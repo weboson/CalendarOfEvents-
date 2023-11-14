@@ -1,10 +1,13 @@
 import { FC } from 'react';
 import styled from 'styled-components';
+import { Moment } from 'moment'; // Moment - это специальный тип для TS 
 
-// ts тип
-    export interface RowInCellProps {
-        readonly justifyContent: 'flex-start' | 'flex-end'
-    }
+// ts тип для css свойства
+export interface IRowInCellProps {
+  justifycontent: string;
+}
+
+
 
 const GridWrapper = styled.div`
   display: grid;
@@ -18,7 +21,6 @@ const GridWrapper = styled.div`
   background-color: #484848;
 `;
 
-
 const CellWrapper = styled.div`
   min-width: 140px;
   min-height: 80px;
@@ -26,29 +28,39 @@ const CellWrapper = styled.div`
   color: #dddcdd;
 `;
 
-const RowInCell = styled.div<RowInCellProps>`
-    display: flex;
-    justify-content: ${(props) => props.justifyContent ? props.justifyContent : 'flex-start'};
+const RowInCell = styled.div<IRowInCellProps>`
+  display: flex;
+  justify-content: ${(props) =>
+    props.justifycontent ? props.justifycontent : 'flex-start'};
 `;
 
 const DayWrapper = styled.div`
-    display: flex;
-    height: 33px;
-    width: 33px;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  height: 33px;
+  width: 33px;
+  align-items: center;
+  justify-content: center;
 `;
 
-const CalendarGrid: FC = () => {
-  //const totalDays = 42;
-  const daysArray = [...new Array(42)];
+interface IProps {
+    firstDayOfWeek: Moment
+    lastDayOfWeek: Moment
+}
+
+const CalendarGrid: FC<IProps> = ({firstDayOfWeek, lastDayOfWeek}) => {
+  const totalDays = 42;
+  const g = lastDayOfWeek;
+  // чтобы не мутировать исходник, делаем копию объекта (clone от moment), а не ссылки
+  const day = firstDayOfWeek.clone().subtract(1, 'day'); // уменьшили на 1 день 
+  const daysArray = [...new Array(42)].map(() => day.add(1, 'day').clone()); // прибавили на 1 день
+
 
   return (
     <GridWrapper>
-      {daysArray.map((_, indx: number) => (
-        <CellWrapper>
-          <RowInCell justifyContent={'flex-end'}>
-            <DayWrapper>{indx}</DayWrapper>
+      {daysArray.map((dayItem, indx: number) => (
+        <CellWrapper key={dayItem.format('DDMMYYYY')}>
+          <RowInCell justifycontent={'flex-end'}>
+            <DayWrapper>{dayItem.format('D')}</DayWrapper>
           </RowInCell>
         </CellWrapper>
       ))}

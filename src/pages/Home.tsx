@@ -3,6 +3,15 @@ import Header from '../components/Header/Header';
 import Monitor from '../components/Monitor/Monitor';
 import CalendarGrid from '../components/CalendarGrid/CalendarGrid';
 import moment, { Moment } from 'moment'; // для расчетов даты - Moment - это специальный тип для TS 
+import styled from 'styled-components';
+
+// sc-style
+const ShadowWrapper = styled('div')`
+    border-radius: 8px;
+    border: 1px solid #464648;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px #1A1A1A, 0 8px 20px 6px #888;
+`
 
 
 // чтобы неделя начаналась с понедельника, а не с воскресенья, как в США - поэтому прибавляем к week + 1
@@ -15,11 +24,11 @@ import moment, { Moment } from 'moment'; // для расчетов даты - M
 
 const Home: FC = () => {
     return (
-        <div>
+        <ShadowWrapper>
             <Header />
             <Monitor />
             <CalendarGrid firstDayOfWeek={firstDayOfWeek}/>
-        </div>
+        </ShadowWrapper>
     );
 };
 

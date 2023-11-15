@@ -1,12 +1,14 @@
 import { FC } from 'react';
-import { Title } from '../../styles/sc_calendarGrid'
+import styled from 'styled-components';
+
+const DivWrapper = styled('div')`
+    background-color: #2A282D;
+    height: 36px;
+`
 
 const Header: FC = () => {
     return (
-        <div>
-            <Title>Календарь событий</Title>
-            Header
-        </div>
+            <DivWrapper>Header</DivWrapper>
     );
 };
 

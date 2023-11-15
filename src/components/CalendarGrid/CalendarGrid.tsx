@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { Moment } from 'moment'; // Moment - это специальный тип для TS 
-import { GridWrapper, CellWrapper, RowInCell, DayWrapper } from '../../styles/sc_calendarGrid'
+import { GridWrapper, CellWrapper, RowInCell, DayWrapper, CurrentDay } from '../../styles/sc_calendarGrid'
+import moment from 'moment';
 
 
 interface IProps {
@@ -13,13 +14,18 @@ const CalendarGrid: FC<IProps> = ({firstDayOfWeek}) => {
   // и прибавлям каждую итерацию +1 день и выводим его, но не меняем исходник, ведь мы клонируем clone()
   const daysArray = [...new Array(42)].map(() => day.add(1, 'day').clone()); 
 
+  // проверка на текущий день, чтобы его маркировать
+  const isCurrentDay = (day: object) => moment().isSame(day, 'day')
 
   return (
     <GridWrapper>
       {daysArray.map((dayItem) => (
-        <CellWrapper key={dayItem.format('DDMMYYYY')} isWeekend={dayItem.day() === 6 || dayItem.day() === 0}>
-          <RowInCell justifycontent={'flex-end'}>
-            <DayWrapper>{dayItem.format('D')}</DayWrapper>
+        <CellWrapper key={dayItem.format('DDMMYYYY')} $isWeekend={dayItem.day() === 6 || dayItem.day() === 0}>
+          <RowInCell $justifyContent={'flex-end'}>
+            <DayWrapper>
+              
+                {!isCurrentDay(dayItem) ? dayItem.format('D') : <CurrentDay>{dayItem.format('D')}</CurrentDay>}
+            </DayWrapper>
           </RowInCell>
         </CellWrapper>
       ))}

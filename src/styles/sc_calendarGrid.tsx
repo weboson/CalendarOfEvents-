@@ -16,25 +16,25 @@ background-color: #484848;
 
 // ts тип для css свойства
 export interface ICellWrapperProps {
-  isWeekend: boolean;
+  $isWeekend: boolean;
 }
 export const CellWrapper = styled.div<ICellWrapperProps>`
   min-width: 140px;
   min-height: 80px;
-  background-color: ${props => props.isWeekend ? '#272829' : '#1e1f21'};
+  background-color: ${props => (props.$isWeekend) ? '#272829' : '#1e1f21'};
   color: #dddcdd;
 `;
 
 
 // ts тип для css свойства
 export interface IRowInCellProps {
-  justifycontent: string;
+  $justifyContent: string;
 }
 
 export const RowInCell = styled.div<IRowInCellProps>`
   display: flex;
   justify-content: ${(props) =>
-    props.justifycontent ? props.justifycontent : 'flex-start'};
+    props.$justifyContent ? props.$justifyContent : 'flex-start'};
 `;
 
 export const DayWrapper = styled.div`
@@ -43,4 +43,15 @@ export const DayWrapper = styled.div`
   width: 33px;
   align-items: center;
   justify-content: center;
+  margin: 2px;
 `;
+
+export const CurrentDay = styled('div')`
+  height: 100%;
+  width: 100%;
+  background: #f00;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`

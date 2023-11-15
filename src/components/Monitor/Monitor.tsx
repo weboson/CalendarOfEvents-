@@ -1,3 +1,4 @@
+import { Moment } from 'moment';
 import { FC } from 'react';
 import styled from 'styled-components';
 
@@ -17,6 +18,11 @@ const TitleWrapper = styled(TextWrapper)`
     font-weight: bold;
     margin-right: 8px;
 `
+const ButtonsWrapper = styled('div')`
+    display: flex;
+    align-items: center;
+`
+
 const ButtonWrapper = styled('button')`
     border: unset;
     background-color: #565759;
@@ -31,18 +37,23 @@ const TodayButton = styled(ButtonWrapper)`
     font-weight: bold;
 `;
 
-const Monitor: FC = () => {
+// ts тип для пропс
+export interface IMonitorProps {
+    currentDate: Moment;
+  }
+
+const Monitor: FC<IMonitorProps> = ({currentDate}) => {
   return (
     <DivWrapper>
       <div>
-        <TitleWrapper>Novemder</TitleWrapper>
-        <TextWrapper>2023</TextWrapper>
+        <TitleWrapper>{currentDate.format('MMMM')}</TitleWrapper>
+        <TextWrapper>{currentDate.format('YYYY')}</TextWrapper>
       </div>
-      <div>
+      <ButtonsWrapper>
         <ButtonWrapper> &lt; </ButtonWrapper>
         <TodayButton>Today</TodayButton>
         <ButtonWrapper> &gt; </ButtonWrapper>
-      </div>
+      </ButtonsWrapper>
     </DivWrapper>
   );
 };

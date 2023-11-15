@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Title } from '../../styles/title'
+import { Title } from '../../styles/sc_calendarGrid'
 
 const Header: FC = () => {
     return (

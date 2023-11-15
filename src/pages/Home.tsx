@@ -7,18 +7,18 @@ import moment, { Moment } from 'moment'; // для расчетов даты - M
 
 // чтобы неделя начаналась с понедельника, а не с воскресенья, как в США - поэтому прибавляем к week + 1
   moment.updateLocale('ru', {week: {dow: 1}});
-  window.moment = moment; // тест
+  //window.moment = moment; // тест
   // первый день недели касающий месяца
   const firstDayOfWeek: Moment = moment().startOf('month').startOf('week');
   // последний день недели касающиеся месяца
-  const lastDayOfWeek: Moment = moment().endOf('month').endOf('week');
+  //const lastDayOfWeek: Moment = moment().endOf('month').endOf('week');
 
 const Home: FC = () => {
     return (
         <div>
             <Header />
             <Monitor />
-            <CalendarGrid firstDayOfWeek={firstDayOfWeek} lastDayOfWeek={lastDayOfWeek}/>
+            <CalendarGrid firstDayOfWeek={firstDayOfWeek}/>
         </div>
     );
 };

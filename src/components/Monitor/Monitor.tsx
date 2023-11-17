@@ -1,5 +1,5 @@
 import { Moment } from 'moment';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
 
 const DivWrapper = styled('div')`
@@ -30,11 +30,13 @@ const ButtonWrapper = styled('button')`
     margin-right: 2px;
     border-radius: 4px;
     color: #E6E6E6;
+    cursor: pointer;
 `
 const TodayButton = styled(ButtonWrapper)`
     padding-right: 16px;
     padding-left: 16px;
     font-weight: bold;
+    cursor: pointer;
 `;
 
 // ts тип для пропс
@@ -56,7 +58,7 @@ const Monitor: FC<IMonitorProps> = ({currentDate, selectHandler}) => {
       <ButtonsWrapper>
 
         <ButtonWrapper onClick={() => selectHandler('prev')}> &lt; </ButtonWrapper>
-        <TodayButton onClick={() => console.log('sdf')}>Today</TodayButton>
+        <TodayButton onClick={() => selectHandler('today')}>Today</TodayButton>
         <ButtonWrapper onClick={() => selectHandler('next')}> &gt; </ButtonWrapper>
 
       </ButtonsWrapper>

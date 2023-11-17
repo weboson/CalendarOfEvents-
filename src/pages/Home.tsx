@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, useState} from 'react';
 import Header from '../components/Header/Header';
 import Monitor from '../components/Monitor/Monitor';
 import CalendarGrid from '../components/CalendarGrid/CalendarGrid';
@@ -13,22 +13,40 @@ const ShadowWrapper = styled('div')`
     box-shadow: 0 0 0 1px #1A1A1A, 0 8px 20px 6px #888;
 `
 
-// чтобы неделя начаналась с понедельника, а не с воскресенья, как в США - поэтому прибавляем к week + 1
-  moment.updateLocale('ru', {week: {dow: 1}});
-  //window.moment = moment; // тест
-  const currentDate = moment()
-  // первый день недели касающий месяца
-  const firstDayOfWeek: Moment = currentDate.clone().startOf('month').startOf('week');
-  // последний день недели касающиеся месяца
-  //const lastDayOfWeek: Moment = moment().endOf('month').endOf('week');
-  // Заголовок месяца в Header
-  //const today = 
+  
 
 const Home: FC = () => {
+
+    moment.updateLocale('ru', {week: {dow: 1}}); // неделя начинается с понедельника
+    //window.moment = moment; // тест
+    const momentDate = moment()
+    const [currentDate, setCurrenDate] = useState(momentDate)
+    const [firstDayOfWeek, setFirstDayOfWeek] = useState<Moment>(currentDate.clone().startOf('month').startOf('week'))
+    
+
+    
+    // buttons: +/- month 
+    const selectHandler = (vector: string) => {
+        switch (vector) {
+            case "prev": // - month
+                setCurrenDate(currentDate.subtract(1, 'month')) // мутируем текущую дату ( - month)
+                setFirstDayOfWeek(currentDate.clone().startOf('month').startOf('week')) // узнаем начало недели текущ месяц
+                //console.log(currentDate)
+            break;
+            case "next": // + month
+                setCurrenDate(currentDate.add(1, 'month')) // используя мутированную дату, снова мутируем ( + moth)
+                setFirstDayOfWeek(currentDate.clone().startOf('month').startOf('week')) // узнаем начало недели текущ месяц
+                //console.log(firstDayOfWeek)
+                break;
+            default:
+                break;
+        }
+    }
+    
     return (
         <ShadowWrapper>
             <Header />
-            <Monitor currentDate={currentDate}/>
+            <Monitor currentDate={currentDate} selectHandler={selectHandler}/>
             <CalendarGrid firstDayOfWeek={firstDayOfWeek}/>
         </ShadowWrapper>
     );

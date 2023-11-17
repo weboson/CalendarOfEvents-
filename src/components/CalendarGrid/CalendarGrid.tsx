@@ -20,7 +20,7 @@ const CalendarGrid: FC<IProps> = ({firstDayOfWeek}) => {
   return (
     <GridWrapper>
       {daysArray.map((dayItem) => (
-        <CellWrapper key={dayItem.format('DDMMYYYY')} $isWeekend={dayItem.day() === 6 || dayItem.day() === 0}>
+        <CellWrapper key={dayItem.unix()} $isWeekend={dayItem.day() === 6 || dayItem.day() === 0}>
           <RowInCell $justifyContent={'flex-end'}>
             <DayWrapper>
               

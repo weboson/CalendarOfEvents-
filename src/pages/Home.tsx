@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 import Header from '../components/Header/Header';
 import Monitor from '../components/Monitor/Monitor';
 import CalendarGrid from '../components/CalendarGrid/CalendarGrid';
-import moment, { Moment } from 'moment'; // для расчетов даты - Moment - это специальный тип для TS
+import moment from 'moment'; // для расчетов даты - Moment - это специальный тип для TS
 import styled from 'styled-components';
 
 // sc-style
@@ -16,36 +16,23 @@ const ShadowWrapper = styled('div')`
 const Home: FC = () => {
   moment.updateLocale('ru', { week: { dow: 1 } }); // неделя начинается с понедельника
   //window.moment = moment; // тест
-  const momentDate = moment();
-  const [currentDate, setCurrenDate] = useState(momentDate);
-  const [firstDayOfWeek, setFirstDayOfWeek] = useState<Moment>( currentDate.clone().startOf('month').startOf('week'));
+  const [today, setToday] = useState(moment());
+  const firstDayOfWeek = today.clone().startOf('month').startOf('week');
 
-  // buttons: +/- month & today
-  const selectHandler = (vector: string) => {
-    switch (vector) {
-      case 'prev': // - month
-        setCurrenDate(currentDate.subtract(1, 'month')); // мутируем текущую дату ( - month)
-        setFirstDayOfWeek(currentDate.clone().startOf('month').startOf('week')); // узнаем начало недели текущ месяц
-        //console.log(currentDate)
-        break;
-      case 'next': // + month
-        setCurrenDate(currentDate.add(1, 'month')); // используя мутированную дату, снова мутируем ( + moth)
-        setFirstDayOfWeek(currentDate.clone().startOf('month').startOf('week')); // узнаем начало недели текущ месяц
-        //console.log(firstDayOfWeek)
-        break;
-      case 'today': // - current date
-        setCurrenDate(moment());
-        setFirstDayOfWeek(moment().clone().startOf('month').startOf('week')); // узнаем начало недели текущ месяц
-        break;
-      default:
-        break;
-    }
-  };
+  const prevHandler = () => setToday(prev => prev.clone().subtract(1, 'month'));
+  const todayHandler = () => setToday(moment());
+  const nextHandler = () => setToday(prev => prev.clone().add(1, 'month'));
+
 
   return (
     <ShadowWrapper>
       <Header />
-      <Monitor currentDate={currentDate} selectHandler={selectHandler} />
+      <Monitor 
+        today={today}
+        prevHandler={prevHandler}
+        todayHandler={todayHandler}
+        nextHandler={nextHandler}
+    />
       <CalendarGrid firstDayOfWeek={firstDayOfWeek} />
     </ShadowWrapper>
   );

@@ -41,25 +41,27 @@ const TodayButton = styled(ButtonWrapper)`
 
 // ts тип для пропс
 export interface IMonitorProps {
-    currentDate: Moment
-    selectHandler: (string: string) => void
+    today: Moment
+    prevHandler: () => void
+    todayHandler: () => void
+    nextHandler: () => void
   }
 
 
-const Monitor: FC<IMonitorProps> = ({currentDate, selectHandler}) => {
+const Monitor: FC<IMonitorProps> = ({today, prevHandler, todayHandler, nextHandler}) => {
 
 
   return (
     <DivWrapper>
       <div>
-        <TitleWrapper>{currentDate.format('MMMM')}</TitleWrapper>
-        <TextWrapper>{currentDate.format('YYYY')}</TextWrapper>
+        <TitleWrapper>{today.format('MMMM')}</TitleWrapper>
+        <TextWrapper>{today.format('YYYY')}</TextWrapper>
       </div>
       <ButtonsWrapper>
 
-        <ButtonWrapper onClick={() => selectHandler('prev')}> &lt; </ButtonWrapper>
-        <TodayButton onClick={() => selectHandler('today')}>Today</TodayButton>
-        <ButtonWrapper onClick={() => selectHandler('next')}> &gt; </ButtonWrapper>
+        <ButtonWrapper onClick={prevHandler}> &lt; </ButtonWrapper>
+        <TodayButton onClick={todayHandler}>Today</TodayButton>
+        <ButtonWrapper onClick={nextHandler}> &gt; </ButtonWrapper>
 
       </ButtonsWrapper>
     </DivWrapper>

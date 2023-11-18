@@ -33,7 +33,7 @@ const Home: FC = () => {
         todayHandler={todayHandler}
         nextHandler={nextHandler}
     />
-      <CalendarGrid firstDayOfWeek={firstDayOfWeek} />
+      <CalendarGrid firstDayOfWeek={firstDayOfWeek} today={today}/>
     </ShadowWrapper>
   );
 };

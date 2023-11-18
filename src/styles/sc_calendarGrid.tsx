@@ -1,4 +1,5 @@
 // styles for Grid Calendar
+import { Moment } from 'moment';
 import styled from 'styled-components'; // библиотека, которая упрощает стилизацию компонентов (CSS with JS)
 export interface IGridWrapperProps {
   $isHeader?: number;
@@ -22,14 +23,15 @@ export const GridWrapper = styled.div<IGridWrapperProps>`
 // ts тип для css свойства ($ чтобы не было ошибки)
 export interface ICellWrapperProps {
   $isWeekend?: boolean;
-  $isHeader?: number; //
+  $isHeader?: number; 
+  $isSelecctedMonth?: Moment | boolean;
 }
 
 export const CellWrapper = styled.div<ICellWrapperProps>`
   min-width: 140px;
   min-height: ${(props) => (props.$isHeader ? 24 : 80)}px;
   background-color: ${(props) => (props.$isWeekend ? '#272829' : '#1e1f21')};
-  color: #dddcdd;
+  color: ${(props) => (props.$isSelecctedMonth ? '#dddcdd' : '#555759')};
 `;
 
 // ts тип для css свойства

@@ -11,7 +11,7 @@ import moment from 'moment';
 
 interface IProps {
   firstDayOfWeek: Moment;
-  today?: Moment;
+  today?: Moment
 }
 
 const CalendarGrid: FC<IProps> = ({ firstDayOfWeek, today }) => {

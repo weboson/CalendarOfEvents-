@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 import Header from '../components/Header/Header';
 import Monitor from '../components/Monitor/Monitor';
 import CalendarGrid from '../components/CalendarGrid/CalendarGrid';
-import moment from 'moment'; // для расчетов даты - Moment - это специальный тип для TS
+import moment, { Moment } from 'moment'; // для расчетов даты - Moment - это специальный тип для TS
 import styled from 'styled-components';
 
 // sc-style
@@ -16,7 +16,7 @@ const ShadowWrapper = styled('div')`
 const Home: FC = () => {
   moment.updateLocale('ru', { week: { dow: 1 } }); // неделя начинается с понедельника
   //window.moment = moment; // тест
-  const [today, setToday] = useState(moment());
+  const [today, setToday] = useState<Moment>(moment() || '');
   const firstDayOfWeek = today.clone().startOf('month').startOf('week');
 
   const prevHandler = () => setToday(prev => prev.clone().subtract(1, 'month'));
@@ -33,7 +33,7 @@ const Home: FC = () => {
         todayHandler={todayHandler}
         nextHandler={nextHandler}
     />
-      <CalendarGrid firstDayOfWeek={firstDayOfWeek} today={today}/>
+      <CalendarGrid firstDayOfWeek={firstDayOfWeek} today={today || null}/>
     </ShadowWrapper>
   );
 };

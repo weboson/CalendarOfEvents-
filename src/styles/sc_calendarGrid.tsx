@@ -23,7 +23,7 @@ export const GridWrapper = styled.div<IGridWrapperProps>`
 // ts тип для css свойства ($ чтобы не было ошибки)
 export interface ICellWrapperProps {
   $isWeekend?: boolean;
-  $isHeader?: number; 
+  $isHeader?: number;
   $isSelecctedMonth?: Moment | boolean;
 }
 
@@ -31,20 +31,28 @@ export const CellWrapper = styled.div<ICellWrapperProps>`
   min-width: 140px;
   min-height: ${(props) => (props.$isHeader ? 24 : 80)}px;
   background-color: ${(props) => (props.$isWeekend ? '#272829' : '#1e1f21')};
-  color: ${(props) => (props.$isSelecctedMonth ? '#dddcdd' : '#555759')};
+/*если выбранный месяц И еще выходной = такой цвет :
+  если просто выбранный месяц то = такой цвет 
+  иначе (дни вне выбраного месяца) по умолчанию = такой цвет*/
+  ${(props => (
+    (props.$isSelecctedMonth && props.$isWeekend) ? 'color: #919294' :
+    (props.$isSelecctedMonth) ? 'color: #dddcdd' :
+    'color: #555759'
+  ))}
+
 `;
 
 // ts тип для css свойства
 export interface IRowInCellProps {
   $justifyContent: string;
-  $pr?: number
+  $pr?: number;
 }
 
 export const RowInCell = styled.div<IRowInCellProps>`
   display: flex;
   justify-content: ${(props) =>
     props.$justifyContent ? props.$justifyContent : 'flex-start'};
-  ${props => props.$pr && `padding-right: ${props.$pr * 8}px`}
+  ${(props) => props.$pr && `padding-right: ${props.$pr * 8}px`}
 `;
 
 export const DayWrapper = styled.div`

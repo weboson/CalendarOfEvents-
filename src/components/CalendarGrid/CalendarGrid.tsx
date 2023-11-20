@@ -6,7 +6,7 @@ import {
   RowInCell,
   DayWrapper,
   CurrentDay,
-} from '../../styles/sc_calendarGrid';
+} from './stylesGrid/sc_calendarGrid';
 import moment from 'moment';
 
 interface IProps {

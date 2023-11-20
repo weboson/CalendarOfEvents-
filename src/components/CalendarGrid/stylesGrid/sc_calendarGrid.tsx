@@ -1,4 +1,4 @@
-// styles for Grid Calendar
+// styles for CalendarGrid.tsx 
 import { Moment } from 'moment';
 import styled from 'styled-components'; // библиотека, которая упрощает стилизацию компонентов (CSS with JS)
 export interface IGridWrapperProps {

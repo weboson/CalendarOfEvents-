@@ -1,9 +1,10 @@
-//! redux-toolkit - Slice (шаблон кода из документации)
+// redux-toolkit - Slice (шаблон кода из документации)
+// выбранная кнопка режима отомбражения календаря: month, year, week...
 import { createSlice } from '@reduxjs/toolkit'
 import type { RootState } from '../store'
 
 // index active menu (по-умолчанию)
-const initialState: number = 3;
+const initialState: number = 2;
 
 
 export const menuSlice = createSlice({

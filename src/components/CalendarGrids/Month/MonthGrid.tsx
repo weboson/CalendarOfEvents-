@@ -6,17 +6,17 @@ import {
   RowInCell,
   DayWrapper,
   CurrentDay,
-} from './stylesGrid/sc_calendarGrid';
+} from '../stylesGrids/sc_calendarGrid';
 import moment from 'moment';
-import { useAppSelector } from '../../store/hooks'; // redux-toolkit
-import { menuModesDate } from '../../data/dataMenu';
+import { useAppSelector } from '../../../store/hooks'; // redux-toolkit
+import { menuModesDate } from '../../../data/dataMenu';
 
 interface IProps {
   firstDayOfWeek: Moment;
-  today: Moment
+  currentData: Moment
 }
 
-const CalendarGrid: FC<IProps> = ({ firstDayOfWeek, today }) => {
+const CalendarGrid: FC<IProps> = ({ firstDayOfWeek, currentData }) => {
   // чтобы не мутировать исходник, делаем копию объекта (clone от moment), а не ссылки объекта
   const day = firstDayOfWeek.clone().subtract(1, 'day'); // -1 день для смещения отчета на 1 день, иначе календарь врёт на 1 день
   // и прибавлям каждую итерацию +1 день и выводим его, но не меняем исходник, ведь мы клонируем clone()
@@ -25,7 +25,7 @@ const CalendarGrid: FC<IProps> = ({ firstDayOfWeek, today }) => {
   // проверка на текущий день, чтобы его маркировать
   const isCurrentDay = (day: object) => moment().isSame(day, 'day');
   // подцветка дней входящие в выбранный месяц
-  const $isSelecctedMonth = (day: object) => today.isSame(day, 'month');
+  const $isSelecctedMonth = (day: object) => currentData.isSame(day, 'month');
 
 
 // redux-toolkit (массив пунктов меню в dataMenu)
@@ -45,6 +45,7 @@ console.log(menuModesDate[index].format)
           </CellWrapper>
         ))}
       </GridWrapper>
+      
       {/* Days Grid */}
       <GridWrapper>
         {daysArray.map((dayItem) => (

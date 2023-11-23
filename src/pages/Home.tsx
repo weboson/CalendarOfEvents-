@@ -1,9 +1,13 @@
 import { FC, useState } from 'react';
 import Header from '../components/Header/Header';
 import Monitor from '../components/Monitor/Monitor';
-import CalendarGrid from '../components/CalendarGrid/CalendarGrid';
-import moment, { Moment } from 'moment'; // для расчетов даты - Moment - это специальный тип для TS
+import MonthGrid from '../components/CalendarGrids/Month/MonthGrid';
 import styled from 'styled-components';
+import YearGrid from '../components/CalendarGrids/Year/YearGrid';
+import { Moment } from 'moment';
+import moment from 'moment';
+import { currentDate } from '../data/currentDate';
+
 
 // sc-style
 const ShadowWrapper = styled('div')`
@@ -14,10 +18,10 @@ const ShadowWrapper = styled('div')`
 `;
 
 const Home: FC = () => {
-  moment.updateLocale('ru', { week: { dow: 1 } }); // неделя начинается с понедельника
-  //window.moment = moment; // тест
-  const [today, setToday] = useState<Moment>(moment() || '');
-  const firstDayOfWeek = today.clone().startOf('month').startOf('week');
+
+
+  const [currentData, setToday] = useState<Moment>(currentDate || ''); // currentDate в currentDate.ts 
+  const firstDayOfWeek = currentData.clone().startOf('month').startOf('week');
 
   const prevHandler = () => setToday(prev => prev.clone().subtract(1, 'month'));
   const todayHandler = () => setToday(moment());
@@ -28,14 +32,21 @@ const Home: FC = () => {
     <ShadowWrapper>
       <Header />
       <Monitor 
-        today={today}
+        currentData={currentData}
         prevHandler={prevHandler}
         todayHandler={todayHandler}
         nextHandler={nextHandler}
     />
-      <CalendarGrid firstDayOfWeek={firstDayOfWeek} today={today || null}/>
+
+      
+        <MonthGrid firstDayOfWeek={firstDayOfWeek} currentData={currentData || null} /> 
+        <YearGrid />
+    
+      
+      
     </ShadowWrapper>
   );
 };
+
 
 export default Home;

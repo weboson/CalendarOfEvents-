@@ -5,7 +5,7 @@ import menuReducer from './features/modesDateSlice'
 
 export const store = configureStore({
   reducer: {
-    menu: menuReducer
+    menu: menuReducer,
   },
 })
 

@@ -3,14 +3,14 @@ import {DivWrapper, TextWrapper, TitleWrapper, ButtonsWrapper, ButtonWrapper, To
 
 
 
-const Monitor: FC<IMonitorProps> = ({today, prevHandler, todayHandler, nextHandler}) => {
+const Monitor: FC<IMonitorProps> = ({currentData, prevHandler, todayHandler, nextHandler}) => {
 
 
   return (
     <DivWrapper>
       <div>
-        <TitleWrapper>{today.format('MMMM')}</TitleWrapper>
-        <TextWrapper>{today.format('YYYY')}</TextWrapper>
+        <TitleWrapper>{currentData.format('MMMM')}</TitleWrapper>
+        <TextWrapper>{currentData.format('YYYY')}</TextWrapper>
       </div>
       <ButtonsWrapper>
 

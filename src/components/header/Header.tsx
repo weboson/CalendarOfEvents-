@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { FaCalendarPlus, FaSearch } from 'react-icons/fa';
 import {
   DivWrapper,
@@ -12,46 +12,21 @@ import {
   InputSearch,
   InputButtonSearch,
 } from './stylesHeader/sc_calendarHeader';
-import { useAppDispatch } from '../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { readingMenu } from '../../store/features/modesDateSlice';
+import { menuModesDate } from '../../data/dataMenu';
 
-  // !
-// Define a type for the slice state
-interface IModeDate {
-  id: number;
-  type: string;
-  format: string
-}
-
-interface IMenuModesDate extends Array<IModeDate>{}
-
-// значение по умолчанию (в данном проекте значения менять не будем - просто учимся Rudax Toolkit)
-const menuModesDate: IMenuModesDate = [
-  {id: 1, type: 'Day', format: 'D'},
-  {id: 2, type: 'Week', format: 'W'},
-  {id: 3, type: 'Month', format: 'MM'},
-  {id: 4, type: 'Year', format: 'YY'},
-]
 
 const Header: FC = () => {
 
-  // active button (day, week, month, year)
-  const [activeButton, setActiveButton] = useState<number>(1);
-
   // redux-toolkit
-  const dispatch = useAppDispatch()
+  const activeButton = useAppSelector((state) => state.menu)
 
-  // selected Mode (day, week, month, year)
-  //const [selectedMode, setSelectedMode] = useState(menuModesDate[activeButton])
+  const dispatch = useAppDispatch()
   
   const handleClick = (index: number) => {
-    setActiveButton(index);
     // redux-toolkit
-    dispatch(readingMenu(activeButton))
-    //console.log(activeButton)
-    //setSelectedMode(menuModesDate[activeButton])
-    // console.log(selectedMode)
-    return
+    dispatch(readingMenu(index))
   };
 
   return (
@@ -79,7 +54,7 @@ const Header: FC = () => {
                 array.indexOf(item) === array.length - 1 ? true : false
               }
             >
-              {item.type}
+              {item.title}
             </ModeDateButton>
           ))}
         </ButtonsWrapper>

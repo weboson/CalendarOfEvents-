@@ -8,7 +8,8 @@ interface IModeDate {
   
   interface IMenuModesDate extends Array<IModeDate>{}
   
-  // значение по умолчанию (в данном проекте значения менять не будем - просто учимся Rudax Toolkit)
+  // в данном проекте, значения менять не будем - толькот чтение по меняющемуся (active button) index. 
+  // Просто учимся Rudax Toolkit)
 export  const menuModesDate: IMenuModesDate = [
     {id: 1, title: 'Day', format: 'D'},
     {id: 2, title: 'Week', format: 'WWW'},

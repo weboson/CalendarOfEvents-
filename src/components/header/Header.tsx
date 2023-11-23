@@ -12,15 +12,46 @@ import {
   InputSearch,
   InputButtonSearch,
 } from './stylesHeader/sc_calendarHeader';
+import { useAppDispatch } from '../../store/hooks';
+import { readingMenu } from '../../store/features/modesDateSlice';
+
+  // !
+// Define a type for the slice state
+interface IModeDate {
+  id: number;
+  type: string;
+  format: string
+}
+
+interface IMenuModesDate extends Array<IModeDate>{}
+
+// значение по умолчанию (в данном проекте значения менять не будем - просто учимся Rudax Toolkit)
+const menuModesDate: IMenuModesDate = [
+  {id: 1, type: 'Day', format: 'D'},
+  {id: 2, type: 'Week', format: 'W'},
+  {id: 3, type: 'Month', format: 'MM'},
+  {id: 4, type: 'Year', format: 'YY'},
+]
 
 const Header: FC = () => {
-  const menuModesDate = ['Day', 'Week', 'Month', 'Year'];
 
-  const [active, setActive] = useState<number>(2);
+  // active button (day, week, month, year)
+  const [activeButton, setActiveButton] = useState<number>(1);
 
+  // redux-toolkit
+  const dispatch = useAppDispatch()
+
+  // selected Mode (day, week, month, year)
+  //const [selectedMode, setSelectedMode] = useState(menuModesDate[activeButton])
+  
   const handleClick = (index: number) => {
-    setActive(index);
-    //console.log(index)
+    setActiveButton(index);
+    // redux-toolkit
+    dispatch(readingMenu(activeButton))
+    //console.log(activeButton)
+    //setSelectedMode(menuModesDate[activeButton])
+    // console.log(selectedMode)
+    return
   };
 
   return (
@@ -38,16 +69,17 @@ const Header: FC = () => {
           {menuModesDate.map((item, index, array) => (
             <ModeDateButton
               key={index}
+              // active button/mode
+              onClick={() => handleClick(index)}
+              $isCurrentModeDate={activeButton == index ? true : false}
+              
               // закругление крайних углов
               $extremeButtonLeft={array.indexOf(item) === 0 ? true : false}
               $extremeButtonRight={
                 array.indexOf(item) === array.length - 1 ? true : false
               }
-              // активная кнопка
-              onClick={() => handleClick(index)}
-              $isCurrentModeDate={active == index ? true : false}
             >
-              {item}
+              {item.type}
             </ModeDateButton>
           ))}
         </ButtonsWrapper>

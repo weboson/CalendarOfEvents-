@@ -8,10 +8,12 @@ import {
   CurrentDay,
 } from './stylesGrid/sc_calendarGrid';
 import moment from 'moment';
+import { useAppSelector } from '../../store/hooks'; // redux-toolkit
+import { menuModesDate } from '../../data/dataMenu';
 
 interface IProps {
   firstDayOfWeek: Moment;
-  today?: Moment
+  today: Moment
 }
 
 const CalendarGrid: FC<IProps> = ({ firstDayOfWeek, today }) => {
@@ -24,6 +26,12 @@ const CalendarGrid: FC<IProps> = ({ firstDayOfWeek, today }) => {
   const isCurrentDay = (day: object) => moment().isSame(day, 'day');
   // подцветка дней входящие в выбранный месяц
   const $isSelecctedMonth = (day: object) => today.isSame(day, 'month');
+
+
+// redux-toolkit (массив пунктов меню в dataMenu)
+const index = useAppSelector((state) => state.menu)
+console.log(menuModesDate[index].format)
+
 
   return (
     <>

@@ -1,4 +1,5 @@
-import { FC, useState } from 'react';
+//! Mode Year (общий календарь)
+import { FC } from 'react';
 import {
   СellMonths,
   GridWrapperYear,
@@ -8,19 +9,12 @@ import {
 } from './stylesYearGrid/sc_YearGrid';
 import moment from 'moment';
 
-interface IYearGridProps {
-}
 
-const YearGrid: FC<IYearGridProps> = () => {
+const YearGrid: FC = () => {
 
  moment.updateLocale('ru', { week: { dow: 1 } }); // настройка: еделя начинается с понедельника
- 
-  
-  const daysArray = [...new Array(42)];
- 
-  window.moment = moment;
 
-  // массив месяцев (с января с 1 числа) и каждый месяц начинается с первой недели
+  // массив месяцев (с января с 1 числа, чтобы отчет дней не был с текущего числа) и каждый месяц начинается с первой недели
   const monthArray = [...new Array(12)].map((_, i) => (moment().clone().month(i).startOf('month').startOf('week'))) // .startOf('month').startOf('week') - начать отчет ячеек с 1 месяца и 1-й недели
   
   return (
@@ -37,14 +31,11 @@ const YearGrid: FC<IYearGridProps> = () => {
 
         <СellMonths>
 {/* 42 цикла по 12 раз */}
-        {daysArray.map((_, indx) => (
-
-          <CellDay>{itemMonth.clone().add(indx, 'day').format('D')}</CellDay>
-          
+        {[...new Array(42)].map((_, indx) => (
+          <CellDay key={indx+1}>{itemMonth.clone().add(indx, 'day').format('D')}</CellDay>       
           ))}
-
-       
         </СellMonths>
+        
         </WrapperMothCell>
       ))}
 

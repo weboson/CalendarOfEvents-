@@ -7,6 +7,8 @@ import moment from 'moment';
 import { currentDate } from '../data/currentDate';
 import YearGrid from '../components/CalendarGrids/Year/YearGrid';
 import MonthGrid from '../components/CalendarGrids/Month/MonthGrid';
+import { useAppSelector } from '../store/hooks';
+import { menuModesDate } from '../data/dataMenu';
 
 
 // sc-style
@@ -28,6 +30,11 @@ const Home: FC = () => {
   const nextHandler = () => setToday(prev => prev.clone().add(1, 'month'));
 
 
+  // выбранный режим меню (day, week, month, year)
+  const indexMenu = useAppSelector((state) => state.menu) // из Readux-toolkit
+  console.log(indexMenu)
+
+
   return (
     <ShadowWrapper>
       <Header />
@@ -38,9 +45,17 @@ const Home: FC = () => {
         nextHandler={nextHandler}
     />
 
-      
+      {
+        // mode menu
+        (menuModesDate[indexMenu].title == 'Day') ? (<div>Day</div>) :
+        (menuModesDate[indexMenu].title == 'Week') ? (<div>Week</div>) :
+        (menuModesDate[indexMenu].title == 'Month') ? (<MonthGrid firstDayOfWeek={firstDayOfWeek} currentData={currentData || null} />) :
+        (menuModesDate[indexMenu].title == 'Year') ? (<YearGrid />) :
+  'Какой необычный возраст!'
+      }
+
       {/* <MonthGrid firstDayOfWeek={firstDayOfWeek} currentData={currentData || null} /> */}
-      <YearGrid firstDayOfWeek={firstDayOfWeek} currentData={currentData}/>
+      {/* <YearGrid /> */}
       
         
         

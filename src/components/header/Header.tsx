@@ -20,7 +20,7 @@ import { menuModesDate } from '../../data/dataMenu';
 const Header: FC = () => {
 
   // redux-toolkit
-  const activeButton = useAppSelector((state) => state.menu)
+  const activeMenu = useAppSelector((state) => state.menu)
 
   const dispatch = useAppDispatch()
   
@@ -46,7 +46,7 @@ const Header: FC = () => {
               key={index}
               // active button/mode
               onClick={() => handleClick(index)}
-              $isCurrentModeDate={activeButton == index ? true : false}
+              $isCurrentModeDate={activeMenu == index ? true : false}
               
               // закругление крайних углов
               $extremeButtonLeft={array.indexOf(item) === 0 ? true : false}

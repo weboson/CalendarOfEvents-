@@ -6,7 +6,7 @@ import {
   RowInCell,
   DayWrapper,
   CurrentDay,
-} from '../stylesGrids/sc_calendarGrid';
+} from './stylesMonthGrid/sc_MonthGrid';
 import moment from 'moment';
 import { useAppSelector } from '../../../store/hooks'; // redux-toolkit
 import { menuModesDate } from '../../../data/dataMenu';

@@ -1,12 +1,12 @@
 import { FC, useState } from 'react';
 import Header from '../components/Header/Header';
 import Monitor from '../components/Monitor/Monitor';
-import MonthGrid from '../components/CalendarGrids/Month/MonthGrid';
 import styled from 'styled-components';
-import YearGrid from '../components/CalendarGrids/Year/YearGrid';
 import { Moment } from 'moment';
 import moment from 'moment';
 import { currentDate } from '../data/currentDate';
+import YearGrid from '../components/CalendarGrids/Year/YearGrid';
+import MonthGrid from '../components/CalendarGrids/Month/MonthGrid';
 
 
 // sc-style
@@ -39,8 +39,11 @@ const Home: FC = () => {
     />
 
       
-        <MonthGrid firstDayOfWeek={firstDayOfWeek} currentData={currentData || null} /> 
-        <YearGrid />
+      {/* <MonthGrid firstDayOfWeek={firstDayOfWeek} currentData={currentData || null} /> */}
+      <YearGrid firstDayOfWeek={firstDayOfWeek} currentData={currentData}/>
+      
+        
+        
     
       
       

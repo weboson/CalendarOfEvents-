@@ -16,10 +16,14 @@ export const GridWrapperYear = styled.div<IGridWrapperYearProps>`
 
 
 // Cell Months
-export const WrapperMothCell = styled.div`
+interface IWrapperMothCellProps {
+  $isCurrentMonth?: boolean
+}
+
+export const WrapperMothCell = styled.div<IWrapperMothCellProps>`
   margin: 10px;
   padding: 10px;
-  color: white;
+  ${(props) => (props.$isCurrentMonth) ? 'color: red' : 'color: white'}
   
 `
 // Title Month
@@ -57,11 +61,20 @@ export const CellWeek = styled.div`
 
 
 // For Cell Days
-export const CellDay = styled.div`
+interface ICellDayProps  {
+  $isWeekend?: boolean
+  $isCurrentDay?: boolean
+}
+
+export const CellDay = styled.div<ICellDayProps>`
   text-align: center;
-  color: #ffffff;
   grid-gap: 1px;
   background-color: #272829;
+  ${(props => (
+    (props.$isWeekend) ? 'color: #919294' : 
+    (props.$isCurrentDay) ? 'color: red' :
+    'color: #ffffff' 
+  ))};
 `
 
 

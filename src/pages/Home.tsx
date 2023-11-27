@@ -32,7 +32,7 @@ const Home: FC = () => {
 
   // выбранный режим меню (day, week, month, year)
   const indexMenu = useAppSelector((state) => state.menu) // из Readux-toolkit
-  console.log(indexMenu)
+  //console.log(indexMenu)
 
 
   return (

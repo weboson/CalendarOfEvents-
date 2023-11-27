@@ -7,3 +7,4 @@ moment.updateLocale('ru', { week: { dow: 1 } }); // неделя начинае�
 
 // состояние по-умолчанию
 export const currentDate: Moment = moment();
+export default currentDate

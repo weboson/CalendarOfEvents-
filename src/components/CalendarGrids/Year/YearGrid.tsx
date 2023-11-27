@@ -6,6 +6,9 @@ import {
   CellDay,
   WrapperMothCell,
   MothTitle,
+  CellWeek,
+  WrapperWeek,
+  WrapperDay,
 } from './stylesYearGrid/sc_YearGrid';
 import moment from 'moment';
 
@@ -20,19 +23,31 @@ const YearGrid: FC = () => {
   return (
     <>
     <GridWrapperYear>
-{/* 12 циклов (месяцев)  */}
+{/* 12 итераций  */}
       {monthArray.map((itemMonth, index) => (
 
          <WrapperMothCell key={index+2}>
-
+{/* Months:  */}
         <MothTitle key={index}>
           {itemMonth.clone().add(1,'month').format('MMMM')}
         </MothTitle>
 
+{/* Week */}
+<WrapperWeek>
+{[...Array(7)].map((_, indx) => (
+              <CellWeek key={indx+3}>{moment().day(indx + 1).format('ddd')}</CellWeek> 
+        ))}
+</WrapperWeek>
+
+
+
         <СellMonths>
-{/* 42 цикла по 12 раз */}
+{/* Days: 42 цикла по 12 раз */}
         {[...new Array(42)].map((_, indx) => (
-          <CellDay key={indx+1}>{itemMonth.clone().add(indx, 'day').format('D')}</CellDay>       
+          
+            <CellDay key={indx+1}>{itemMonth.clone().add(indx, 'day').format('D')}</CellDay> 
+          
+                
           ))}
         </СellMonths>
         

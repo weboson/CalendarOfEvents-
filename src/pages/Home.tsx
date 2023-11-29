@@ -23,7 +23,7 @@ const Home: FC = () => {
 
 
   const [currentData, setToday] = useState<Moment>(currentDate || ''); // currentDate в currentDate.ts 
-  const firstDayOfWeek = currentData.clone().startOf('month').startOf('week');
+  const firstDayOfWeek = currentData.clone().startOf('month').startOf('week'); // стартовывй день: 01.понедельник.2023
 
   const prevHandler = () => setToday(prev => prev.clone().subtract(1, 'month'));
   const todayHandler = () => setToday(moment());
@@ -50,7 +50,7 @@ const Home: FC = () => {
         (menuModesDate[indexMenu].title == 'Day') ? (<div>Day</div>) :
         (menuModesDate[indexMenu].title == 'Week') ? (<div>Week</div>) :
         (menuModesDate[indexMenu].title == 'Month') ? (<MonthGrid firstDayOfWeek={firstDayOfWeek} currentData={currentData || null} />) :
-        (menuModesDate[indexMenu].title == 'Year') ? (<YearGrid />) :
+        (menuModesDate[indexMenu].title == 'Year') ? (<YearGrid firstDayOfWeek={firstDayOfWeek}/>) :
   'Какой необычный возраст!'
       }
 

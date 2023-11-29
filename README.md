@@ -1,27 +1,36 @@
-# React + TypeScript + Vite
+# App Callendar of Events
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+***
+##Screenshots
 
-Currently, two official plugins are available:
+###Month Mode
+![Calendar-Month-mode](https://github.com/weboson/CalendarOfEvents-/assets/42917939/a8bd1a61-eb1b-4ca7-8f98-f3cadf1b4172)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+###Year Mode
+![Calendar-Year-mode](https://github.com/weboson/CalendarOfEvents-/assets/42917939/376a5315-de53-43f5-8913-829126af34db)
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+# Stack--
+## Frontend: npm run dev
+1. React: "^18.2.0"
+2. Vite: "^4.4.5" 
+3. Reduxjs/toolkit: "^1.9.7",
+4. React-router-dom: "^6.15.0"
+5. React-icons: "^4.12.0"
+6. Moment": "^2.29.4"
+7. Styled-components": "^6.1.1"
 
-- Configure the top-level `parserOptions` property like this:
+## Backend: 
+1. Typescript": "^5.0.2",
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+### Running the app (watch mode)
+- npm run dev
+
+### Stay in touch
+- Author - [Rishat Weboson](...)
+- Website - [https://mysite.com](...)
+
+### License
+Nest is [MIT licensed](LICENSE).

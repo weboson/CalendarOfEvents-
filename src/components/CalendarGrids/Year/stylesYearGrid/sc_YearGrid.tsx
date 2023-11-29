@@ -12,6 +12,7 @@ export const GridWrapperYear = styled.div<IGridWrapperYearProps>`
   grid-row-gap: 10px;
   border-bottom: 6px solid '#484848';
   padding: 10px;
+  /* border: solid 1px green; */
 `;
 
 
@@ -23,6 +24,7 @@ interface IWrapperMothCellProps {
 export const WrapperMothCell = styled.div<IWrapperMothCellProps>`
   margin: 10px;
   padding: 10px;
+  /* border: solid 1px blue; */
   ${(props) => (props.$isCurrentMonth) ? 'color: red' : 'color: white'}
   
 `
@@ -42,6 +44,7 @@ export const СellMonths = styled.div`
   grid-gap: 1px;
   padding: 0;
   margin-top: 5px;
+  /* border: solid 1px red; */
 `
 
 
@@ -58,12 +61,17 @@ export const CellWeek = styled.div`
   color: #565759;
 `
 
+// Current Day
+export const CurrentDay = styled.div`
+  color: red;
+`
 
 
 // For Cell Days
 interface ICellDayProps  {
   $isWeekend?: boolean
   $isCurrentDay?: boolean
+  $isCurrentDays?: boolean
 }
 
 export const CellDay = styled.div<ICellDayProps>`
@@ -71,9 +79,11 @@ export const CellDay = styled.div<ICellDayProps>`
   grid-gap: 1px;
   background-color: #272829;
   ${(props => (
-    (props.$isWeekend) ? 'color: #919294' : 
+    (props.$isWeekend) ? 'color: #212121' : 
     (props.$isCurrentDay) ? 'color: red' :
-    'color: #ffffff' 
+    (props.$isCurrentDays) ? 'color: #ffffff' :
+    'color: #919294'
+     
   ))};
 `
 

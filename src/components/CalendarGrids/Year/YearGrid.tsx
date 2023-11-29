@@ -1,50 +1,52 @@
-//! Mode Year (общий календарь)
-import { FC } from 'react';
-import {
-  СellMonths,
-  GridWrapperYear,
-  CellDay,
-  WrapperMothCell,
-  MothTitle,
-  CellWeek,
-  WrapperWeek,
-} from './stylesYearGrid/sc_YearGrid';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
+import { FC, useEffect, useState } from 'react';
 import currentDate from '../../../data/currentDate';
+import {
+  CellDay,
+  CellWeek,
+  CurrentDay,
+  GridWrapperYear,
+  MothTitle,
+  WrapperMothCell,
+  WrapperWeek,
+  СellMonths,
+} from './stylesYearGrid/sc_YearGrid';
+
 
 const YearGrid: FC = () => {
-  moment.updateLocale('ru', { week: { dow: 1 } }); // настройка: еделя начинается с понедельника
+  moment.updateLocale('ru', { week: { dow: 1 } }); // неделя начинается с понедельника
 
-  // массив месяцев (с января с 1 числа, чтобы отчет дней не был с текущего числа) и каждый месяц начинается с первой недели
-  const monthArray = [...new Array(12)].map((_, i) =>
-    moment().clone().month(i).startOf('month').startOf('week'),
-  ); // .startOf('month').startOf('week') - начать отчет ячеек с 1 месяца и 1-й недели
+  // начало первого месяца в году: 1-е январь
+  const firstMonth = moment().clone().month(0).startOf('month');
+  // console.log(firstMonth.format('DD-MMMM-YY'));
 
-  console.log(monthArray[11].isSame(currentDate, 'month'));
+  // понедельник-26-декабря: начало календарной недели входящая в январь - сделал в самом чередовании
+  const firstCalendarDay = moment()
+    .clone()
+    .month(0)
+    .startOf('month')
+    .startOf('week');
 
-  // текущий месяц (для проверки, чтобы маркировать $isCurrentMonth)
-  const curruenMonth = moment().subtract(1, 'month'); // -1 иначе спешит на 1 месяц
+  const ArrayMonths = [...new Array(12)].map((_, i) =>
+    firstMonth.clone().add(i, 'month'),
+  );
+
+  // console.log(ArrayMonths[0]);
 
   return (
     <>
       <GridWrapperYear>
-        {/* 12 итераций  */}
-        {monthArray.map((itemMonth, index) => (
+        {ArrayMonths.map((monthItem, index) => (
           <WrapperMothCell
-            key={index + 2}
-            $isCurrentMonth={
-              itemMonth.isSame(curruenMonth, 'month') ? true : false
-            }
+            key={index + 1}
+            $isCurrentMonth={monthItem.isSame(moment(), 'month') ? true : false}
           >
-            {/* Months:  */}
-            <MothTitle key={index}>
-              {itemMonth.clone().add(1, 'month').format('MMMM')}
-            </MothTitle>
+            <MothTitle>{monthItem.format('MMMM')}</MothTitle>
 
             {/* Week */}
             <WrapperWeek>
               {[...Array(7)].map((_, indx) => (
-                <CellWeek key={indx + 3}>
+                <CellWeek key={indx + 2}>
                   {moment()
                     .day(indx + 1)
                     .format('ddd')}
@@ -52,17 +54,31 @@ const YearGrid: FC = () => {
               ))}
             </WrapperWeek>
 
-            <СellMonths>
-              {/* Days: 42 цикла по 12 раз */}
-              {[...new Array(42)].map((_, indx) => (
+            <СellMonths key={index + 3}>
+              {[...new Array(42)].map((_, i) => (
                 <CellDay
-                  key={indx + 1}
-                  $isWeekend={
-                    itemMonth.day(indx).format('d') == '6' ||
-                    itemMonth.day(indx).format('d') == '5'
+                     key={i}
+                  $isCurrentDay={monthItem
+                    .clone()
+                    .startOf('month')
+                    .startOf('week')
+                    .add(i, 'day')
+                    .isSame(moment(), 'day') && monthItem.isSame(moment(), 'month')}
+
+                  $isCurrentDays={monthItem
+                    .clone()
+                    .startOf('month')
+                    .startOf('week')
+                    .add(i, 'day')
+                    .isSame(moment(), 'month')
                   }
                 >
-                  {itemMonth.clone().add(indx, 'day').format('D')}
+                  {monthItem
+                    .clone()
+                    .startOf('month')
+                    .startOf('week')
+                    .add(i, 'day')
+                    .format('D')}
                 </CellDay>
               ))}
             </СellMonths>

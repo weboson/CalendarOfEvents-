@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 import { FC } from 'react';
 import {
   CellDay,
@@ -10,12 +10,15 @@ import {
   СellMonths,
 } from './stylesYearGrid/sc_YearGrid';
 
+interface IProps {
+  currentDate: Moment
+}
 
-const YearGrid: FC = () => {
+const YearGrid: FC<IProps> = ({currentDate}) => {
   moment.updateLocale('ru', { week: { dow: 1 } }); // неделя начинается с понедельника
 
   // начало первого месяца в году: 1-е январь
-  const firstMonth = moment().clone().month(0).startOf('month');
+  const firstMonth = currentDate.clone().month(0).startOf('month');
 
   const ArrayMonths = [...new Array(12)].map((_, i) =>
     firstMonth.clone().add(i, 'month'),

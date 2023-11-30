@@ -20,9 +20,6 @@ const ShadowWrapper = styled('div')`
 `;
 
 const Home: FC = () => {
-  
-
-
 
   // redux-toolkit
   const index = useAppSelector((state) => state.menu)
@@ -54,7 +51,7 @@ const Home: FC = () => {
         (menuModesDate[indexMenu].title == 'Day') ? (<div>Day</div>) :
         (menuModesDate[indexMenu].title == 'Week') ? (<div>Week</div>) :
         (menuModesDate[indexMenu].title == 'Month') ? (<MonthGrid firstDayOfWeek={firstDayOfWeek} currentDate={currentDate || null} />) :
-        (<YearGrid />)
+        (<YearGrid currentDate={currentDate}/>)
       }  
     </ShadowWrapper>
   );

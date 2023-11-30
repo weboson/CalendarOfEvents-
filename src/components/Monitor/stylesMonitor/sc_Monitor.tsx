@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 // ts тип для пропс
 export interface IMonitorProps {
-    currentData: Moment
+    currentDate: Moment
     prevHandler: () => void
     todayHandler: () => void
     nextHandler: () => void

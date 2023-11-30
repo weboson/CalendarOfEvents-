@@ -1,11 +1,16 @@
 // For Redux-Toolkit
 import { configureStore } from '@reduxjs/toolkit'
 import menuReducer from './features/modesDateSlice'
+import selectedModeMonitorReducer from './features/selectedModeMonitorSlice'
+
+
+
 
 
 export const store = configureStore({
   reducer: {
     menu: menuReducer,
+    selectedModeMonitor: selectedModeMonitorReducer,
   },
 })
 

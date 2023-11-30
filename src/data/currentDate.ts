@@ -6,5 +6,5 @@ import moment, { Moment } from 'moment'; // библиотека для даты
 moment.updateLocale('ru', { week: { dow: 1 } }); // неделя начинается с понедельника
 
 // состояние по-умолчанию
-export const currentDate: Moment = moment();
-export default currentDate
+export const currentMoment: Moment = moment();
+export default currentMoment

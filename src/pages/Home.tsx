@@ -2,13 +2,13 @@ import { FC, useState } from 'react';
 import Header from '../components/Header/Header';
 import Monitor from '../components/Monitor/Monitor';
 import styled from 'styled-components';
-import { Moment } from 'moment';
-import moment from 'moment';
-import { currentDate } from '../data/currentDate';
+import moment, { Moment } from 'moment';
+import { currentMoment } from '../data/currentDate';
 import YearGrid from '../components/CalendarGrids/Year/YearGrid';
 import MonthGrid from '../components/CalendarGrids/Month/MonthGrid';
-import { useAppSelector } from '../store/hooks';
 import { menuModesDate } from '../data/dataMenu';
+import { modesMonitor } from '../data/modesMonitor'; // МАССИВ режимов отображения в Monitor
+import { useAppSelector } from '../store/hooks';
 
 
 // sc-style
@@ -20,48 +20,42 @@ const ShadowWrapper = styled('div')`
 `;
 
 const Home: FC = () => {
+  
 
 
-  const [currentData, setToday] = useState<Moment>(currentDate || ''); // currentDate в currentDate.ts 
-  const firstDayOfWeek = currentData.clone().startOf('month').startOf('week'); // стартовывй день: 01.понедельник.2023
 
-  const prevHandler = () => setToday(prev => prev.clone().subtract(1, 'month'));
+  // redux-toolkit
+  const index = useAppSelector((state) => state.menu)
+  
+  const mode = modesMonitor[index].title // 'month' (режим отображения заголовка в Monitor: Month)
+
+  const [currentDate, setToday] = useState<Moment>(currentMoment || ''); // currentDate в currentDate.ts 
+  const firstDayOfWeek = currentDate.clone().startOf('month').startOf('week'); // стартовывй день: 01.понедельник.2023
+
+  const prevHandler = () => setToday(prev => prev.clone().subtract(1, mode));
   const todayHandler = () => setToday(moment());
-  const nextHandler = () => setToday(prev => prev.clone().add(1, 'month'));
-
+  const nextHandler = () => setToday(prev => prev.clone().add(1, mode));
 
   // выбранный режим меню (day, week, month, year)
   const indexMenu = useAppSelector((state) => state.menu) // из Readux-toolkit
-  //console.log(indexMenu)
-
 
   return (
     <ShadowWrapper>
       <Header />
       <Monitor 
-        currentData={currentData}
+        currentDate={currentDate}
         prevHandler={prevHandler}
         todayHandler={todayHandler}
         nextHandler={nextHandler}
     />
 
       {
-        // mode menu
+        // mode menu: Day, Week, Month, Year
         (menuModesDate[indexMenu].title == 'Day') ? (<div>Day</div>) :
         (menuModesDate[indexMenu].title == 'Week') ? (<div>Week</div>) :
-        (menuModesDate[indexMenu].title == 'Month') ? (<MonthGrid firstDayOfWeek={firstDayOfWeek} currentData={currentData || null} />) :
-        (menuModesDate[indexMenu].title == 'Year') ? (<YearGrid firstDayOfWeek={firstDayOfWeek}/>) :
-  'Какой необычный возраст!'
-      }
-
-      {/* <MonthGrid firstDayOfWeek={firstDayOfWeek} currentData={currentData || null} /> */}
-      {/* <YearGrid /> */}
-      
-        
-        
-    
-      
-      
+        (menuModesDate[indexMenu].title == 'Month') ? (<MonthGrid firstDayOfWeek={firstDayOfWeek} currentDate={currentDate || null} />) :
+        (<YearGrid />)
+      }  
     </ShadowWrapper>
   );
 };

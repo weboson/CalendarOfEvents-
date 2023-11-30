@@ -1,10 +1,8 @@
-import moment, { Moment } from 'moment';
-import { FC, useEffect, useState } from 'react';
-import currentDate from '../../../data/currentDate';
+import moment from 'moment';
+import { FC } from 'react';
 import {
   CellDay,
   CellWeek,
-  CurrentDay,
   GridWrapperYear,
   MothTitle,
   WrapperMothCell,
@@ -18,20 +16,10 @@ const YearGrid: FC = () => {
 
   // начало первого месяца в году: 1-е январь
   const firstMonth = moment().clone().month(0).startOf('month');
-  // console.log(firstMonth.format('DD-MMMM-YY'));
-
-  // понедельник-26-декабря: начало календарной недели входящая в январь - сделал в самом чередовании
-  const firstCalendarDay = moment()
-    .clone()
-    .month(0)
-    .startOf('month')
-    .startOf('week');
 
   const ArrayMonths = [...new Array(12)].map((_, i) =>
     firstMonth.clone().add(i, 'month'),
   );
-
-  // console.log(ArrayMonths[0]);
 
   return (
     <>
@@ -55,32 +43,29 @@ const YearGrid: FC = () => {
             </WrapperWeek>
 
             <СellMonths key={index + 3}>
-              {[...new Array(42)].map((_, i) => (
+              {[...new Array(42)].map((_, i) => { 
+                // сохраню хоть что-то в перменную, чтобы не дублировать код
+                let iDay = monthItem
+                .clone()
+                .startOf('month')
+                .startOf('week').add(i, 'day'); // переменная каждого дня
+                
+                return (
                 <CellDay
                      key={i}
-                  $isCurrentDay={monthItem
-                    .clone()
-                    .startOf('month')
-                    .startOf('week')
-                    .add(i, 'day')
+                  $isCurrentDay={
+                    iDay
                     .isSame(moment(), 'day') && monthItem.isSame(moment(), 'month')}
 
-                  $isCurrentDays={monthItem
-                    .clone()
-                    .startOf('month')
-                    .startOf('week')
-                    .add(i, 'day')
+                  $isCurrentDays={
+                    iDay
                     .isSame(moment(), 'month')
                   }
                 >
-                  {monthItem
-                    .clone()
-                    .startOf('month')
-                    .startOf('week')
-                    .add(i, 'day')
+                  {iDay
                     .format('D')}
                 </CellDay>
-              ))}
+              )})}
             </СellMonths>
           </WrapperMothCell>
         ))}

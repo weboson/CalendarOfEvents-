@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { RootState } from '../store'
 
 //! по-умолчанию
-const initialState: number = 2; // режим отображения заголовка в Monitor: "November 2023" (режим отображения Month.tsx), "2023" (Year)
+const initialState: number = 0; // режим отображения заголовка в Monitor: "November 2023" (режим отображения Month.tsx), "2023" (Year)
 
 export const selectedModeMonitorSlice = createSlice({
   name: 'selectedModeMonitor',

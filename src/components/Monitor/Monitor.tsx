@@ -37,9 +37,13 @@ const Monitor: FC<IMonitorProps> = ({
         <div>
           <TitleWrapper>{currentDate.format('YYYY')}</TitleWrapper>
         </div>
-      ) : (
+      ) : mode == 'week' ? (
+        <div>
+          <TitleWrapper>{currentDate.clone().startOf('week').format('ww')}</TitleWrapper>
+        </div>
+      ) :
         'Заголовок (Monitor.tsx)'
-      )}
+      }
       <ButtonsWrapper>
         <ButtonWrapper onClick={prevHandler}> &lt; </ButtonWrapper>
         <TodayButton onClick={todayHandler}>Today</TodayButton>

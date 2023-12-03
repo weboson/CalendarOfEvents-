@@ -1,13 +1,13 @@
 # App Callendar of Events
 
 ***
-##Screenshots
+## Screenshots
 
-###Month Mode
+### Month Mode
 ![Calendar-Month-mode](https://github.com/weboson/CalendarOfEvents-/assets/42917939/a8bd1a61-eb1b-4ca7-8f98-f3cadf1b4172)
 
-###Year Mode
-![Calendar-Year-mode](https://github.com/weboson/CalendarOfEvents-/assets/42917939/376a5315-de53-43f5-8913-829126af34db)
+### Year Mode
+![Calendar-Year-mode](https://github.com/weboson/CalendarOfEvents-/assets/42917939/9f02cb3e-662d-439e-8269-776b84adf3c6)
 
 
 # Stack--

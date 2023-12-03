@@ -1,8 +1,19 @@
 import {FC} from 'react';
-import { GridWrapper, DaySidePanel, WrapperSidePanel, HourSidePanel, WrapperHeaderDays } from './stylesWeekGrid/sc_WeekGrid';
-import moment from 'moment';
+import { GridWrapper, DaySidePanel, WrapperSidePanel, HourSidePanel, WrapperTopPanel, DayOfWeek } from './stylesWeekGrid/sc_WeekGrid';
+import moment, { Moment } from 'moment';
 
-const WeekGrid:FC = () => {
+interface IProps {
+    currentDate: Moment
+  }
+
+const WeekGrid:FC<IProps> = ({currentDate}) => {
+
+ // Days of week
+const ArrayDays = [... new Array(7)].map((_, i) => (
+    currentDate.clone().startOf('week').add(i, 'day') //currentDate - чтобы можно было "лестать" неделями в Monitor.tsx
+))
+
+// console.log(ArrayDays[0].format('dddd')) // Monday
     return (
         <GridWrapper>
             {/* Side Panel */}
@@ -15,7 +26,12 @@ const WeekGrid:FC = () => {
                 ))}
                 
             </WrapperSidePanel>
-            <WrapperHeaderDays>20220</WrapperHeaderDays>
+            <WrapperTopPanel>
+                {ArrayDays.map((dayItem, index) => (
+                    <DayOfWeek key={index+1} $currentDay={(dayItem.isSame(moment(), 'day'))}>{dayItem.format('dddd')}</DayOfWeek>
+                ))}
+            </WrapperTopPanel>
+            
         </GridWrapper>
     );
 };

@@ -50,7 +50,7 @@ const Home: FC = () => {
       {
         // mode menu: Day, Week, Month, Year
         (menuModesDate[indexMenu].title == 'Day') ? (<div>Day</div>) :
-        (menuModesDate[indexMenu].title == 'Week') ? (<WeekGrid />) :
+        (menuModesDate[indexMenu].title == 'Week') ? (<WeekGrid currentDate={currentDate}/>) :
         (menuModesDate[indexMenu].title == 'Month') ? (<MonthGrid firstDayOfWeek={firstDayOfWeek} currentDate={currentDate || null} />) :
         (<YearGrid currentDate={currentDate}/>)
       }  

@@ -47,6 +47,18 @@ export const HourSidePanel = styled.div`
 `
 
 // Wrapper Header
-export const WrapperHeaderDays = styled.div`
-    border: 1px solid #23a49b
+export const WrapperTopPanel = styled.div`
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); 
+    border: 1px solid #23a49b;
+`
+// Day of Week + Date
+interface IDayOfWeek {
+    $currentDay: boolean
+}
+
+export const DayOfWeek = styled.div<IDayOfWeek>`
+    color: #322525;
+    ${(props) => (props.$currentDay) ? 'background-color: #005050;' : 'background-color: #0fff;'}
+    border: 1px solid #1a2f2f;
 `

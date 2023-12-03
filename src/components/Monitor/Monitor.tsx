@@ -39,7 +39,8 @@ const Monitor: FC<IMonitorProps> = ({
         </div>
       ) : mode == 'week' ? (
         <div>
-          <TitleWrapper>{currentDate.clone().startOf('week').format('ww')}</TitleWrapper>
+          <TitleWrapper>{`${currentDate.clone().startOf('week').format('D')} - ${currentDate.clone().endOf('week').format('D')} `}</TitleWrapper>
+          <TextWrapper>{currentDate.format('MMMM yyyy')}</TextWrapper>
         </div>
       ) :
         'Заголовок (Monitor.tsx)'

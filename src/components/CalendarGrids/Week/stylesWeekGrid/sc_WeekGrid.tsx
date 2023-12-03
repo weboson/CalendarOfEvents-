@@ -9,15 +9,15 @@ export const GridWrapper = styled.div`
     min-width: 1210px;
     overflow-y: scroll; 
     &::-webkit-scrollbar { // style scroll
-        width: 12px;  
+        width: 18px;  
     }             /* ширина scrollbar */
     &::-webkit-scrollbar-track {
         background: #E6E6E6; 
-        border-radius: 20px; 
+        /* border-radius: 20px;  */
            }       /* цвет дорожки */
     &::-webkit-scrollbar-thumb {
         background-color: #565759;    /* цвет плашки */
-        border-radius: 20px;       /* закругления плашки */
+        border-radius: 0px 0px 9px 0;       /* закругления плашки */
         border: 1px solid #E6E6E6;
       }  /* padding вокруг плашки */
 `
@@ -25,13 +25,17 @@ export const GridWrapper = styled.div`
 export const WrapperSidePanel = styled.div`
     display: block;
     float: left;
-    background-color: green;
 `
 // Day (side panel)
 export const DaySidePanel = styled.div`
-    background-color: #9696e6;
-    margin: 5px;
-    padding: 10px 20px;
+    background-color: #1e1f21;
+    border-bottom: 1px solid #565759;
+    color: white;
+    text-align: center;
+    padding-bottom: 8px;
+    position: sticky; // fixed panel
+    top: 0; // fixed panel
+    width: 100%;
 `
 // Hours (side panel)
 export const HoursSidePanel = styled.div`
@@ -39,26 +43,48 @@ export const HoursSidePanel = styled.div`
 `
 // Item Hour
 export const HourSidePanel = styled.div`
-    color: white;
-    background-color: orange;
-    padding: 10px 20px;
-    margin: 5px;
+    color: #E6E6E6;
+    background-color: #1e1f21;
     text-align: center;
+    min-height: 40px;
+    padding: 10px;
+    border-bottom: 1px solid #565759;
+    border-right: 1px solid #565759;
 `
 
 // Wrapper Header
-export const WrapperTopPanel = styled.div`
+export const WrapperTopPanelAndContent = styled.div`
     display: grid;
     grid-template-columns: repeat(7, 1fr); 
-    border: 1px solid #23a49b;
 `
-// Day of Week + Date
+// Day of Week + Date + Column
+export const WrapperColumn = styled.div`` // для обёртки
+
 interface IDayOfWeek {
     $currentDay: boolean
 }
 
 export const DayOfWeek = styled.div<IDayOfWeek>`
-    color: #322525;
-    ${(props) => (props.$currentDay) ? 'background-color: #005050;' : 'background-color: #0fff;'}
-    border: 1px solid #1a2f2f;
+    position: sticky; // fixed panel
+    top: 0; // fixed panel
+    background-color: #1e1f21;
+    border-bottom: 1px solid #565759;
+    ${(props) => (props.$currentDay) ? 'color: red;' : 'color: white;'}
+    padding-left: 20px;
+    padding-bottom: 8px;
+
+`
+
+// Hours Columm
+interface IHourContent {
+    $currentHour: boolean
+}
+
+export const HourContent = styled.div<IHourContent>`
+    display: block;
+    width: 100%;
+    height: 42px;
+    border-bottom: 1px solid #565759;
+    border-right: 1px solid #565759;
+    ${(props) => (props.$currentHour) ? 'background-color: #565759' : 'background-color: #1e1f21'}
 `

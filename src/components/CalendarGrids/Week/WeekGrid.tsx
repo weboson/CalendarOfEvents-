@@ -16,6 +16,8 @@ interface IProps {
 }
 
 const WeekGrid: FC<IProps> = ({ currentDate }) => {
+// currentDate - это текущее врем, которое автоматически обновляется (useEffect) каждую минуту
+
   // Days of week (top panel)
   const ArrayDays = [...new Array(7)].map((_, i) =>
     currentDate.clone().startOf('week').add(i, 'day'), //currentDate - чтобы можно было "лестать" неделями в Monitor.tsx
@@ -31,9 +33,6 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
     currentDate.clone().startOf('day').add(i, 'hour'),
   );
 
-  // console.log(ArrayDays[0].format('dddd')) // Monday
-  // console.log(ArrayHoursContent[0].format('HH')); // 23
-  // console.log(ArrayHoursSidePanel[0].format('H:00 A')); // 23:00 PM
   return (
     <GridWrapper>
       {/* Side Panel */}
@@ -43,7 +42,8 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
         {/* Hours (Side Panel) */}
         {ArrayHoursSidePanel.map((HourSideItem, index) => (
           <HourSidePanel key={index} $currentSideHour={HourSideItem.hours(index).isSame(moment(), 'hour')}>
-            {HourSideItem.hours(index).format('H:00 A')}
+            {HourSideItem.hour(index).format('H:00 A')}
+            {/* {HourSideItem.hour(index).format('LTS')} */}
           </HourSidePanel>
         ))}
       </WrapperSidePanel>

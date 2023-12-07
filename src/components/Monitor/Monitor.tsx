@@ -24,7 +24,7 @@ const Monitor: FC<IMonitorProps> = ({
   const index = useAppSelector((state) => state.menu);
 
   const mode = modesMonitor[index].title; // 'month' (режим отображения заголовка в Monitor: Month)
-  console.log(modesMonitor[index].title)
+  // console.log(modesMonitor[index].title)
 
   return (
     <DivWrapper>

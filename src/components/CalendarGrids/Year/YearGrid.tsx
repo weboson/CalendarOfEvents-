@@ -62,7 +62,7 @@ const YearGrid: FC<IProps> = ({currentDate}) => {
 
                   $isCurrentDays={
                     iDay
-                    .isSame(moment(), 'month')
+                    .isSame(moment(), 'month') && monthItem.isSame(moment(), 'month')
                   }
                 >
                   {iDay

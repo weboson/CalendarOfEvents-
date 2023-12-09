@@ -1,5 +1,5 @@
 // redux-toolkit - Slice (шаблон кода из документации)
-// выбранная кнопка режима отомбражения календаря: month, year, week...
+// режим отображения заголовка в Monitor: "November 2023" (режим отображения Month.tsx), "2023" (Year)
 import { createSlice } from '@reduxjs/toolkit'
 import type { RootState } from '../store'
 

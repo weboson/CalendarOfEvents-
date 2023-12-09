@@ -10,6 +10,7 @@ import { menuModesDate } from '../data/dataMenu';
 import { modesMonitor } from '../data/modesMonitor'; // МАССИВ режимов отображения в Monitor
 import { useAppSelector } from '../store/hooks';
 import WeekGrid from '../components/CalendarGrids/Week/WeekGrid';
+import DayGrid from '../components/CalendarGrids/Day/DayGrid';
 
 // sc-style
 const ShadowWrapper = styled('div')`
@@ -61,7 +62,7 @@ const Home: FC = () => {
       {
         // mode menu: Day, Week, Month, Year
         menuModesDate[indexMenu].title == 'Day' ? (
-          <div>Day</div>
+          <DayGrid currentDate={currentDate}/>
         ) : menuModesDate[indexMenu].title == 'Week' ? (
           <WeekGrid currentDate={currentDate} />
         ) : menuModesDate[indexMenu].title == 'Month' ? (

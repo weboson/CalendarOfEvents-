@@ -1,15 +1,14 @@
 import { Moment } from 'moment';
 import { FC } from 'react';
 import {
-    DateBoard,
-  FullDate,
-  GridCalendar,
+  BottomLeftSection,
   LeftSection,
   RightSection,
-  TitleDay,
   TopLeftSection,
   WrapperBlock,
 } from './stylesDayGrid/sc_DayGrid';
+import DateBoard from './DayComponents/DateBoard';
+import GridCalendar from './DayComponents/GridCalendar';
 
 interface IProps {
   currentDate: Moment;
@@ -24,16 +23,12 @@ const DayGrid: FC<IProps> = ({currentDate}) => {
       <LeftSection>
         {/* Top left */}
         <TopLeftSection>
-          <DateBoard>
-            <TitleDay>
-                {currentDate.format('D')}
-            </TitleDay>
-            <FullDate>
-                {currentDate.format('dddd, D MMMM')}
-            </FullDate>
-          </DateBoard>
-          <GridCalendar>Grid Calenar</GridCalendar>
+          <DateBoard currentDate={currentDate}/>
+          <GridCalendar currentDate={currentDate}/>
         </TopLeftSection>
+        <BottomLeftSection>
+          30%
+        </BottomLeftSection>
       </LeftSection>
       {/* Right */}
       <RightSection></RightSection>

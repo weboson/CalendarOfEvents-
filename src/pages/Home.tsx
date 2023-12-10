@@ -3,7 +3,7 @@ import Header from '../components/Header/Header';
 import Monitor from '../components/Monitor/Monitor';
 import styled from 'styled-components';
 import moment, { Moment } from 'moment';
-import { currentMoment } from '../data/currentDate';
+import { currentMoment } from '../data/currentMoment';
 import YearGrid from '../components/CalendarGrids/Year/YearGrid';
 import MonthGrid from '../components/CalendarGrids/Month/MonthGrid';
 import { menuModesDate } from '../data/dataMenu';

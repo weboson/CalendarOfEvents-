@@ -48,7 +48,7 @@ const YearGrid: FC<IProps> = ({currentDate}) => {
             <СellMonths key={index + 3}>
               {[...new Array(42)].map((_, i) => { 
                 // сохраню хоть что-то в перменную, чтобы не дублировать код
-                let iDay = monthItem
+                const iDay = monthItem
                 .clone()
                 .startOf('month')
                 .startOf('week').add(i, 'day'); // переменная каждого дня

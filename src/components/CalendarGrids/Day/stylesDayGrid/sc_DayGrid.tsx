@@ -83,7 +83,9 @@ export const GridCalendarSection = styled.div`
   width: 55%;
   color: #DCDDDD;
   background-color: #1e1f21;
-  /* border: 1px solid gray; */
+  @media (max-width: 1210px) {
+      flex: 50%;
+  }
 `
 export const WrapperWeek = styled.div`
   display: grid;

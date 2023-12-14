@@ -3,7 +3,7 @@
 // пока база данных будет храниться локально (и пока без user):
 
 
-import { Moment } from "moment"
+import moment, { Moment } from "moment"
 
 // массив объектов
 interface IDaily {
@@ -20,14 +20,17 @@ interface IDaily {
 
 
 // режим дня 
-export const dailyRegime: IDailyRegime = [
+const dailyRegime: IDailyRegime = [
   {
     id: 1,
     title: 'ежедневный', // любой заголовок
     modeDR: 'weekdays', // 'будни' | 'выходные'
-    startDay: '10:00', // во сколько просыпаешься 
-    endDay: '', // + 14-16 часа бодростования и после спать
+    startDay: moment().hour(8 - 1).minute(30), // во сколько просыпаешься (10:30)
+    endDay: moment().hour(20 - 1).minute(0), // + 14-16 часа бодростования и после спать
     CreateDateColumn: '12.12.2023',
     UpdateDateColumn: '12.12.2023',
   },
 ];
+
+
+export default dailyRegime;

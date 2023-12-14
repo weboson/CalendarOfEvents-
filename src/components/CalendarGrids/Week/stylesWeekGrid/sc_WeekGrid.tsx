@@ -97,5 +97,5 @@ export const HourContent = styled.div<IHourContent>`
     height: 42px;
     border-bottom: 1px solid #565759;
     border-right: 1px solid #565759;
-    ${(props) => (props.$currentHour) ? 'background-color: #565759' : 'background-color: #1e1f21'}
+    ${(props) => (props.$currentHour) ? 'background-color: #3d3e3f' : 'background-color: #1e1f21'}
 `

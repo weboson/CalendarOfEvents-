@@ -28,7 +28,6 @@ const GridDayWithHours: FC<IProps> = ({currentDate, dayItem}) => {
 
 // если modeDR: 'weekdays' то пометить все будни, или 'weekends ' то пометить все выходные 
   const isWeekend = (dailyRegime: IDailyRegime, dayItem: Moment) => {
-    
     switch (dailyRegime[0].modeDR) {
         case 'weekdays': 
             return (dayItem.day() !== 6 && dayItem.day() !== 0 )

@@ -18,7 +18,7 @@ export interface IDaily {
   
 export  interface IDailyRegime extends Array<IDaily>{}
 
-//! разбить: {weekdays: {}, weekends': {}}
+//! разбить: [ {{weekdays: {}; weekends': {}},  {weekdays: {}; weekends': {}}} ]
 // режим дня (пока массив, потом подумаю)
 const dailyRegime: IDailyRegime = [
   {

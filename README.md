@@ -4,7 +4,7 @@
 ## Screenshots
 
 ### Week Mode
-![Calendar-Year-mode](https://github.com/weboson/CalendarOfEvents-/assets/42917939/e317a069-efc1-4c78-8eb0-a37320f1a97c)
+![Calendar-Week-mode-V2](https://github.com/weboson/CalendarOfEvents-/assets/42917939/5020ce13-3f57-4170-a813-77478c68390b)
 
 ### Month Mode
 ![Calendar-Month-mode](https://github.com/weboson/CalendarOfEvents-/assets/42917939/a8bd1a61-eb1b-4ca7-8f98-f3cadf1b4172)

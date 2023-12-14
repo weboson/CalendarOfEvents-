@@ -6,7 +6,7 @@
 import moment, { Moment } from "moment"
 
 // массив объектов
-interface IDaily {
+export interface IDaily {
     id: number
     title: string
     modeDR: 'weekdays' | 'weekends' // 'будни' | 'выходные'
@@ -16,19 +16,28 @@ interface IDaily {
     UpdateDateColumn: Moment | string
   }
   
-  interface IDailyRegime extends Array<IDaily>{}
+export  interface IDailyRegime extends Array<IDaily>{}
 
-
-// режим дня 
+//! разбить: {weekdays: {}, weekends': {}}
+// режим дня (пока массив, потом подумаю)
 const dailyRegime: IDailyRegime = [
   {
     id: 1,
-    title: 'ежедневный', // любой заголовок
-    modeDR: 'weekdays', // 'будни' | 'выходные'
+    title: 'будни', // любой заголовок
+    modeDR: 'weekdays', // 'будни' | 'выходные' - 
     startDay: moment().hour(8 - 1).minute(30), // во сколько просыпаешься (10:30)
     endDay: moment().hour(20 - 1).minute(0), // + 14-16 часа бодростования и после спать
     CreateDateColumn: '12.12.2023',
-    UpdateDateColumn: '12.12.2023',
+    UpdateDateColumn: '14.12.2023',
+  },
+  {
+    id: 2,
+    title: 'выходные', // любой заголовок
+    modeDR: 'weekends', // 'выходные' 
+    startDay: moment().hour(10 - 1).minute(30), // во сколько просыпаешься (10:30)
+    endDay: moment().hour(22 - 1).minute(0), // + 14-16 часа бодростования и после спать
+    CreateDateColumn: '12.12.2023',
+    UpdateDateColumn: '14.12.2023',
   },
 ];
 

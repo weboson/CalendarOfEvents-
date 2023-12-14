@@ -6,23 +6,17 @@ import {
   HourSidePanel,
   WrapperTopPanelAndContent,
   DayOfWeek,
-  HourContent,
   WrapperColumn,
 } from './stylesWeekGrid/sc_WeekGrid';
 import moment, { Moment } from 'moment';
-// база данных
-import dailyRegime from '../../../data/localDataBase/localDB_DailyRegime';
-import { GoSun } from 'react-icons/go'; // sun
-import { BsMoon } from 'react-icons/bs'; // Moon
+import GridDayWithHours from './WeekComponents/GridDayWithHours';
+
 
 interface IProps {
   currentDate: Moment;
 }
 
 const WeekGrid: FC<IProps> = ({ currentDate }) => {
-  // база данных: src\data\localDataBase\localDB_DailyRegime.ts
-  const regime = dailyRegime; // режим дня
-
   // currentDate - это текущее врем, которое автоматически обновляется (useEffect) каждую минуту
 
   // Days of week (top panel)
@@ -33,11 +27,6 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
   // 24 Hours (side panel) HourSidePanel
   const ArrayHoursSidePanel = [...new Array(24)].map((_, i) =>
     currentDate.hours(i),
-  );
-
-  // 24 Hours (content)
-  const ArrayHoursContent = [...new Array(24)].map((_, i) =>
-    currentDate.clone().startOf('day').add(i, 'hour'),
   );
 
   // window.moment = moment();
@@ -73,38 +62,10 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
             >
               {dayItem.format('dddd, D')}
             </DayOfWeek>
-            {/* Hours (Top Panel) */}
-            {ArrayHoursContent.map((hourItem, hourIndex) => (
-              <HourContent
-                key={hourIndex + 3}
-                $currentHour={
-                  hourItem.isSame(moment(), 'hour') &&
-                  dayItem.isSame(moment(), 'day')
-                }
-              >
-                {(dayItem.day() !== 6 && dayItem.day() !== 0 ) ? (
-                  hourItem >= regime[0].startDay &&
-                  hourItem <= regime[0].endDay ? (
-                    <GoSun
-                      style={{
-                        color: '#f4fbab',
-                        float: 'right',
-                        margin: '5px 5px 0 0',
-                      }}
-                    />
-                  ) : (
-                    <BsMoon
-                      style={{
-                        color: '#565759',
-                        float: 'right',
-                        margin: '5px 5px 0 0',
-                      }}
-                    />
-                  )
-                ) : null}
-                
-              </HourContent>
-            ))}
+
+            {/* Grid Day with Hours (Content) */}
+            <GridDayWithHours currentDate={currentDate} dayItem={dayItem}/>
+
           </WrapperColumn>
         ))}
       </WrapperTopPanelAndContent>

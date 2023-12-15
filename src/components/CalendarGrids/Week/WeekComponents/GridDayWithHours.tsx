@@ -1,6 +1,6 @@
 import { FC } from 'react';
 // база данных
-import dailyRegime, { IDailyRegime } from '../../../../data/localDataBase/localDB_DailyRegime';
+import dailyRegimes from '../../../../data/localDataBase/localDB_DailyRegime';
 // Icons
 import { GoSun } from 'react-icons/go'; // sun
 import { BsMoon } from 'react-icons/bs'; // Moon
@@ -9,6 +9,7 @@ import { Moment } from 'moment';
 import { HourContent } from '../stylesWeekGrid/sc_WeekGrid';
 import moment from 'moment';
 
+
 // types
 interface IProps {
     currentDate: Moment
@@ -16,29 +17,18 @@ interface IProps {
   }
 
 
-
 const GridDayWithHours: FC<IProps> = ({currentDate, dayItem}) => {
   // база данных: src\data\localDataBase\localDB_DailyRegime.ts
-  const regime = dailyRegime; // режим дня
+  const regime = dailyRegimes[0].modeRegime; // режим дня
 
   // Array 24 Hours (content)
   const ArrayHoursContent = [...new Array(24)].map((_, i) =>
   currentDate.clone().startOf('day').add(i, 'hour'),
   );
 
-// если modeDR: 'weekdays' то пометить все будни, или 'weekends ' то пометить все выходные 
-  const isWeekend = (dailyRegime: IDailyRegime, dayItem: Moment) => {
-    switch (dailyRegime[0].modeDR) {
-        case 'weekdays': 
-            return (dayItem.day() !== 6 && dayItem.day() !== 0 )
-            
-        case 'weekends': 
-            return (dayItem.day() == 6 || dayItem.day() == 0 )        
-    
-        default:
-            break;
-    }
-  }
+  //! Пример логики: чтобы искать нужный объект режима дня, по его id
+  // let arr = dailyRegimes.find((item, index) => item.id == 2)
+  // console.log(arr)
 
   return (
     ArrayHoursContent.map((hourItem, hourIndex) => (
@@ -49,9 +39,29 @@ const GridDayWithHours: FC<IProps> = ({currentDate, dayItem}) => {
             dayItem.isSame(moment(), 'day')
           }
         >
-          {isWeekend(dailyRegime, dayItem) ? (
-            hourItem >= regime[0].startDay &&
-            hourItem <= regime[0].endDay ? (
+          { // marking weekdays
+          (dayItem.day() !== 6 && dayItem.day() !== 0 ) ? (
+            (hourItem >= regime.weekdays.startDay &&
+            hourItem <= regime.weekdays.endDay) ? (
+              <GoSun
+                style={{
+                  color: '#f4fbab',
+                  float: 'right',
+                  margin: '5px 5px 0 0',
+                }}
+              />
+            ) : (
+              <BsMoon
+                style={{
+                  color: '#565759',
+                  float: 'right',
+                  margin: '5px 5px 0 0',
+                }}
+              />
+            ) // marking weekend
+          ) : (dayItem.day() == 6 || dayItem.day() == 0 ) ? (
+            (hourItem >= regime.weekend.startDay &&
+            hourItem <= regime.weekend.endDay) ? (
               <GoSun
                 style={{
                   color: '#f4fbab',

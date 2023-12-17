@@ -1,5 +1,5 @@
 //* Локальная База Данных Daily Regime 
-// Daily Regime - режим дня - проснулся в такое время, лег спать в такое время
+//! Daily Regime - режим дня - проснулся в такое время, лег спать в такое время
 // пока база данных будет храниться локально (и пока без user):
 import moment, { Moment } from "moment"
 
@@ -21,8 +21,8 @@ interface IDaily {
     id: number
     title: string
     modeRegime: IModeRegime
-    CreateDateColumn: Moment | string
-    UpdateDateColumn: Moment | string
+    createdAt: Moment | string
+    updatedAt: Moment | string
 }
 // массив объектов
 export  interface IDailyRegimes extends Array<IDaily>{}
@@ -52,8 +52,8 @@ const dailyRegimes: IDailyRegimes = [
       },
       wakefulness: 14, // количество часов бодровствования (чтобы делить на приёмы ЛС) - автоматически высчитывается в форме ввода.
     },
-    CreateDateColumn: '12.12.2023',
-    UpdateDateColumn: '14.12.2023',
+    createdAt: '12.12.2023',
+    updatedAt: '14.12.2023',
   },
   {
     id: 2,
@@ -71,8 +71,8 @@ const dailyRegimes: IDailyRegimes = [
       },
       wakefulness: 14, // количество часов бодровствования (чтобы делить на приёмы ЛС) - автоматически высчитывается в форме ввода.
     },
-    CreateDateColumn: '12.12.2023',
-    UpdateDateColumn: '14.12.2023',
+    createdAt: '12.12.2023',
+    updatedAt: '14.12.2023',
   }
 
 ]

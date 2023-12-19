@@ -26,10 +26,9 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
 
   // 24 Hours (side panel) HourSidePanel
   const ArrayHoursSidePanel = [...new Array(24)].map((_, i) =>
-    currentDate.hours(i),
+    currentDate.hours(i)
   );
 
-  // window.moment = moment();
 
   return (
     <GridWrapper>

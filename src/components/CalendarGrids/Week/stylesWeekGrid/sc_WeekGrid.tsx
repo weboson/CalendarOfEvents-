@@ -50,7 +50,7 @@ export const HourSidePanel = styled.div<IHourSidePanel>`
     ${(props) => (props.$currentSideHour) ? 'color: red;' : 'color: #E6E6E6;'}
     background-color: #1e1f21;
     text-align: center;
-    min-height: 40px;
+    min-height: 84px; 
     padding: 10px;
     border-bottom: 1px solid #565759;
     border-right: 1px solid #565759;

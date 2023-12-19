@@ -1,6 +1,13 @@
 //* Локальная База Данных Prescriptions (рецепты) 
 //! Prescriptions Data Base
-//  В Серверном БД будут связи: Recipes:  Medicines (лекарства) -> dosage - > Course(сколько времени принмиать ЛС) ->  *doctor - > Clinic* -> Clinic_adress*
+//  В Серверном БД будут связи: Recipes:  
+// Medicines (лекарства) -> 
+// Methods (способы приёма) -> 
+// dosage - > 
+// Course(сколько времени принмиать ЛС) ->  
+// *doctor - > 
+// Clinic* -> 
+// Clinic_adress*
 
 
 interface IPrescription {

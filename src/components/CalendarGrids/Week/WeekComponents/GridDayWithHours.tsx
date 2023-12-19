@@ -21,9 +21,10 @@ const GridDayWithHours: FC<IProps> = ({currentDate, dayItem}) => {
   // база данных: src\data\localDataBase\localDB_DailyRegime.ts
   const regime = dailyRegimes[0].modeRegime; // режим дня
 
-  // Array 24 Hours (content)
-  const ArrayHoursContent = [...new Array(24)].map((_, i) =>
-  currentDate.clone().startOf('day').add(i, 'hour'),
+
+    // 48 Half Hours  (content), exemple: 0:00, 0:30, 1:00
+    const ArrayHalfHoursContent = [...new Array(48)].map((_, i) =>
+    currentDate.startOf('day').clone().add(i*30, 'm')
   );
 
   //! Пример логики: чтобы искать нужный объект режима дня, по его id
@@ -31,23 +32,27 @@ const GridDayWithHours: FC<IProps> = ({currentDate, dayItem}) => {
   // console.log(arr)
 
   return (
-    ArrayHoursContent.map((hourItem, hourIndex) => (
+    ArrayHalfHoursContent.map((halfHourItem, hourIndex) => (
         <HourContent
           key={hourIndex + 3}
           $currentHour={
-            hourItem.isSame(moment(), 'hour') &&
+            //! проверка: чтобы == текущему часу и меньше чем текущие минуты
+            //! пример: 4:30 <= 4:19 = маркирован первая ячейка до 4:30 
+            halfHourItem.isSame(moment(), 'hour') && halfHourItem.minute() <= moment().minute()  
+            &&
             dayItem.isSame(moment(), 'day')
           }
         >
-          { // marking weekdays
+          <div style={{color: 'white'}}>{halfHourItem.format('HH mm')}</div>
+          { // marking weekdays for regime (dailyRegimes)
           (dayItem.day() !== 6 && dayItem.day() !== 0 ) ? (
-            (hourItem >= regime.weekdays.startDay &&
-            hourItem <= regime.weekdays.endDay) ? (
+            (halfHourItem >= regime.weekdays.startDay &&
+            halfHourItem <= regime.weekdays.endDay) ? (
               <GoSun
                 style={{
                   color: '#f4fbab',
                   float: 'right',
-                  margin: '5px 5px 0 0',
+                  margin: '1px 1px 0 0',
                 }}
               />
             ) : (
@@ -55,13 +60,13 @@ const GridDayWithHours: FC<IProps> = ({currentDate, dayItem}) => {
                 style={{
                   color: '#565759',
                   float: 'right',
-                  margin: '5px 5px 0 0',
+                  margin: '1px 1px 0 0',
                 }}
               />
             ) // marking weekend
           ) : (dayItem.day() == 6 || dayItem.day() == 0 ) ? (
-            (hourItem >= regime.weekend.startDay &&
-            hourItem <= regime.weekend.endDay) ? (
+            (halfHourItem >= regime.weekend.startDay &&
+            halfHourItem <= regime.weekend.endDay) ? (
               <GoSun
                 style={{
                   color: '#f4fbab',

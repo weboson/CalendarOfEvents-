@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 // база данных
 import dailyRegimes from '../../../../data/localDataBase/localDB_DailyRegime';
 // Icons
@@ -27,28 +27,46 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
       .add(i * 30, 'm'),
   );
 
-  //! Пример логики: чтобы искать нужный объект режима дня, по его id
+  //* Пример логики: чтобы искать нужный объект режима дня, по его id
   // let arr = dailyRegimes.find((item, index) => item.id == 2)
   // console.log(arr)
   //  window.moment = moment;
+
+  // For Auto Scrolling
+  // можно без useEffet, просто setTimout - но все же.. главное ассинхронно
+  useEffect(() => {
+    setTimeout(
+      () =>
+        document
+          .querySelector('#autoScroll')
+          .scrollIntoView({ // https://learn.javascript.ru/size-and-scroll-window#scrollintoview
+            behavior: 'smooth',
+            block: 'center',
+            inline: 'center',
+          }),
+      1000,
+    );
+  }, []);
 
   return ArrayHalfHoursContent.map((halfHourItem, hourIndex) => (
     <HourContent
       key={hourIndex + 3}
       $currentHour={
-        //! Условие (порядок важен): при 4:02 маркировался 4:00, а при 4:32 марк только 4:30 (но не 4:00). То есть интервалы по *:30 мин.
+        // Условие (порядок важен): при 4:02 маркировался 4:00, а при 4:32 марк только 4:30 (но не 4:00). То есть интервалы по *:30 мин.
         halfHourItem.isSame(moment(), 'hour') && // проверить на текущий час
         moment().minute() - halfHourItem.minute() < 30 && //exp: 4:01 - 4:00/4:30 = 1/-29 < 30 -> true/true
         moment().minute() - halfHourItem.minute() >= 0 && //exp: 4:01 - 4:00/4:30 = 1/-29 < 30 -> true/false(-29)
-        dayItem.isSame(moment(), 'day') // current Day
+        dayItem.isSame(moment(), 'day') // current Day'
       }
+      //! for autoScrolling at the current hour
+      id={halfHourItem.isSame(moment(), 'hour') ? 'autoScroll' : ''}
     >
       {
         // for regime (dailyRegimes)
-        // marking "weekdays" 
+        // marking "weekdays"
         dayItem.day() !== 6 && dayItem.day() !== 0 ? (
           halfHourItem >= regime.weekdays.startDay && //start 8:00 - endDay - 19:00 (weekdays)
-          halfHourItem <= regime.weekdays.endDay ? ( 
+          halfHourItem <= regime.weekdays.endDay ? (
             <GoSun
               style={{
                 color: '#f4fbab',

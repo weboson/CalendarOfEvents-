@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import Header from '../components/Header/Header';
+import {Header} from '../components/Header/Header';
 import Monitor from '../components/Monitor/Monitor';
 import styled from 'styled-components';
 import moment, { Moment } from 'moment';

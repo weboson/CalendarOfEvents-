@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { FaCalendarPlus, FaSearch } from 'react-icons/fa';
 import {
   DivWrapper,
@@ -17,7 +17,7 @@ import { readingMenu } from '../../store/features/modesDateSlice';
 import { menuModesDate } from '../../data/dataMenu';
 
 
-const Header: FC = () => {
+const Headers: FC = () => {
 
   // redux-toolkit
   const activeMenu = useAppSelector((state) => state.menu)
@@ -28,7 +28,7 @@ const Header: FC = () => {
     // redux-toolkit
     dispatch(readingMenu(index))
   };
-
+  console.log('rememo')
   return (
     <>
       <DivWrapper>
@@ -70,4 +70,4 @@ const Header: FC = () => {
   );
 };
 
-export default Header;
+export const Header = memo(Headers); // memo, чтобы не рендерился при каждом изменении других комопнентов

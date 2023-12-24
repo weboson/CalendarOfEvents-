@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import {
   GridWrapper,
   DaySidePanel,
@@ -30,10 +30,27 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
   );
 
 
+
+//! Savind/Recovery Scroll position (сохраняет текущий скролл (в mode: Week), даже после перехода на другие компоненты - не нужно постоянно мотать до того места, где остановился)
+ // Знак ! - в TS значит, что уверены, что объект не равен null или Uundefined
+  useEffect(() => {
+        //1 после события скроллинга пользователя - срабатывает сохраннение в sessionStorage(localStorage сохраняет даже после перезагрузки - нам это не нужно, на только после обновления)
+        document.querySelector('#saveScroll')!.addEventListener('scroll', function() {
+          const currentScroll =  document.querySelector('#saveScroll')!.scrollTop.toString() // получили текущий сролл (to String)
+          sessionStorage.setItem('position', currentScroll) // сохранили в Storage
+        });
+
+        //2  получаем значение свойств scrollTop и используем его, чтобы скроллить на эту позицию
+        // console.log(sessionStorage.getItem('position'))
+        document.querySelector('#saveScroll')!.scrollTo(0, +sessionStorage.getItem('position')!) // Знак ! - в TS значит, что уверены, что объект не равен null или Uundefined
+        }
+  , []);
+ 
+
   return (
-    <GridWrapper>
+    <GridWrapper id='saveScroll'>
       {/* Side Panel */}
-      <WrapperSidePanel>
+      <WrapperSidePanel >
         {/* Title: "Day" */}
         <DaySidePanel>Day</DaySidePanel>
         {/* Hours (Side Panel) */}
@@ -63,7 +80,7 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
             </DayOfWeek>
 
             {/* Grid Day with Hours (Content) */}
-            <GridDayWithHours currentDate={currentDate} dayItem={dayItem}/>
+            <GridDayWithHours currentDate={currentDate} dayItem={dayItem} />
 
           </WrapperColumn>
         ))}

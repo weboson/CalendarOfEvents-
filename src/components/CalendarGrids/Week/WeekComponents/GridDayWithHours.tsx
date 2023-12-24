@@ -30,23 +30,6 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
   //* Пример логики: чтобы искать нужный объект режима дня, по его id
   // let arr = dailyRegimes.find((item, index) => item.id == 2)
   // console.log(arr)
-  //  window.moment = moment;
-
-  // For Auto Scrolling
-  // можно без useEffet, просто setTimout - но все же.. главное ассинхронно
-  useEffect(() => {
-    setTimeout(
-      () =>
-        document
-          .querySelector('#autoScroll')
-          .scrollIntoView({ // https://learn.javascript.ru/size-and-scroll-window#scrollintoview
-            behavior: 'smooth',
-            block: 'center',
-            inline: 'center',
-          }),
-      1000,
-    );
-  }, []);
 
   return ArrayHalfHoursContent.map((halfHourItem, hourIndex) => (
     <HourContent
@@ -58,8 +41,8 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
         moment().minute() - halfHourItem.minute() >= 0 && //exp: 4:01 - 4:00/4:30 = 1/-29 < 30 -> true/false(-29)
         dayItem.isSame(moment(), 'day') // current Day'
       }
-      //! for autoScrolling at the current hour
-      id={halfHourItem.isSame(moment(), 'hour') ? 'autoScroll' : ''}
+      // for autoScrolling at the current hour
+      id={halfHourItem.isSame(moment(), 'hour') ? 'autoScroll' : ''} // scroll вin Home.tsx
     >
       {
         // for regime (dailyRegimes)

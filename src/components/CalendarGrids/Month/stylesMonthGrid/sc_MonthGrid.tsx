@@ -5,6 +5,12 @@ export interface IGridWrapperProps {
   $isHeader?: number;
 }
 
+
+// Wrapper main
+export const MonthWrapper = styled.div`
+  min-height: 694px;
+`
+
 // for Cell
 export const GridWrapper = styled.div<IGridWrapperProps>`
   display: grid;

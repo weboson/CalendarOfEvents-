@@ -6,6 +6,7 @@ import {
   RowInCell,
   DayWrapper,
   CurrentDay,
+  MonthWrapper,
 } from './stylesMonthGrid/sc_MonthGrid';
 import moment from 'moment';
 
@@ -27,7 +28,7 @@ const CalendarGrid: FC<IProps> = ({ firstDayOfWeek, currentDate }) => {
 
 
   return (
-    <>
+    <MonthWrapper>
       {/* Weekday headers */}
       <GridWrapper $isHeader={1}>
         {[...Array(7)].map((_, indx) => (
@@ -59,7 +60,7 @@ const CalendarGrid: FC<IProps> = ({ firstDayOfWeek, currentDate }) => {
           </CellWrapper>
         ))}
       </GridWrapper>
-    </>
+    </MonthWrapper>
   );
 };
 

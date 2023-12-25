@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 // база данных
 import dailyRegimes from '../../../../data/localDataBase/localDB_DailyRegime';
 // Icons

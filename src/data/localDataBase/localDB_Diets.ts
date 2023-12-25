@@ -16,7 +16,7 @@ interface IDiet {
     id: number
     title: string
     meals: Array<IMeal> | null// массив объектов (конкретных приёмов пищи)
-    counter: string | null // resilt arr.length
+    counter: number | null // result arr.length
     createdAt: Moment | string
     updatedAt: Moment | string
 }
@@ -32,23 +32,23 @@ const dietRegimes: IDietRegimes = [
             {
                 // конкретный прием пищи 
                 id: 1, // первый по index - значит завтрак
-                time: moment().hour(9 - 1), // время приёма пищи: 9:00 (-1 потому что так настроен moment)
+                time: moment().hour(9), // время приёма пищи: 9:00 
             },
             {
                 id: 2, 
-                time: moment().hour(12 - 1), // время приёма пищи: 12:00
+                time: moment().hour(12), // время приёма пищи: 12:00
             },
             {
                 id: 3, 
-                time: moment().hour(15 - 1), // время приёма пищи: 10:00
+                time: moment().hour(15), // время приёма пищи: 10:00
             },
             {
                 id: 4, // первый по index - значит ужин (рекомендуется в форме за 2 часа до сна)
-                time: moment().hour(18 - 1), // время приёма пищи: 18:00 
+                time: moment().hour(18), // время приёма пищи: 18:00 
             },
             
         ],
-        counter: this.meals.length, // количество элем в массиве - то есть, сколько раз в день кушать < режим дня
+        counter: ['meals'].length, // количество элем в массиве - то есть, сколько раз в день кушать < режим дня
         createdAt: '12.12.2023',
         updatedAt: '14.12.2023',
 
@@ -61,19 +61,19 @@ const dietRegimes: IDietRegimes = [
             {
                 // конкретный прием пищи 
                 id: 1, // первый по index - значит завтрак
-                time: moment().hour(9 - 1), // время приёма пищи: 9:00 (-1 потому что так настроен moment)
+                time: moment().hour(9), // время приёма пищи: 9:00 (-1 потому что так настроен moment)
             },
             {
                 id: 2, 
-                time: moment().hour(13 - 1), // время приёма пищи: 12:00
+                time: moment().hour(13), // время приёма пищи: 12:00
             },
             {
                 id: 3, 
-                time: moment().hour(18 - 1), // время приёма пищи: 10:00
+                time: moment().hour(18), // время приёма пищи: 10:00
             },
             
         ],
-        counter: this.meals.length, // количество элем в массиве - то есть, сколько раз в день кушать < режим дня
+        counter: ['meals'].length, // количество элем в массиве - то есть, сколько раз в день кушать < режим дня
         createdAt: '10.12.2023',
         updatedAt: '10.12.2023',
 

@@ -45,8 +45,11 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
       <DailyRegimes dayItem={dayItem} halfHourItem={halfHourItem} />
 
       {/* //* for Dies (dietRegimes)(режим приёма пищи) */}
-      {dietRegimes[0].meals.map((item, indx, arr) =>
-        (halfHourItem.isSame(item.time, 'hour')) ? <MdOutlineFastfood key={indx} style={{ color: 'blue' }} /> : null
+      {dietRegimes[0].meals!.map((item, indx) =>
+        (halfHourItem.isSame(item.time, 'hour')) && // проверить на текущий час
+        item.time.minute() - halfHourItem.minute() >= 0 && //exp: 15:30 - 15:00 >= 0 (true)
+        item.time.minute() - halfHourItem.minute() < 30 ?  // 15:30 - 15:30 < 30 (true)
+        <MdOutlineFastfood key={indx} style={{ color: 'red' }} /> : null
       )}
     </HourContent>
   ));

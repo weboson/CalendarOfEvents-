@@ -28,7 +28,7 @@ const Home: FC = () => {
 
   const [currentDate, setToday] = useState<Moment>(currentMoment || ''); // currentDate в currentDate.ts
 
-  // For dinamic (upedate) time (чтобы не нужно было обновлять каждый раз, когда время изменилось)
+  // For dinamic (update) time (чтобы не нужно было обновлять каждый раз, когда время изменилось)
   useEffect(() => {
     const timer = setInterval(() => {
       setToday(moment());

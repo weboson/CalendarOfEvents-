@@ -32,19 +32,19 @@ const dietRegimes: IDietRegimes = [
             {
                 // конкретный прием пищи 
                 id: 1, // первый по index - значит завтрак
-                time: moment().hour(9), // время приёма пищи: 9:00 
+                time: moment().hour(8).minute(30), // время приёма пищи: 9:00 
             },
             {
                 id: 2, 
-                time: moment().hour(12), // время приёма пищи: 12:00
+                time: moment().hour(12).minute(0), // время приёма пищи: 12:00
             },
             {
                 id: 3, 
-                time: moment().hour(15), // время приёма пищи: 10:00
+                time: moment().hour(15).minute(30), // время приёма пищи: 10:00
             },
             {
                 id: 4, // первый по index - значит ужин (рекомендуется в форме за 2 часа до сна)
-                time: moment().hour(18), // время приёма пищи: 18:00 
+                time: moment().hour(18).minute(35), // время приёма пищи: 18:00 
             },
             
         ],

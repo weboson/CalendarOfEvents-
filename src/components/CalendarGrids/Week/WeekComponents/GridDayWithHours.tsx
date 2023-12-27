@@ -43,7 +43,7 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
       <DailyRegimes dayItem={dayItem} halfHourItem={halfHourItem} />
 
       {/* //* for Dies (dietRegimes)(режим приёма пищи) */}
-      <DietRegimes halfHourItem={halfHourItem} />
+      <DietRegimes dayItem={dayItem} halfHourItem={halfHourItem} />
     </HourContent>
   ));
 };

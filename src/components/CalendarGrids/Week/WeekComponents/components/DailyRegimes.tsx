@@ -18,6 +18,7 @@ const DailyRegimes: FC<IProps> = ({ dayItem, halfHourItem }) => {
 
   return (
     <>
+    {/* at weekday */}
       {dayItem.day() !== 6 && dayItem.day() !== 0 ? (
         halfHourItem >= regime.weekdays.startDay && //start 8:00 - endDay - 19:00 (weekdays)
         halfHourItem <= regime.weekdays.endDay ? (

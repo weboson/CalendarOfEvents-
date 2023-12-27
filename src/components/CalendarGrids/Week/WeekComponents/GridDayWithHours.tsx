@@ -3,10 +3,8 @@ import { Moment } from 'moment';
 // sc_styles
 import { HourContent } from '../stylesWeekGrid/sc_WeekGrid';
 import moment from 'moment';
-import DailyRegimes from './components/DailyRegimes';
-//!
-import dietRegimes from '../../../../data/localDataBase/localDB_Diets';
-import { MdOutlineFastfood } from 'react-icons/md';
+import DailyRegimes from './components/DailyRegimes'; // режим дня
+import DietRegimes from './components/DietRegimes'; // режим питания
 
 // types
 interface IProps {
@@ -45,12 +43,7 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
       <DailyRegimes dayItem={dayItem} halfHourItem={halfHourItem} />
 
       {/* //* for Dies (dietRegimes)(режим приёма пищи) */}
-      {dietRegimes[0].meals!.map((item, indx) =>
-        (halfHourItem.isSame(item.time, 'hour')) && // проверить на текущий час
-        item.time.minute() - halfHourItem.minute() >= 0 && //exp: 15:30 - 15:00 >= 0 (true)
-        item.time.minute() - halfHourItem.minute() < 30 ?  // 15:30 - 15:30 < 30 (true)
-        <MdOutlineFastfood key={indx} style={{ color: 'red' }} /> : null
-      )}
+      <DietRegimes halfHourItem={halfHourItem} />
     </HourContent>
   ));
 };

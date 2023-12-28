@@ -4,6 +4,7 @@ import { FC } from 'react';
 import dietRegimes from '../../../../../data/localDataBase/localDB_Diets';
 import { MdOutlineFastfood } from 'react-icons/md';
 import { Moment } from 'moment';
+import { stylesFood } from '../../stylesWeekGrid/sc_WeekGrid';
 
 interface IProps {
   dayItem: Moment;
@@ -23,7 +24,7 @@ const DietRegimes: FC<IProps> = ({ halfHourItem, dayItem }) => {
               halfHourItem.isSame(item.time, 'hour') && // проверить на текущий час
               item.time.minute() - halfHourItem.minute() >= 0 && //exp: 15:30 - 15:00 >= 0 (true)
               item.time.minute() - halfHourItem.minute() < 30 && ( // 15:30 - 15:30 < 30 (true)
-                <MdOutlineFastfood key={indx} style={{ color: 'red' }} />
+                  <MdOutlineFastfood key={indx} style={stylesFood}/>
               ),
           )
         // weekend
@@ -33,7 +34,7 @@ const DietRegimes: FC<IProps> = ({ halfHourItem, dayItem }) => {
               halfHourItem.isSame(item.time, 'hour') && // проверить на текущий час
               item.time.minute() - halfHourItem.minute() >= 0 && //exp: 15:30 - 15:00 >= 0 (true)
               item.time.minute() - halfHourItem.minute() < 30 && ( // 15:30 - 15:30 < 30 (true)
-                <MdOutlineFastfood key={indx} style={{ color: 'red' }} />
+                  <MdOutlineFastfood key={indx+1} style={stylesFood}/>
               ),
           )
         : null}

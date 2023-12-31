@@ -90,7 +90,7 @@ export const unitTime = [
 // type
 interface IWayUsing {
     id: number
-    type: 'empty stomach' | 'first breakfast' | 'eating' | 'sleep'
+    type: 'empty stomach' | 'first breakfast' | 'last supper' | 'eating' | 'sleep'
     title: string
 }
 interface IWaysUsing extends Array<IWayUsing> {}
@@ -99,8 +99,8 @@ interface IWaysUsing extends Array<IWayUsing> {}
 const waysUsing: IWaysUsing = [
     {
         id: 1,
-        type: 'empty stomach',
-        title: 'пустой желудок (натощак)', // во время (while) пустого желудка
+        type: 'eating',
+        title: 'приём пищи',
     },
     {
         id: 2,
@@ -109,8 +109,8 @@ const waysUsing: IWaysUsing = [
     },
     {
         id: 3,
-        type: 'eating',
-        title: 'приём пищи',
+        type: 'last supper',
+        title: 'последний ужин',
     },
     {
         id: 4,
@@ -126,17 +126,17 @@ interface IExpressionTime {
     id: number
     oftime: 'while' | 'before' | 'after'
 }
-interface IExpressionsTime extends Array<IExpressionTime> {}
+interface IPositionAction extends Array<IExpressionTime> {}
 
 // выражения времени: во время, до/перед, после (еды/сна/натощак )
-const expressionsTime: IExpressionsTime = [
+const positionAction: IPositionAction = [
     {
         id: 1,
-        oftime: 'while', // вовремя
+        oftime: 'before', // до (за время до, сразу перед едой...)
     },
     {
         id: 2,
-        oftime: 'before', // до (за время до, сразу перед едой...)
+        oftime: 'while', // вовремя
     },
     {
         id: 3,
@@ -145,15 +145,15 @@ const expressionsTime: IExpressionsTime = [
 ]
 
 
-// ! пример композиции
+// ! пример композиции (на примере одного ЛС)
 const takingMedications = [
     {
         id: 5,
-        isRegardlessOfFood: true, // *1 вне зависимости от еды/сна... просто 3 раза в день
-        waysUsing: waysUsing[2].type, // *2 'eating' - приём пищи
+        depending: true, // *1 вне зависимости от еды/сна... просто 3 раза в день
+        action: waysUsing[0].type, // *2 'eating' - приём пищи
         quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
-        expTime: expressionsTime[2].oftime, // используется константа 'after'(после) из массива 
+        position: positionAction[0].oftime, // используется константа 'before' из массива 
         // ! нужно изменить на первый приём пищи
         interval: 45, // exm: спустя 45 минут после еды 
         

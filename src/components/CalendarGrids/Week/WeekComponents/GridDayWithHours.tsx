@@ -3,8 +3,7 @@ import { Moment } from 'moment';
 // sc_styles
 import { HourContent } from '../stylesWeekGrid/sc_WeekGrid';
 import moment from 'moment';
-import DailyRegimes from './components/DailyRegimes'; // режим дня
-import DietRegimes from './components/DietRegimes'; // режим питания
+import MealSchedule from './components/MealSchedule'; // график питания: первый и последний приём пищи
 import UsingMedicines from './components/medicines/UsingMedicines';
 
 // types
@@ -37,14 +36,10 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
         dayItem.isSame(moment(), 'day') // current Day'
       }
       // id for autoScrolling at the current hour
-      id={halfHourItem.isSame(moment(), 'hour') ? 'autoScroll' : ''} // scroll вin Home.tsx
+      id={halfHourItem.isSame(moment(), 'hour') ? 'autoScroll' : ''} // scroll in Home.tsx
     >
-      {/* //* for regime (dailyRegimes)(режим дня)
-         marking "weekdays" */}
-      <DailyRegimes dayItem={dayItem} halfHourItem={halfHourItem} />
-
-      {/* //* for Dies (dietRegimes)(режим приёма пищи) */}
-      <DietRegimes dayItem={dayItem} halfHourItem={halfHourItem} />
+      {/* //* for MealSchedule (firs и last eating)*/}
+      <MealSchedule dayItem={dayItem} halfHourItem={halfHourItem} />
 
       {/* //* for Using Medicines ()(расчет приёма лекарств) */}
       <UsingMedicines dayItem={dayItem} halfHourItem={halfHourItem} />

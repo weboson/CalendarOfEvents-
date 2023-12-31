@@ -5,7 +5,7 @@ import { FC } from 'react';
 import { GoSun } from 'react-icons/go'; // sun
 import { BsMoon } from 'react-icons/bs'; // Moon
 // база данных
-import dailyRegimes from '../../../../../data/localDataBase/localDB_DailyRegime';
+import mealSchedule from '../../../../../data/localDataBase/localDB_MealSchedule';
 import { stylesMoon, stylesSun } from '../../stylesWeekGrid/sc_WeekGrid';
 
 interface IProps {
@@ -13,23 +13,23 @@ interface IProps {
   halfHourItem: Moment;
 }
 
-const DailyRegimes: FC<IProps> = ({ dayItem, halfHourItem }) => {
+const MealSchedule: FC<IProps> = ({ dayItem, halfHourItem }) => {
   // Возьмем 1 режим дня[0] база данных: src\data\localDataBase\localDB_DailyRegime.ts
-  const regime = dailyRegimes[0].modeRegime; // режим дня
+  const diet = mealSchedule[0].modeRegime; // режим дня
 
   return (
     <>
       {/* at weekday */}
       {dayItem.day() !== 6 && dayItem.day() !== 0 ? (
-        halfHourItem >= regime.weekdays.startDay && //start 8:00 - endDay - 19:00 (weekdays)
-        halfHourItem <= regime.weekdays.endDay ? (
+        halfHourItem.hour() >= diet.weekdays.firstMeal.hour() && // 8:00 >= 8:00 (weekdays)
+        halfHourItem.hour() <= diet.weekdays.lastMeal.hour() ? ( // 8:00 <= 22:00
             <GoSun style={stylesSun}/>
         ) : (
             <BsMoon style={stylesMoon}/>
         ) // marking "weekend"
       ) : dayItem.day() == 6 || dayItem.day() == 0 ? (
-        halfHourItem >= regime.weekend.startDay && // start 10:00 - endDay - 21:00 (weekend)
-        halfHourItem <= regime.weekend.endDay ? (
+        halfHourItem.hour() >= diet.weekend.firstMeal.hour() && 
+        halfHourItem.hour() <= diet.weekend.lastMeal.hour() ? (
             <GoSun style={stylesSun}/>
         ) : (
             <BsMoon style={stylesMoon}/>
@@ -39,4 +39,4 @@ const DailyRegimes: FC<IProps> = ({ dayItem, halfHourItem }) => {
   );
 };
 
-export default DailyRegimes;
+export default MealSchedule;

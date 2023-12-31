@@ -3,8 +3,9 @@ import { Moment } from 'moment';
 // sc_styles
 import { HourContent } from '../stylesWeekGrid/sc_WeekGrid';
 import moment from 'moment';
-import MealSchedule from './components/MealSchedule'; // график питания: первый и последний приём пищи
-import UsingMedicines from './components/medicines/UsingMedicines';
+import SpaceBetweenMeals from './components/SpaceBetweenMeals'; // график питания: первый и последний приём пищи
+// import UsingMedicines from './components/medicines/UsingMedicines';
+import MealSchedule from './components/MealSchedule';
 
 // types
 interface IProps {
@@ -38,11 +39,16 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
       // id for autoScrolling at the current hour
       id={halfHourItem.isSame(moment(), 'hour') ? 'autoScroll' : ''} // scroll in Home.tsx
     >
-      {/* //* for MealSchedule (firs и last eating)*/}
+      {/* //* icons Sun & Moon (space between firs и last eating)*/}
+      {/* data: localDB_MealSchedule.ts */}
+      <SpaceBetweenMeals dayItem={dayItem} halfHourItem={halfHourItem} />
+
+      {/* //* icons Food (firs и last eating)*/}
+      {/* data: localDB_MealSchedule.ts */}
       <MealSchedule dayItem={dayItem} halfHourItem={halfHourItem} />
 
       {/* //* for Using Medicines ()(расчет приёма лекарств) */}
-      <UsingMedicines dayItem={dayItem} halfHourItem={halfHourItem} />
+      {/* <UsingMedicines dayItem={dayItem} halfHourItem={halfHourItem} /> */}
     </HourContent>
   ));
 };

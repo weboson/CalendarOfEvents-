@@ -38,16 +38,16 @@ export  interface IMealSchedule extends Array<ISchedule>{}
 const mealSchedule: IMealSchedule = [
   {
     id: 1,
-    title: 'первый и псоледний приём пищи',
+    title: 'первый и последний приём пищи',
     modeRegime: {
       weekdays: {
         id: 2,
         firstMeal: moment().hour(8).minute(0), // 8:00
-        lastMeal: moment().hour(22).minute(30), // 22:00
+        lastMeal: moment().hour(22).minute(0), // 22:00
       },
       weekend: { // по-умолчанию схож с weekdays, но user может изменить
         id: 3,
-        firstMeal: moment().hour(9).minute(0), // советуется бодровстовать 14-16 часов
+        firstMeal: moment().hour(9).minute(30), // советуется бодровстовать 14-16 часов
         lastMeal: moment().hour(22).minute(0),
       },
     },

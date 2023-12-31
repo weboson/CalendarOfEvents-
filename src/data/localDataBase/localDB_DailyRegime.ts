@@ -38,12 +38,12 @@ export  interface IDailyRegimes extends Array<IDaily>{}
 const dailyRegimes: IDailyRegimes = [
   {
     id: 1,
-    title: 'мой режим',
+    title: 'первый и псоледний приём пищи',
     modeRegime: {
       weekdays: {
         idWend: 2,
         startDay: moment().hour(8 - 1).minute(30), // советуется бодровстовать 14-16 часов
-        endDay: moment().hour(20 - 1).minute(0),
+        endDay: moment().hour(22 - 1).minute(0),
       },
       weekend: { // по-умолчанию схож с weekdays, но user может изменить
         idWend: 3,
@@ -57,7 +57,7 @@ const dailyRegimes: IDailyRegimes = [
   },
   {
     id: 2,
-    title: 'в отпуске',
+    title: 'режим другого пользователя',
     modeRegime: {
       weekdays: {
         idWend: 4,

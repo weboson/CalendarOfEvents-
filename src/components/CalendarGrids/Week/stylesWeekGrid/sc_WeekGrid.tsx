@@ -110,14 +110,12 @@ export const stylesSun = {
   float: 'right',
   margin: '1px 1px 0 0',
 }
-
+// GoMoon
 export const stylesMoon = {
   color: '#565759',
   float: 'right',
   margin: '1px 1px 0 0',
 }
-
-
 // For Diet (Стилизация иконки "food")
 export const stylesFood = {
   color: '#4fa2d5',

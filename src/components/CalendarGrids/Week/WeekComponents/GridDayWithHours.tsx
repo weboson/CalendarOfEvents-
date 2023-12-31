@@ -5,6 +5,7 @@ import { HourContent } from '../stylesWeekGrid/sc_WeekGrid';
 import moment from 'moment';
 import DailyRegimes from './components/DailyRegimes'; // режим дня
 import DietRegimes from './components/DietRegimes'; // режим питания
+import UsingMedicines from './components/medicines/UsingMedicines';
 
 // types
 interface IProps {
@@ -44,6 +45,9 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
 
       {/* //* for Dies (dietRegimes)(режим приёма пищи) */}
       <DietRegimes dayItem={dayItem} halfHourItem={halfHourItem} />
+
+      {/* //* for Using Medicines ()(расчет приёма лекарств) */}
+      <UsingMedicines dayItem={dayItem} halfHourItem={halfHourItem} />
     </HourContent>
   ));
 };

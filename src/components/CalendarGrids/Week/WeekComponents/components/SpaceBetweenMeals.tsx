@@ -20,17 +20,17 @@ const SpaceBetweenMeals: FC<IProps> = ({ dayItem, halfHourItem }) => {
   return (
     <>
       {/* at weekday */}
-      {/* // .isSameOrAfter/.isSameOrBefore аналог >=/<= (оставлю два варианта))  */}
+      {/* //* .isSameOrAfter/.isSameOrBefore аналог >=/<= (оставлю два варианта))  */}
       {dayItem.day() !== 6 && dayItem.day() !== 0 ? (
-        halfHourItem.isSame(diet.weekdays.firstMeal, 'minute') || // иначе на 30 мин позже маркирует
+        halfHourItem.isSame(diet.weekdays.firstMeal, 'minute') || // || - иначе на 30 мин позже маркирует
         halfHourItem.isSameOrAfter(diet.weekdays.firstMeal) && // 8:00 >= 8:00 (weekdays)
         halfHourItem.isSameOrBefore(diet.weekdays.lastMeal) ? ( // 8:00 <= 22:00
             <GoSun style={stylesSun}/>
         ) : (
             <BsMoon style={stylesMoon}/>
-        ) // marking "weekend"
+        ) // "weekend"
       ) : dayItem.day() == 6 || dayItem.day() == 0 ? (
-        halfHourItem.isSame(diet.weekend.firstMeal, 'minute') || // иначе на 30 мин позже маркирует
+        halfHourItem.isSame(diet.weekend.firstMeal, 'minute') || // || - иначе на 30 мин позже маркирует
         halfHourItem >= diet.weekend.firstMeal && 
         halfHourItem <= diet.weekend.lastMeal ? (
             <GoSun style={stylesSun}/>

@@ -149,6 +149,7 @@ const positionAction: IPositionAction = [
 const takingMedications = [
     {
         id: 5,
+        title: 'Ursonan',
         depending: true, // *1 вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0].type, // *2 'eating' - приём пищи
         quantity: 3, // 3 раза

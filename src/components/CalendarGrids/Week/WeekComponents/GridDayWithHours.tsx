@@ -1,3 +1,4 @@
+//! вертикальный столбик по пол часа на определенный день (datyItem)
 import { FC } from 'react';
 import { Moment } from 'moment';
 // sc_styles
@@ -6,6 +7,8 @@ import moment from 'moment';
 import SpaceBetweenMeals from './components/SpaceBetweenMeals'; // график питания: первый и последний приём пищи
 // import UsingMedicines from './components/medicines/UsingMedicines';
 import MealSchedule from './components/MealSchedule';
+import UsingMedicines from './components/medicines/UsingMedicines';
+import takingMedications from '../../../../data/localDataBase/LocalDB_WaysUsing';
 
 // types
 interface IProps {
@@ -26,6 +29,10 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
   // let arr = dailyRegimes.find((item, index) => item.id == 2)
   // console.log(arr)
 
+  //! выберем экземляр массива, где вся инфа об употреблении конкретного ЛС:
+  const med = takingMedications[0]
+
+
   return ArrayHalfHoursContent.map((halfHourItem, hourIndex) => (
     <HourContent
       key={hourIndex + 3}
@@ -45,10 +52,10 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
 
       {/* //* icons Food (firs и last eating)*/}
       {/* data: localDB_MealSchedule.ts */}
-      <MealSchedule dayItem={dayItem} halfHourItem={halfHourItem} />
+      <MealSchedule dayItem={dayItem} halfHourItem={halfHourItem}  med={med}/>
 
       {/* //* for Using Medicines (расчет приёма лекарств) */}
-      {/* <UsingMedicines dayItem={dayItem} halfHourItem={halfHourItem} /> */}
+      {/* <UsingMedicines dayItem={dayItem} halfHourItem={halfHourItem} med={med}/> */}
     </HourContent>
   ));
 };

@@ -15,23 +15,34 @@ import moment from 'moment';
 interface IProps {
   dayItem: Moment;
   halfHourItem: Moment;
+  med: any
 }
 
-const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem }) => {
 
 
 
-  
-// выберем экземляр массива, где вся инфа об употреблении конкретного ЛС:
-const med = takingMedications[0]
+const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
 
+//* weekday
+// приёмы пищи:
+// 1-й приём пищи
+const firstMealWeekdays = mealSchedule[0].modeRegime.weekdays.firstMeal.clone() // обз clone() иначе изменим исходник
+// последний приём пищи
+const lastMealWeekdays = mealSchedule[0].modeRegime.weekdays.lastMeal.clone()
 
+//* weekend
+const firstMealWeekend = mealSchedule[0].modeRegime.weekend.firstMeal.clone() // обз clone() иначе изменим исходник
+const lastMealWeekend = mealSchedule[0].modeRegime.weekend.lastMeal.clone()
 
-// получили end(ужин) - start(завтрак) = время бодровствования 14 часов (в будни)
-const diffIntervalMealWeekdays = mealSchedule[0].modeRegime.weekdays.lastMeal.diff(mealSchedule[0].modeRegime.weekdays.firstMeal, 'hour'); // график питания в weekday
-const betweenMealsWeekdays = Math.floor(diffIntervalMealWeekdays / med.quantity) // окрулить вниз(время бодровствоания / количесвто приёма ЛС) 
-const diffIntervalMealWeekend = mealSchedule[0].modeRegime.weekend.lastMeal.diff(mealSchedule[0].modeRegime.weekend.firstMeal, 'hour'); // график питания в weekend
-const betweenMealsWeekend = Math.floor(diffIntervalMealWeekend / med.quantity) // окрулить вниз(время бодровствоания / количесвто приёма ЛС) 
+//* интервал (промежуточные приёмы пищи)
+// время между 1-м и последним приёмом пищи = последняя еда - первая еды, вычист по секундам (точнее, чем минуты/часы)
+const diffIntervalMealWeekdays = lastMealWeekdays.diff(firstMealWeekdays, 'second') // 50400000 в миллисекундах (~14 часов), чтобы интервалы были одинаковыми  - разница (инервал времени между 1-м и last едой)
+//console.log(diffIntervalMealWeekdays) // 50400000
+// интервал времени / количество приёма ЛЕкарств                      
+// -1 потому что (в начале завтрак -1)
+const betweenMealsWeekdays = (diffIntervalMealWeekdays / (med.quantity-1)) // 50400000(~14 ч) / 3-1раз/день = 3.5 часа - 
+//console.log(betweenMealsWeekdays); // 3 (каждые три часа принимать пищу, так как принимать таблетку после еды)
+// ! создать отдельный файл (либо в беке либо во фронте) и передавать объектом
 
 
 
@@ -62,7 +73,6 @@ const distribution = (halfHourItem, depending, action, quantity, position, inter
           switch (position) {
             case 'before': // до
             // exmp: 9:00 - 45 = 8:15 
-            //! еще еду в промежутках, типа 3 раза после еды, значит 3 еды (1-й, 2-й, последний)
             halfHourItem.isSame(halfHourItem - interval, 'minute') && halfHourItem.isSame(halfHourItem - interval, 'hour') &&
             <RiMedicineBottleLine style={{color: 'red'}}/>
           

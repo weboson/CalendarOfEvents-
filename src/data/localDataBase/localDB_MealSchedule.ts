@@ -42,13 +42,13 @@ const mealSchedule: IMealSchedule = [
     modeRegime: {
       weekdays: {
         id: 2,
-        firstMeal: moment().hour(8).minute(0), // 8:00
-        lastMeal: moment().hour(22).minute(0), // 22:00
+        firstMeal: moment().hour(8).minute(16), // 8:00
+        lastMeal: moment().hour(22).minute(20), // 22:00
       },
       weekend: { // по-умолчанию схож с weekdays, но user может изменить
         id: 3,
-        firstMeal: moment().hour(9).minute(30), // советуется бодровстовать 14-16 часов
-        lastMeal: moment().hour(22).minute(0),
+        firstMeal: moment().hour(10).minute(16), // советуется бодровстовать 14-16 часов
+        lastMeal: moment().hour(23).minute(34),
       },
     },
     createdAt: '12.12.2023',
@@ -66,7 +66,7 @@ const mealSchedule: IMealSchedule = [
       weekend: { // по-умолчанию схож с weekdays, но user может изменить
         id: 3,
         firstMeal: moment().hour(9).minute(0), // советуется бодровстовать 14-16 часов
-        lastMeal: moment().hour(22).minute(0),
+        lastMeal: moment().hour(23).minute(0),
       },
     },
     createdAt: '12.12.2023',

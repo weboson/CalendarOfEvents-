@@ -62,21 +62,62 @@ const betweenMealsWeekend = (diffIntervalMealWeekend / (med.quantity-1))
 
 // weekday (в будни)
   if (med.depending) {  // есть ли зависимости от завтрака/ужина/еды/сна/
-    // если есть, то какая?
-    switch (med.action) {
+    //* если есть, то какая?
+    switch (med.action.type) {
+      // ---------------------------------
       case "eating": // от еды
+      //* до, вовремя или после
+        switch (med.position) { 
+          case 'before': // до 
+            return (
+              // weekday
+              (dayItem.day() !== 6 && dayItem.day() !== 0) ?
+            ( // exm: до еды за 45 минут
+              (halfHourItem.isSame(firstMealWeekdays.subtract(med.interval, 'minute'), 'hour')) && 
+              firstMealWeekdays.minute() - halfHourItem.minute() >= 0 && 
+              firstMealWeekdays.minute() - halfHourItem.minute() < 30 && 
+              (<div><RiMedicineBottleLine style={{color: "red"}}/><span style={{color: "gray", fontSize: "14px", }}> За {med.interval} до еды</span> </div>)
+               
+            ) : 
+            // weekend
+            ( // exm: до еды за 45 минут
+              (halfHourItem.isSame(firstMealWeekend.subtract(med.interval, 'minute'), 'hour')) && 
+              firstMealWeekend.minute() - halfHourItem.minute() >= 0 && 
+              firstMealWeekend.minute() - halfHourItem.minute() < 30 && 
+              (<div><RiMedicineBottleLine style={{color: "red"}}/><span style={{color: "gray", fontSize: "14px", }}> За {med.interval} до еды</span> </div>)
+               
+            ) 
+            )
+ 
+            break;
+          case 'while': // вовремя
+          
+            break;
+          case 'after': // после
+          
+            break;
+          default:
+            break;
+        }
         
         break;
+
+      // ---------------------------------
       case 'first breakfast': // от первого завтрака
       
         break;
+
+      // ---------------------------------
       case 'last supper': // от последнего ужина
       
         break;
+
+      // ---------------------------------
       case 'sleep': // от сна
       
         break;
-    
+
+      // ---------------------------------
       default:
         break;
     }
@@ -84,7 +125,7 @@ const betweenMealsWeekend = (diffIntervalMealWeekend / (med.quantity-1))
     return ( // приём ЛС не имеет зависимостей (просто количество приёма ЛС делиться на интервал между 1-м и последним ПП)
     // логика схожа с MealSchedule.tsx 
   (dayItem.day() !== 6 && dayItem.day() !== 0) ? 
-    (
+    (  // weekday
       (halfHourItem.isSame(firstMealWeekdays, "hour")) && 
       (
         halfHourItem.minute() - firstMealWeekdays.minute() >= 0 && // 8:30 - 8:16 >= 0  and < 30
@@ -97,9 +138,24 @@ const betweenMealsWeekend = (diffIntervalMealWeekend / (med.quantity-1))
         firstMealWeekend.clone().add(betweenMealsWeekend, 'm').minute() - halfHourItem.minute() >= 0 &&
         firstMealWeekend.clone().add(betweenMealsWeekend, 'm').minute() - halfHourItem.minute() < 30  ?
         (<RiMedicineBottleLine key={index} style={{color: "red"}}/>) : null
-        // console.log(halfHourItem)
+        
       ))
-    ) : null
+    ) : 
+    ( // weekend
+      (halfHourItem.isSame(firstMealWeekend, "hour")) && 
+      (
+        halfHourItem.minute() - firstMealWeekend.minute() >= 0 && // 8:30 - 8:16 >= 0  and < 30
+        halfHourItem.minute() - firstMealWeekend.minute() < 30 && // 8:30 - 8:16 < 0  and < 30
+        (<RiMedicineBottleLine style={{color: "red"}}/>)
+      )
+      ||
+      [...new Array(med.quantity)].map((_, index) => (
+        halfHourItem.isSame(firstMealWeekend.add(betweenMealsWeekend, 's'), 'hour') && 
+        firstMealWeekend.clone().add(betweenMealsWeekend, 'm').minute() - halfHourItem.minute() >= 0 &&
+        firstMealWeekend.clone().add(betweenMealsWeekend, 'm').minute() - halfHourItem.minute() < 30  ?
+        (<RiMedicineBottleLine key={index} style={{color: "red"}}/>) : null
+      ))
+    )
   ) 
   } 
 

@@ -154,9 +154,9 @@ const takingMedications = [
         action: waysUsing[0], // *2 'eating' - приём пищи
         quantity: 3, // 5 раза
         unitTime: unitTime[0].type, // day -  в день
-        position: positionAction[0].oftime, // используется константа 'before' из массива 
+        position: positionAction[2].oftime, // используется константа 'before' из массива 
         // ! нужно изменить на первый приём пищи
-        interval: 45, // exm: спустя 45 минут после еды 
+        interval: 60, // exm: спустя 45 минут после еды 
         
         duration: moment().month(3), // продолжительность 3 месяца
         

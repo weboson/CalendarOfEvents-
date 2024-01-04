@@ -150,9 +150,9 @@ const takingMedications = [
     {
         id: 5,
         title: 'Ursonan',
-        depending: true, // *1 вне зависимости от еды/сна... просто 3 раза в день
+        depending: false, // *1 вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0].type, // *2 'eating' - приём пищи
-        quantity: 5, // 5 раза
+        quantity: 3, // 5 раза
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[0].oftime, // используется константа 'before' из массива 
         // ! нужно изменить на первый приём пищи

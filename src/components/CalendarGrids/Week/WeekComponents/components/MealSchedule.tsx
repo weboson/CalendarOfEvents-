@@ -44,7 +44,7 @@ const betweenMealsWeekend = (diffIntervalMealWeekend / (med.quantity-1))
 
 // ! создать отдельный файл (либо в беке либо во фронте) и передавать объектом
 
-
+if (med.depending) { // есть ли зависимость от еды?
   return (
     <>
       { // Оптимальный код(где важен порядок и сравния), иначе при изменении минут в localDB_MealSchedule - могут пропасть приёмы пищи
@@ -65,14 +65,7 @@ const betweenMealsWeekend = (diffIntervalMealWeekend / (med.quantity-1))
             <MdOutlineFastfood key={index} style={stylesFood}/> : 
             null
             )))
-            // ! закомментировал, так как код выше([...new Arr...]), генерирует все ПП после завтрака
-          // || 
-          // (halfHourItem.isSame(lastMealWeekdays, 'hour')) &&
-          //   (
-          //     lastMealWeekdays.minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:00 >= 0  and < 30
-          //     lastMealWeekdays.minute() - halfHourItem.minute() < 30 && (<MdOutlineFastfood style={stylesFood}/>)
-          //   )
-
+      
           : 
           // weekend
           (
@@ -91,13 +84,6 @@ const betweenMealsWeekend = (diffIntervalMealWeekend / (med.quantity-1))
             <MdOutlineFastfood key={index} style={stylesFood}/> : 
             null
             )))
-            // || 
-            // (
-            //   halfHourItem.isSame(lastMealWeekend, 'hour')) &&
-            //   (
-            //     lastMealWeekend.minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:00 >= 0  and < 30
-            //     lastMealWeekend.minute() - halfHourItem.minute() < 30 && (<MdOutlineFastfood style={stylesFood}/>)
-            //   )
         
           
 
@@ -108,6 +94,8 @@ const betweenMealsWeekend = (diffIntervalMealWeekend / (med.quantity-1))
       
     </>
   );
+}
+  
 };
 
 export default MealSchedule;

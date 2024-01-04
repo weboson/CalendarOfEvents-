@@ -37,7 +37,7 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
     <HourContent
       key={hourIndex + 3}
       $currentHour={
-        // Условие (порядок важен): при 4:02 маркировался 4:00, а при 4:32 марк только 4:30 (но не 4:00). То есть интервалы по *:30 мин.
+        // Условие (порядок важен): при 4:02 маркировался 4:00, а при 4:32 маркировка только 4:30 (но не 4:00). То есть интервалы по *:30 мин.
         halfHourItem.isSame(moment(), 'hour') && // проверить на текущий час
         moment().minute() - halfHourItem.minute() < 30 && //exp: 4:01 - 4:00/4:30 = 1/-29 < 30 -> true/true
         moment().minute() - halfHourItem.minute() >= 0 && //exp: 4:01 - 4:00/4:30 = 1/-29 < 30 -> true/false(-29)
@@ -55,7 +55,7 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
       <MealSchedule dayItem={dayItem} halfHourItem={halfHourItem}  med={med}/>
 
       {/* //* for Using Medicines (расчет приёма лекарств) */}
-      {/* <UsingMedicines dayItem={dayItem} halfHourItem={halfHourItem} med={med}/> */}
+      <UsingMedicines dayItem={dayItem} halfHourItem={halfHourItem} med={med}/>
     </HourContent>
   ));
 };

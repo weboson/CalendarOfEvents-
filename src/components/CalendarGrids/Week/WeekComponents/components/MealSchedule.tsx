@@ -47,7 +47,7 @@ const betweenMealsWeekend = (diffIntervalMealWeekend / (med.quantity-1))
 
   return (
     <>
-      { //! Оптимальный код(где важен порядок и сравния), иначе при изменении минут в localDB_MealSchedule - могут пропасть приёмы пищи
+      { // Оптимальный код(где важен порядок и сравния), иначе при изменении минут в localDB_MealSchedule - могут пропасть приёмы пищи
       //weekday
         (dayItem.day() !== 6 && dayItem.day() !== 0) ? 
           (halfHourItem.isSame(firstMealWeekdays, 'hour')) && 
@@ -65,12 +65,13 @@ const betweenMealsWeekend = (diffIntervalMealWeekend / (med.quantity-1))
             <MdOutlineFastfood key={index} style={stylesFood}/> : 
             null
             )))
-          || 
-          (halfHourItem.isSame(lastMealWeekdays, 'hour')) &&
-            (
-              lastMealWeekdays.minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:00 >= 0  and < 30
-              lastMealWeekdays.minute() - halfHourItem.minute() < 30 && (<MdOutlineFastfood style={stylesFood}/>)
-            )
+            // ! закомментировал, так как код выше([...new Arr...]), генерирует все ПП после завтрака
+          // || 
+          // (halfHourItem.isSame(lastMealWeekdays, 'hour')) &&
+          //   (
+          //     lastMealWeekdays.minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:00 >= 0  and < 30
+          //     lastMealWeekdays.minute() - halfHourItem.minute() < 30 && (<MdOutlineFastfood style={stylesFood}/>)
+          //   )
 
           : 
           // weekend
@@ -90,13 +91,13 @@ const betweenMealsWeekend = (diffIntervalMealWeekend / (med.quantity-1))
             <MdOutlineFastfood key={index} style={stylesFood}/> : 
             null
             )))
-            || 
-            (
-              halfHourItem.isSame(lastMealWeekend, 'hour')) &&
-              (
-                lastMealWeekend.minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:00 >= 0  and < 30
-                lastMealWeekend.minute() - halfHourItem.minute() < 30 && (<MdOutlineFastfood style={stylesFood}/>)
-              )
+            // || 
+            // (
+            //   halfHourItem.isSame(lastMealWeekend, 'hour')) &&
+            //   (
+            //     lastMealWeekend.minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:00 >= 0  and < 30
+            //     lastMealWeekend.minute() - halfHourItem.minute() < 30 && (<MdOutlineFastfood style={stylesFood}/>)
+            //   )
         
           
 

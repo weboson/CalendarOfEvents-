@@ -150,7 +150,7 @@ const takingMedications = [
     {
         id: 5,
         title: 'Ursonan',
-        depending: false, // *1 вне зависимости от еды/сна... просто 3 раза в день
+        depending: true, // *1 вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0], // *2 'eating' - приём пищи
         quantity: 3, // 5 раза
         unitTime: unitTime[0].type, // day -  в день

@@ -42,13 +42,14 @@ const mealSchedule: IMealSchedule = [
     modeRegime: {
       weekdays: {
         id: 2,
-        firstMeal: moment().hour(8).minute(0), // 8:00
-        lastMeal: moment().hour(22).minute(0), // 22:00
+        //!если добавлять минуты (minute(25)), то  искажается. Ведь, интервал между таблетками и едой, становиться разный, мы ведь фикисруем только час или пол часа
+        firstMeal: moment().hour(8), // 8:00  
+        lastMeal: moment().hour(22), // 22:00
       },
       weekend: { // по-умолчанию схож с weekdays, но user может изменить
         id: 3,
-        firstMeal: moment().hour(10).minute(0), // советуется бодровстовать 14-16 часов
-        lastMeal: moment().hour(23).minute(0),
+        firstMeal: moment().hour(9), // советуется бодровстовать 14-16 часов
+        lastMeal: moment().hour(23),
       },
     },
     createdAt: '12.12.2023',

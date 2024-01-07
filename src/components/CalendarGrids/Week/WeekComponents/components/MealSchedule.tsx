@@ -50,7 +50,8 @@ if (med.depending) { // есть ли зависимость от еды?
       { // Оптимальный код(где важен порядок и сравния), иначе при изменении минут в localDB_MealSchedule - могут пропасть приёмы пищи
       //weekday
         (dayItem.day() !== 6 && dayItem.day() !== 0) ? 
-          (halfHourItem.isSame(firstMealWeekdays, 'hour')) && 
+          (halfHourItem.isSame(firstMealWeekdays, 'hour')) 
+          && 
           (
             firstMealWeekdays.minute() - halfHourItem.minute()   >= 0 && // 22:30 - 22:21 >= 0  and < 30
             firstMealWeekdays.minute() - halfHourItem.minute()  < 30 && 

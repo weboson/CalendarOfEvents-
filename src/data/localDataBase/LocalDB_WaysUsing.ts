@@ -7,56 +7,8 @@ import moment from "moment"
 
 // ! interface - вынисти отдельно в папку "types" файл typesWaysUsing.ts
 
-
-
-
-
-
-// если вне зависимости от еды, просто 3 раза в день
-
-// interface IRegardless {
-//     id: number
-//     oftime: 'no time' | null
-// }
-// interface IRegardlessOfFood extends Array<IRegardless> {}
-
-// // data
-// const regardlessOfFood: IRegardlessOfFood = [
-//     {
-//         id: 1,
-//         oftime: 'no time', // вне зависимости от: приёма пищи, сна
-//     }
-// ]
-
-// интервалы времени: за (20минут) до еды/сна
-//type
-// interface ITimeInterval {
-//     id: number,
-//     interval: Moment
-// }
-
-// interface ITimeIntervals extends Array<ITimeInterval> {}
-
-// const timeIntervals:ITimeIntervals = [
-//     {
-//         id: 1,
-//         interval: moment().minute(45) // exm: спустя 45 минут после еды 
-//     },
-//     {
-//         id: 2,
-//         interval: moment().minute(15) // exm: за 15 минут до завтрака
-
-//     },
-//     {
-//         id: 3,
-//         interval: moment().hour(2) // exm: за 2 часа перед сном
-
-//     },
-// ]
-
-
-// export default { regardlessOfFood, waysUsing, expressionsTime, timeIntervals } ;
-
+// курсы 
+// константы, которые будут в Форме в атрибутах type или value
 export const unitTime = [
     {
         id: 2,
@@ -149,9 +101,9 @@ const takingMedications = [
     {
         id: 5,
         title: 'Ursonan',
-        depending: true, // *1 вне зависимости от еды/сна... просто 3 раза в день
-        action: waysUsing[0], // *2 'eating' - приём пищи
-        quantity: 5, // 4 раза
+        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        action: waysUsing[0], // 'eating' - приём пищи
+        quantity: 4, // 4 раза
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[0].oftime, // используется константа 'after' из массива 
         // ! нужно изменить на первый приём пищи

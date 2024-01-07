@@ -3,7 +3,6 @@
 // При заполнении формы, фиксируются 
 
 import moment from "moment"
-import { Moment } from "moment"
 
 
 // ! interface - вынисти отдельно в папку "types" файл typesWaysUsing.ts
@@ -156,7 +155,7 @@ const takingMedications = [
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[0].oftime, // используется константа 'after' из массива 
         // ! нужно изменить на первый приём пищи
-        interval: moment().hour(0).minute(45), // exm: спустя 45 минут после еды 
+        interval: moment().hour(1).minute(0), // exm: спустя 45 минут после еды 
         
         duration: moment().month(3), // продолжительность 3 месяца
         

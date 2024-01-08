@@ -35,7 +35,9 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
   const betweenMealsWeekdays = diffIntervalMealWeekdays / (med.quantity - 1); // 50400000(~14 ч) / 3-1раз/день = 3.5 часа -
   //console.log(betweenMealsWeekdays); // 3 (каждые три часа принимать пищу, так как принимать таблетку после еды)
   //! ровный шаг между едой
-  const stepWeekdays = firstMealWeekdays.subtract(med.interval.minute(), 'minute').subtract(med.interval.hour(), 'hour') 
+  const stepWeekdays = firstMealWeekdays.subtract(med.interval.minute(), 'minute').subtract(med.interval.hour(), 'hour')
+  const addStepWeekdays = firstMealWeekdays.add(med.interval.minute(), 'minute').add(med.interval.hour(), 'hour')
+   
 
   //* weekend
   // тоже самое только weekend
@@ -48,7 +50,8 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
   );
   const betweenMealsWeekend = diffIntervalMealWeekend / (med.quantity - 1);
     //! ровный шаг между едой
-  const stepWeekend = firstMealWeekend.subtract(med.interval.minute(), 'minute').subtract(med.interval.hour(), 'hour') 
+  // const stepWeekend = firstMealWeekend.subtract(med.interval.minute(), 'minute').subtract(med.interval.hour(), 'hour') 
+  const addStepWeekend = firstMealWeekend.add(med.interval.minute(), 'minute').add(med.interval.hour(), 'hour')
   // ! создать отдельный файл (либо в беке либо во фронте) и передавать объектом
  
   // weekday (в будни)
@@ -65,10 +68,10 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
               // weekday
               // первый приём ЛС
               (dayItem.day() !== 6 && dayItem.day() !== 0) ? 
-              (halfHourItem.isSame(stepWeekdays, 'hour')) && 
+              (halfHourItem.isSame(firstMealWeekdays.subtract(med.interval.minute(), 'minute').subtract(med.interval.hour(), 'hour'), 'hour')) && 
               (
-                stepWeekdays.clone().minute() - halfHourItem.minute()   >= 0 && // 22:30 - 22:21 >= 0  and < 30
-                stepWeekdays.clone().minute() - halfHourItem.minute()  < 30 && 
+                firstMealWeekdays.clone().minute() - halfHourItem.minute()   >= 0 && // 22:30 - 22:21 >= 0  and < 30
+                firstMealWeekdays.clone().minute() - halfHourItem.minute()  < 30 && 
                  (
                   <>
                   <RiMedicineBottleLine  style={{ color: 'red' }} />
@@ -81,9 +84,9 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
               ) 
               || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
               ([...new Array(med.quantity-1)].map((_, index) => (
-                (halfHourItem.isSame(stepWeekdays.add(betweenMealsWeekdays, 's'), 'hour')) &&
-                stepWeekdays.clone().minute() - halfHourItem.minute()   >= 0 && // 22:30 - 22:21 >= 0  and < 30
-                stepWeekdays.clone().minute() - halfHourItem.minute()  < 30 && 
+                (halfHourItem.isSame(firstMealWeekdays.add(betweenMealsWeekdays, 's'), 'hour')) &&
+                firstMealWeekdays.clone().minute() - halfHourItem.minute()   >= 0 && // 22:30 - 22:21 >= 0  and < 30
+                firstMealWeekdays.clone().minute() - halfHourItem.minute()  < 30 && 
                 (
                   <div key={index}>
                     <RiMedicineBottleLine key={`before-${index}`}  style={{ color: 'red' }} />
@@ -95,10 +98,10 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
                 )
               )))
                 : // weekend
-                (halfHourItem.isSame(stepWeekend, 'hour')) && 
+                (halfHourItem.isSame(firstMealWeekdays.subtract(med.interval.minute(), 'minute').subtract(med.interval.hour(), 'hour'), 'hour')) && 
                 (
-                  stepWeekend.clone().minute() - halfHourItem.minute()   >= 0 && // 22:30 - 22:21 >= 0  and < 30
-                  stepWeekend.clone().minute() - halfHourItem.minute()  < 30 && 
+                  firstMealWeekdays.clone().minute() - halfHourItem.minute()   >= 0 && // 22:30 - 22:21 >= 0  and < 30
+                  firstMealWeekdays.clone().minute() - halfHourItem.minute()  < 30 && 
                    (
                   <div>
                     <RiMedicineBottleLine style={{ color: 'red' }} />
@@ -111,9 +114,9 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
                 ) 
                 || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
                 ([...new Array(med.quantity-1)].map((_, index) => (
-                  (halfHourItem.isSame(stepWeekend.add(betweenMealsWeekend, 's'), 'hour')) &&
-                  stepWeekend.clone().minute() - halfHourItem.minute()   >= 0 && // 22:30 - 22:21 >= 0  and < 30
-                  stepWeekend.clone().minute() - halfHourItem.minute()  < 30 && 
+                  (halfHourItem.isSame(firstMealWeekdays.add(betweenMealsWeekend, 's'), 'hour')) &&
+                  firstMealWeekdays.clone().minute() - halfHourItem.minute()   >= 0 && // 22:30 - 22:21 >= 0  and < 30
+                  firstMealWeekdays.clone().minute() - halfHourItem.minute()  < 30 && 
                   (
                     <div key={index}>
                       <RiMedicineBottleLine key={`before-${index}`}  style={{ color: 'red' }} />
@@ -198,10 +201,10 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
               // weekday
               // первый приём ЛС
               (dayItem.day() !== 6 && dayItem.day() !== 0) ? 
-              (halfHourItem.isSame(firstMealWeekdays.add(med.interval.minute(), 'minute').add(med.interval.hour(), 'hour'), 'hour')) && 
+              (halfHourItem.isSame(addStepWeekdays.add(med.interval.minute(), 'minute').add(med.interval.hour(), 'hour'), 'hour')) && 
               (
-                firstMealWeekdays.clone().minute() - halfHourItem.minute()   >= 0 && // 22:30 - 22:21 >= 0  and < 30
-                firstMealWeekdays.clone().minute() - halfHourItem.minute()  < 30 && 
+                addStepWeekdays.clone().minute() - halfHourItem.minute()   >= 0 && // 22:30 - 22:21 >= 0  and < 30
+                addStepWeekdays.clone().minute() - halfHourItem.minute()  < 30 && 
                  (
                   <div>
                   <RiMedicineBottleLine style={{ color: 'red' }} />
@@ -214,9 +217,9 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
               ) 
               || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
               ([...new Array(med.quantity-1)].map((_, index) => (
-                (halfHourItem.isSame(firstMealWeekdays.add(betweenMealsWeekdays, 's'), 'hour')) &&
-                firstMealWeekdays.clone().minute() - halfHourItem.minute()   >= 0 && // 22:30 - 22:21 >= 0  and < 30
-                firstMealWeekdays.clone().minute() - halfHourItem.minute()  < 30 && 
+                (halfHourItem.isSame(addStepWeekdays.add(betweenMealsWeekdays, 's'), 'hour')) &&
+                addStepWeekdays.clone().minute() - halfHourItem.minute()   >= 0 && // 22:30 - 22:21 >= 0  and < 30
+                addStepWeekdays.clone().minute() - halfHourItem.minute()  < 30 && 
                 (
                   <div key={index}>
                   <RiMedicineBottleLine key={`after-${index}`}  style={{ color: 'red' }} />
@@ -228,10 +231,10 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
                 )
               )))
                 : // weekend
-                (halfHourItem.isSame(firstMealWeekend.add(med.interval.minute(), 'minute').add(med.interval.hour(), 'hour'), 'hour')) && 
+                (halfHourItem.isSame(addStepWeekend.add(med.interval.minute(), 'minute').add(med.interval.hour(), 'hour'), 'hour')) && 
                 (
-                  firstMealWeekend.clone().minute() - halfHourItem.minute()   >= 0 && // 22:30 - 22:21 >= 0  and < 30
-                  firstMealWeekend.clone().minute() - halfHourItem.minute()  < 30 && 
+                  addStepWeekend.clone().minute() - halfHourItem.minute()   >= 0 && // 22:30 - 22:21 >= 0  and < 30
+                  addStepWeekend.clone().minute() - halfHourItem.minute()  < 30 && 
                    (
                     <div>
                     <RiMedicineBottleLine style={{ color: 'red' }} />
@@ -244,9 +247,9 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
                 ) 
                 || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
                 ([...new Array(med.quantity-1)].map((_, index) => (
-                  (halfHourItem.isSame(firstMealWeekend.add(betweenMealsWeekend, 's'), 'hour')) &&
-                  firstMealWeekend.clone().minute() - halfHourItem.minute()   >= 0 && // 22:30 - 22:21 >= 0  and < 30
-                  firstMealWeekend.clone().minute() - halfHourItem.minute()  < 30 && 
+                  (halfHourItem.isSame(addStepWeekend.add(betweenMealsWeekend, 's'), 'hour')) &&
+                  addStepWeekend.clone().minute() - halfHourItem.minute()   >= 0 && // 22:30 - 22:21 >= 0  and < 30
+                  addStepWeekend.clone().minute() - halfHourItem.minute()  < 30 && 
                   (
                     <div key={index}>
                       <RiMedicineBottleLine key={`after-${index}`}  style={{ color: 'red' }} />

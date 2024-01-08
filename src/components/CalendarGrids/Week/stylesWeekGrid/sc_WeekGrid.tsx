@@ -83,13 +83,8 @@ interface IHourContent {
 }
 
 export const HourContent = styled.div<IHourContent>`
+  position: relative;
   display: block;
-  /* display: grid;
-    background-color: #fff;
-    grid-template-rows: repeat(2, 1fr);
-    grid-template-columns: 1fr;
-    grid-column-gap: 30px;
-    grid-row-gap: 10px; */
   width: 100%;
   height: 42px;
   border-bottom: 1px solid #565759;

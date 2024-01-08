@@ -103,13 +103,53 @@ const takingMedications = [
         title: 'Ursonan',
         depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0], // 'eating' - приём пищи
-        quantity: 4, // 4 раза
+        quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
-        position: positionAction[0].oftime, // используется константа 'after' из массива 
-        // ! нужно изменить на первый приём пищи
-        interval: moment().hour(1).minute(0), // exm: спустя 45 минут после еды 
+        position: positionAction[2].oftime, // Используется константа(потом будет в Form) в массива 
+        interval: moment().hour(0).minute(30), // exm: спустя 45 минут после еды 
+        duration: moment().month(3), // продолжительность курса 3 месяца
         
-        duration: moment().month(3), // продолжительность 3 месяца
+        
+    },
+    {
+        id: 6,
+        title: 'Paroksetin',
+        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        action: waysUsing[0], // 'eating' - приём пищи
+        quantity: 3, // 3 раза
+        unitTime: unitTime[0].type, // day -  в день
+        position: positionAction[0].oftime, 
+        // ! нужно изменить на первый приём пищи
+        interval: moment().hour(0).minute(30), 
+        duration: moment().month(3), // продолжительность курса 3 месяца
+        
+        
+    },
+    {
+        id: 7,
+        title: 'Eclonil',
+        depending: false, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        action: waysUsing[0], // 'eating' - приём пищи
+        quantity: 3, // 3 раза
+        unitTime: unitTime[0].type, // day -  в день
+        position: positionAction[1].oftime, //  'after' после
+        // ! нужно изменить на первый приём пищи
+        interval: moment().hour(0).minute(30), // exm: спустя 30 минут после еды 
+        duration: moment().month(3), // продолжительность курса 3 месяца
+        
+        
+    },
+    {
+        id: 8,
+        title: 'Eclonilewewewew',
+        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        action: waysUsing[0], // 'eating' - приём пищи
+        quantity: 3, // 3 раза
+        unitTime: unitTime[0].type, // day -  в день
+        position: positionAction[0].oftime, //  'after' после
+        // ! нужно изменить на первый приём пищи
+        interval: moment().hour(1).minute(0), // exm: спустя 30 минут после еды 
+        duration: moment().month(3), // продолжительность курса 3 месяца
         
         
     }

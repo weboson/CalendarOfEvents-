@@ -29,8 +29,16 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
   // let arr = dailyRegimes.find((item, index) => item.id == 2)
   // console.log(arr)
 
-  //! выберем экземляр массива, где вся инфа об употреблении конкретного ЛС:
-  const med = takingMedications[0]
+
+//! выбираем самы большое число из всех элементов массива "takingMedications" у свойства "quantity"(количество приёмом ЛС)
+ const maxMealFood = takingMedications.reduce(function(prev, current) {
+  if (+current.quantity > +prev.quantity) {
+      return current;
+  } else {
+      return prev;
+  }
+}); 
+// console.log(maxMealFood) // {... .quantity, }
 
 
   return ArrayHalfHoursContent.map((halfHourItem, hourIndex) => (
@@ -52,10 +60,14 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
 
       {/* //* icons Food (firs и last eating)*/}
       {/* data: localDB_MealSchedule.ts */}
-      <MealSchedule dayItem={dayItem} halfHourItem={halfHourItem}  med={med}/>
+        <MealSchedule dayItem={dayItem} halfHourItem={halfHourItem}  med={maxMealFood}/>
+      
 
       {/* //* for Using Medicines (расчет приёма лекарств) */}
-      <UsingMedicines dayItem={dayItem} halfHourItem={halfHourItem} med={med}/>
+      {takingMedications.map((medItem, index) => (
+        <UsingMedicines key={index} dayItem={dayItem} halfHourItem={halfHourItem} med={medItem}/>
+      ))}
+      
     </HourContent>
   ));
 };

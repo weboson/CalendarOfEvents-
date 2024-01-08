@@ -7,7 +7,7 @@
 ![Calendar-Day-mode](https://github.com/weboson/CalendarOfEvents-/assets/42917939/4717915c-adc5-40f9-a317-9d7098975aa6)
 
 ### Week Mode
-![Calendar-Week-mode-V7](https://github.com/weboson/CalendarOfEvents-/assets/42917939/8d6deb2c-9441-4ff0-8c0c-fe116fe0eb6f)
+![Calendar-Week-mode-V8](https://github.com/weboson/CalendarOfEvents-/assets/42917939/96b32b67-6e4a-4acf-85eb-dd8b515ba301)
 
 ### Month Mode
 ![Calendar-Month-mode](https://github.com/weboson/CalendarOfEvents-/assets/42917939/a8bd1a61-eb1b-4ca7-8f98-f3cadf1b4172)

@@ -2,14 +2,22 @@
 //! Ways of using - способы применения (лекарства), например: "до еды", "после еды", "перед сном" <- это константы, которые выбирает user
 // При заполнении формы, фиксируются 
 
-import moment from "moment"
+import moment, { Moment } from "moment"
 
 
 // ! interface - вынисти отдельно в папку "types" файл typesWaysUsing.ts
 
 // курсы 
 // константы, которые будут в Форме в атрибутах type или value
-export const unitTime = [
+interface IUnit {
+    id: number
+    type: 'day' | 'week' | 'month' | 'quarter' | 'year'
+    title: string
+}
+
+interface IUnitTime extends Array<IUnit>{}
+
+export const unitTime: IUnitTime = [
     {
         id: 2,
         type: 'day',
@@ -97,7 +105,21 @@ const positionAction: IPositionAction = [
 
 
 // ! пример композиции (на примере одного ЛС)
-const takingMedications = [
+export interface ITakingMedication {
+    id: number
+    title: string
+    depending: boolean
+    action: IWayUsing
+    quantity: number
+    unitTime: string
+    position: string
+    interval: Moment | null
+    duration: Moment
+}
+
+interface ITakingMedications extends Array<ITakingMedication>{}
+
+const takingMedications: ITakingMedications = [
     {
         id: 5,
         title: 'Ursonan',
@@ -119,7 +141,6 @@ const takingMedications = [
         quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[0].oftime, 
-        // ! нужно изменить на первый приём пищи
         interval: moment().hour(0).minute(30), 
         duration: moment().month(3), // продолжительность курса 3 месяца
         
@@ -132,8 +153,7 @@ const takingMedications = [
         action: waysUsing[0], // 'eating' - приём пищи
         quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
-        position: positionAction[1].oftime, //  'after' после
-        // ! нужно изменить на первый приём пищи
+        position: positionAction[1].oftime, //  'while'
         interval: moment().hour(0).minute(30), // exm: спустя 30 минут после еды 
         duration: moment().month(3), // продолжительность курса 3 месяца
         
@@ -147,7 +167,6 @@ const takingMedications = [
         quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[0].oftime, //  'after' после
-        // ! нужно изменить на первый приём пищи
         interval: moment().hour(1).minute(0), // exm: спустя 30 минут после еды 
         duration: moment().month(3), // продолжительность курса 3 месяца
         

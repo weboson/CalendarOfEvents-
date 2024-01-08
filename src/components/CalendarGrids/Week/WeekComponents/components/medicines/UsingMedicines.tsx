@@ -4,13 +4,13 @@ import { FC } from 'react';
 import mealSchedule from '../../../../../../data/localDataBase/localDB_MealSchedule';
 // иконка
 import { RiMedicineBottleLine } from 'react-icons/ri';
+import { ITakingMedication } from '../../../../../../data/localDataBase/LocalDB_WaysUsing';
 
-// Logic
 
 interface IProps {
   dayItem: Moment;
   halfHourItem: Moment;
-  med: any; //! создать тип Array(medElement)
+  med: ITakingMedication | null
 }
 
 
@@ -76,9 +76,8 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
                   <>
                   <RiMedicineBottleLine  style={{ color: 'red' }} />
                   <span style={{ color: 'gray', fontSize: '14px' }}>
-                    {' '}
-                    За {med.interval.format('H:mm')} до еды
-                  </span>{' '}
+                     {med.interval.format('H:mm')} до еды
+                  </span>
                 </>
                   )
               ) 
@@ -91,9 +90,8 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
                   <div key={index}>
                     <RiMedicineBottleLine key={`before-${index}`}  style={{ color: 'red' }} />
                     <span style={{ color: 'gray', fontSize: '14px' }}>
-                      {' '}
-                      За {med.interval.format('H:mm')} до еды
-                    </span>{' '}
+                       {med.interval.format('H:mm')} до еды
+                    </span>
                   </div>
                 )
               )))
@@ -106,9 +104,8 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
                   <div>
                     <RiMedicineBottleLine style={{ color: 'red' }} />
                     <span style={{ color: 'gray', fontSize: '14px' }}>
-                      {' '}
-                      За {med.interval.format('H:mm')} до еды
-                    </span>{' '}
+                       {med.interval.format('H:mm')} до еды
+                    </span>
                   </div>
                     )
                 ) 
@@ -121,9 +118,8 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
                     <div key={index}>
                       <RiMedicineBottleLine key={`before-${index}`}  style={{ color: 'red' }} />
                       <span style={{ color: 'gray', fontSize: '14px' }}>
-                        {' '}
-                        За {med.interval.format('H:mm')} до еды
-                      </span>{' '}
+                         {med.interval.format('H:mm')} до еды
+                      </span>
                     </div>
                   )
                 )))
@@ -208,10 +204,9 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
                  (
                   <div>
                   <RiMedicineBottleLine style={{ color: 'red' }} />
-                  <span style={{ color: 'gray', fontSize: '14px', float: 'left',}}>
-                    {' '}
-                    Спустя {med.interval.format('H:mm')} после еды
-                  </span>{' '}
+                  <span style={{ color: 'gray', fontSize: '14px'}}>
+                    {med.interval.format('H:mm')} после еды
+                  </span>
                 </div>
                   )
               ) 
@@ -223,10 +218,9 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
                 (
                   <div key={index}>
                   <RiMedicineBottleLine key={`after-${index}`}  style={{ color: 'red' }} />
-                  <span style={{ color: 'gray', fontSize: '14px', float: 'left', }}>
-                    {' '}
-                    Спустя {med.interval.format('H:mm')} после еды
-                  </span>{' '}
+                  <span style={{ color: 'gray', fontSize: '14px'}}>
+                     {med.interval.format('H:mm')} после еды
+                  </span>
                 </div>
                 )
               )))
@@ -238,10 +232,9 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
                    (
                     <div>
                     <RiMedicineBottleLine style={{ color: 'red' }} />
-                    <span style={{ color: 'gray', fontSize: '14px', float: 'left', }}>
-                      {' '}
-                      Спустя {med.interval.format('H:mm')} после еды
-                    </span>{' '}
+                    <span style={{ color: 'gray', fontSize: '14px'}}>
+                       {med.interval.format('H:mm')} после еды
+                    </span>
                   </div>
                     )
                 ) 
@@ -253,10 +246,9 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
                   (
                     <div key={index}>
                       <RiMedicineBottleLine key={`after-${index}`}  style={{ color: 'red' }} />
-                      <span key={index+4} style={{ color: 'gray', fontSize: '14px', float: 'left', }}>
-                        {' '}
-                        Спустя {med.interval.format('H:mm')} после еды
-                      </span>{' '}
+                      <span key={index+4} style={{ color: 'gray', fontSize: '14px'}}>
+                         {med.interval.format('H:mm')} после еды
+                      </span>
                     </div>
                   )
                 )))
@@ -295,10 +287,10 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
             halfHourItem.minute() - firstMealWeekdays.minute() < 30 && ( // 8:30 - 8:16 < 0  and < 30
               
             <div>
-            <RiMedicineBottleLine style={{ color: 'red' }} />
-            <span style={{ color: 'gray', fontSize: '14px', float: 'left', }}>
+            <RiMedicineBottleLine style={{ color: 'red', position: 'absolute', float: "left", bottom: '0', left: '0' }} />
+            <span style={{ color: 'gray', fontSize: '14px',position: 'absolute', float: "left", bottom: '0', left: '16px'  }}>
               {' '}
-              Независимо от еды
+              Независимо
             </span>{' '}
           </div>
             )) ||
@@ -314,10 +306,10 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
                 halfHourItem.minute() <
                 30 ? (
                   <div key={index+1}>
-                  <RiMedicineBottleLine key={`regardless=${index}`} style={{ color: 'red' }} />
-                  <span style={{ color: 'gray', fontSize: '14px', float: 'left', }}>
+                  <RiMedicineBottleLine key={`regardless=${index}`} style={{ color: 'red', position: 'absolute', float: "left", bottom: '0', left: '0' }} />
+                  <span style={{ color: 'gray', fontSize: '14px',position: 'absolute', float: "left", bottom: '0', left: '16px'  }}>
                     {' '}
-                    Независимо от еды
+                    Независимо
                   </span>{' '}
                 </div>
               ) : null,
@@ -327,10 +319,10 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
             halfHourItem.minute() - firstMealWeekend.minute() >= 0 && // 8:30 - 8:16 >= 0  and < 30
             halfHourItem.minute() - firstMealWeekend.minute() < 30 && ( // 8:30 - 8:16 < 0  and < 30
             <div>
-            <RiMedicineBottleLine style={{ color: 'red' }} />
-            <span style={{ color: 'gray', fontSize: '14px', float: 'left', }}>
+            <RiMedicineBottleLine style={{ color: 'red', position: 'absolute', float: "left", bottom: '0', left: '0' }} />
+            <span style={{ color: 'gray', fontSize: '14px',position: 'absolute', float: "left", bottom: '0', left: '16px'  }}>
               {' '}
-              Независимо от еды
+              Независимо
             </span>{' '}
           </div>
             )) ||
@@ -346,10 +338,10 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
                 halfHourItem.minute() <
                 30 ? (
                   <div key={index+1}>
-                  <RiMedicineBottleLine key={`regardless=${index+3}`} style={{ color: 'red' }} />
-                  <span style={{ color: 'gray', fontSize: '14px', float: 'left', }}>
+                  <RiMedicineBottleLine key={`regardless=${index+3}`} style={{ color: 'red', position: 'absolute', float: "left", bottom: '0', left: '0' }} />
+                  <span style={{ color: 'gray', fontSize: '14px',position: 'absolute', float: "left", bottom: '0', left: '16px'  }}>
                     {' '}
-                    Независимо от еды
+                    Независимо
                   </span>{' '}
                 </div>
               ) : null,

@@ -5,14 +5,14 @@ import mealSchedule from '../../../../../data/localDataBase/localDB_MealSchedule
 import { MdOutlineFastfood } from 'react-icons/md';
 import { Moment } from 'moment';
 import { stylesFood } from '../../stylesWeekGrid/sc_WeekGrid';
-import takingMedications from '../../../../../data/localDataBase/LocalDB_WaysUsing';
+import { ITakingMedication } from '../../../../../data/localDataBase/LocalDB_WaysUsing';
 
 
 
 interface IProps {
   dayItem: Moment
   halfHourItem: Moment
-  med: any
+  med: ITakingMedication 
 }
 
 const MealSchedule: FC<IProps> = ({ halfHourItem, dayItem, med }) => {
@@ -43,7 +43,6 @@ const diffIntervalMealWeekend = lastMealWeekend.diff(firstMealWeekend, 'seconds'
 const betweenMealsWeekend = (diffIntervalMealWeekend / (med.quantity-1)) 
 
 // ! создать отдельный файл (либо в беке либо во фронте) и передавать объектом
-// const arrFoot = [... new Array(4)]
 
 
 if (med.depending) { // есть ли зависимость от еды?

@@ -5,22 +5,8 @@ import styled from 'styled-components';
 export const GridWrapper = styled.div`
   display: block;
   background-color: #1e1f21;
-  max-height: 694px;
-  min-width: 1210px;
-  overflow-y: scroll;
-  &::-webkit-scrollbar {
-    // style scroll
-    width: 18px;
-  } /* ширина scrollbar */
-  &::-webkit-scrollbar-track {
-    background: #e6e6e6;
-    /* border-radius: 20px;  */
-  } /* цвет дорожки */
-  &::-webkit-scrollbar-thumb {
-    background-color: #565759; /* цвет плашки */
-    border-radius: 0px 0px 9px 0; /* закругления плашки */
-    border: 1px solid #e6e6e6;
-  } /* padding вокруг плашки */
+  max-height: 100%;
+  min-width: 100%;
 `;
 // side panel block
 export const WrapperSidePanel = styled.div`
@@ -49,7 +35,7 @@ export const HourSidePanel = styled.div<IHourSidePanel>`
   ${(props) => (props.$currentSideHour ? 'color: red;' : 'color: #E6E6E6;')}
   background-color: #1e1f21;
   text-align: center;
-  min-height: 84px;
+  min-height: 168px;
   padding: 10px;
   border-bottom: 1px solid #565759;
   border-right: 1px solid #565759;
@@ -68,8 +54,9 @@ interface IDayOfWeek {
 }
 
 export const DayOfWeek = styled.div<IDayOfWeek>`
-  position: sticky; // fixed panel
+  position: sticky;
   top: 0; // fixed panel
+  z-index: 1;
   background-color: #1e1f21;
   border-bottom: 1px solid #565759;
   ${(props) => (props.$currentDay ? 'color: red;' : 'color: white;')}
@@ -86,7 +73,7 @@ export const HourContent = styled.div<IHourContent>`
   position: relative;
   display: block;
   width: 100%;
-  height: 42px;
+  height: 84px;
   border-bottom: 1px solid #565759;
   border-right: 1px solid #565759;
   ${(props) =>
@@ -113,8 +100,10 @@ export const stylesMoon = {
 }
 // For Diet (Стилизация иконки "food")
 export const stylesFood = {
-  color: '#4fa2d5',
-  // color: '#a12a2a',
-  float: 'left',
-  margin: '0px 0px 1px 1px',
+  // color: '#4fa2d5',
+  color: '#00ff04',
+  position: 'absolute',
+  right: '0',
+  bottom: '0',
+  margin: '0px 3px 3px 0px',
 }

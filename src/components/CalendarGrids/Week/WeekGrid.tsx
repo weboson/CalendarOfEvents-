@@ -7,6 +7,7 @@ import {
   WrapperTopPanelAndContent,
   DayOfWeek,
   WrapperColumn,
+  FixedTopPanel,
 } from './stylesWeekGrid/sc_WeekGrid';
 import moment, { Moment } from 'moment';
 import GridDayWithHours from './WeekComponents/GridDayWithHours';
@@ -69,6 +70,7 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
       </WrapperSidePanel>
 
       {/* Days of Week (Top Panel) */}
+      
       <WrapperTopPanelAndContent>
         {ArrayDays.map((dayItem, index) => (
           <WrapperColumn key={index + 1}>

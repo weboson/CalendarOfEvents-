@@ -14,6 +14,7 @@ export interface IMonitorProps {
 
 export const DivWrapper = styled('div')`
     display: flex;
+    min-width: 300px;
     justify-content: space-between;
     background-color: #1e1f21;
     color: #DCDDDD;

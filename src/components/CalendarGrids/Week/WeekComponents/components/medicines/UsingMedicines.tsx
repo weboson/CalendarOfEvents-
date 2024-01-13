@@ -171,7 +171,6 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
                       <div>
                         <RiMedicineBottleLine style={{ color: 'red' }} />
                         <span style={{ color: 'gray', fontSize: '14px' }}>
-                          {' '}
                           Вовремя еды
                         </span>{' '}
                       </div>
@@ -194,7 +193,6 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
                               style={{ color: 'red' }}
                             />
                             <span style={{ color: 'gray', fontSize: '14px' }}>
-                              {' '}
                               Вовремя еды
                             </span>{' '}
                           </div>
@@ -209,7 +207,6 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
                       <div>
                         <RiMedicineBottleLine style={{ color: 'red' }} />
                         <span style={{ color: 'gray', fontSize: '14px' }}>
-                          {' '}
                           Вовремя еды
                         </span>{' '}
                       </div>
@@ -235,7 +232,6 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
                               key={index + 4}
                               style={{ color: 'gray', fontSize: '14px' }}
                             >
-                              {' '}
                               Вовремя еды
                             </span>{' '}
                           </div>
@@ -367,8 +363,8 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
                             color: 'red',
                             position: 'absolute',
                             float: 'left',
-                            bottom: '0',
                             left: '0',
+                            top: '18px',
                           }}
                         />
                         <span
@@ -377,8 +373,8 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
                             fontSize: '14px',
                             position: 'absolute',
                             float: 'left',
-                            bottom: '0',
                             left: '16px',
+                            top: '18px',
                           }}
                         >
                           {med.interval.format('H:mm')} до завтрака
@@ -402,8 +398,8 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
                             color: 'red',
                             position: 'absolute',
                             float: 'left',
-                            bottom: '0',
                             left: '0',
+                            top: '18px',
                           }}
                         />
                         <span
@@ -412,8 +408,8 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
                             fontSize: '14px',
                             position: 'absolute',
                             float: 'left',
-                            bottom: '0',
                             left: '16px',
+                            top: '18px',
                           }}
                         >
                           {med.interval.format('H:mm')} до завтрака
@@ -438,7 +434,6 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
                             color: 'red',
                             position: 'absolute',
                             float: 'left',
-                            bottom: '0',
                             left: '0',
                           }}
                         />
@@ -448,11 +443,10 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
                             fontSize: '14px',
                             position: 'absolute',
                             float: 'left',
-                            bottom: '0',
                             left: '16px',
                           }}
                         >
-                          во время завтрака
+                          Вовремя завтрака
                         </span>
                       </>
                     )
@@ -468,7 +462,6 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
                             color: 'red',
                             position: 'absolute',
                             float: 'left',
-                            bottom: '0',
                             left: '0',
                           }}
                         />
@@ -478,11 +471,10 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
                             fontSize: '14px',
                             position: 'absolute',
                             float: 'left',
-                            bottom: '0',
                             left: '16px',
                           }}
                         >
-                          во время завтрака
+                          Вовремя завтрака
                         </span>
                       </>
                     )

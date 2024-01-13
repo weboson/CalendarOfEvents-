@@ -14,9 +14,10 @@ import DayGrid from '../components/CalendarGrids/Day/DayGrid';
 
 // sc-style
 const ShadowWrapper = styled('div')`
-  border-radius: 8px;
+  height: 100vh;
+  width: 100%;
   border: 1px solid #464648;
-  overflow: hidden;
+  /* overflow: hidden; */
   box-shadow: 0 0 0 1px #1a1a1a, 0 8px 20px 6px #888;
 `;
 

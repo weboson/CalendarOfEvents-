@@ -119,6 +119,7 @@ export interface ITakingMedication {
 
 interface ITakingMedications extends Array<ITakingMedication>{}
 
+// разные лекарства
 const takingMedications: ITakingMedications = [
     {
         id: 5,
@@ -127,7 +128,7 @@ const takingMedications: ITakingMedications = [
         action: waysUsing[0], // 'eating' - приём пищи
         quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
-        position: positionAction[2].oftime, // Используется константа(потом будет в Form) в массива 
+        position: positionAction[0].oftime, // Используется константа(потом будет в Form) в массива 
         interval: moment().hour(0).minute(30), // exm: спустя 45 минут после еды 
         duration: moment().month(3), // продолжительность курса 3 месяца
         
@@ -135,13 +136,13 @@ const takingMedications: ITakingMedications = [
     },
     {
         id: 6,
-        title: 'Paroksetin',
+        title: 'Pepsan',
         depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0], // 'eating' - приём пищи
         quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
-        position: positionAction[0].oftime, 
-        interval: moment().hour(0).minute(30), 
+        position: positionAction[2].oftime, 
+        interval: moment().hour(1).minute(0), 
         duration: moment().month(3), // продолжительность курса 3 месяца
         
         
@@ -151,10 +152,10 @@ const takingMedications: ITakingMedications = [
         title: 'Eclonil',
         depending: false, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0], // 'eating' - приём пищи
-        quantity: 3, // 3 раза
+        quantity: 1, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
-        position: positionAction[1].oftime, //  'while'
-        interval: moment().hour(0).minute(30), // exm: спустя 30 минут после еды 
+        position: positionAction[0].oftime, //   не активен
+        interval: moment().hour(0).minute(0), // exm: спустя 30 минут после еды 
         duration: moment().month(3), // продолжительность курса 3 месяца
         
         
@@ -166,12 +167,52 @@ const takingMedications: ITakingMedications = [
         action: waysUsing[0], // 'eating' - приём пищи
         quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
-        position: positionAction[0].oftime, //  'after' после
+        position: positionAction[1].oftime, //  'after' после
         interval: moment().hour(1).minute(0), // exm: спустя 30 минут после еды 
         duration: moment().month(3), // продолжительность курса 3 месяца
         
         
-    }
+    },
+    {
+        id: 9,
+        title: 'Параксетин',
+        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        action: waysUsing[1], // 'first breakfast' - в зависимости от 1-го приёма пищи
+        quantity: 1, // не изменно 1 раз
+        unitTime: unitTime[0].type, // day -  в день
+        position: positionAction[0].oftime, //  'before' ДО
+        interval: moment().hour(0).minute(45), // exm: за 30 минут ДО еды 
+        duration: moment().month(3), // продолжительность курса 3 месяца
+        
+        
+    },
+    {
+        id: 10,
+        title: 'Смекта',
+        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        action: waysUsing[1], // 'first breakfast' - в зависимости от 1-го приёма пищи
+        quantity: 1, // не активен (по-умолчанию 1 раз)
+        unitTime: unitTime[0].type, // day -  в день
+        position: positionAction[1].oftime, //  'while' ВОВРЕМЯ
+        interval: moment().hour(0).minute(45), // не активен
+        duration: moment().month(3), // продолжительность курса 3 месяца
+        
+        
+    },
+    {
+        id: 11,
+        title: 'Анальгин',
+        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        action: waysUsing[1], // 'first breakfast' - в зависимости от 1-го приёма пищи
+        quantity: 1, // не активен (по-умолчанию 1 раз)
+        unitTime: unitTime[0].type, // day -  в день
+        position: positionAction[2].oftime, //  'after' ВОВРЕМЯ
+        interval: moment().hour(1).minute(30), // не активен
+        duration: moment().month(3), // продолжительность курса 3 месяца
+        
+        
+    },
+
     
 ]
 

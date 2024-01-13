@@ -30,7 +30,7 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
   // console.log(arr)
 
 
-//! выбираем самы большое число из всех элементов массива "takingMedications" у свойства "quantity"(количество приёмом ЛС)
+//! выбираем самы большое число из всех элементов массива "takingMedications" у свойства "quantity"(количество приёмом ЛС): 7 раз/день: еда 
  const maxMealFood = takingMedications.reduce(function(prev, current) {
   if (+current.quantity > +prev.quantity) {
       return current;

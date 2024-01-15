@@ -71,11 +71,6 @@ const waysUsing: IWaysUsing = [
         type: 'last supper',
         title: 'последний ужин',
     },
-    {
-        id: 4,
-        type: 'sleep',
-        title: 'сон',
-    },
 ]
 
 
@@ -152,7 +147,7 @@ const takingMedications: ITakingMedications = [
         title: 'Eclonil',
         depending: false, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0], // 'eating' - приём пищи
-        quantity: 1, // 3 раза
+        quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[0].oftime, //   не активен
         interval: moment().hour(0).minute(0), // exm: спустя 30 минут после еды 
@@ -208,6 +203,45 @@ const takingMedications: ITakingMedications = [
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[2].oftime, //  'after' ВОВРЕМЯ
         interval: moment().hour(1).minute(30), // не активен
+        duration: moment().month(3), // продолжительность курса 3 месяца
+        
+        
+    },
+    {
+        id: 12,
+        title: 'Эглонил',
+        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        action: waysUsing[2], // 'last supper' - в зависимости от последнего приёма еды
+        quantity: 1, // не активен (по-умолчанию 1 раз в день)
+        unitTime: unitTime[0].type, // day -  в день
+        position: positionAction[0].oftime, //  'before' ДО
+        interval: moment().hour(1).minute(30), // 
+        duration: moment().month(3), // продолжительность курса 3 месяца
+        
+        
+    },
+    {
+        id: 13,
+        title: 'Эглонил2',
+        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        action: waysUsing[2], // 'last supper' - в зависимости от последнего приёма еды
+        quantity: 1, // не активен (по-умолчанию 1 раз в день)
+        unitTime: unitTime[0].type, // day -  в день
+        position: positionAction[1].oftime, //  'while' ВОВРЕМЯ
+        interval: moment().hour(1).minute(30), // не активен
+        duration: moment().month(3), // продолжительность курса 3 месяца
+        
+        
+    },
+    {
+        id: 14,
+        title: 'Эглонил3',
+        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        action: waysUsing[2], // 'last supper' - в зависимости от последнего приёма еды
+        quantity: 1, // не активен (по-умолчанию 1 раз в день)
+        unitTime: unitTime[0].type, // day -  в день
+        position: positionAction[2].oftime, //  'after' ПОСЛЕ
+        interval: moment().hour(1).minute(0), // 
         duration: moment().month(3), // продолжительность курса 3 месяца
         
         

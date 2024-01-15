@@ -79,7 +79,12 @@ export const HourContent = styled.div<IHourContent>`
   ${(props) =>
     props.$currentHour
       ? 'background-color: #3d3e3f'
-      : 'background-color: #1e1f21'}
+      : 'background-color: #1e1f21'};
+   /* Для того, чтобы текст не растягивал блок, а ставилось в конце ...  */
+    /* max-width: 260px; */
+   //white-space: nowrap; /* Текст не переносится */
+    //overflow: hidden; /* Обрезаем всё за пределами блока */
+    //text-overflow: ellipsis; /* Добавляем многоточие */
 `;
 
 
@@ -88,7 +93,8 @@ export const HourContent = styled.div<IHourContent>`
 // For Daily Regimes (стилизация иконок "GoSun" и "GoMoon")
 // GoSun 
 export const stylesSun = {
-  color: '#f4fbab',
+  // color: '#f4fbab',
+  color: '#565759',
   float: 'right',
   margin: '1px 1px 0 0',
 }
@@ -101,9 +107,11 @@ export const stylesMoon = {
 // For Diet (Стилизация иконки "food")
 export const stylesFood = {
   // color: '#4fa2d5',
-  color: '#00ff04',
+  // color: '#00ff04',
+  color: '#fffb00',
   position: 'absolute',
   right: '0',
   bottom: '0',
   margin: '0px 3px 3px 0px',
+  // fontSize: '18px',
 }

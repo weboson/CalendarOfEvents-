@@ -61,7 +61,7 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
   
         {/* //* icons Food (firs и last eating)*/}
         {/* data: localDB_MealSchedule.ts */}
-          {/* <MealSchedule dayItem={dayItem} halfHourItem={halfHourItem}  med={maxMealFood}/> */}
+          <MealSchedule dayItem={dayItem} halfHourItem={halfHourItem}  med={maxMealFood}/>
         
   
         {/* //* for Using Medicines (расчет приёма лекарств) */}

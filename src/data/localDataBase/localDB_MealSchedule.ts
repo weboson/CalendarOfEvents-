@@ -7,8 +7,8 @@ import moment, { Moment } from "moment"
 // свойства выходных или будней
 interface IWeek {
   id: number
-  firstMeal: object
-  lastMeal: object
+  firstMeal: Moment
+  lastMeal: Moment
 }
 
 interface IModeRegime {
@@ -44,13 +44,13 @@ const mealSchedule: IMealSchedule = [
         id: 2,
         //!если добавлять минуты (minute(25)), то  искажается. Ведь, интервал между таблетками и едой, становиться разный, мы ведь фикисруем только час или пол часа
         // .minute(0) обязательно, иначе при сравнении будет: ...minute() < 0
-        firstMeal: {hour: 8, minute: 0}, // 8:00  
-        lastMeal: {hour: 20, minute: 0}, // 22:00
+        firstMeal: moment().hour(8).minute(0), // 8:00  
+        lastMeal: moment().hour(20).minute(0), // 22:00
       },
       weekend: { // по-умолчанию схож с weekdays, но user может изменить
         id: 3,
-        firstMeal: {hour: 9, minute: 0}, // советуется бодровстовать 14-16 часов
-        lastMeal: {hour: 22, minute: 0},
+        firstMeal: moment().hour(9).minute(0), // советуется бодровстовать 14-16 часов
+        lastMeal: moment().hour(22).minute(0),
       },
     },
     createdAt: '12.12.2023',
@@ -62,13 +62,13 @@ const mealSchedule: IMealSchedule = [
     modeRegime: {
       weekdays: {
         id: 2,
-        firstMeal: {hour: 7, minute: 0}, // советуется бодровстовать 14-16 часов
-        lastMeal: {hour: 20, minute: 0},
+        firstMeal: moment().hour(7).minute(0), // советуется бодровстовать 14-16 часов
+        lastMeal: moment().hour(20).minute(0),
       },
       weekend: { // по-умолчанию схож с weekdays, но user может изменить
         id: 3,
-        firstMeal: {hour: 9, minute: 0}, // советуется бодровстовать 14-16 часов
-        lastMeal: {hour: 20, minute: 0},
+        firstMeal: moment().hour(9).minute(0), // советуется бодровстовать 14-16 часов
+        lastMeal: moment().hour(20).minute(0),
       },
     },
     createdAt: '12.12.2023',

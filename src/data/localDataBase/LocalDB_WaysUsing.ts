@@ -118,7 +118,7 @@ interface ITakingMedications extends Array<ITakingMedication>{}
 const takingMedications: ITakingMedications = [
     {
         id: 5,
-        title: 'Ursonan',
+        title: 'Урсосан',
         depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0], // 'eating' - приём пищи
         quantity: 3, // 3 раза
@@ -131,7 +131,7 @@ const takingMedications: ITakingMedications = [
     },
     {
         id: 6,
-        title: 'Pepsan',
+        title: 'Пепсан-Р',
         depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0], // 'eating' - приём пищи
         quantity: 3, // 3 раза
@@ -144,7 +144,7 @@ const takingMedications: ITakingMedications = [
     },
     {
         id: 7,
-        title: 'Eclonil',
+        title: 'Ибуприн',
         depending: false, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0], // 'eating' - приём пищи
         quantity: 3, // 3 раза
@@ -157,7 +157,7 @@ const takingMedications: ITakingMedications = [
     },
     {
         id: 8,
-        title: 'Eclonilewewewew',
+        title: 'Альфазокс',
         depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0], // 'eating' - приём пищи
         quantity: 3, // 3 раза
@@ -222,7 +222,7 @@ const takingMedications: ITakingMedications = [
     },
     {
         id: 13,
-        title: 'Эглонил2',
+        title: 'Ганатон',
         depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[2], // 'last supper' - в зависимости от последнего приёма еды
         quantity: 1, // не активен (по-умолчанию 1 раз в день)
@@ -235,7 +235,7 @@ const takingMedications: ITakingMedications = [
     },
     {
         id: 14,
-        title: 'Эглонил3',
+        title: 'Тералиджин',
         depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[2], // 'last supper' - в зависимости от последнего приёма еды
         quantity: 1, // не активен (по-умолчанию 1 раз в день)

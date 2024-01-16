@@ -27,7 +27,6 @@ const DayGrid: FC<IProps> = ({currentDate}) => {
           <GridCalendar currentDate={currentDate}/>
         </TopLeftSection>
         <BottomLeftSection>
-          30%
         </BottomLeftSection>
       </LeftSection>
       {/* Right */}

@@ -73,7 +73,7 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
       
       <WrapperTopPanelAndContent>
         {ArrayDays.map((dayItem, index) => (
-          <WrapperColumn key={index + 1}>
+          <WrapperColumn key={index + 1} $currentDay={dayItem.isSame(moment(), 'day')}>
             <DayOfWeek
               key={index + 2}
               $currentDay={dayItem.isSame(moment(), 'day')}

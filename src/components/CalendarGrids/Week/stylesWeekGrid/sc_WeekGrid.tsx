@@ -6,7 +6,7 @@ export const GridWrapper = styled.div`
   display: block;
   background-color: #1e1f21;
   max-height: 100%;
-  min-width: 100%;
+  min-width: 100vw;
 `;
 // side panel block
 export const WrapperSidePanel = styled.div`
@@ -47,7 +47,10 @@ export const WrapperTopPanelAndContent = styled.div`
   grid-template-columns: repeat(7, 1fr);
 `;
 // Day of Week + Date + Column
-export const WrapperColumn = styled.div``; // для обёртки
+export const WrapperColumn = styled.div`
+/* ${(props) => (props.$currentDay ? 'width: 100%;' : 'width: 40px;')} */
+  
+`; // для обёртки
 
 interface IDayOfWeek {
   $currentDay: boolean;

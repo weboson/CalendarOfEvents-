@@ -9,6 +9,7 @@ import { ITakingMedication } from '../../../../../../data/localDataBase/LocalDB_
 import DependingEating from './medComponents/DependingEating';
 import DependingBreakfast from './medComponents/DependingBreakfast';
 import DependingSupper from './medComponents/DependingSupper';
+import InDependently from './medComponents/InDependently';
 
 interface IProps {
   dayItem: Moment;
@@ -84,143 +85,15 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
   } else {
     //======================================================= ВНЕ ЗАВИСИМОСТИ ОТ ЕДЫ
     return (
-      // приём ЛС не имеет зависимостей (просто количество приёма ЛС делиться на интервал между 1-м и последним ПП)
-      // логика схожа с MealSchedule.tsx
-      dayItem.day() !== 6 && dayItem.day() !== 0
-        ? // weekday
-          (halfHourItem.isSame(firstMealWeekdays, 'hour') &&
-            halfHourItem.minute() - firstMealWeekdays.minute() >= 0 && // 8:30 - 8:16 >= 0  and < 30
-            halfHourItem.minute() - firstMealWeekdays.minute() < 30 && ( // 8:30 - 8:16 < 0  and < 30
-              <div>
-                <RiMedicineBottleLine
-                  style={{
-                    color: 'red',
-                    position: 'absolute',
-                    float: 'left',
-                    bottom: '0',
-                    left: '0',
-                  }}
-                />
-                <span
-                  style={{
-                    color: 'gray',
-                    fontSize: '14px',
-                    position: 'absolute',
-                    float: 'left',
-                    bottom: '0',
-                    left: '16px',
-                  }}
-                >
-                  {' '}
-                  Независимо
-                </span>{' '}
-              </div>
-            )) ||
-            [...new Array(med.quantity)].map((_, index) =>
-              halfHourItem.isSame(
-                firstMealWeekdays.add(betweenMealsWeekdays, 's'),
-                'hour',
-              ) &&
-              firstMealWeekend.clone().add(betweenMealsWeekend, 'm').minute() -
-                halfHourItem.minute() >=
-                0 &&
-              firstMealWeekend.clone().add(betweenMealsWeekend, 'm').minute() -
-                halfHourItem.minute() <
-                30 ? (
-                <div key={index + 1}>
-                  <RiMedicineBottleLine
-                    key={`regardless=${index}`}
-                    style={{
-                      color: 'red',
-                      position: 'absolute',
-                      float: 'left',
-                      bottom: '0',
-                      left: '0',
-                    }}
-                  />
-                  <span
-                    style={{
-                      color: 'gray',
-                      fontSize: '14px',
-                      position: 'absolute',
-                      float: 'left',
-                      bottom: '0',
-                      left: '16px',
-                    }}
-                  >
-                    {' '}
-                    Независимо
-                  </span>{' '}
-                </div>
-              ) : null,
-            )
-        : // weekend
-          (halfHourItem.isSame(firstMealWeekend, 'hour') &&
-            halfHourItem.minute() - firstMealWeekend.minute() >= 0 && // 8:30 - 8:16 >= 0  and < 30
-            halfHourItem.minute() - firstMealWeekend.minute() < 30 && ( // 8:30 - 8:16 < 0  and < 30
-              <div>
-                <RiMedicineBottleLine
-                  style={{
-                    color: 'red',
-                    position: 'absolute',
-                    float: 'left',
-                    bottom: '0',
-                    left: '0',
-                  }}
-                />
-                <span
-                  style={{
-                    color: 'gray',
-                    fontSize: '14px',
-                    position: 'absolute',
-                    float: 'left',
-                    bottom: '0',
-                    left: '16px',
-                  }}
-                >
-                  {' '}
-                  Независимо
-                </span>{' '}
-              </div>
-            )) ||
-            [...new Array(med.quantity)].map((_, index) =>
-              halfHourItem.isSame(
-                firstMealWeekend.add(betweenMealsWeekend, 's'),
-                'hour',
-              ) &&
-              firstMealWeekend.clone().add(betweenMealsWeekend, 'm').minute() -
-                halfHourItem.minute() >=
-                0 &&
-              firstMealWeekend.clone().add(betweenMealsWeekend, 'm').minute() -
-                halfHourItem.minute() <
-                30 ? (
-                <div key={index + 1}>
-                  <RiMedicineBottleLine
-                    key={`regardless=${index + 3}`}
-                    style={{
-                      color: 'red',
-                      position: 'absolute',
-                      float: 'left',
-                      bottom: '0',
-                      left: '0',
-                    }}
-                  />
-                  <span
-                    style={{
-                      color: 'gray',
-                      fontSize: '14px',
-                      position: 'absolute',
-                      float: 'left',
-                      bottom: '0',
-                      left: '16px',
-                    }}
-                  >
-                    {' '}
-                    Независимо
-                  </span>{' '}
-                </div>
-              ) : null,
-            )
+      <InDependently
+        dayItem={dayItem}
+        halfHourItem={halfHourItem}
+        firstMealWeekdays={firstMealWeekdays}
+        betweenMealsWeekdays={betweenMealsWeekdays}
+        firstMealWeekend={firstMealWeekend}
+        betweenMealsWeekend={betweenMealsWeekend}
+        med={med}
+      />
     );
   }
 };

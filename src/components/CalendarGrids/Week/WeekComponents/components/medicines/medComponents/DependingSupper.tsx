@@ -1,44 +1,44 @@
-//! Приём Лекарств зависит ПЕРВОГО приёма пищи (до/вовремя/после)
-// case: 'first breakfast'    ---  takingMedications[0].action: waysUsing[1]
+//! Приём Лекарств зависит ПОСЛЕДНЕГО приёма пищи (до/вовремя/после)
+// case: 'last supper'    ---  takingMedications[0].action: waysUsing[2]
 import { Moment } from 'moment';
 import { FC } from 'react';
-import { RiMedicineBottleLine } from 'react-icons/ri';
 import { ITakingMedication } from '../../../../../../../data/localDataBase/LocalDB_WaysUsing';
+import { RiMedicineBottleLine } from 'react-icons/ri';
 
 interface IProps {
   dayItem: Moment;
   halfHourItem: Moment;
-  firstMealWeekdays: Moment;
-  firstMealWeekend: Moment;
+  lastMealWeekdays: Moment;
+  lastMealWeekend: Moment;
   med: ITakingMedication | null;
 }
 
-const DependingBreakfast: FC<IProps> = ({
+const DependingSupper: FC<IProps> = ({
   dayItem,
   halfHourItem,
-  firstMealWeekdays,
-  firstMealWeekend,
+  lastMealWeekdays,
+  lastMealWeekend,
   med,
 }) => {
   // нужен .clone() - иначе add и subtract будут дублировать своё выполнение
-  firstMealWeekdays = firstMealWeekdays.clone();
-  firstMealWeekend = firstMealWeekend.clone();
+  lastMealWeekdays = lastMealWeekdays.clone();
+  lastMealWeekend = lastMealWeekend.clone();
 
   switch (
     med.position // до/вовремя/после
   ) {
-    case 'before': //! ДО завтрака
+    case 'before': //! ДО ужина
       return (
         // weekday
         dayItem.day() !== 6 && dayItem.day() !== 0
           ? halfHourItem.isSame(
-              firstMealWeekdays
+              lastMealWeekdays
                 .subtract(med.interval.minute(), 'minute')
                 .subtract(med.interval.hour(), 'hour'),
               'hour',
             ) &&
-              firstMealWeekdays.clone().minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:21 >= 0  and < 30
-              firstMealWeekdays.clone().minute() - halfHourItem.minute() <
+              lastMealWeekdays.clone().minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:21 >= 0  and < 30
+              lastMealWeekdays.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <>
                   <RiMedicineBottleLine
@@ -60,20 +60,19 @@ const DependingBreakfast: FC<IProps> = ({
                       top: '18px',
                     }}
                   >
-                    {med.interval.format('H:mm')} до завтрака
+                    {med.interval.format('H:mm')} до ужина
                   </span>
                 </>
               )
           : // weekend
             halfHourItem.isSame(
-              firstMealWeekend
+              lastMealWeekend
                 .subtract(med.interval.minute(), 'minute')
                 .subtract(med.interval.hour(), 'hour'),
               'hour',
             ) &&
-              firstMealWeekend.clone().minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:21 >= 0  and < 30
-              firstMealWeekend.clone().minute() - halfHourItem.minute() <
-                30 && (
+              lastMealWeekend.clone().minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:21 >= 0  and < 30
+              lastMealWeekend.clone().minute() - halfHourItem.minute() < 30 && (
                 <>
                   <RiMedicineBottleLine
                     style={{
@@ -94,19 +93,19 @@ const DependingBreakfast: FC<IProps> = ({
                       top: '18px',
                     }}
                   >
-                    {med.interval.format('H:mm')} до завтрака
+                    {med.interval.format('H:mm')} до ужина
                   </span>
                 </>
               )
       );
       break;
-    case 'while': //! ВОВРЕМЯ завтрака
+    case 'while': //! ВОВРЕМЯ ужина
       return (
         // weekday
         dayItem.day() !== 6 && dayItem.day() !== 0
-          ? halfHourItem.isSame(firstMealWeekdays, 'hour') &&
-              firstMealWeekdays.clone().minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:21 >= 0  and < 30
-              firstMealWeekdays.clone().minute() - halfHourItem.minute() <
+          ? halfHourItem.isSame(lastMealWeekdays, 'hour') &&
+              lastMealWeekdays.clone().minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:21 >= 0  and < 30
+              lastMealWeekdays.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <>
                   <RiMedicineBottleLine
@@ -126,15 +125,14 @@ const DependingBreakfast: FC<IProps> = ({
                       left: '16px',
                     }}
                   >
-                    Вовремя завтрака
+                    Вовремя ужина
                   </span>
                 </>
               )
           : // weekend
-            halfHourItem.isSame(firstMealWeekend, 'hour') &&
-              firstMealWeekend.clone().minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:21 >= 0  and < 30
-              firstMealWeekend.clone().minute() - halfHourItem.minute() <
-                30 && (
+            halfHourItem.isSame(lastMealWeekend, 'hour') &&
+              lastMealWeekend.clone().minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:21 >= 0  and < 30
+              lastMealWeekend.clone().minute() - halfHourItem.minute() < 30 && (
                 <>
                   <RiMedicineBottleLine
                     style={{
@@ -153,24 +151,24 @@ const DependingBreakfast: FC<IProps> = ({
                       left: '16px',
                     }}
                   >
-                    Вовремя завтрака
+                    Вовремя ужина
                   </span>
                 </>
               )
       );
       break;
-    case 'after': //! ПОСЛЕ завтрака
+    case 'after': //! ПОСЛЕ ужина
       return (
         // weekday
         dayItem.day() !== 6 && dayItem.day() !== 0
           ? halfHourItem.isSame(
-              firstMealWeekdays
+              lastMealWeekdays
                 .add(med.interval.minute(), 'minute')
                 .add(med.interval.hour(), 'hour'),
               'hour',
             ) &&
-              firstMealWeekdays.clone().minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:21 >= 0  and < 30
-              firstMealWeekdays.clone().minute() - halfHourItem.minute() <
+              lastMealWeekdays.clone().minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:21 >= 0  and < 30
+              lastMealWeekdays.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <>
                   <RiMedicineBottleLine
@@ -192,20 +190,19 @@ const DependingBreakfast: FC<IProps> = ({
                       top: '18px',
                     }}
                   >
-                    {med.interval.format('H:mm')} после завтрака
+                    {med.interval.format('H:mm')} после ужина
                   </span>
                 </>
               )
           : // weekend
             halfHourItem.isSame(
-              firstMealWeekend
+              lastMealWeekend
                 .add(med.interval.minute(), 'minute')
                 .add(med.interval.hour(), 'hour'),
               'hour',
             ) &&
-              firstMealWeekend.clone().minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:21 >= 0  and < 30
-              firstMealWeekend.clone().minute() - halfHourItem.minute() <
-                30 && (
+              lastMealWeekend.clone().minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:21 >= 0  and < 30
+              lastMealWeekend.clone().minute() - halfHourItem.minute() < 30 && (
                 <>
                   <RiMedicineBottleLine
                     style={{
@@ -226,7 +223,7 @@ const DependingBreakfast: FC<IProps> = ({
                       top: '18px',
                     }}
                   >
-                    {med.interval.format('H:mm')} после завтрака
+                    {med.interval.format('H:mm')} после ужина
                   </span>
                 </>
               )
@@ -238,4 +235,4 @@ const DependingBreakfast: FC<IProps> = ({
   }
 };
 
-export default DependingBreakfast;
+export default DependingSupper;

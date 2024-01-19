@@ -7,6 +7,7 @@ import mealSchedule from '../../../../../../data/localDataBase/localDB_MealSched
 import { RiMedicineBottleLine } from 'react-icons/ri';
 import { ITakingMedication } from '../../../../../../data/localDataBase/LocalDB_WaysUsing';
 import DependingEating from './medComponents/DependingEating';
+import DependingBreakfast from './medComponents/DependingBreakfast';
 
 interface IProps {
   dayItem: Moment;
@@ -51,229 +52,17 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
 
       // ---------------------------------
       case 'first breakfast': //============================= от первого завтрака
-        switch (
-          med.position // до/вовремя/после
-        ) {
-          case 'before': //! ДО завтрака
-            return (
-              // weekday
-              dayItem.day() !== 6 && dayItem.day() !== 0
-                ? halfHourItem.isSame(
-                    firstMealWeekdays
-                      .subtract(med.interval.minute(), 'minute')
-                      .subtract(med.interval.hour(), 'hour'),
-                    'hour',
-                  ) &&
-                    firstMealWeekdays.clone().minute() -
-                      halfHourItem.minute() >=
-                      0 && // 22:30 - 22:21 >= 0  and < 30
-                    firstMealWeekdays.clone().minute() - halfHourItem.minute() <
-                      30 && (
-                      <>
-                        <RiMedicineBottleLine
-                          style={{
-                            color: 'red',
-                            position: 'absolute',
-                            float: 'left',
-                            left: '0',
-                            top: '18px',
-                          }}
-                        />
-                        <span
-                          style={{
-                            color: 'gray',
-                            fontSize: '14px',
-                            position: 'absolute',
-                            float: 'left',
-                            left: '16px',
-                            top: '18px',
-                          }}
-                        >
-                          {med.interval.format('H:mm')} до завтрака
-                        </span>
-                      </>
-                    )
-                : // weekend
-                  halfHourItem.isSame(
-                    firstMealWeekend
-                      .subtract(med.interval.minute(), 'minute')
-                      .subtract(med.interval.hour(), 'hour'),
-                    'hour',
-                  ) &&
-                    firstMealWeekend.clone().minute() - halfHourItem.minute() >=
-                      0 && // 22:30 - 22:21 >= 0  and < 30
-                    firstMealWeekend.clone().minute() - halfHourItem.minute() <
-                      30 && (
-                      <>
-                        <RiMedicineBottleLine
-                          style={{
-                            color: 'red',
-                            position: 'absolute',
-                            float: 'left',
-                            left: '0',
-                            top: '18px',
-                          }}
-                        />
-                        <span
-                          style={{
-                            color: 'gray',
-                            fontSize: '14px',
-                            position: 'absolute',
-                            float: 'left',
-                            left: '16px',
-                            top: '18px',
-                          }}
-                        >
-                          {med.interval.format('H:mm')} до завтрака
-                        </span>
-                      </>
-                    )
-            );
-            break;
-          case 'while': //! ВОВРЕМЯ завтрака
-            return (
-              // weekday
-              dayItem.day() !== 6 && dayItem.day() !== 0
-                ? halfHourItem.isSame(firstMealWeekdays, 'hour') &&
-                    firstMealWeekdays.clone().minute() -
-                      halfHourItem.minute() >=
-                      0 && // 22:30 - 22:21 >= 0  and < 30
-                    firstMealWeekdays.clone().minute() - halfHourItem.minute() <
-                      30 && (
-                      <>
-                        <RiMedicineBottleLine
-                          style={{
-                            color: 'red',
-                            position: 'absolute',
-                            float: 'left',
-                            left: '0',
-                          }}
-                        />
-                        <span
-                          style={{
-                            color: 'gray',
-                            fontSize: '14px',
-                            position: 'absolute',
-                            float: 'left',
-                            left: '16px',
-                          }}
-                        >
-                          Вовремя завтрака
-                        </span>
-                      </>
-                    )
-                : // weekend
-                  halfHourItem.isSame(firstMealWeekend, 'hour') &&
-                    firstMealWeekend.clone().minute() - halfHourItem.minute() >=
-                      0 && // 22:30 - 22:21 >= 0  and < 30
-                    firstMealWeekend.clone().minute() - halfHourItem.minute() <
-                      30 && (
-                      <>
-                        <RiMedicineBottleLine
-                          style={{
-                            color: 'red',
-                            position: 'absolute',
-                            float: 'left',
-                            left: '0',
-                          }}
-                        />
-                        <span
-                          style={{
-                            color: 'gray',
-                            fontSize: '14px',
-                            position: 'absolute',
-                            float: 'left',
-                            left: '16px',
-                          }}
-                        >
-                          Вовремя завтрака
-                        </span>
-                      </>
-                    )
-            );
-            break;
-          case 'after': //! ПОСЛЕ завтрака
-            return (
-              // weekday
-              dayItem.day() !== 6 && dayItem.day() !== 0
-                ? halfHourItem.isSame(
-                    firstMealWeekdays
-                      .add(med.interval.minute(), 'minute')
-                      .add(med.interval.hour(), 'hour'),
-                    'hour',
-                  ) &&
-                    firstMealWeekdays.clone().minute() -
-                      halfHourItem.minute() >=
-                      0 && // 22:30 - 22:21 >= 0  and < 30
-                    firstMealWeekdays.clone().minute() - halfHourItem.minute() <
-                      30 && (
-                      <>
-                        <RiMedicineBottleLine
-                          style={{
-                            color: 'red',
-                            position: 'absolute',
-                            float: 'left',
-                            left: '0',
-                            top: '18px',
-                          }}
-                        />
-                        <span
-                          style={{
-                            color: 'gray',
-                            fontSize: '14px',
-                            position: 'absolute',
-                            float: 'left',
-                            left: '16px',
-                            top: '18px',
-                          }}
-                        >
-                          {med.interval.format('H:mm')} после завтрака
-                        </span>
-                      </>
-                    )
-                : // weekend
-                  halfHourItem.isSame(
-                    firstMealWeekend
-                      .add(med.interval.minute(), 'minute')
-                      .add(med.interval.hour(), 'hour'),
-                    'hour',
-                  ) &&
-                    firstMealWeekend.clone().minute() - halfHourItem.minute() >=
-                      0 && // 22:30 - 22:21 >= 0  and < 30
-                    firstMealWeekend.clone().minute() - halfHourItem.minute() <
-                      30 && (
-                      <>
-                        <RiMedicineBottleLine
-                          style={{
-                            color: 'red',
-                            position: 'absolute',
-                            float: 'left',
-                            left: '0',
-                            top: '18px',
-                          }}
-                        />
-                        <span
-                          style={{
-                            color: 'gray',
-                            fontSize: '14px',
-                            position: 'absolute',
-                            float: 'left',
-                            left: '16px',
-                            top: '18px',
-                          }}
-                        >
-                          {med.interval.format('H:mm')} после завтрака
-                        </span>
-                      </>
-                    )
-            );
-            break;
+          return (
+            <DependingBreakfast
+              dayItem={dayItem}
+              halfHourItem={halfHourItem}
+              firstMealWeekdays={firstMealWeekdays}
+              firstMealWeekend={firstMealWeekend}
+              med={med}
+            />
+          )
 
-          default:
-            break;
-        }
         break;
-
       // ---------------------------------
       case 'last supper': //================================= от последнего ужина
         switch (

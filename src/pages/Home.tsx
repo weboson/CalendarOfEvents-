@@ -90,7 +90,7 @@ const Home: FC = () => {
             currentDate={currentDate || null}
           />
         ) : (
-          <YearGrid currentDate={currentDate} />
+            <YearGrid currentDate={currentDate} />
         )
       }
     </ShadowWrapper>

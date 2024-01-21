@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 export const DivWrapper = styled('div')`
   background-color: #2a282d;
-  height: 36px;
+  height: 37px;
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -25,7 +25,6 @@ const YearGrid: FC<IProps> = ({currentDate}) => {
   );
 
   return (
-    <>
       <GridWrapperYear>
         {ArrayMonths.map((monthItem, index) => (
           <WrapperMothCell
@@ -73,7 +72,6 @@ const YearGrid: FC<IProps> = ({currentDate}) => {
           </WrapperMothCell>
         ))}
       </GridWrapperYear>
-    </>
   );
 };
 

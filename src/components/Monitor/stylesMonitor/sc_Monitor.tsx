@@ -18,7 +18,7 @@ export const DivWrapper = styled('div')`
     justify-content: space-between;
     background-color: #1e1f21;
     color: #DCDDDD;
-    padding: 16px;
+    padding: 15px;
 `
 
 export const TextWrapper = styled('span')`

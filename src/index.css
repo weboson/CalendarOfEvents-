@@ -27,3 +27,13 @@ code {
     align-items: center;
     justify-content: center;
 }
+
+
+/* скрывается (скролл вниз) или появляется (скролл вверх) menu (Header.tsx)  */
+.header_display {
+    position: sticky; /* or fixed */
+    top: 0px;
+    z-index: 10;
+    color: red;
+}
+

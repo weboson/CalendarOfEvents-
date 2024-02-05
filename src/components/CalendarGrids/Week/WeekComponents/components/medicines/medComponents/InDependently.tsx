@@ -1,3 +1,4 @@
+//! Вне зависимсоти от еды, сна и т.д.
 import { Moment } from 'moment';
 import { FC } from 'react';
 import { ITakingMedication } from '../../../../../../../data/localDataBase/LocalDB_WaysUsing';

@@ -59,7 +59,7 @@ const Home: FC = () => {
     );
   }, []);
 
-  const firstDayOfWeek = currentDate.clone().startOf('month').startOf('week'); // стартовывй день: 01.понедельник.2023
+  const firstDayOfWeek = currentDate.clone().startOf('month').startOf('week'); // стартовый день: 01.понедельник.2023
 
   const prevHandler = () => setToday((prev) => prev.clone().subtract(1, mode));
   const todayHandler = () => setToday(moment());

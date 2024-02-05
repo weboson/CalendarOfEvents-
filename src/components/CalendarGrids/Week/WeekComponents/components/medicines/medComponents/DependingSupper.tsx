@@ -1,4 +1,4 @@
-//! Приём Лекарств зависит ПОСЛЕДНЕГО приёма пищи (до/вовремя/после)
+//! Приём Лекарств зависит от ПОСЛЕДНЕГО приёма пищи (до/вовремя/после)
 // case: 'last supper'    ---  takingMedications[0].action: waysUsing[2]
 import { Moment } from 'moment';
 import { FC } from 'react';

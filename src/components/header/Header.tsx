@@ -30,7 +30,7 @@ const Headers: FC = () => {
   };
   console.log('rememo')
   return (
-    <>
+    <div id='header'> 
       <DivWrapper>
         {/* Заголовок */}
         <TitleCalendarWrapper>
@@ -66,7 +66,7 @@ const Headers: FC = () => {
           </FormRouterSearch>
         </SearchWrapper>
       </DivWrapper>
-    </>
+    </div>
   );
 };
 

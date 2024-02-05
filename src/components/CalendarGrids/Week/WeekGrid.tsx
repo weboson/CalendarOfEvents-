@@ -7,7 +7,6 @@ import {
   WrapperTopPanelAndContent,
   DayOfWeek,
   WrapperColumn,
-  FixedTopPanel,
 } from './stylesWeekGrid/sc_WeekGrid';
 import moment, { Moment } from 'moment';
 import GridDayWithHours from './WeekComponents/GridDayWithHours';
@@ -18,7 +17,7 @@ interface IProps {
 }
 
 const WeekGrid: FC<IProps> = ({ currentDate }) => {
-  // currentDate - это текущее врем, которое автоматически обновляется (useEffect) каждую минуту
+  // currentDate - это текущее врем, которое автоматически обновляется (useEffect) каждую минуту в Home.tsx
 
   // Days of week (top panel)
   const ArrayDays = [...new Array(7)].map(
@@ -37,7 +36,9 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
   useEffect(() => {
         //1 после события скроллинга пользователя - срабатывает сохраннение в sessionStorage(localStorage сохраняет даже после перезагрузки - нам это не нужно, на только после обновления)
         document.querySelector('#saveScroll')!.addEventListener('scroll', function() {
+          
           const currentScroll =  document.querySelector('#saveScroll')!.scrollTop.toString() // получили текущий сролл (to String)
+          
           sessionStorage.setItem('position', currentScroll) // сохранили в Storage
         });
 
@@ -48,8 +49,44 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
   , []);
  
 
+//! Если прокрутить Scroll Up, то появляется menu (Header.tsx)
+useEffect(() => { 
+
+  const onScrollHeader = () => { // объявляем основную функцию onScrollHeader
+
+    const header = document.querySelector('#header') // находим showScroll и записываем в константу
+
+    let prevScroll = window.scrollY // узнаем на сколько была прокручена страница ранее
+    let currentScroll // на сколько прокручена страница сейчас (пока нет значения)
+
+    window.addEventListener('scroll', () => { // при прокрутке страницы
+
+      currentScroll = window.scrollY // узнаем на сколько прокрутили страницу
+
+      
+
+      if (currentScroll > prevScroll) { // если прокручиваем страницу вниз и header скрыт
+        header.classList.remove('header_display') // то скрываем header
+        console.log("меню скрытo")
+      }
+      if (currentScroll < prevScroll) { // если прокручиваем страницу вверх и header не скрыт
+        header.classList.add('header_display') // то отображаем header
+        console.log("меню не скрыт")
+      }
+
+      prevScroll = currentScroll // записываем на сколько прокручена страница на данный момент
+
+    })
+
+  }
+
+  onScrollHeader() // вызываем основную функцию onScrollHeader
+
+}, [])
+
+
   return (
-    <GridWrapper id='saveScroll'>
+    <GridWrapper id='saveScroll' className='showScroll'>
       {/* Side Panel */}
       <WrapperSidePanel >
         {/* Title: "Day" */}

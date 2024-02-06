@@ -6,7 +6,7 @@ export const GridWrapper = styled.div`
   display: block;
   background-color: #1e1f21;
   max-height: 100%;
-  min-width: 100vw;
+  min-width: 100%; // 100vw заходит за окно
 `;
 // side panel block
 export const WrapperSidePanel = styled.div`
@@ -44,6 +44,7 @@ export const HourSidePanel = styled.div<IHourSidePanel>`
 // Wrapper Header
 export const WrapperTopPanelAndContent = styled.div`
   display: grid;
+  //flex-wrap: wrap; // хз - и без него робит
   grid-template-columns: repeat(7, 1fr);
 `;
 // Day of Week + Date + Column

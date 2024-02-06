@@ -31,9 +31,8 @@ code {
 
 /* скрывается (скролл вниз) или появляется (скролл вверх) menu (Header.tsx)  */
 .header_display {
-    position: sticky; /* or fixed */
+    position: sticky; /* or  sticky*/
     top: 0px;
-    z-index: 10;
-    color: red;
+    z-index: 4;
 }
 

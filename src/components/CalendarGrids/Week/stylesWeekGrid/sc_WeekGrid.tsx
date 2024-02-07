@@ -97,7 +97,6 @@ export const HourContent = styled.div<IHourContent>`
 // For Daily Regimes (стилизация иконок "GoSun" и "GoMoon")
 // GoSun 
 export const stylesSun = {
-  // color: '#f4fbab',
   color: '#565759',
   float: 'right',
   margin: '1px 1px 0 0',

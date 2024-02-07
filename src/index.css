@@ -29,10 +29,11 @@ code {
 }
 
 
-/* скрывается (скролл вниз) или появляется (скролл вверх) menu (Header.tsx)  */
+/* menu (Header.tsx) - скрывается (скролл вниз) или появляется (скролл вверх)   */
+/* важное условие родитель (Home.tsx) должен иметь "min-height: 100%", НО НЕ просто height: 100% И НЕ 100vh*/
 .header_display {
     position: sticky; /* or  sticky*/
-    top: 0px;
+    top: 0;
     z-index: 4;
 }
 

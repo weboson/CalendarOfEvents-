@@ -14,7 +14,7 @@ import DayGrid from '../components/CalendarGrids/Day/DayGrid';
 
 // sc-style
 const ShadowWrapper = styled('div')`
-  height: 100vh;
+  min-height: 100%;  // если просто height: 100% - то header поднимается только при видммом окне
   width: 100%;
   /* border: 1px solid #464648; // иначе появляется белая полоса слева при  скролле вниз */
   /* overflow: hidden; */

@@ -40,9 +40,9 @@ const Home: FC = () => {
     };
   }, []);
 
-  // auto scroll "week": grid hours
-  // если данный код у становить прямо в GridDayWithHours.tsx - то автоскролл каждый раз при переключении на Week
-  // в GridDayWithHours.tsx есть элемент с id=#autoScroll
+  // auto scroll "week" for id=#autoScroll: grid hours
+  // если данный код установить прямо в GridDayWithHours.tsx - то автоскролл каждый раз при переключении на Week
+  // в GridDayWithHours.tsx есть элемент с 
   useEffect(() => {
     setTimeout(
       () =>

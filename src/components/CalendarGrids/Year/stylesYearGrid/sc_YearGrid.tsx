@@ -1,6 +1,13 @@
 import styled from 'styled-components'; // библиотека, которая упрощает стилизацию компонентов (CSS with JS)
 
 
+// Main wrapper
+export const WrapperYear = styled.div`
+  height: 88.5vh;
+  width: 100%;
+  background-color: #1e1f21;
+`
+
 export interface IGridWrapperYearProps {
 }
 
@@ -10,8 +17,8 @@ export const GridWrapperYear = styled.div<IGridWrapperYearProps>`
   justify-items: center;
   background-color: #1e1f21;
   grid-template-columns: repeat(4, 1fr); 
-  grid-column-gap: 10px;
-  grid-row-gap: 10px;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
   align-items: start;
   border-bottom: 5px solid '#1e1f21';
   padding: 20px;
@@ -54,13 +61,14 @@ export const СellMonths = styled.div`
 export const WrapperWeek = styled.div`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+  padding-bottom: 10px;
   justify-items: center;
   /* padding-top: 5px; */
   padding-left: 1px;
-  width: 280px;
+  width: 320px;
 `
 export const CellWeek = styled.div`
-  font-size: 12px;
+  font-size: 16px;
   align-items: end;
   color: #565759;
 `
@@ -80,7 +88,7 @@ interface ICellDayProps  {
 
 export const CellDay = styled.div<ICellDayProps>`
   text-align: center;
-  /* grid-gap: 1px; */
+  font-size: 18px;
   background-color: #1e1f21;
   ${(props => (
     (props.$isWeekend) ? 'color: #212121' : 

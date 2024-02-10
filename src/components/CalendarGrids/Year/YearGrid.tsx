@@ -7,6 +7,7 @@ import {
   MothTitle,
   WrapperMothCell,
   WrapperWeek,
+  WrapperYear,
   СellMonths,
 } from './stylesYearGrid/sc_YearGrid';
 
@@ -25,6 +26,7 @@ const YearGrid: FC<IProps> = ({currentDate}) => {
   );
 
   return (
+    <WrapperYear>
       <GridWrapperYear>
         {ArrayMonths.map((monthItem, index) => (
           <WrapperMothCell
@@ -46,7 +48,7 @@ const YearGrid: FC<IProps> = ({currentDate}) => {
 
             <СellMonths key={index + 3}>
               {[...new Array(42)].map((_, i) => { 
-                // сохраню хоть что-то в перменную, чтобы не дублировать код
+                // сохраню хоть что-то в переменную, чтобы не дублировать код
                 const iDay = monthItem
                 .clone()
                 .startOf('month')
@@ -72,6 +74,7 @@ const YearGrid: FC<IProps> = ({currentDate}) => {
           </WrapperMothCell>
         ))}
       </GridWrapperYear>
+    </WrapperYear>
   );
 };
 

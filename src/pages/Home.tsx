@@ -14,11 +14,11 @@ import DayGrid from '../components/CalendarGrids/Day/DayGrid';
 
 // sc-style
 const ShadowWrapper = styled('div')`
-  min-height: 100hv;  // если просто height: 100% - то header поднимается только при видимом окне
+  height: 600px;  //! если просто height: 100% - то header поднимается только при видимом окне
   width: 100%;
   /* border: 1px solid #464648; // иначе появляется белая полоса слева при  скролле вниз */
   /* overflow: hidden; */
-  box-shadow: 0 0 0 1px #1a1a1a, 0 8px 20px 6px #888;
+  /* box-shadow: 0 0 0 1px #1a1a1a, 0 8px 20px 6px #888; // тень */
 `;
 
 const Home: FC = () => {

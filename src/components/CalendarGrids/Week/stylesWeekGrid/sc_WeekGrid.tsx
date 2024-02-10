@@ -5,8 +5,22 @@ import styled from 'styled-components';
 export const GridWrapper = styled.div`
   display: block;
   background-color: #1e1f21;
-  min-width: 100vw;
-
+  min-width: 100%;
+  height: 87.3vh; //! чтобы скролл window не появляся
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    // style scroll
+    width: 18px;
+  } /* ширина scrollbar */
+  &::-webkit-scrollbar-track {
+    background: #e6e6e6;
+    /* border-radius: 20px;  */
+  } /* цвет дорожки */
+  &::-webkit-scrollbar-thumb {
+    background-color: #565759; /* цвет плашки */
+    border-radius: 0px 0px 9px 0; /* закругления плашки */
+    border: 1px solid #e6e6e6;
+  } /* padding вокруг плашки */
 `;
 // side panel block
 export const WrapperSidePanel = styled.div`

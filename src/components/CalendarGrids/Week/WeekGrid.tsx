@@ -51,39 +51,39 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
 
 //! Display/Hidden header 
 // Если прокрутить Scroll Up, то появляется menu (Header.tsx)
-useEffect(() => { 
+// useEffect(() => { 
 
-  const onScrollHeader = () => { // объявляем основную функцию onScrollHeader
+//   const onScrollHeader = () => { // объявляем основную функцию onScrollHeader
 
-    const header = document.querySelector('#header') // находим header и записываем в константу
+//     const header = document.querySelector('#header') // находим header и записываем в константу
 
-    let prevScroll = window.scrollY // узнаем на сколько была прокручена страница ранее
-    let currentScroll // на сколько прокручена страница сейчас (пока нет значения)
+//     let prevScroll = window.scrollY // узнаем на сколько была прокручена страница ранее
+//     let currentScroll // на сколько прокручена страница сейчас (пока нет значения)
 
-    window.addEventListener('scroll', () => { // при прокрутке страницы
+//     window.addEventListener('scroll', () => { // при прокрутке страницы
 
-      currentScroll = window.scrollY // узнаем на сколько прокрутили страницу
+//       currentScroll = window.scrollY // узнаем на сколько прокрутили страницу
 
       
 
-      if (currentScroll > prevScroll) { // если прокручиваем страницу вниз и header скрыт
-        header.classList.remove('header_display') // то скрываем header
-        // console.log(`UP - prevScroll: ${prevScroll} и currentScroll: ${currentScroll}`)
-      }
-      if (currentScroll < prevScroll) { // если прокручиваем страницу вверх и header не скрыт
-        header.classList.add('header_display') // то отображаем header
-        // console.log(`UP - prevScroll: ${prevScroll} и currentScroll: ${currentScroll}`)
-      }
+//       if (currentScroll > prevScroll) { // если прокручиваем страницу вниз и header скрыт
+//         header.classList.remove('header_display') // то скрываем header
+//         // console.log(`UP - prevScroll: ${prevScroll} и currentScroll: ${currentScroll}`)
+//       }
+//       if (currentScroll < prevScroll) { // если прокручиваем страницу вверх и header не скрыт
+//         header.classList.add('header_display') // то отображаем header
+//         // console.log(`UP - prevScroll: ${prevScroll} и currentScroll: ${currentScroll}`)
+//       }
 
-      prevScroll = currentScroll // записываем на сколько прокручена страница на данный момент
+//       prevScroll = currentScroll // записываем на сколько прокручена страница на данный момент
 
-    })
+//     })
 
-  }
+//   }
 
-  onScrollHeader() // вызываем основную функцию onScrollHeader
+//   onScrollHeader() // вызываем основную функцию onScrollHeader
 
-}, [])
+// }, [])
 
 
   return (

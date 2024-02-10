@@ -33,28 +33,29 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
 
 //! Savind/Recovery Scroll position (сохраняет текущий скролл (в mode: Week), даже после перехода на другие компоненты - не нужно постоянно мотать до того места, где остановился)
  // Знак ! - в TS значит, что уверены, что объект не равен null или Uundefined
-  useEffect(() => {
-        //1 после события скроллинга пользователя - срабатывает сохраннение в sessionStorage(localStorage сохраняет даже после перезагрузки - нам это не нужно, на только после обновления)
-        document.querySelector('#saveScroll')!.addEventListener('scroll', function() {
-          
-          const currentScroll =  document.querySelector('#saveScroll')!.scrollTop.toString() // получили текущий сролл (to String)
-          
-          sessionStorage.setItem('position', currentScroll) // сохранили в Storage
-        });
+ useEffect(() => {
+  //1 после события скроллинга пользователя - срабатывает сохраннение в sessionStorage(localStorage сохраняет даже после перезагрузки - нам это не нужно, на только после обновления)
+  document.querySelector('#saveScroll')!.addEventListener('scroll', function() {
+    const currentScroll =  document.querySelector('#saveScroll')!.scrollTop.toString() // получили текущий сролл (to String)
+    sessionStorage.setItem('position', currentScroll) // сохранили в Storage
+  });
 
-        //2  получаем значение свойств scrollTop и используем его, чтобы скроллить на эту позицию
-        // console.log(sessionStorage.getItem('position'))
-        document.querySelector('#saveScroll')!.scrollTo(0, +sessionStorage.getItem('position')!) // Знак ! - в TS значит, что уверены, что объект не равен null или Uundefined
-        }
-  , []);
+  //2  получаем значение свойств scrollTop и используем его, чтобы скроллить на эту позицию
+  // console.log(sessionStorage.getItem('position'))
+  document.querySelector('#saveScroll')!.scrollTo(0, +sessionStorage.getItem('position')!) // Знак ! - в TS значит, что уверены, что объект не равен null или Uundefined
+  }
+, []);
  
 
-//! Если прокрутить Scroll Up, то появляется menu (Header.tsx)
+
+
+//! Display/Hidden header 
+// Если прокрутить Scroll Up, то появляется menu (Header.tsx)
 useEffect(() => { 
 
   const onScrollHeader = () => { // объявляем основную функцию onScrollHeader
 
-    const header = document.querySelector('#header') // находим showScroll и записываем в константу
+    const header = document.querySelector('#header') // находим header и записываем в константу
 
     let prevScroll = window.scrollY // узнаем на сколько была прокручена страница ранее
     let currentScroll // на сколько прокручена страница сейчас (пока нет значения)
@@ -67,11 +68,11 @@ useEffect(() => {
 
       if (currentScroll > prevScroll) { // если прокручиваем страницу вниз и header скрыт
         header.classList.remove('header_display') // то скрываем header
-        console.log("меню скрытo")
+        // console.log(`UP - prevScroll: ${prevScroll} и currentScroll: ${currentScroll}`)
       }
       if (currentScroll < prevScroll) { // если прокручиваем страницу вверх и header не скрыт
         header.classList.add('header_display') // то отображаем header
-        console.log("меню не скрыт")
+        // console.log(`UP - prevScroll: ${prevScroll} и currentScroll: ${currentScroll}`)
       }
 
       prevScroll = currentScroll // записываем на сколько прокручена страница на данный момент
@@ -86,7 +87,7 @@ useEffect(() => {
 
 
   return (
-    <GridWrapper id='saveScroll' className='showScroll'>
+    <GridWrapper id='saveScroll'>
       {/* Side Panel */}
       <WrapperSidePanel >
         {/* Title: "Day" */}

@@ -16,6 +16,7 @@ interface IProps {
   dayItem: Moment;
 }
 
+
 const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
   // 48 Half Hours  (content), exemple: 0:00, 0:30, 1:00
   const ArrayHalfHoursContent = [...new Array(48)].map((_, i) =>

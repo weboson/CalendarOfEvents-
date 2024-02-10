@@ -22,7 +22,7 @@ code {
 }
 
 #root {
-    height: 100vh;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -32,8 +32,12 @@ code {
 /* menu (Header.tsx) - скрывается (скролл вниз) или появляется (скролл вверх)   */
 /* важное условие родитель (Home.tsx) должен иметь "min-height: 100%", НО НЕ просто height: 100% И НЕ 100vh*/
 .header_display {
+    /* transition - для анимации */
+    transition: transform 400ms ease;
+    /* transform: translateY(-100%); */
+    animation-duration: 500ms;
     position: sticky; /* or  sticky*/
     top: 0;
-    z-index: 4;
+    z-index: 2;
 }
 

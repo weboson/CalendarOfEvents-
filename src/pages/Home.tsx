@@ -14,7 +14,7 @@ import DayGrid from '../components/CalendarGrids/Day/DayGrid';
 
 // sc-style
 const ShadowWrapper = styled('div')`
-  min-height: 100%;  // если просто height: 100% - то header поднимается только при видммом окне
+  min-height: 100hv;  // если просто height: 100% - то header поднимается только при видимом окне
   width: 100%;
   /* border: 1px solid #464648; // иначе появляется белая полоса слева при  скролле вниз */
   /* overflow: hidden; */
@@ -67,7 +67,7 @@ const Home: FC = () => {
 
   // выбранный режим меню (day, week, month, year)
   const indexMenu = useAppSelector((state) => state.menu); // из Readux-toolkit
-
+  
   return (
     <ShadowWrapper>
       <Header />

@@ -5,8 +5,8 @@ import styled from 'styled-components';
 export const GridWrapper = styled.div`
   display: block;
   background-color: #1e1f21;
-  max-height: 100%;
-  min-width: 100%; // 100vw заходит за окно
+  min-width: 100vw;
+
 `;
 // side panel block
 export const WrapperSidePanel = styled.div`

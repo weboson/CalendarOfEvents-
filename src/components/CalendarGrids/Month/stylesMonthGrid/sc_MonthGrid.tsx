@@ -8,13 +8,13 @@ export interface IGridWrapperProps {
 
 // Wrapper main
 export const MonthWrapper = styled.div`
-  min-height: 694px;
+  min-height: 100%;
 `
 
 // for Cell
 export const GridWrapper = styled.div<IGridWrapperProps>`
   display: grid;
-  min-width: 1210px;
+  width: 100%;
   grid-template-columns: repeat(
     7,
     1fr
@@ -36,7 +36,7 @@ export interface ICellWrapperProps {
 
 export const CellWrapper = styled.div<ICellWrapperProps>`
   min-width: 120px;
-  min-height: ${(props) => (props.$isHeader ? 24 : 110)}px;
+  min-height: ${(props) => (props.$isHeader ? 24 : 135.5)}px;
   background-color: ${(props) => (props.$isWeekend ? '#272829' : '#1e1f21')};
 /*если выбранный месяц И еще выходной = такой цвет :
   если просто выбранный месяц то = такой цвет 

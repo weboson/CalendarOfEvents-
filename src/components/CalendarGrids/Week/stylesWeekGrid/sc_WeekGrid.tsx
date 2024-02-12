@@ -121,6 +121,7 @@ export const stylesMoon = {
   float: 'right',
   margin: '1px 1px 0 0',
 }
+
 // For Diet (Стилизация иконки "food")
 export const stylesFood = {
   // color: '#4fa2d5',
@@ -132,3 +133,45 @@ export const stylesFood = {
   margin: '0px 3px 3px 0px',
   // fontSize: '18px',
 }
+
+//! для всплывающей подсказки (html атрибут data-title)
+export const FoodTooltip = styled.span`
+  	&::before {
+		position: absolute;
+		z-index: 9;
+		top: 100%;
+		left: 100%;
+		/* margin: -10px 0 0 -20px; */
+		padding: 5px 10px;
+		background: #E6E6E6;
+    color: #565759;
+    font-weight: bold;
+    border-radius: 10%;
+		content: attr(data-title);
+		transition: .2s ease;
+		transition-property: opacity, visibility;
+		opacity: 0;
+		/* visibility: hidden; */
+		/* pointer-events: none; */
+
+    //* 10s в начале будет показан (для отладки)
+		animation: showTitles 0s linear; 
+		@keyframes showTitles {
+			0%, 90% {
+				visibility: visible;
+				opacity: 1;
+			}	
+			100% {
+				visibility: hidden;
+				opacity: 0;
+			}
+		}
+	// *******************************************
+  }	
+	&:hover {
+		&::before {
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+`

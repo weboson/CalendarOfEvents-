@@ -41,7 +41,7 @@ const DependingBreakfast: FC<IProps> = ({
               firstMealWeekdays.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <>
-                  <RiMedicineBottleLine
+                  <RiMedicineBottleLine 
                     style={{
                       color: 'red',
                       position: 'absolute',
@@ -58,6 +58,7 @@ const DependingBreakfast: FC<IProps> = ({
                       float: 'left',
                       left: '16px',
                       top: '18px',
+                      cursor: 'pointer',
                     }}
                   >
                     {med.interval.format('H:mm')} до завтрака

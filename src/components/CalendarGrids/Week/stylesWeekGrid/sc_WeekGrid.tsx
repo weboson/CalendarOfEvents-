@@ -6,7 +6,7 @@ export const GridWrapper = styled.div`
   display: block;
   background-color: #1e1f21;
   min-width: 100%;
-  height: 88.5vh; //! чтобы скролл window не появляся
+  height: 89.7vh; //! чтобы скролл window не появляся
   overflow-y: scroll;
   &::-webkit-scrollbar {
     // style scroll
@@ -140,7 +140,7 @@ export const FoodTooltip = styled.span`
 		position: absolute;
 		z-index: 9;
 		top: 100%;
-		left: 100%;
+		right: 0%;
 		/* margin: -10px 0 0 -20px; */
 		padding: 5px 10px;
 		background: #E6E6E6;

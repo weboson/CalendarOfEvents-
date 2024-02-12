@@ -61,6 +61,7 @@ const DependingBreakfast: FC<IProps> = ({
                       cursor: 'pointer',
                     }}
                   >
+                    {/* вариант с названием ЛС {`${med.interval.format('H:mm')} ${med?.title}`} */}
                     {med.interval.format('H:mm')} до завтрака
                   </span>
                 </>

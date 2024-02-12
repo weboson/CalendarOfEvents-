@@ -3,8 +3,6 @@ import { Moment } from 'moment';
 import { FC } from 'react';
 // данные графика питания: first and last eating
 import mealSchedule from '../../../../../../data/localDataBase/localDB_MealSchedule';
-// иконка
-import { RiMedicineBottleLine } from 'react-icons/ri';
 import { ITakingMedication } from '../../../../../../data/localDataBase/LocalDB_WaysUsing';
 import DependingEating from './medComponents/DependingEating';
 import DependingBreakfast from './medComponents/DependingBreakfast';

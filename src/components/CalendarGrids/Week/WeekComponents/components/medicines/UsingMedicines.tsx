@@ -38,7 +38,7 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
       case 'eating': // =====================================от еды
         //* до, вовремя или после
         return (
-          <DependingEating
+            <DependingEating
             dayItem={dayItem}
             halfHourItem={halfHourItem}
             firstMealWeekdays={firstMealWeekdays}

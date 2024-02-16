@@ -4,6 +4,9 @@ import { Moment } from 'moment';
 import { FC } from 'react';
 import { RiMedicineBottleLine } from 'react-icons/ri';
 import { ITakingMedication } from '../../../../../../../data/localDataBase/LocalDB_WaysUsing';
+import MyPopup from '../../../../../../myPopup/MyPopup';
+// обработчик поведения myPopup при наведения на элемент
+import { hoverMouseOnMedicine } from '../../../../../../../service/handler_forPopup'
 
 interface IProps {
   dayItem: Moment;
@@ -45,9 +48,15 @@ const DependingEating: FC<IProps> = ({
                 30 && (
                 <>
                   <RiMedicineBottleLine style={{ color: 'red' }} />
-                  <span style={{ color: 'gray', fontSize: '14px' }}>
+                  <span 
+                  //! события наведения и уходы мыши
+                    onMouseOver={(e) => hoverMouseOnMedicine(e)} 
+                    onMouseOut={(e) => hoverMouseOnMedicine(e)} style={{ color: 'gray', fontSize: '14px', cursor: "pointer", }}>
+                      
                     {med.interval.format('H:mm')} до еды
                   </span>
+                  {/* //! Popup - модальное окно-подсказка (блок находиться в самой таблице ( не в каждой ячейке), только он сдвинут вверх, и конечно скрыт*/}
+                  <MyPopup data={med}/>
                 </>
               )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
               [...new Array(med.quantity - 1)].map(

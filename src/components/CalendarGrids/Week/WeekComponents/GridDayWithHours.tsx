@@ -41,10 +41,9 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
 }); 
 // console.log(maxMealFood) // {... .quantity, }
 
-
   return (
     ArrayHalfHoursContent.map((halfHourItem, hourIndex) => (
-      <HourContent
+      <HourContent 
         key={hourIndex + 3}
         $currentHour={
           // Условие (порядок важен): при 4:02 маркировался 4:00, а при 4:32 маркировка только 4:30 (но не 4:00). То есть интервалы по *:30 мин.

@@ -9,7 +9,6 @@ import SpaceBetweenMeals from './components/SpaceBetweenMeals'; // график 
 import MealSchedule from './components/MealSchedule';
 import UsingMedicines from './components/medicines/UsingMedicines';
 import takingMedications from '../../../../data/localDataBase/LocalDB_WaysUsing';
-import MyModal from '../../../myModal/MyModal';
 
 // types
 interface IProps {
@@ -70,9 +69,6 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
         {takingMedications.map((medItem, index) => (
           <UsingMedicines key={index} dayItem={dayItem} halfHourItem={halfHourItem} med={medItem}/>
         ))}
-        
-        {/* модальное окно (блок находиться в ячейке, только он сдвинут вверх, и конечно скрыт*/}
-         {/* <MyModal/> */}
       </HourContent>
     ))
   )

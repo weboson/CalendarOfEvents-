@@ -10,6 +10,7 @@ import {
 } from './stylesWeekGrid/sc_WeekGrid';
 import moment, { Moment } from 'moment';
 import GridDayWithHours from './WeekComponents/GridDayWithHours';
+import MyPopup from '../../myPopup/MyPopup';
 
 
 interface IProps {
@@ -83,6 +84,9 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
           </WrapperColumn>
         ))}
       </WrapperTopPanelAndContent>
+              
+        {/*Popup - модальное окно-подсказка (блок находиться в самой таблице ( не в каждой ячейке), только он сдвинут вверх, и конечно скрыт*/}
+        <MyPopup/>
     </GridWrapper>
   );
 };

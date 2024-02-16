@@ -24,12 +24,30 @@ const DependingBreakfast: FC<IProps> = ({
   firstMealWeekdays = firstMealWeekdays.clone();
   firstMealWeekend = firstMealWeekend.clone();
 
-// ! пример для изучения event.target
+//! для события onMouseOver и onMouseOut
+// (еще в самом myPopup.tsx есть событие - чтобы popup не исчезал при наведение на самого popup)
   const hoverMouseOnMedicine = (e) => {
-    // console.log(e.clientX)
-    console.log(e.target)
-    // const element = document.querySelectorAll('#red');
-    e.target.innerHTML = '<div style="color:red">Modal window<div/>'
+    // console.log(e.target)
+    // console.log(`${e.clientX} ${e.clientY}`)
+    // console.log(e.type)
+    const top = e.clientY;
+    const left = e.clientX;
+    const cell = document.querySelector('#popup');
+    // если мышь наведена на элемент
+    if (e.type == 'mouseover') {
+
+      cell!.style.cssText += `
+       top: ${top}px;
+       left: ${left}px;
+       display: block;
+     `;
+    } else { // если мышь ушла с элемента (mouseout)
+      cell!.style.cssText += `
+      display: none;
+    `;
+    }
+
+   
     
   } 
 
@@ -61,7 +79,8 @@ const DependingBreakfast: FC<IProps> = ({
                   />
                   <span
                     id='red'
-                    onMouseMove={(e) => hoverMouseOnMedicine(e)}
+                    onMouseOver={(e) => hoverMouseOnMedicine(e)}
+                    onMouseOut={(e) => hoverMouseOnMedicine(e)}
                     style={{
                       color: 'gray',
                       fontSize: '14px',

@@ -24,6 +24,15 @@ const DependingBreakfast: FC<IProps> = ({
   firstMealWeekdays = firstMealWeekdays.clone();
   firstMealWeekend = firstMealWeekend.clone();
 
+// ! пример для изучения event.target
+  const hoverMouseOnMedicine = (e) => {
+    // console.log(e.clientX)
+    console.log(e.target)
+    // const element = document.querySelectorAll('#red');
+    e.target.innerHTML = '<div style="color:red">Modal window<div/>'
+    
+  } 
+
   switch (
     med.position // до/вовремя/после
   ) {
@@ -40,7 +49,7 @@ const DependingBreakfast: FC<IProps> = ({
               firstMealWeekdays.clone().minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:21 >= 0  and < 30
               firstMealWeekdays.clone().minute() - halfHourItem.minute() <
                 30 && (
-                <>
+                <div>
                   <RiMedicineBottleLine 
                     style={{
                       color: 'red',
@@ -51,6 +60,8 @@ const DependingBreakfast: FC<IProps> = ({
                     }}
                   />
                   <span
+                    id='red'
+                    onMouseMove={(e) => hoverMouseOnMedicine(e)}
                     style={{
                       color: 'gray',
                       fontSize: '14px',
@@ -61,10 +72,10 @@ const DependingBreakfast: FC<IProps> = ({
                       cursor: 'pointer',
                     }}
                   >
-                    {/* вариант с названием ЛС {`${med.interval.format('H:mm')} ${med?.title}`} */}
+                    {/*//! вариант с названием ЛС {`${med.interval.format('H:mm')} ${med?.title}`} */}
                     {med.interval.format('H:mm')} до завтрака
                   </span>
-                </>
+                </div>
               )
           : // weekend
             halfHourItem.isSame(

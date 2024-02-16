@@ -146,7 +146,7 @@ export const FoodTooltip = styled.span`
 		background: #E6E6E6;
     color: #565759;
     font-weight: bold;
-    border-radius: 10%;
+    /* border-radius: 0; */
 		content: attr(data-title);
 		transition: .2s ease;
 		transition-property: opacity, visibility;

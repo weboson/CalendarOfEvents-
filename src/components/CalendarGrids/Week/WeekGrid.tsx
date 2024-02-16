@@ -29,8 +29,6 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
     currentDate.hours(i)
   );
 
-
-
 //! Savind/Recovery Scroll position (сохраняет текущий скролл (в mode: Week), даже после перехода на другие компоненты - не нужно постоянно мотать до того места, где остановился)
  // Знак ! - в TS значит, что уверены, что объект не равен null или Uundefined
  useEffect(() => {
@@ -82,7 +80,6 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
 
             {/* Grid Day with Hours (Content) */}
             <GridDayWithHours currentDate={currentDate} dayItem={dayItem} />
-
           </WrapperColumn>
         ))}
       </WrapperTopPanelAndContent>

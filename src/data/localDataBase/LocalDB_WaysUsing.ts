@@ -118,7 +118,20 @@ interface ITakingMedications extends Array<ITakingMedication>{}
 const takingMedications: ITakingMedications = [
     {
         id: 5,
-        title: 'Урсосан',
+        title: 'Урсосан11111',
+        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        action: waysUsing[0], // 'eating' - приём пищи
+        quantity: 3, // 3 раза
+        unitTime: unitTime[0].type, // day -  в день
+        position: positionAction[0].oftime, // Используется константа(потом будет в Form) в массива 
+        interval: moment().hour(0).minute(30), // exm: спустя 45 минут после еды 
+        duration: moment().month(3), // продолжительность курса 3 месяца
+        
+        
+    },
+    {
+        id: 1,
+        title: 'Урсосан22222',
         depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0], // 'eating' - приём пищи
         quantity: 3, // 3 раза

@@ -18,6 +18,7 @@ interface IProps {
 }
 
 const WeekGrid: FC<IProps> = ({ currentDate }) => {
+
   // currentDate - это текущее врем, которое автоматически обновляется (useEffect) каждую минуту в Home.tsx
 
   // Days of week (top panel)
@@ -83,7 +84,9 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
             <GridDayWithHours currentDate={currentDate} dayItem={dayItem} />
           </WrapperColumn>
         ))}
+        
       </WrapperTopPanelAndContent>
+      <MyPopup />
     </GridWrapper>
   );
 };

@@ -2,19 +2,19 @@
 
 import styled from "styled-components";
 
-export const WrapperMyModal = styled('span')`
+export const WrapperMyModal = styled('div')`
     /* по-умолчанию */
-    display: none;
+    display: block; //! включать для отладки (и еще в src\service\handler_forPopup.tsx)
     position: fixed;
-    z-index: 3;
-    background-color: #E6E6E6;
-    color: #565759;
-    width:fit-content; // шириной в контент
+    z-index: 1;
+    background-color: #E6E6E6; 
+    color: #565759; 
+    width: fit-content; // шириной в контент
     height: 250px;// положение меняется в src\service\handler_forPopup.tsx
-    /* font-family: Roboto, serif; */
+    font-family: Roboto, serif;
     line-height: 1;
     padding: 10px;
-    border-radius: 2%;
+    border-radius: 2%; 
     @keyframes shows {
         from { opacity: 0;}
         to { opacity: 1; }
@@ -32,7 +32,7 @@ export const WrapperMyModal = styled('span')`
         font-weight: bold;
     }
 
-`;
+`; 
 
 // кнопка "изменить"
 export const MyButton = styled.button`

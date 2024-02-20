@@ -2,6 +2,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import menuReducer from './features/modesDateSlice'
 import selectedModeMonitorReducer from './features/selectedModeMonitorSlice'
+import popupDataReducer from './features/popupDataSlice'
 
 
 
@@ -11,6 +12,7 @@ export const store = configureStore({
   reducer: {
     menu: menuReducer,
     selectedModeMonitor: selectedModeMonitorReducer,
+    popupData: popupDataReducer,
   },
 })
 

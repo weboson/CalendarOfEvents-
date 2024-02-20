@@ -5,17 +5,17 @@ import mealSchedule from '../../../../../data/localDataBase/localDB_MealSchedule
 import { MdOutlineFastfood } from 'react-icons/md';
 import { Moment } from 'moment';
 import { stylesFood, FoodTooltip } from '../../stylesWeekGrid/sc_WeekGrid';
-import { ITakingMedication } from '../../../../../data/localDataBase/LocalDB_WaysUsing';
+import { ITakingMaxMealFoodication } from '../../../../../data/localDataBase/LocalDB_WaysUsing';
 
 
 
 interface IProps {
   dayItem: Moment
   halfHourItem: Moment
-  med: ITakingMedication 
+  maxmealfood: ITakingMaxMealFoodication 
 }
 
-const MealSchedule: FC<IProps> = ({ halfHourItem, dayItem, med }) => {
+const MealSchedule: FC<IProps> = ({ halfHourItem, dayItem, maxmealfood }) => {
 
 //* weekday
 // приёмы пищи:
@@ -30,7 +30,7 @@ const diffIntervalMealWeekdays = lastMealWeekdays.diff(firstMealWeekdays, 'secon
 //console.log(diffIntervalMealWeekdays) // 50400000
 // интервал времени / количество приёма ЛЕкарств                      
 // -1 потому что (в начале завтрак -1)
-const betweenMealsWeekdays = Math.floor(diffIntervalMealWeekdays / (med.quantity-1)) // 50400000(~14 ч) / 3-1раз/день = 3.5 часа - 
+const betweenMealsWeekdays = Math.floor(diffIntervalMealWeekdays / (maxmealfood.quantity-1)) // 50400000(~14 ч) / 3-1раз/день = 3.5 часа - 
 //console.log(betweenMealsWeekdays); // 3 (каждые три часа принимать пищу, так как принимать таблетку после еды)
 
 
@@ -40,12 +40,12 @@ const firstMealWeekend = mealSchedule[0].modeRegime.weekend.firstMeal.clone() //
 const lastMealWeekend = mealSchedule[0].modeRegime.weekend.lastMeal.clone()
 
 const diffIntervalMealWeekend = lastMealWeekend.diff(firstMealWeekend, 'seconds')
-const betweenMealsWeekend = (diffIntervalMealWeekend / (med.quantity-1)) 
+const betweenMealsWeekend = (diffIntervalMealWeekend / (maxmealfood.quantity-1)) 
 
 // ! создать отдельный файл (либо в беке либо во фронте) и передавать объектом
 
 
-if (med.depending) { // есть ли зависимость от еды?
+if (maxmealfood.depending) { // есть ли зависимость от еды?
   return (
     <>
       { // Оптимальный код(где важен порядок и сравнения), иначе при изменении минут в localDB_MealSchedule - могут пропасть приёмы пищи
@@ -61,7 +61,7 @@ if (med.depending) { // есть ли зависимость от еды?
               </FoodTooltip>)
           ) 
           || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
-          ([...new Array(med.quantity)].map((_, index) => (
+          ([...new Array(maxmealfood.quantity)].map((_, index) => (
             //ячейку.сравнить(время первого завтрака + (интервал времени, по секундам), сравнить по 'часам')
             (halfHourItem.isSame(firstMealWeekdays.add(betweenMealsWeekdays, 's'), 'hour')) && // схравнение по часу
             firstMealWeekdays.clone().add(betweenMealsWeekdays, 'm').minute() - halfHourItem.minute() >= 0 &&
@@ -84,7 +84,7 @@ if (med.depending) { // есть ли зависимость от еды?
             </FoodTooltip>)
           ) 
           || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
-          ([...new Array(med.quantity)].map((_, index) => (
+          ([...new Array(maxmealfood.quantity)].map((_, index) => (
             //ячейку.сравнить(время первого завтрака + (интервал времени, по секундам), сравнить по 'часам')
             (halfHourItem.isSame(firstMealWeekend.add(betweenMealsWeekend, 's'), 'hour')) &&  // схравнение по часу
             firstMealWeekend.clone().add(betweenMealsWeekend, 'm').minute() - halfHourItem.minute() >= 0 &&

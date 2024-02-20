@@ -12,23 +12,29 @@ import InDependently from './medComponents/InDependently';
 interface IProps {
   dayItem: Moment;
   halfHourItem: Moment;
-  med: ITakingMedication | null;
+  med: ITakingMedication;
 }
 
 const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
   // weekday
-  const firstMealWeekdays = mealSchedule[0].modeRegime.weekdays.firstMeal.clone(); // обз clone() иначе изменим исходник
+  const firstMealWeekdays =
+    mealSchedule[0].modeRegime.weekdays.firstMeal.clone(); // обз clone() иначе изменим исходник
   const lastMealWeekdays = mealSchedule[0].modeRegime.weekdays.lastMeal.clone();
 
-  const diffIntervalMealWeekdays = lastMealWeekdays.diff(firstMealWeekdays, 'seconds',); 
+  const diffIntervalMealWeekdays = lastMealWeekdays.diff(
+    firstMealWeekdays,
+    'seconds',
+  );
   const betweenMealsWeekdays = diffIntervalMealWeekdays / (med.quantity - 1);
 
   // weekend
   const firstMealWeekend = mealSchedule[0].modeRegime.weekend.firstMeal.clone(); // обз clone() иначе изменим исходник
   const lastMealWeekend = mealSchedule[0].modeRegime.weekend.lastMeal.clone();
-  const diffIntervalMealWeekend = lastMealWeekend.diff(firstMealWeekend,'seconds',);
+  const diffIntervalMealWeekend = lastMealWeekend.diff(
+    firstMealWeekend,
+    'seconds',
+  );
   const betweenMealsWeekend = diffIntervalMealWeekend / (med.quantity - 1);
-
 
   if (med.depending) {
     //==================================== есть ли зависимости от завтрака/ужина/еды/
@@ -39,41 +45,41 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
         //* до, вовремя или после
         return (
             <DependingEating
-            dayItem={dayItem}
-            halfHourItem={halfHourItem}
-            firstMealWeekdays={firstMealWeekdays}
-            betweenMealsWeekdays={betweenMealsWeekdays}
-            firstMealWeekend={firstMealWeekend}
-            betweenMealsWeekend={betweenMealsWeekend}
-            med={med}
-          />
+              dayItem={dayItem}
+              halfHourItem={halfHourItem}
+              firstMealWeekdays={firstMealWeekdays}
+              betweenMealsWeekdays={betweenMealsWeekdays}
+              firstMealWeekend={firstMealWeekend}
+              betweenMealsWeekend={betweenMealsWeekend}
+              med={med}
+            />
         );
         break;
 
       // ---------------------------------
       case 'first breakfast': //============================= от первого завтрака
-          return (
-            <DependingBreakfast
-              dayItem={dayItem}
-              halfHourItem={halfHourItem}
-              firstMealWeekdays={firstMealWeekdays}
-              firstMealWeekend={firstMealWeekend}
-              med={med}
-            />
-          )
+        return (
+          <DependingBreakfast
+            dayItem={dayItem}
+            halfHourItem={halfHourItem}
+            firstMealWeekdays={firstMealWeekdays}
+            firstMealWeekend={firstMealWeekend}
+            med={med}
+          />
+        );
 
         break;
       // ---------------------------------
       case 'last supper': //================================= от последнего ужина
-      return (
-        <DependingSupper
-          dayItem={dayItem}
-          halfHourItem={halfHourItem}
-          lastMealWeekdays={lastMealWeekdays}
-          lastMealWeekend={lastMealWeekend}
-          med={med}
-        />
-      )
+        return (
+          <DependingSupper
+            dayItem={dayItem}
+            halfHourItem={halfHourItem}
+            lastMealWeekdays={lastMealWeekdays}
+            lastMealWeekend={lastMealWeekend}
+            med={med}
+          />
+        );
         break;
 
       // ---------------------------------

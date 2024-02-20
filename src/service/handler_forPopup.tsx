@@ -7,7 +7,7 @@ export const hoverMouseOnMedicine = (e) => {
     const top = e.clientY;
     const left = e.clientX;
     const cell = document.querySelector('#popup');
-    
+    // setDataPopup({dataPopup})
     // если мышь наведена на элемент
     if (e.type == 'mouseover') {
       cell!.style.cssText += `
@@ -17,6 +17,10 @@ export const hoverMouseOnMedicine = (e) => {
      `;
     } else { // если мышь ушла с элемента (mouseout)
       cell!.style.cssText += `
-      display: none;`; // block - для отладки (еще в MyPopup.tsx)
+      display: block;`; // block - для отладки (еще в MyPopup.tsx)
     }    
   } 
+
+
+
+  

@@ -10,7 +10,7 @@ interface IProps {
   halfHourItem: Moment;
   firstMealWeekdays: Moment;
   firstMealWeekend: Moment;
-  med: ITakingMedication | null;
+  med: ITakingMedication;
 }
 
 const DependingBreakfast: FC<IProps> = ({
@@ -51,7 +51,8 @@ const DependingBreakfast: FC<IProps> = ({
                     }}
                   />
                   <span
-                    id='red'
+                    // onMouseOver={(e) => hoverMouseOnMedicine(e)} 
+                    // onMouseOut={(e) => hoverMouseOnMedicine(e)}
                     style={{
                       color: 'gray',
                       fontSize: '14px',

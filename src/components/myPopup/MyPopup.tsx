@@ -15,8 +15,8 @@ const MyPopup: FC = () => {
   // при наведении на само окно "popup" - popup не будет исчезать.
   const hoverMouseOnMyPopup = (e: React.MouseEvent) => {
     // element
-    // const popup = document.querySelector('#popup');
-    const popup = e.target;
+    const popup = document.querySelector('#popup');
+    // const popup = e.target;
     // если мышь наведена на popup
     if (e.type == 'mouseover') {
       popup!.style.cssText = `
@@ -24,7 +24,7 @@ const MyPopup: FC = () => {
     } else {
      // если мышь ушла с popup (mouseout)
       popup!.style.cssText = `
-            display: none;
+            display: block;
             animation: shows 1s;`; // для анимации + в стилях еще | display: block - для отладки
     }
   };

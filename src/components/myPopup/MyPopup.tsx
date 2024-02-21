@@ -43,7 +43,7 @@ const MyPopup: FC = () => {
             ? 'До '
             : medicine?.position == 'while'
             ? 'Вовремя '
-            : 'После ') + `[${medicine?.action.title}]`) : 
+            : 'После ') + `[${medicine?.action}]`) : 
             'Независимо'}</li>
         <li>        Количество:&nbsp;
           {medicine?.quantity} раза в [{medicine?.unitTime}]</li>

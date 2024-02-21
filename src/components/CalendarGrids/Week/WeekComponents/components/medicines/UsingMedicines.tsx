@@ -39,15 +39,6 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
   const betweenMealsWeekend = diffIntervalMealWeekend / (med.quantity - 1);
 
   //! Для Popup - окна
-  // для body, чтобы при клике за границей popup - popup closed
-  // document.body.addEventListener('click', (e)=> {
-  //   const popup = document.querySelector('#popup')
-  //   const withinBoundaries = e.composedPath().includes(popup);
-  //   if ( ! withinBoundaries ) {
-  //     document.querySelector('#popup')!.style.display = `none`
-  //   }
-      
-  //  })
   //Redux-toolkit - из hooks.tsx - для изменения данных
   const dispatch = useAppDispatch();
   // Обработчик onMouseOver и onMouseOut: при наведении мышью на ячейку с ЛС, появляется Popup - окно с подробным списком лекарств
@@ -77,7 +68,7 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
   if (med.depending) {
     //==================================== есть ли зависимости от завтрака/ужина/еды/
     //* если есть, то какая (еда, завтрак, ужин)?
-    switch (med.action.type) {
+    switch (med.action) {
       // ---------------------------------
       case 'eating': // =====================================от еды
         //* до, вовремя или после

@@ -1,5 +1,5 @@
 //! Приём Лекарств зависит от приёма пищи (до/вовремя/после)
-// case: Depending of Eating    ---  takingMedications[0].action: waysUsing[0]
+// case: Depending of Eating    ---  takingMedications[0].action: waysUsing[0].type
 import { Moment } from 'moment';
 import { FC } from 'react';
 import { RiMedicineBottleLine } from 'react-icons/ri';

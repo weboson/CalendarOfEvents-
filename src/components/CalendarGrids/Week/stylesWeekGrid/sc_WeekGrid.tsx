@@ -122,18 +122,6 @@ export const stylesMoon = {
   margin: '1px 1px 0 0',
 }
 
-// For Diet (Стилизация иконки "food")
-export const stylesFood = {
-  color: '#fffb00',
-  position: 'absolute',
-  right: '0',
-  bottom: '0',
-  margin: '0px 3px 3px 0px',
-  ':hover': {
-    color: '#ffffff'
-  }
-}
-
 
 //! для всплывающей подсказки (html атрибут data-title)
 export const FoodTooltip = styled.span`

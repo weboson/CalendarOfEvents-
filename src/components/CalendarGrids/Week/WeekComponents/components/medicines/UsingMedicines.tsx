@@ -54,9 +54,9 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
       // меняем данные (redux-toolkit)
       dispatch(readingPopupData(med.id)); // передаю только id лекарства, в popup буду find()
       line!.style.cssText += `
-      top: ${top-230}px;
-      left: ${left-10}px;
-      display: block;
+      top: ${top-350}px;
+      left: ${left-20}px;
+      display: flex;
       animation: show 1s forwards;`;
     } else {
       // если мышь ушла с элемента (mouseout)

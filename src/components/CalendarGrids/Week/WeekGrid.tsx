@@ -10,6 +10,7 @@ import {
 } from './stylesWeekGrid/sc_WeekGrid';
 import moment, { Moment } from 'moment';
 import GridDayWithHours from './WeekComponents/GridDayWithHours';
+import MyPopup from '../../myPopup/MyPopup';
 
 
 interface IProps {
@@ -83,7 +84,8 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
             <GridDayWithHours currentDate={currentDate} dayItem={dayItem} />
           </WrapperColumn>
         ))}
-        
+        {/* //! При наведении на лекарсвто - появляется Popup-окно с подробным описанием ЛС */}
+        <MyPopup />
       </WrapperTopPanelAndContent>
     </GridWrapper>
   );

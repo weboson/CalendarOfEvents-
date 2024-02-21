@@ -41,4 +41,6 @@ code {
     z-index: 2;
 }
 
-
+.span_active:hover {
+    color: red;
+}

@@ -16,10 +16,7 @@ export const WrapperMyModal = styled('div')`
     line-height: 1;
     padding: 10px;
     border-radius: 2%; 
-    @keyframes shows {
-        from { opacity: 0;}
-        to { opacity: 1; }
-    }
+    transition: "1s ease-in" 
     h6 {
         font-size: 20px;
         line-height: 0px;

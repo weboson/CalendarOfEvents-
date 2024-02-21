@@ -19,13 +19,13 @@ const MyPopup: FC = () => {
     // const popup = e.target;
     // если мышь наведена на popup
     if (e.type == 'mouseover') {
-      popup!.style.cssText = `
-             display: block;`;
+      popup!.style.cssText += `
+             display: block;
+             `;
     } else {
      // если мышь ушла с popup (mouseout)
-      popup!.style.cssText = `
-            display: block;
-            animation: shows 1s;`; // для анимации + в стилях еще | display: block - для отладки
+      popup!.style.cssText += `
+            display: none;`; // для анимации + в стилях еще | display: block - для отладки
     }
   };
   return (

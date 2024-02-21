@@ -44,18 +44,14 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
   const dispatch = useAppDispatch();
   // Обработчик onMouseOver и onMouseOut: при наведении мышью на ячейку с ЛС, появляется Popup - окно с подробным списком лекарств
   // (еще в самом myPopup.tsx есть событие - чтобы popup не исчезал при наведение на самого popup)
-  const hoverMouseOnMedicine = (event: React.MouseEvent) => {
-    // тип атриубта https://habr.com/ru/articles/783858/
-    // console.log(`${e.clientX} ${e.clientY}`)
-    // console.log(e.type)
+  const hoverMouseOnMedicine = (event: React.MouseEvent) => { // тип атриубта https://habr.com/ru/articles/783858/   
     const top = event.clientY;
     const left = event.clientX;
     // popup
     const line = document.querySelector('#popup');
     // span
-    // const target = event.target;
-    // const span = target.lastChild;
-
+    const span = event.target;
+    console.log(span)
     if (event.type == 'mouseover') {
       // если мышь наведена на элемент
       // меняем данные
@@ -63,16 +59,18 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
       line!.style.cssText = `
       top: ${top - 250}px;
       left: ${left}px;
-      display: block;`;
+      display: block;
+      transition: "1s ease-in" `;
+      // translate3d(${left}px, ${top}px, 0px)
       // стили самого span
-      //span!.style.color = "white";
+      span!.classList.add('span_active');
     } else {
       // если мышь ушла с элемента (mouseout)
       line!.style.cssText = `
-      display: none;`;
+      display: none;
+      transition: "1s ease-out" `;
       // стили самого span
-      //span!.style.cssText += `
-      //color: gray;`
+      // span!.style.color = "gray";
     }
   };
 
@@ -88,7 +86,7 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
             //! события наведения и уходы мыши
             onMouseOver={hoverMouseOnMedicine}
             onMouseOut={hoverMouseOnMedicine}
-            style={{ cursor: 'pointer', width: '100%' }}
+            style={{ cursor: 'pointer', width: '100%'}}
           >
             <DependingEating
               dayItem={dayItem}
@@ -99,8 +97,6 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
               betweenMealsWeekend={betweenMealsWeekend}
               med={med}
             />
-            {/* //! При наведении на ячейку - появляется Popup-окно с подробным списком ЛС */}
-            <MyPopup />
           </div>
         );
         break;
@@ -121,8 +117,6 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
               firstMealWeekend={firstMealWeekend}
               med={med}
             />
-            {/* //! При наведении на ячейку - появляется Popup-окно с подробным списком ЛС */}
-            <MyPopup />
           </div>
         );
 
@@ -143,8 +137,6 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
               lastMealWeekend={lastMealWeekend}
               med={med}
             />
-            {/* //! При наведении на ячейку - появляется Popup-окно с подробным списком ЛС */}
-            <MyPopup />
           </div>
         );
         break;
@@ -171,8 +163,6 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
           betweenMealsWeekend={betweenMealsWeekend}
           med={med}
         />
-        {/* //! При наведении на ячейку - появляется Popup-окно с подробным списком ЛС */}
-        <MyPopup />
       </div>
     );
   }

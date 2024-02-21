@@ -57,7 +57,7 @@ if (maxmealfood.depending) { // есть ли зависимость от еды
             firstMealWeekdays.minute() - halfHourItem.minute()   >= 0 && // 22:30 - 22:21 >= 0  and < 30
             firstMealWeekdays.minute() - halfHourItem.minute()  < 30 && 
              (<FoodTooltip data-title ='Приём пищи' key={1}>
-                <MdOutlineFastfood style={stylesFood}/>
+                <MdOutlineFastfood className="food"/>
               </FoodTooltip>)
           ) 
           || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
@@ -67,7 +67,7 @@ if (maxmealfood.depending) { // есть ли зависимость от еды
             firstMealWeekdays.clone().add(betweenMealsWeekdays, 'm').minute() - halfHourItem.minute() >= 0 &&
             firstMealWeekdays.clone().add(betweenMealsWeekdays, 'm').minute() - halfHourItem.minute() < 30  ? 
             (<FoodTooltip data-title ='Приём пищи' key={index+2}>
-              <MdOutlineFastfood style={stylesFood}/>
+              <MdOutlineFastfood className="food"/>
             </FoodTooltip>) : 
             null
           )))
@@ -80,7 +80,7 @@ if (maxmealfood.depending) { // есть ли зависимость от еды
             firstMealWeekend.minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:00 >= 0  and < 30
             firstMealWeekend.minute() - halfHourItem.minute() < 30 && 
             (<FoodTooltip data-title ='Приём пищи' key={22}>
-              <MdOutlineFastfood style={stylesFood}/>
+              <MdOutlineFastfood className="food"/>
             </FoodTooltip>)
           ) 
           || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
@@ -91,7 +91,7 @@ if (maxmealfood.depending) { // есть ли зависимость от еды
             firstMealWeekend.clone().add(betweenMealsWeekend, 'm').minute() - halfHourItem.minute() < 30 ? // схравнение по минуте 
 
             (<FoodTooltip data-title ='Приём пищи' key={index+22}>
-              <MdOutlineFastfood style={stylesFood}/>
+              <MdOutlineFastfood className="food"/>
             </FoodTooltip>) : 
             null
             )))

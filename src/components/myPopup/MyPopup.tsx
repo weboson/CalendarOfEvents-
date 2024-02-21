@@ -34,27 +34,20 @@ const MyPopup: FC = () => {
       id="popup"
       onMouseOver={hoverMouseOnMyPopup}
     > 
-      <h6>Схема приема препарата</h6>
-      <p>
-        Наименование: <span>"{medicine?.title}"</span>
-      </p>
-      <p>
-        Способ приёма:&nbsp;
-        <span>
-          {medicine?.position == 'before'
-            ? 'До'
+      <h6>Схема приема препарата: </h6>
+      <ul>
+        <li>Наименование: "{medicine?.title}"</li>
+        <li>Способ приёма:&nbsp;
+          {(medicine?.depending) ? 
+          ((medicine?.position == 'before'
+            ? 'До '
             : medicine?.position == 'while'
-            ? 'Вовремя'
-            : 'После'}
-          &nbsp; [{medicine?.action.title}]
-        </span>
-      </p>
-      <p>
-        Количество:&nbsp;
-        <span>
-          {medicine?.quantity} раза в [{medicine?.unitTime}]
-        </span>
-      </p> 
+            ? 'Вовремя '
+            : 'После ') + `[${medicine?.action.title}]`) : 
+            'Независимо'}</li>
+        <li>        Количество:&nbsp;
+          {medicine?.quantity} раза в [{medicine?.unitTime}]</li>
+      </ul>
       <MyButton>Изменить!</MyButton>
     </WrapperMyModal>
   );

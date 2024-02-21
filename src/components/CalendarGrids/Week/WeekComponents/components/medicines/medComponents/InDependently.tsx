@@ -40,10 +40,8 @@ const InDependently: FC<IProps> = ({
                 style={{
                   color: 'red',}}
               />
-              <span>
-                {' '}
-                Независимо
-              </span>{' '}<br/>
+              <span>Независимо
+              </span><br/>
             </div>
           )) ||
           [...new Array(med.quantity)].map((_, index) =>
@@ -64,9 +62,8 @@ const InDependently: FC<IProps> = ({
                     color: 'red',}}
                 />
                 <span>
-                  {' '}
                   Независимо
-                </span>{' '}<br/>
+                </span><br/>
               </div>
             ) : null,
           )
@@ -80,9 +77,8 @@ const InDependently: FC<IProps> = ({
                   color: 'red',}}
               />
               <span>
-                {' '}
                 Независимо
-              </span>{' '}<br/>
+              </span><br/>
             </div>
           )) ||
           [...new Array(med.quantity)].map((_, index) =>
@@ -103,9 +99,8 @@ const InDependently: FC<IProps> = ({
                     color: 'red',}}
                 />
                 <span>
-                  {' '}
                   Независимо
-                </span>{' '}<br/>
+                </span><br/>
               </div>
             ) : null,
           )

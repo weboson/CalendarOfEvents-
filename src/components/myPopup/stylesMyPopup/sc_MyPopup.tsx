@@ -23,22 +23,20 @@ export const WrapperMyModal = styled('div')`
         100% {opacity: 1;}
 }
     h6 {
-        font-size: 20px;
+        font-size: 28px;
         line-height: 0px;
         margin: 25px 0 25px 0;
     }
-    p {
-        font-size: 17px;
-        line-height: 1;
-    }
-    span {
-        font-weight: bold;
+    ul>li{
+        font-size: 20px;
+        line-height: 2;
     }
 
 `; 
 
 // кнопка "изменить"
 export const MyButton = styled.button`
+    cursor: pointer;
     border: unset;
     height: 40px;
     padding-right: 16px;
@@ -52,5 +50,5 @@ export const MyButton = styled.button`
     text-align: center;
     justify-content: center;
     margin: 0 auto;
-    transform: translate(+100%, +100%);
+    transform: translate(+100%, 0%);
 `

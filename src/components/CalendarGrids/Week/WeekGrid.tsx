@@ -85,6 +85,7 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
           </WrapperColumn>
         ))}
         {/* //! При наведении на лекарсвто - появляется Popup-окно с подробным описанием ЛС */}
+        {/* Обработчик в UsingMedicines.tsx */}
         <MyPopup />
       </WrapperTopPanelAndContent>
     </GridWrapper>

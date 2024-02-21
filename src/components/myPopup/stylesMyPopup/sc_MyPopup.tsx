@@ -6,6 +6,7 @@ export const WrapperMyModal = styled('div')`
     /* по-умолчанию */
     display: none; //! включать для отладки (и еще в src\service\handler_forPopup.tsx)
     position: fixed;
+    margin: 20px;
     z-index: 3; // выше top-panel дней недели
     background-color: #E6E6E6; 
     color: #565759; 
@@ -16,7 +17,7 @@ export const WrapperMyModal = styled('div')`
     line-height: 1;
     padding: 10px;
     border-radius: 2%; 
-    transition: "1s ease-in" 
+    transition: "1s ease-in"; 
     h6 {
         font-size: 20px;
         line-height: 0px;

@@ -20,11 +20,10 @@ const MyPopup: FC = () => {
     // если мышь наведена на popup
     if (e.type == 'mouseover') {
       popup!.style.cssText += `
-             display: block;
-             `;
+             display: block;`;
     } else {
      // если мышь ушла с popup (mouseout)
-      popup!.style.cssText += `
+      popup!.style.cssText = `
             display: none;`; // для анимации + в стилях еще | display: block - для отладки
     }
   };
@@ -32,7 +31,6 @@ const MyPopup: FC = () => {
     <WrapperMyModal
       id="popup"
       onMouseOver={hoverMouseOnMyPopup}
-      onMouseOut={hoverMouseOnMyPopup}
     > 
       <h6>Схема приема препарата</h6>
       <p>
@@ -54,7 +52,7 @@ const MyPopup: FC = () => {
         <span>
           {medicine?.quantity} раза в [{medicine?.unitTime}]
         </span>
-      </p>
+      </p> 
       <MyButton>Изменить!</MyButton>
     </WrapperMyModal>
   );

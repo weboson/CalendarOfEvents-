@@ -8,6 +8,7 @@ import SpaceBetweenMeals from './components/SpaceBetweenMeals'; // график 
 // import UsingMedicines from './components/medicines/UsingMedicines';
 import MealSchedule from './components/MealSchedule';
 import UsingMedicines from './components/medicines/UsingMedicines';
+// DataBase array
 import takingMedications from '../../../../data/localDataBase/LocalDB_WaysUsing';
 
 // types
@@ -31,7 +32,7 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
   // console.log(arr)
 
 
-//! выбираем самый большое число из всех элементов массива "takingMedications" у свойства "quantity"(количество приёмом ЛС): 7 раз/день: еда 
+// выбираем самый большое число из всех элементов массива "takingMedications" у свойства "quantity"(количество приёмом ЛС): 7 раз/день: еда 
  const maxMealFood = takingMedications.reduce(function(prev, current) {
   if (+current.quantity > +prev.quantity) {
       return current;
@@ -39,7 +40,6 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
       return prev;
   }
 }); 
-// console.log(maxMealFood) // {... .quantity, }
 
   return (
     ArrayHalfHoursContent.map((halfHourItem, hourIndex) => (

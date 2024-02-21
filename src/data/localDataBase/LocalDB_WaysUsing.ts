@@ -118,7 +118,7 @@ interface ITakingMedications extends Array<ITakingMedication>{}
 const takingMedications: ITakingMedications = [
     {
         id: 5,
-        title: 'Урсосан11111',
+        title: 'Урсосан',
         depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0], // 'eating' - приём пищи
         quantity: 3, // 3 раза
@@ -131,7 +131,7 @@ const takingMedications: ITakingMedications = [
     },
     {
         id: 1,
-        title: 'Урсосан22222',
+        title: 'Бифидокс',
         depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0], // 'eating' - приём пищи
         quantity: 3, // 3 раза

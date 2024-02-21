@@ -4,12 +4,13 @@ import styled from "styled-components";
 
 export const WrapperMyModal = styled('div')`
     /* по-умолчанию */
-    display: block; //! включать для отладки (и еще в src\service\handler_forPopup.tsx)
+    display: none; //! включать для отладки (и еще в src\service\handler_forPopup.tsx)
     position: fixed;
-    z-index: 1;
+    z-index: 3; // выше top-panel дней недели
     background-color: #E6E6E6; 
     color: #565759; 
-    width: fit-content; // шириной в контент
+    min-width: fit-content; // шириной в контент
+    width: 350px;
     height: 250px;// положение меняется в src\service\handler_forPopup.tsx
     font-family: Roboto, serif;
     line-height: 1;
@@ -42,7 +43,7 @@ export const MyButton = styled.button`
     padding-left: 16px;
     margin-bottom: 0px;
     font-weight: bold;
-    cursor: pointer;
+    /* cursor: pointer; */
     border-radius: 4px;
     background-color: #565759;
     color: #E6E6E6;

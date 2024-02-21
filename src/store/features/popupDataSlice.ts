@@ -1,10 +1,10 @@
 // redux-toolkit - Slice 
-// отображение данных в MyPopup.tsx
+//! отображение данных в MyPopup.tsx
 import { createSlice } from '@reduxjs/toolkit'
 import type { RootState } from '../store'
 
-//! данные текущего ЛС (по-умолчанию)
-const initialState: string  = 'Popup - значение по умолчанию';
+//! id лекарства, по которому (в popup) будет поиск (arr.find((arrItem) => arrItem.id == id)) по массиву лекарств
+const initialState: number   = 0 // по-умолчанию
 
 export const popupDataSlice = createSlice({
   name: 'popupData',

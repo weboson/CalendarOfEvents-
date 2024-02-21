@@ -10,9 +10,9 @@ import popupDataReducer from './features/popupDataSlice'
 
 export const store = configureStore({
   reducer: {
-    menu: menuReducer,
-    selectedModeMonitor: selectedModeMonitorReducer,
-    popupData: popupDataReducer,
+    menu: menuReducer, // режим меню
+    selectedModeMonitor: selectedModeMonitorReducer, // режим отображения заголовка (месяц, неделя и т.д.) шапки (Monitor) 
+    popupData: popupDataReducer, // содержание MyPopup.tsx
   },
 })
 

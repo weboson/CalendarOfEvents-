@@ -8,6 +8,9 @@ import DependingEating from './medComponents/DependingEating';
 import DependingBreakfast from './medComponents/DependingBreakfast';
 import DependingSupper from './medComponents/DependingSupper';
 import InDependently from './medComponents/InDependently';
+import { useAppDispatch } from '../../../../../../store/hooks';
+import { readingPopupData } from '../../../../../../store/features/popupDataSlice';
+import MyPopup from '../../../../../myPopup/MyPopup';
 
 interface IProps {
   dayItem: Moment;
@@ -36,6 +39,43 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
   );
   const betweenMealsWeekend = diffIntervalMealWeekend / (med.quantity - 1);
 
+  //! Для Popup - окна
+  //Redux-toolkit - из hooks.tsx - для изменения данных
+  const dispatch = useAppDispatch();
+  // Обработчик onMouseOver и onMouseOut: при наведении мышью на ячейку с ЛС, появляется Popup - окно с подробным списком лекарств
+  // (еще в самом myPopup.tsx есть событие - чтобы popup не исчезал при наведение на самого popup)
+  const hoverMouseOnMedicine = (event: React.MouseEvent) => {
+    // тип атриубта https://habr.com/ru/articles/783858/
+    // console.log(`${e.clientX} ${e.clientY}`)
+    // console.log(e.type)
+    const top = event.clientY;
+    const left = event.clientX;
+    // popup
+    const line = document.querySelector('#popup');
+    // span
+    // const target = event.target;
+    // const span = target.lastChild;
+
+    if (event.type == 'mouseover') {
+      // если мышь наведена на элемент
+      // меняем данные
+      dispatch(readingPopupData(med.id)); // передаю только id лекарства, в popup буду find()
+      line!.style.cssText = `
+      top: ${top - 250}px;
+      left: ${left}px;
+      display: block;`;
+      // стили самого span
+      //span!.style.color = "white";
+    } else {
+      // если мышь ушла с элемента (mouseout)
+      line!.style.cssText = `
+      display: none;`;
+      // стили самого span
+      //span!.style.cssText += `
+      //color: gray;`
+    }
+  };
+
   if (med.depending) {
     //==================================== есть ли зависимости от завтрака/ужина/еды/
     //* если есть, то какая (еда, завтрак, ужин)?
@@ -44,6 +84,12 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
       case 'eating': // =====================================от еды
         //* до, вовремя или после
         return (
+          <div
+            //! события наведения и уходы мыши
+            onMouseOver={hoverMouseOnMedicine}
+            onMouseOut={hoverMouseOnMedicine}
+            style={{ cursor: 'pointer', width: '100%' }}
+          >
             <DependingEating
               dayItem={dayItem}
               halfHourItem={halfHourItem}
@@ -53,32 +99,53 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
               betweenMealsWeekend={betweenMealsWeekend}
               med={med}
             />
+            {/* //! При наведении на ячейку - появляется Popup-окно с подробным списком ЛС */}
+            <MyPopup />
+          </div>
         );
         break;
 
       // ---------------------------------
       case 'first breakfast': //============================= от первого завтрака
         return (
-          <DependingBreakfast
-            dayItem={dayItem}
-            halfHourItem={halfHourItem}
-            firstMealWeekdays={firstMealWeekdays}
-            firstMealWeekend={firstMealWeekend}
-            med={med}
-          />
+          <div
+            //! события наведения и уходы мыши
+            onMouseOver={hoverMouseOnMedicine}
+            onMouseOut={hoverMouseOnMedicine}
+            style={{ cursor: 'pointer', width: '100%' }}
+          >
+            <DependingBreakfast
+              dayItem={dayItem}
+              halfHourItem={halfHourItem}
+              firstMealWeekdays={firstMealWeekdays}
+              firstMealWeekend={firstMealWeekend}
+              med={med}
+            />
+            {/* //! При наведении на ячейку - появляется Popup-окно с подробным списком ЛС */}
+            <MyPopup />
+          </div>
         );
 
         break;
       // ---------------------------------
       case 'last supper': //================================= от последнего ужина
         return (
-          <DependingSupper
-            dayItem={dayItem}
-            halfHourItem={halfHourItem}
-            lastMealWeekdays={lastMealWeekdays}
-            lastMealWeekend={lastMealWeekend}
-            med={med}
-          />
+          <div
+            //! события наведения и уходы мыши
+            onMouseOver={hoverMouseOnMedicine}
+            onMouseOut={hoverMouseOnMedicine}
+            style={{ cursor: 'pointer', width: '100%' }}
+          >
+            <DependingSupper
+              dayItem={dayItem}
+              halfHourItem={halfHourItem}
+              lastMealWeekdays={lastMealWeekdays}
+              lastMealWeekend={lastMealWeekend}
+              med={med}
+            />
+            {/* //! При наведении на ячейку - появляется Popup-окно с подробным списком ЛС */}
+            <MyPopup />
+          </div>
         );
         break;
 
@@ -89,15 +156,24 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
   } else {
     //======================================================= ВНЕ ЗАВИСИМОСТИ ОТ ЕДЫ
     return (
-      <InDependently
-        dayItem={dayItem}
-        halfHourItem={halfHourItem}
-        firstMealWeekdays={firstMealWeekdays}
-        betweenMealsWeekdays={betweenMealsWeekdays}
-        firstMealWeekend={firstMealWeekend}
-        betweenMealsWeekend={betweenMealsWeekend}
-        med={med}
-      />
+      <div
+        //! события наведения и уходы мыши
+        onMouseOver={hoverMouseOnMedicine}
+        onMouseOut={hoverMouseOnMedicine}
+        style={{ cursor: 'pointer', width: '100%' }}
+      >
+        <InDependently
+          dayItem={dayItem}
+          halfHourItem={halfHourItem}
+          firstMealWeekdays={firstMealWeekdays}
+          betweenMealsWeekdays={betweenMealsWeekdays}
+          firstMealWeekend={firstMealWeekend}
+          betweenMealsWeekend={betweenMealsWeekend}
+          med={med}
+        />
+        {/* //! При наведении на ячейку - появляется Popup-окно с подробным списком ЛС */}
+        <MyPopup />
+      </div>
     );
   }
 };

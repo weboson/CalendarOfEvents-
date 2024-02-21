@@ -41,6 +41,13 @@ code {
     z-index: 2;
 }
 
-.span_active:hover {
-    color: red;
+/* при наведении на лекарство меняет цвет */
+#saveScroll span {
+    cursor: help;
+    color: gray;
+    font-size: 14px;
+}
+
+#saveScroll span:hover {
+    color: white;
 }

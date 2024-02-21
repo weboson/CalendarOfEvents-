@@ -18,6 +18,10 @@ export const WrapperMyModal = styled('div')`
     padding: 10px;
     border-radius: 2%; 
     transition: "1s ease-in"; 
+    @keyframes show { // медленное появление + в обработчике 
+        0% {opacity: 0;}
+        100% {opacity: 1;}
+}
     h6 {
         font-size: 20px;
         line-height: 0px;

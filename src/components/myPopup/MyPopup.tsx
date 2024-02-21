@@ -20,7 +20,9 @@ const MyPopup: FC = () => {
     // если мышь наведена на popup
     if (e.type == 'mouseover') {
       popup!.style.cssText += `
-             display: block;`;
+             display: block;
+             opacity: 0;
+            animation: show 1s forwards;`;
     } else {
      // если мышь ушла с popup (mouseout)
       popup!.style.cssText = `

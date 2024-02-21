@@ -138,7 +138,7 @@ export const stylesFood = {
 export const FoodTooltip = styled.span`
   	&::before {
 		position: absolute;
-		z-index: 9;
+		z-index: 2;
 		top: 100%;
 		right: 0%;
 		/* margin: -10px 0 0 -20px; */
@@ -146,7 +146,6 @@ export const FoodTooltip = styled.span`
 		background: #E6E6E6;
     color: #565759;
     font-weight: bold;
-    /* border-radius: 0; */
 		content: attr(data-title);
 		transition: .2s ease;
 		transition-property: opacity, visibility;

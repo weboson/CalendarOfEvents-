@@ -45,12 +45,7 @@ const DependingEating: FC<IProps> = ({
                 30 && (
                 <>
                   <RiMedicineBottleLine style={{ color: 'red' }} />
-                  <span
-                    style={{
-                      color: 'gray',
-                      fontSize: '14px',
-                    }}
-                  >
+                  <span>
                     {med.interval.format('H:mm')} до еды
                   </span><br/>
                 </>
@@ -70,9 +65,9 @@ const DependingEating: FC<IProps> = ({
                         key={`before-${index}`}
                         style={{ color: 'red' }}
                       />
-                      <span style={{ color: 'gray', fontSize: '14px' }}>
+                      <span>
                         {med.interval.format('H:mm')} до еды
-                      </span>
+                      </span><br/>
                     </div>
                   ),
               )
@@ -88,7 +83,7 @@ const DependingEating: FC<IProps> = ({
                 30 && (
                 <div>
                   <RiMedicineBottleLine style={{ color: 'red' }} />
-                  <span style={{ color: 'gray', fontSize: '14px' }}>
+                  <span>
                     {med.interval.format('H:mm')} до еды
                   </span>
                 </div>
@@ -108,9 +103,9 @@ const DependingEating: FC<IProps> = ({
                         key={`before-${index}`}
                         style={{ color: 'red' }}
                       />
-                      <span style={{ color: 'gray', fontSize: '14px' }}>
+                      <span>
                         {med.interval.format('H:mm')} до еды
-                      </span>
+                      </span><br/>
                     </div>
                   ),
               )
@@ -128,9 +123,9 @@ const DependingEating: FC<IProps> = ({
                 30 && (
                 <div>
                   <RiMedicineBottleLine style={{ color: 'red' }} />
-                  <span style={{ color: 'gray', fontSize: '14px' }}>
+                  <span>
                     Вовремя еды
-                  </span>{' '}
+                  </span>{' '}<br/>
                 </div>
               )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
               [...new Array(med.quantity - 1)].map(
@@ -148,9 +143,9 @@ const DependingEating: FC<IProps> = ({
                         key={`while-${index}`}
                         style={{ color: 'red' }}
                       />
-                      <span style={{ color: 'gray', fontSize: '14px' }}>
+                      <span>
                         Вовремя еды
-                      </span>{' '}
+                      </span>{' '}<br/>
                     </div>
                   ),
               )
@@ -161,9 +156,9 @@ const DependingEating: FC<IProps> = ({
                 30 && (
                 <div>
                   <RiMedicineBottleLine style={{ color: 'red' }} />
-                  <span style={{ color: 'gray', fontSize: '14px' }}>
+                  <span>
                     Вовремя еды
-                  </span>{' '}
+                  </span>{' '}<br/>
                 </div>
               )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
               [...new Array(med.quantity - 1)].map(
@@ -181,12 +176,9 @@ const DependingEating: FC<IProps> = ({
                         key={`while-${index}`}
                         style={{ color: 'red' }}
                       />
-                      <span
-                        key={index + 4}
-                        style={{ color: 'gray', fontSize: '14px' }}
-                      >
+                      <span key={index + 4}>
                         Вовремя еды
-                      </span>{' '}
+                      </span>{' '}<br/>
                     </div>
                   ),
               )
@@ -208,9 +200,9 @@ const DependingEating: FC<IProps> = ({
                 30 && (
                 <div>
                   <RiMedicineBottleLine style={{ color: 'red' }} />
-                  <span style={{ color: 'gray', fontSize: '14px' }}>
+                  <span>
                     {med.interval.format('H:mm')} после еды
-                  </span>
+                  </span><br/>
                 </div>
               )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
               [...new Array(med.quantity - 1)].map(
@@ -228,9 +220,9 @@ const DependingEating: FC<IProps> = ({
                         key={`after-${index}`}
                         style={{ color: 'red' }}
                       />
-                      <span style={{ color: 'gray', fontSize: '14px' }}>
+                      <span>
                         {med.interval.format('H:mm')} после еды
-                      </span>
+                      </span><br/>
                     </div>
                   ),
               )
@@ -246,9 +238,9 @@ const DependingEating: FC<IProps> = ({
                 30 && (
                 <div>
                   <RiMedicineBottleLine style={{ color: 'red' }} />
-                  <span style={{ color: 'gray', fontSize: '14px' }}>
+                  <span>
                     {med.interval.format('H:mm')} после еды
-                  </span>
+                  </span><br/>
                 </div>
               )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
               [...new Array(med.quantity - 1)].map(
@@ -267,9 +259,7 @@ const DependingEating: FC<IProps> = ({
                         style={{ color: 'red' }}
                       />
                       <span
-                        key={index + 4}
-                        style={{ color: 'gray', fontSize: '14px' }}
-                      >
+                        key={index + 4}>
                         {med.interval.format('H:mm')} после еды
                       </span>
                     </div>

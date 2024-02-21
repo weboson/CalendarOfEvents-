@@ -43,25 +43,11 @@ const DependingSupper: FC<IProps> = ({
                 <>
                   <RiMedicineBottleLine
                     style={{
-                      color: 'red',
-                      position: 'absolute',
-                      float: 'left',
-                      left: '0',
-                      top: '18px',
-                    }}
+                      color: 'red'}}
                   />
-                  <span
-                    style={{
-                      color: 'gray',
-                      fontSize: '14px',
-                      position: 'absolute',
-                      float: 'left',
-                      left: '16px',
-                      top: '18px',
-                    }}
-                  >
+                  <span>
                     {med.interval.format('H:mm')} до ужина
-                  </span>
+                  </span><br/>
                 </>
               )
           : // weekend
@@ -76,25 +62,11 @@ const DependingSupper: FC<IProps> = ({
                 <>
                   <RiMedicineBottleLine
                     style={{
-                      color: 'red',
-                      position: 'absolute',
-                      float: 'left',
-                      left: '0',
-                      top: '18px',
-                    }}
+                      color: 'red',}}
                   />
-                  <span
-                    style={{
-                      color: 'gray',
-                      fontSize: '14px',
-                      position: 'absolute',
-                      float: 'left',
-                      left: '16px',
-                      top: '18px',
-                    }}
-                  >
+                  <span>
                     {med.interval.format('H:mm')} до ужина
-                  </span>
+                  </span><br/>
                 </>
               )
       );
@@ -110,23 +82,11 @@ const DependingSupper: FC<IProps> = ({
                 <>
                   <RiMedicineBottleLine
                     style={{
-                      color: 'red',
-                      position: 'absolute',
-                      float: 'left',
-                      left: '0',
-                    }}
+                      color: 'red',}}
                   />
-                  <span
-                    style={{
-                      color: 'gray',
-                      fontSize: '14px',
-                      position: 'absolute',
-                      float: 'left',
-                      left: '16px',
-                    }}
-                  >
+                  <span>
                     Вовремя ужина
-                  </span>
+                  </span><br/>
                 </>
               )
           : // weekend
@@ -136,23 +96,11 @@ const DependingSupper: FC<IProps> = ({
                 <>
                   <RiMedicineBottleLine
                     style={{
-                      color: 'red',
-                      position: 'absolute',
-                      float: 'left',
-                      left: '0',
-                    }}
+                      color: 'red',}}
                   />
-                  <span
-                    style={{
-                      color: 'gray',
-                      fontSize: '14px',
-                      position: 'absolute',
-                      float: 'left',
-                      left: '16px',
-                    }}
-                  >
+                  <span>
                     Вовремя ужина
-                  </span>
+                  </span><br/>
                 </>
               )
       );
@@ -173,25 +121,11 @@ const DependingSupper: FC<IProps> = ({
                 <>
                   <RiMedicineBottleLine
                     style={{
-                      color: 'red',
-                      position: 'absolute',
-                      float: 'left',
-                      left: '0',
-                      top: '18px',
-                    }}
+                      color: 'red',}}
                   />
-                  <span
-                    style={{
-                      color: 'gray',
-                      fontSize: '14px',
-                      position: 'absolute',
-                      float: 'left',
-                      left: '16px',
-                      top: '18px',
-                    }}
-                  >
+                  <span>
                     {med.interval.format('H:mm')} после ужина
-                  </span>
+                  </span><br/>
                 </>
               )
           : // weekend
@@ -206,25 +140,11 @@ const DependingSupper: FC<IProps> = ({
                 <>
                   <RiMedicineBottleLine
                     style={{
-                      color: 'red',
-                      position: 'absolute',
-                      float: 'left',
-                      left: '0',
-                      top: '18px',
-                    }}
+                      color: 'red',}}
                   />
-                  <span
-                    style={{
-                      color: 'gray',
-                      fontSize: '14px',
-                      position: 'absolute',
-                      float: 'left',
-                      left: '16px',
-                      top: '18px',
-                    }}
-                  >
+                  <span>
                     {med.interval.format('H:mm')} после ужина
-                  </span>
+                  </span><br/>
                 </>
               )
       );

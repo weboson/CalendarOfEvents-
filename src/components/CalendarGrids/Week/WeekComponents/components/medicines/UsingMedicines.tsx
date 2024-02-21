@@ -40,14 +40,14 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
 
   //! Для Popup - окна
   // для body, чтобы при клике за границей popup - popup closed
-  document.body.addEventListener('click', (e)=> {
-    const popup = document.querySelector('#popup')
-    const withinBoundaries = e.composedPath().includes(popup);
-    if ( ! withinBoundaries ) {
-      document.querySelector('#popup')!.style.display = `none`
-    }
+  // document.body.addEventListener('click', (e)=> {
+  //   const popup = document.querySelector('#popup')
+  //   const withinBoundaries = e.composedPath().includes(popup);
+  //   if ( ! withinBoundaries ) {
+  //     document.querySelector('#popup')!.style.display = `none`
+  //   }
       
-   })
+  //  })
   //Redux-toolkit - из hooks.tsx - для изменения данных
   const dispatch = useAppDispatch();
   // Обработчик onMouseOver и onMouseOut: при наведении мышью на ячейку с ЛС, появляется Popup - окно с подробным списком лекарств
@@ -58,26 +58,19 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
     // popup
     const line = document.querySelector('#popup');
     // span
-    const span = event.target;
     if (event.type == 'mouseover') {
       // если мышь наведена на элемент
-      // меняем данные
+      // меняем данные (redux-toolkit)
       dispatch(readingPopupData(med.id)); // передаю только id лекарства, в popup буду find()
       line!.style.cssText += `
       top: ${top-230}px;
       left: ${left-10}px;
       display: block;
-      transition: "1s ease-in" `;
-      // translate3d(${left}px, ${top}px, 0px)
-      // стили самого span
-      span!.classList.add('span_active');
+      animation: show 1s forwards;`;
     } else {
       // если мышь ушла с элемента (mouseout)
       line!.style.cssText += `
-      display: none;
-      transition: "1s ease-out" `;
-      // стили самого span
-      // span!.style.color = "gray";
+      display: none;`;
     }
   };
 

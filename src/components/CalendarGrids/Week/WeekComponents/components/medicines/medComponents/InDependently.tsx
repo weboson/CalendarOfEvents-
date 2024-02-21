@@ -38,26 +38,12 @@ const InDependently: FC<IProps> = ({
             <div>
               <RiMedicineBottleLine
                 style={{
-                  color: 'red',
-                  position: 'absolute',
-                  float: 'left',
-                  bottom: '0',
-                  left: '0',
-                }}
+                  color: 'red',}}
               />
-              <span
-                style={{
-                  color: 'gray',
-                  fontSize: '14px',
-                  position: 'absolute',
-                  float: 'left',
-                  bottom: '0',
-                  left: '16px',
-                }}
-              >
+              <span>
                 {' '}
                 Независимо
-              </span>{' '}
+              </span>{' '}<br/>
             </div>
           )) ||
           [...new Array(med.quantity)].map((_, index) =>
@@ -75,26 +61,12 @@ const InDependently: FC<IProps> = ({
                 <RiMedicineBottleLine
                   key={`regardless=${index}`}
                   style={{
-                    color: 'red',
-                    position: 'absolute',
-                    float: 'left',
-                    bottom: '0',
-                    left: '0',
-                  }}
+                    color: 'red',}}
                 />
-                <span
-                  style={{
-                    color: 'gray',
-                    fontSize: '14px',
-                    position: 'absolute',
-                    float: 'left',
-                    bottom: '0',
-                    left: '16px',
-                  }}
-                >
+                <span>
                   {' '}
                   Независимо
-                </span>{' '}
+                </span>{' '}<br/>
               </div>
             ) : null,
           )
@@ -105,26 +77,12 @@ const InDependently: FC<IProps> = ({
             <div>
               <RiMedicineBottleLine
                 style={{
-                  color: 'red',
-                  position: 'absolute',
-                  float: 'left',
-                  bottom: '0',
-                  left: '0',
-                }}
+                  color: 'red',}}
               />
-              <span
-                style={{
-                  color: 'gray',
-                  fontSize: '14px',
-                  position: 'absolute',
-                  float: 'left',
-                  bottom: '0',
-                  left: '16px',
-                }}
-              >
+              <span>
                 {' '}
                 Независимо
-              </span>{' '}
+              </span>{' '}<br/>
             </div>
           )) ||
           [...new Array(med.quantity)].map((_, index) =>
@@ -142,26 +100,12 @@ const InDependently: FC<IProps> = ({
                 <RiMedicineBottleLine
                   key={`regardless=${index + 3}`}
                   style={{
-                    color: 'red',
-                    position: 'absolute',
-                    float: 'left',
-                    bottom: '0',
-                    left: '0',
-                  }}
+                    color: 'red',}}
                 />
-                <span
-                  style={{
-                    color: 'gray',
-                    fontSize: '14px',
-                    position: 'absolute',
-                    float: 'left',
-                    bottom: '0',
-                    left: '16px',
-                  }}
-                >
+                <span>
                   {' '}
                   Независимо
-                </span>{' '}
+                </span>{' '}<br/>
               </div>
             ) : null,
           )

@@ -39,16 +39,20 @@ const MyPopup: FC = () => {
         <li>Наименование: "{medicine?.title}"</li>
         <li>Способ приёма:&nbsp;
           {(medicine?.depending) ? 
-          ((medicine?.position == 'before'
-            ? 'До '
+          (medicine?.position == 'before'
+            ? ('До ' + `${(medicine?.action == 'eating') ? 'приёма пищи' : (medicine?.action == 'first breakfast') ? 'завтрака' : 'ужина'}`)
             : medicine?.position == 'while'
-            ? 'Вовремя '
-            : 'После ') + `[${medicine?.action}]`) : 
+            ? ('Вовремя ' + `${(medicine?.action == 'eating') ? 'приёма пищи' : (medicine?.action == 'first breakfast') ? 'завтрака' : 'ужина'}`)
+            : ('После ' + `${(medicine?.action == 'eating') ? 'приёма пищи' : (medicine?.action == 'first breakfast') ? 'завтрака' : 'ужина'}`)
+            )  
+             : 
             'Независимо'}</li>
         <li>        Количество:&nbsp;
-          {medicine?.quantity} раза в [{medicine?.unitTime}]</li>
+          {medicine?.quantity} раза в  
+          {(medicine?.unitTime == 'day') ? ' день' : (medicine?.unitTime == 'week') ? ' в неделю' : 'в месяц'}
+        </li>
       </ul>
-      <MyButton>Изменить!</MyButton>
+      <MyButton>Изменить</MyButton>
     </WrapperMyModal>
   );
 };

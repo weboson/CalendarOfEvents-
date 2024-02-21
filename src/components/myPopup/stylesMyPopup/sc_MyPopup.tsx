@@ -11,7 +11,6 @@ export const WrapperMyModal = styled('div')`
     background-color: #E6E6E6; 
     color: #565759; 
     min-width: fit-content; // шириной в контент
-    width: 350px;
     height: 250px;// положение меняется в src\service\handler_forPopup.tsx
     font-family: Roboto, serif;
     line-height: 1;
@@ -28,8 +27,8 @@ export const WrapperMyModal = styled('div')`
         margin: 25px 0 25px 0;
     }
     ul>li{
-        font-size: 20px;
-        line-height: 2;
+        font-size: 24px;
+        line-height: 1.5;
     }
 
 `; 

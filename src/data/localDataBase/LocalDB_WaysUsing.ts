@@ -12,7 +12,6 @@ import moment, { Moment } from "moment"
 interface IUnit {
     id: number
     type: 'day' | 'week' | 'month' | 'quarter' | 'year'
-    title: string
 }
 
 interface IUnitTime extends Array<IUnit>{}
@@ -21,27 +20,14 @@ export const unitTime: IUnitTime = [
     {
         id: 2,
         type: 'day',
-        title: 'в день'
     },
     {
         id: 3,
         type: 'week',
-        title: 'в неделю'
     },
     {
         id: 4,
         type: 'month',
-        title: 'в месяц'
-    },
-    {
-        id: 5,
-        type: 'quarter',
-        title: 'в квартал'
-    },
-    {
-        id: 6,
-        type: 'year',
-        title: 'в год'
     },
 ]
 

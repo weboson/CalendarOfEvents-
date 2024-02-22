@@ -181,6 +181,19 @@ const takingMedications: ITakingMedications = [
         
     },
     {
+        id: 19,
+        title: 'Параксетин222222222222222222222222',
+        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        action: waysUsing[1].type, // 'first breakfast' - в зависимости от 1-го приёма пищи
+        quantity: 1, // не изменно 1 раз
+        unitTime: unitTime[0].type, // day -  в день
+        position: positionAction[0].oftime, //  'before' ДО
+        interval: moment().hour(2).minute(0), // exm: за 2 часа завтрака 
+        duration: moment().month(3), // продолжительность курса 3 месяца
+        
+        
+    },
+    {
         id: 10,
         title: 'Смекта',
         depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день

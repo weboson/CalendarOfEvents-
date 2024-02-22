@@ -55,7 +55,7 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
       dispatch(readingPopupData(med.id)); // передаю только id лекарства, в popup буду find()
       line!.style.cssText += `
       top: ${top-350}px;
-      left: ${left-20}px;
+      left: ${left}px;
       display: flex;
       animation: show 1s forwards;`;
     } else {
@@ -96,7 +96,6 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
       case 'first breakfast': //============================= от первого завтрака
         return (
           <div
-            //! события наведения и уходы мыши
             onMouseOver={hoverMouseOnMedicine}
             onMouseOut={hoverMouseOnMedicine}
             style={{ cursor: 'help', width: '100%' }}
@@ -116,7 +115,6 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
       case 'last supper': //================================= от последнего ужина
         return (
           <div
-            //! события наведения и уходы мыши
             onMouseOver={hoverMouseOnMedicine}
             onMouseOut={hoverMouseOnMedicine}
             style={{ cursor: 'help', width: '100%' }}
@@ -140,7 +138,6 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
     //======================================================= ВНЕ ЗАВИСИМОСТИ ОТ ЕДЫ
     return (
       <div
-        //! события наведения и уходы мыши
         onMouseOver={hoverMouseOnMedicine}
         onMouseOut={hoverMouseOnMedicine}
         style={{ cursor: 'help', width: '100%' }}

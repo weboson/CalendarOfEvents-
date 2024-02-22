@@ -4,6 +4,9 @@ import { Moment } from 'moment';
 import { FC } from 'react';
 import { RiMedicineBottleLine } from 'react-icons/ri';
 import { ITakingMedication } from '../../../../../../../data/localDataBase/LocalDB_WaysUsing';
+import moment from 'moment';
+import sound from './sound.mp3'; // with import
+import { DivWrapper } from '../../../../../../Header/stylesHeader/sc_calendarHeader';
 
 interface IProps {
   dayItem: Moment;
@@ -49,7 +52,12 @@ const DependingBreakfast: FC<IProps> = ({
                   />
                   <span>
                     {/*//! вариант с названием ЛС {`${med.interval.format('H:mm')} ${med?.title}`} */}
-                    {med.interval.format('H:mm')} до завтрака
+                    {med.interval.format('H:mm')} до завтрака 
+                    {/* //! SOUND - время должно совпадать с текущим*/}
+                    {/* {halfHourItem.isSame(moment(), 'hour') ? "1111" : '0000000'} */}
+                    {halfHourItem.isSame(moment(), 'hour') ? (<div onMouseMove={() => (new Audio(sound).play())}>кликни </div>) : '0000000'}
+                    
+                    
                   </span><br/>
                 </div>
               )

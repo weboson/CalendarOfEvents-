@@ -11,10 +11,10 @@ export const WrapperMyModal = styled('div')`
     z-index: 3; // выше top-panel дней недели
     background-color: #E6E6E6; 
     color: #565759; 
-    min-width: fit-content; // шириной в контент // положение меняется в src\service\handler_forPopup.tsx
-    /* max-width: 300px; */
-    min-height: fit-content; // высотой в контент
-    /* height: 400px; */
+    width: 400px;
+    height: 400px;
+    /* min-width: fit-content; // шириной в контент // положение меняется в src\service\handler_forPopup.tsx
+    min-height: fit-content; // высотой в контент */
     font-family: Roboto, serif;
     line-height: 1;
     padding: 20px;

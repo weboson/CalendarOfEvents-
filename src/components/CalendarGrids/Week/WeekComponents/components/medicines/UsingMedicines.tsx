@@ -47,7 +47,7 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
     const top = event.clientY;
     const left = event.clientX;
     // popup
-    const line = document.querySelector('#popup');
+    const line = document.querySelector('#IdPopup');
     // span
     if (event.type == 'mouseover') {
       // если мышь наведена на элемент
@@ -55,7 +55,7 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
       dispatch(readingPopupData(med.id)); // передаю только id лекарства, в popup буду find()
       line!.style.cssText += `
       top: ${top-350}px;
-      left: ${left}px;
+      left: ${left-10}px;
       display: flex;
       animation: show 1s forwards;`;
     } else {
@@ -77,7 +77,7 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
             //! события наведения и уходы мыши
             onMouseOver={hoverMouseOnMedicine}
             onMouseOut={hoverMouseOnMedicine}
-            style={{ cursor: 'help', width: '100%'}}
+            style={{ cursor: 'help'}}
           >
             <DependingEating
               dayItem={dayItem}
@@ -98,7 +98,7 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
           <div
             onMouseOver={hoverMouseOnMedicine}
             onMouseOut={hoverMouseOnMedicine}
-            style={{ cursor: 'help', width: '100%' }}
+            style={{ cursor: 'help'}}
           >
             <DependingBreakfast
               dayItem={dayItem}
@@ -117,7 +117,7 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
           <div
             onMouseOver={hoverMouseOnMedicine}
             onMouseOut={hoverMouseOnMedicine}
-            style={{ cursor: 'help', width: '100%' }}
+            style={{ cursor: 'help'}}
           >
             <DependingSupper
               dayItem={dayItem}
@@ -140,7 +140,7 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
       <div
         onMouseOver={hoverMouseOnMedicine}
         onMouseOut={hoverMouseOnMedicine}
-        style={{ cursor: 'help', width: '100%' }}
+        style={{ cursor: 'help'}}
       >
         <InDependently
           dayItem={dayItem}

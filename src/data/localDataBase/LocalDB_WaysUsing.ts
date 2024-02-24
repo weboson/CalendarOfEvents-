@@ -182,7 +182,7 @@ const takingMedications: ITakingMedications = [
     },
     {
         id: 19,
-        title: 'Параксетин222222222222222222222222',
+        title: 'Параксетин222',
         depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[1].type, // 'first breakfast' - в зависимости от 1-го приёма пищи
         quantity: 1, // не изменно 1 раз

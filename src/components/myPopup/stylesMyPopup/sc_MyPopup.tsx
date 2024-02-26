@@ -4,20 +4,20 @@ import styled from "styled-components";
 
 export const WrapperMyModal = styled('div')`
     /* по-умолчанию */
-    display: none; //! включать для отладки (и еще в src\service\handler_forPopup.tsx)
+    display: flex; //! включать для отладки (и еще в src\service\handler_forPopup.tsx)
     position: fixed;
     flex-direction: column; // display: flex в UsingMedicines и MyPopup
     margin: 20px;
+    padding: 20px;
     z-index: 3; // выше top-panel дней недели
     background-color: #E6E6E6; 
     color: #565759; 
-    width: 400px;
-    height: 400px;
-    /* min-width: fit-content; // шириной в контент // положение меняется в src\service\handler_forPopup.tsx
-    min-height: fit-content; // высотой в контент */
+    /* width: 400px;
+    height: 400px; */
+    min-width: fit-content; // шириной в контент // положение меняется в src\service\handler_forPopup.tsx
+    min-height: fit-content; // высотой в контент 
     font-family: Roboto, serif;
     line-height: 1;
-    padding: 20px;
     border: 6px solid #565759;
     transition: "1s ease-in"; 
     @keyframes show { // медленное появление + в обработчике 

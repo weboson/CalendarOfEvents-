@@ -84,6 +84,12 @@ const positionAction: IPositionAction = [
     },
 ]
 
+// курс лечения
+interface Iduration {
+    index: number
+    title: string
+
+}
 
 // ! пример композиции (на примере одного ЛС)
 export interface ITakingMedication {
@@ -95,7 +101,7 @@ export interface ITakingMedication {
     unitTime: string
     position: string
     interval: Moment | null
-    duration: Moment
+    duration: Iduration
 }
 
 interface ITakingMedications extends Array<ITakingMedication>{}
@@ -111,7 +117,10 @@ const takingMedications: ITakingMedications = [
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[0].oftime, // Используется константа(потом будет в Form) в массива 
         interval: moment().hour(0).minute(30), // exm: спустя 45 минут после еды 
-        duration: moment().month(3), // продолжительность курса 3 месяца
+        duration: {
+            index: 3,
+            title: "months", // moment().subtract(1.5, 'months')
+        }, // продолжительность курса до 3 месяца  
         
         
     },
@@ -124,7 +133,10 @@ const takingMedications: ITakingMedications = [
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[0].oftime, // Используется константа(потом будет в Form) в массива 
         interval: moment().hour(0).minute(30), // exm: спустя 45 минут после еды 
-        duration: moment().month(3), // продолжительность курса 3 месяца
+        duration: {
+            index: 3,
+            title: "months", // moment().subtract(1.5, 'months')
+        }, // продолжительность курса до 2 месяца  
         
         
     },
@@ -137,7 +149,10 @@ const takingMedications: ITakingMedications = [
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[2].oftime, 
         interval: moment().hour(1).minute(0), 
-        duration: moment().month(3), // продолжительность курса 3 месяца
+        duration: {
+            index: 1,
+            title: "months", // moment().subtract(1.5, 'months')
+        }, // продолжительность курса до 1 месяц 
         
         
     },
@@ -150,7 +165,10 @@ const takingMedications: ITakingMedications = [
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[0].oftime, //   не активен
         interval: moment().hour(0).minute(0), // exm: спустя 30 минут после еды 
-        duration: moment().month(3), // продолжительность курса 3 месяца
+        duration: {
+            index: 3,
+            title: "months", // moment().subtract(1.5, 'months')
+        }, // продолжительность курса до 3 месяца  
         
         
     },
@@ -163,7 +181,10 @@ const takingMedications: ITakingMedications = [
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[1].oftime, //  'after' после
         interval: moment().hour(1).minute(0), // exm: спустя 30 минут после еды 
-        duration: moment().month(3), // продолжительность курса 3 месяца
+        duration: {
+            index: 4,
+            title: "months", // moment().subtract(1.5, 'months')
+        }, // продолжительность курса до 4 месяца  
         
         
     },
@@ -176,7 +197,10 @@ const takingMedications: ITakingMedications = [
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[0].oftime, //  'before' ДО
         interval: moment().hour(0).minute(45), // exm: за 30 минут ДО еды 
-        duration: moment().month(3), // продолжительность курса 3 месяца
+        duration: {
+            index: 5,
+            title: "months", // moment().subtract(1.5, 'months')
+        }, // продолжительность курса до 5 месяца  
         
         
     },
@@ -189,7 +213,10 @@ const takingMedications: ITakingMedications = [
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[0].oftime, //  'before' ДО
         interval: moment().hour(2).minute(0), // exm: за 2 часа завтрака 
-        duration: moment().month(3), // продолжительность курса 3 месяца
+        duration: {
+            index: 1,
+            title: "months", // moment().subtract(1.5, 'months')
+        }, // продолжительность курса до 1 месяц 
         
         
     },
@@ -202,7 +229,10 @@ const takingMedications: ITakingMedications = [
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[1].oftime, //  'while' ВОВРЕМЯ
         interval: moment().hour(0).minute(45), // не активен
-        duration: moment().month(3), // продолжительность курса 3 месяца
+        duration: {
+            index: 5,
+            title: "months", // moment().subtract(1.5, 'months')
+        }, // продолжительность курса до 5 месяца  
         
         
     },
@@ -215,7 +245,10 @@ const takingMedications: ITakingMedications = [
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[2].oftime, //  'after' ВОВРЕМЯ
         interval: moment().hour(1).minute(30), // не активен
-        duration: moment().month(3), // продолжительность курса 3 месяца
+        duration: {
+            index: 1,
+            title: "months", // moment().subtract(1.5, 'months')
+        }, // продолжительность курса до 1 месяца  
         
         
     },
@@ -228,7 +261,10 @@ const takingMedications: ITakingMedications = [
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[0].oftime, //  'before' ДО
         interval: moment().hour(1).minute(30), // 
-        duration: moment().month(3), // продолжительность курса 3 месяца
+        duration: {
+            index: 3,
+            title: "months", // moment().subtract(1.5, 'months')
+        }, // продолжительность курса до 3 месяца  
         
         
     },
@@ -241,7 +277,10 @@ const takingMedications: ITakingMedications = [
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[1].oftime, //  'while' ВОВРЕМЯ
         interval: moment().hour(1).minute(30), // не активен
-        duration: moment().month(3), // продолжительность курса 3 месяца
+        duration: {
+            index: 6,
+            title: "months", // moment().subtract(1.5, 'months')
+        }, // продолжительность курса до 6 месяца  
         
         
     },
@@ -254,9 +293,28 @@ const takingMedications: ITakingMedications = [
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[2].oftime, //  'after' ПОСЛЕ
         interval: moment().hour(1).minute(0), // 
-        duration: moment().month(3), // продолжительность курса 3 месяца
+        duration: {
+            index: 3,
+            title: "months", // moment().subtract(1.5, 'months')
+        }, // продолжительность курса до 3 месяца  , // продолжительность курса 3 месяца
         
         
+    },
+    {
+        id: 15,
+        title: 'Альфазокс',
+        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        action: waysUsing[0].type, // 'eating' - в зависимости от приёма еды
+        quantity: 3, // не активен (по-умолчанию 1 раз в день)
+        unitTime: unitTime[0].type, // day -  в день
+        position: positionAction[0].oftime, //  'before' ДО
+        interval: moment().hour(0).minute(45), // 
+        //! нужно везде изменить 
+        // duration: moment().month(2), // продолжительность курса до 3 месяца  
+        duration: {
+            index: 3,
+            title: "months", // moment().subtract(1.5, 'months')
+        }, // продолжительность курса до 3 месяца  
     },
 
     

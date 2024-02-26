@@ -10,6 +10,7 @@ import DependingSupper from './medComponents/DependingSupper';
 import InDependently from './medComponents/InDependently';
 import { useAppDispatch } from '../../../../../../store/hooks';
 import { readingPopupData } from '../../../../../../store/features/popupDataSlice';
+import moment from 'moment';
 
 interface IProps {
   dayItem: Moment;
@@ -88,6 +89,7 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
               betweenMealsWeekend={betweenMealsWeekend}
               med={med}
             />
+            {/* <p style={{color:"red"}}>{halfHourItem.isSame(moment(), 'hour') && dayItem.isSame(moment(), 'day') ? 'текущий' : 'нет'}</p> */}
           </div>
         );
         break;

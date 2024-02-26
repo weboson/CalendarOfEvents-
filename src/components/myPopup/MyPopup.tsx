@@ -1,10 +1,10 @@
 //! MyPopup - при наведении на ячейку с приёмом ЛС - поляляется развернутая информация
-import { FC, useRef, useState } from 'react';
-import React from 'react';
+import { FC, useState } from 'react';
 import { MyButton, WrapperMyModal } from './stylesMyPopup/sc_MyPopup';
 import { useAppSelector } from '../../store/hooks';
 // DataBase array
 import takingMedications from '../../data/localDataBase/LocalDB_WaysUsing';
+import moment from 'moment';
 
 const MyPopup: FC = () => {
   //Redux-toolkit - из hooks.tsx -
@@ -12,19 +12,15 @@ const MyPopup: FC = () => {
   const idMed = useAppSelector((state) => state.popupData);
   // нашли сам объект лекарства по его id
   const medicine = takingMedications.find((item) => item.id == idMed);
-
-  // const divPopup = useRef();
-  const [popup, setPopup] = useState(false)
+  const [popup, setPopup] = useState(false);
 
   return (
     <WrapperMyModal
       id="IdPopup"
-        // ref={popup}
-      style={(popup) ? {display: "flex"} : {display: "none"}}  
-      onMouseOver = {()=>setPopup(true)}
-      onMouseOut= {()=>setPopup(false)}  
+      style={popup ? { display: 'flex' } : { display: 'none' }}
+      onMouseOver={() => setPopup(true)}
+      onMouseOut={() => setPopup(false)}
     >
-
       <h6>Схема приема препарата: </h6>
       <ul>
         <li>
@@ -36,7 +32,8 @@ const MyPopup: FC = () => {
           <p>
             {medicine?.depending
               ? medicine?.position == 'before'
-                ? 'До ' +
+                ? `За ${medicine?.interval?.format('H:mm')} ` +
+                  'до ' +
                   `${
                     medicine?.action == 'eating'
                       ? 'еды'
@@ -53,7 +50,8 @@ const MyPopup: FC = () => {
                       ? 'завтрака'
                       : 'ужина'
                   }`
-                : 'После ' +
+                : `Спустя ${medicine?.interval?.format('H:mm')} ` +
+                  'после ' +
                   `${
                     medicine?.action == 'eating'
                       ? 'еды'
@@ -73,6 +71,19 @@ const MyPopup: FC = () => {
               : medicine?.unitTime == 'week'
               ? ' в неделю'
               : 'в месяц'}
+          </p>
+        </li>
+        <li>
+          Курс лечения:{' '}
+          <p>
+            {medicine?.duration.index + ' '}
+            {medicine?.duration.title == 'day'
+              ? 'день'
+              : medicine?.duration.title == 'week'
+              ? 'неделя'
+              : medicine?.duration.title == 'months'
+              ? 'месяц'
+              : 'год'}
           </p>
         </li>
       </ul>

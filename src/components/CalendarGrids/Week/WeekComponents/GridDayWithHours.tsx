@@ -66,7 +66,7 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
   
         {/* //* for Using Medicines (расчет приёма лекарств) */}
         {takingMedications.map((medItem, index) => (
-          <UsingMedicines key={index} dayItem={dayItem} halfHourItem={halfHourItem} med={medItem}/>
+          <UsingMedicines key={index} dayItem={dayItem} halfHourItem={halfHourItem} med={medItem} />
         ))}
       </HourContent>
     ))

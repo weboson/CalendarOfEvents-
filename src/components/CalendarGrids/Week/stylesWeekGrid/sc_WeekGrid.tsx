@@ -94,7 +94,24 @@ export const HourContent = styled.div<IHourContent>`
   height: 115px;
   border-bottom: 1px solid #565759;
   border-right: 1px solid #565759;
-  ${(props) =>
+  /* если контент (лекарства) слишком много в блоке, пояляется сролл */
+  overflow-y: auto; 
+  &::-webkit-scrollbar {
+    // style scroll
+    width: 10px;
+  } /* ширина scrollbar */
+  &::-webkit-scrollbar-track {
+    background: #565759;
+    /* border-radius: 20px;  */
+  } /* цвет дорожки */
+  &::-webkit-scrollbar-thumb {
+    background-color: #1e1f21; /* цвет плашки */
+    border-radius: 0; /* закругления плашки */
+    border: 1px solid #5a5959;
+  } 
+  
+  ${(props) => 
+  /* текущая по времени ячейка */
     props.$currentHour
       ? 'background-color: #3d3e3f'
       : 'background-color: #1e1f21'};

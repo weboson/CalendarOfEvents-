@@ -109,7 +109,7 @@ interface ITakingMedications extends Array<ITakingMedication>{}
 // разные лекарства
 const takingMedications: ITakingMedications = [
     {
-        id: 5,
+        id: 1,
         title: 'Урсосан',
         depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0].type, // 'eating' - приём пищи
@@ -125,8 +125,56 @@ const takingMedications: ITakingMedications = [
         
     },
     {
-        id: 1,
-        title: 'Бифидокс',
+        id: 2,
+        title: 'Бифидокс1',
+        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        action: waysUsing[0].type, // 'eating' - приём пищи
+        quantity: 3, // 3 раза
+        unitTime: unitTime[0].type, // day -  в день
+        position: positionAction[0].oftime, // Используется константа(потом будет в Form) в массива 
+        interval: moment().hour(0).minute(30), // exm: спустя 45 минут после еды 
+        duration: {
+            index: 3,
+            title: "months", // moment().subtract(1.5, 'months')
+        }, // продолжительность курса до 2 месяца  
+        
+        
+    },
+    {
+        id: 3,
+        title: 'Бифидокс2',
+        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        action: waysUsing[0].type, // 'eating' - приём пищи
+        quantity: 3, // 3 раза
+        unitTime: unitTime[0].type, // day -  в день
+        position: positionAction[0].oftime, // Используется константа(потом будет в Form) в массива 
+        interval: moment().hour(0).minute(30), // exm: спустя 45 минут после еды 
+        duration: {
+            index: 3,
+            title: "months", // moment().subtract(1.5, 'months')
+        }, // продолжительность курса до 2 месяца  
+        
+        
+    },
+    {
+        id: 4,
+        title: 'Бифидокс3',
+        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        action: waysUsing[0].type, // 'eating' - приём пищи
+        quantity: 3, // 3 раза
+        unitTime: unitTime[0].type, // day -  в день
+        position: positionAction[0].oftime, // Используется константа(потом будет в Form) в массива 
+        interval: moment().hour(0).minute(30), // exm: спустя 45 минут после еды 
+        duration: {
+            index: 3,
+            title: "months", // moment().subtract(1.5, 'months')
+        }, // продолжительность курса до 2 месяца  
+        
+        
+    },
+    {
+        id: 5,
+        title: 'Бифидокс4',
         depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0].type, // 'eating' - приём пищи
         quantity: 3, // 3 раза
@@ -142,6 +190,70 @@ const takingMedications: ITakingMedications = [
     },
     {
         id: 6,
+        title: 'Бифидокс5',
+        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        action: waysUsing[0].type, // 'eating' - приём пищи
+        quantity: 3, // 3 раза
+        unitTime: unitTime[0].type, // day -  в день
+        position: positionAction[0].oftime, // Используется константа(потом будет в Form) в массива 
+        interval: moment().hour(0).minute(30), // exm: спустя 45 минут после еды 
+        duration: {
+            index: 3,
+            title: "months", // moment().subtract(1.5, 'months')
+        }, // продолжительность курса до 2 месяца  
+        
+        
+    },
+    {
+        id: 7,
+        title: 'Бифидокс6',
+        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        action: waysUsing[0].type, // 'eating' - приём пищи
+        quantity: 3, // 3 раза
+        unitTime: unitTime[0].type, // day -  в день
+        position: positionAction[0].oftime, // Используется константа(потом будет в Form) в массива 
+        interval: moment().hour(0).minute(30), // exm: спустя 45 минут после еды 
+        duration: {
+            index: 3,
+            title: "months", // moment().subtract(1.5, 'months')
+        }, // продолжительность курса до 2 месяца  
+        
+        
+    },
+    {
+        id: 8,
+        title: 'Бифидокс7',
+        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        action: waysUsing[0].type, // 'eating' - приём пищи
+        quantity: 3, // 3 раза
+        unitTime: unitTime[0].type, // day -  в день
+        position: positionAction[0].oftime, // Используется константа(потом будет в Form) в массива 
+        interval: moment().hour(0).minute(30), // exm: спустя 45 минут после еды 
+        duration: {
+            index: 3,
+            title: "months", // moment().subtract(1.5, 'months')
+        }, // продолжительность курса до 2 месяца  
+        
+        
+    },
+    {
+        id: 9,
+        title: 'Бифидокс8',
+        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        action: waysUsing[0].type, // 'eating' - приём пищи
+        quantity: 3, // 3 раза
+        unitTime: unitTime[0].type, // day -  в день
+        position: positionAction[0].oftime, // Используется константа(потом будет в Form) в массива 
+        interval: moment().hour(0).minute(30), // exm: спустя 45 минут после еды 
+        duration: {
+            index: 3,
+            title: "months", // moment().subtract(1.5, 'months')
+        }, // продолжительность курса до 2 месяца  
+        
+        
+    },
+    {
+        id: 10,
         title: 'Пепсан-Р',
         depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0].type, // 'eating' - приём пищи
@@ -157,7 +269,7 @@ const takingMedications: ITakingMedications = [
         
     },
     {
-        id: 7,
+        id: 11,
         title: 'Ибуприн',
         depending: false, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0].type, // 'eating' - приём пищи
@@ -173,7 +285,7 @@ const takingMedications: ITakingMedications = [
         
     },
     {
-        id: 8,
+        id: 12,
         title: 'Альфазокс',
         depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0].type, // 'eating' - приём пищи
@@ -189,7 +301,7 @@ const takingMedications: ITakingMedications = [
         
     },
     {
-        id: 9,
+        id: 13,
         title: 'Параксетин',
         depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[1].type, // 'first breakfast' - в зависимости от 1-го приёма пищи
@@ -205,7 +317,7 @@ const takingMedications: ITakingMedications = [
         
     },
     {
-        id: 19,
+        id: 14,
         title: 'Параксетин222',
         depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[1].type, // 'first breakfast' - в зависимости от 1-го приёма пищи
@@ -221,7 +333,7 @@ const takingMedications: ITakingMedications = [
         
     },
     {
-        id: 10,
+        id: 15,
         title: 'Смекта',
         depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[1].type, // 'first breakfast' - в зависимости от 1-го приёма пищи
@@ -237,7 +349,7 @@ const takingMedications: ITakingMedications = [
         
     },
     {
-        id: 11,
+        id: 16,
         title: 'Анальгин',
         depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[1].type, // 'first breakfast' - в зависимости от 1-го приёма пищи
@@ -253,7 +365,7 @@ const takingMedications: ITakingMedications = [
         
     },
     {
-        id: 12,
+        id: 17,
         title: 'Эглонил',
         depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[2].type, // 'last supper' - в зависимости от последнего приёма еды
@@ -269,7 +381,7 @@ const takingMedications: ITakingMedications = [
         
     },
     {
-        id: 13,
+        id: 18,
         title: 'Ганатон',
         depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[2].type, // 'last supper' - в зависимости от последнего приёма еды
@@ -285,7 +397,7 @@ const takingMedications: ITakingMedications = [
         
     },
     {
-        id: 14,
+        id: 19,
         title: 'Тералиджин',
         depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[2].type, // 'last supper' - в зависимости от последнего приёма еды
@@ -301,7 +413,7 @@ const takingMedications: ITakingMedications = [
         
     },
     {
-        id: 15,
+        id: 20,
         title: 'Альфазокс',
         depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0].type, // 'eating' - в зависимости от приёма еды

@@ -78,7 +78,7 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
             //! события наведения и уходы мыши
             onMouseOver={hoverMouseOnMedicine}
             onMouseOut={hoverMouseOnMedicine}
-            style={{ cursor: 'help'}}
+            style={{ cursor: 'help',}}
           >
             <DependingEating
               dayItem={dayItem}

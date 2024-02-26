@@ -145,7 +145,7 @@ export const FoodTooltip = styled.span`
   	&::before {
 		position: absolute;
 		z-index: 2;
-		top: 100%;
+		top: 50%;
 		right: 0%;
 		/* margin: -10px 0 0 -20px; */
 		padding: 5px 10px;

@@ -78,7 +78,7 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
             //! события наведения и уходы мыши
             onMouseOver={hoverMouseOnMedicine}
             onMouseOut={hoverMouseOnMedicine}
-            style={{ cursor: 'help',}}
+            style={{ cursor: 'help', maxWidth: "fit-content"}}
           >
             <DependingEating
               dayItem={dayItem}
@@ -100,7 +100,7 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
           <div
             onMouseOver={hoverMouseOnMedicine}
             onMouseOut={hoverMouseOnMedicine}
-            style={{ cursor: 'help'}}
+            style={{ cursor: 'help', maxWidth: "fit-content"}}
           >
             <DependingBreakfast
               dayItem={dayItem}
@@ -119,7 +119,7 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
           <div
             onMouseOver={hoverMouseOnMedicine}
             onMouseOut={hoverMouseOnMedicine}
-            style={{ cursor: 'help'}}
+            style={{ cursor: 'help', maxWidth: "fit-content"}}
           >
             <DependingSupper
               dayItem={dayItem}
@@ -142,7 +142,7 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
       <div
         onMouseOver={hoverMouseOnMedicine}
         onMouseOut={hoverMouseOnMedicine}
-        style={{ cursor: 'help'}}
+        style={{ cursor: 'help', maxWidth: "fit-content"}}
       >
         <InDependently
           dayItem={dayItem}

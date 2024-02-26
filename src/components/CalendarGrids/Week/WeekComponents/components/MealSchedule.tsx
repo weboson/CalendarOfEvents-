@@ -4,8 +4,7 @@ import { FC } from 'react';
 import mealSchedule from '../../../../../data/localDataBase/localDB_MealSchedule';
 import { MdOutlineFastfood } from 'react-icons/md';
 import { Moment } from 'moment';
-import { stylesFood, FoodTooltip } from '../../stylesWeekGrid/sc_WeekGrid';
-import { ITakingMaxMealFoodication } from '../../../../../data/localDataBase/LocalDB_WaysUsing';
+import { FoodTooltip } from '../../stylesWeekGrid/sc_WeekGrid';
 
 
 

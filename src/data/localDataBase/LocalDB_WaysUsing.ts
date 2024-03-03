@@ -421,8 +421,34 @@ const takingMedications: ITakingMedications = [
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[0].oftime, //  'before' ДО
         interval: moment().hour(0).minute(45), // 
-        //! нужно везде изменить 
-        // duration: moment().month(2), // продолжительность курса до 3 месяца  
+        duration: {
+            index: 3,
+            title: "months", // moment().subtract(1.5, 'months')
+        }, // продолжительность курса до 3 месяца  
+    },
+    {
+        id: 21,
+        title: 'Тералиджин',
+        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        action: waysUsing[0].type, // 'eating' - в зависимости от приёма еды
+        quantity: 3, // не активен (по-умолчанию 1 раз в день)
+        unitTime: unitTime[0].type, // day -  в день
+        position: positionAction[2].oftime, //  'after' ПОСЛЕ
+        interval: moment().hour(2).minute(45), // 
+        duration: {
+            index: 3,
+            title: "months", // moment().subtract(1.5, 'months')
+        }, // продолжительность курса до 3 месяца  
+    },
+    {
+        id: 22,
+        title: 'Тералиджин',
+        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        action: waysUsing[0].type, // 'eating' - в зависимости от приёма еды
+        quantity: 3, // не активен (по-умолчанию 1 раз в день)
+        unitTime: unitTime[0].type, // day -  в день
+        position: positionAction[2].oftime, //  'after' ПОСЛЕ
+        interval: moment().hour(0).minute(30), // 
         duration: {
             index: 3,
             title: "months", // moment().subtract(1.5, 'months')

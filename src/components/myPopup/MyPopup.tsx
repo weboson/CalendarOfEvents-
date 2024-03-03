@@ -4,12 +4,11 @@ import { MyButton, WrapperMyModal } from './stylesMyPopup/sc_MyPopup';
 import { useAppSelector } from '../../store/hooks';
 // DataBase array
 import takingMedications from '../../data/localDataBase/LocalDB_WaysUsing';
-import moment from 'moment';
 
 const MyPopup: FC = () => {
   //Redux-toolkit - из hooks.tsx -
   // получили id лекарства
-  const idMed = useAppSelector((state) => state.popupData);
+  const idMed = useAppSelector((state) => state.popupData); // изменение состояния (useAppDispatch) в UsingMedicines.tsx
   // нашли сам объект лекарства по его id
   const medicine = takingMedications.find((item) => item.id == idMed);
   const [popup, setPopup] = useState(false);

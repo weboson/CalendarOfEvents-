@@ -2,6 +2,7 @@
 //! Планирую добавить функциональность: 2 вида: в будни и выходные (также как и режимы дня)
 import { FC } from 'react';
 import mealSchedule from '../../../../../data/localDataBase/localDB_MealSchedule';
+import { ITakingMedication } from '../../../../../data/localDataBase/LocalDB_WaysUsing';
 import { MdOutlineFastfood } from 'react-icons/md';
 import { Moment } from 'moment';
 import { FoodTooltip } from '../../stylesWeekGrid/sc_WeekGrid';
@@ -11,7 +12,7 @@ import { FoodTooltip } from '../../stylesWeekGrid/sc_WeekGrid';
 interface IProps {
   dayItem: Moment
   halfHourItem: Moment
-  maxmealfood: ITakingMaxMealFoodication 
+  maxmealfood: ITakingMedication
 }
 
 const MealSchedule: FC<IProps> = ({ halfHourItem, dayItem, maxmealfood }) => {

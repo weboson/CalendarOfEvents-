@@ -3,6 +3,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import menuReducer from './features/modesDateSlice'
 import selectedModeMonitorReducer from './features/selectedModeMonitorSlice'
 import popupDataReducer from './features/popupDataSlice'
+import warningMarkerReducer from './features/warningMarkerSlice'
 
 
 
@@ -13,6 +14,7 @@ export const store = configureStore({
     menu: menuReducer, // режим меню
     selectedModeMonitor: selectedModeMonitorReducer, // режим отображения заголовка (месяц, неделя и т.д.) шапки (Monitor) 
     popupData: popupDataReducer, // содержание MyPopup.tsx
+    warningMarker: warningMarkerReducer, // предупреждение (примите ЛС): текущее время совпадает с приёмом лекарства 
   },
 })
 

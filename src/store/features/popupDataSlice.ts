@@ -1,5 +1,5 @@
 // redux-toolkit - Slice 
-//! отображение данных в MyPopup.tsx
+//! отображение данных в MyPopup.tsx по измненяющему id лекарства
 import { createSlice } from '@reduxjs/toolkit'
 import type { RootState } from '../store'
 

@@ -1,4 +1,4 @@
-//! redux-toolkit для типизации (TypeScript)
+//! redux-toolkit для TypeScript (типизации)
 import { useDispatch, useSelector } from 'react-redux'
 import type { TypedUseSelectorHook } from 'react-redux'
 import type { RootState, AppDispatch } from './store'

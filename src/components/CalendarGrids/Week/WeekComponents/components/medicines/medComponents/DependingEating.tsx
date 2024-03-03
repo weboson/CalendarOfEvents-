@@ -4,6 +4,8 @@ import { Moment } from 'moment';
 import { FC } from 'react';
 import { RiMedicineBottleLine } from 'react-icons/ri';
 import { ITakingMedication } from '../../../../../../../data/localDataBase/LocalDB_WaysUsing';
+import moment from 'moment';
+import { DivWrapper } from '../../../../../../Header/stylesHeader/sc_calendarHeader';
 
 interface IProps {
   dayItem: Moment;
@@ -28,6 +30,20 @@ const DependingEating: FC<IProps> = ({
   firstMealWeekdays = firstMealWeekdays.clone();
   firstMealWeekend = firstMealWeekend.clone();
 
+
+  //! for Warning marker (Предупреждающий маркер, когда текущее время совпадает с приёмом лекарства)
+
+
+  //! helper 
+  const helperWarningMarker = (firstMeal: Moment, halfHourItem: Moment) => {
+    return moment().isSame(firstMeal, 'hour') &&
+      dayItem.isSame(moment(), 'day') &&
+      moment().minute() - halfHourItem.minute() < 30 && //exp: 4:01 - 4:00/4:30 = 1/-29 < 30 -> true/true
+      moment().minute() - halfHourItem.minute() >= 0
+      ? (<div style={{color: "white"}}>Warning: use Medicine</div>)
+      : (<div style={{color: "white"}}>no</div>);
+  };
+
   switch (med.position) {
     case 'before': //! до
       return (
@@ -44,10 +60,11 @@ const DependingEating: FC<IProps> = ({
               firstMealWeekdays.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <>
+                  {/* //! Warning Marker */}
+                  {helperWarningMarker(firstMealWeekdays, halfHourItem)}
                   <RiMedicineBottleLine style={{ color: 'red' }} />
-                  <span>
-                    {med.interval.format('H:mm')} до еды
-                  </span><br/>
+                  <span>{med.interval.format('H:mm')} до еды</span>
+                  <br />
                 </>
               )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
               [...new Array(med.quantity - 1)].map(
@@ -61,13 +78,13 @@ const DependingEating: FC<IProps> = ({
                   firstMealWeekdays.clone().minute() - halfHourItem.minute() <
                     30 && (
                     <div key={index}>
+                      {helperWarningMarker(firstMealWeekdays, halfHourItem)}
                       <RiMedicineBottleLine
                         key={`before-${index}`}
                         style={{ color: 'red' }}
                       />
-                      <span>
-                        {med.interval.format('H:mm')} до еды
-                      </span><br/>
+                      <span>{med.interval.format('H:mm')} до еды</span>
+                      <br />
                     </div>
                   ),
               )
@@ -82,10 +99,9 @@ const DependingEating: FC<IProps> = ({
               firstMealWeekend.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <div>
+                  {helperWarningMarker(firstMealWeekend, halfHourItem)}
                   <RiMedicineBottleLine style={{ color: 'red' }} />
-                  <span>
-                    {med.interval.format('H:mm')} до еды
-                  </span>
+                  <span>{med.interval.format('H:mm')} до еды</span>
                 </div>
               )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
               [...new Array(med.quantity - 1)].map(
@@ -99,13 +115,13 @@ const DependingEating: FC<IProps> = ({
                   firstMealWeekend.clone().minute() - halfHourItem.minute() <
                     30 && (
                     <div key={index}>
+                      {helperWarningMarker(firstMealWeekend, halfHourItem)}
                       <RiMedicineBottleLine
                         key={`before-${index}`}
                         style={{ color: 'red' }}
                       />
-                      <span>
-                        {med.interval.format('H:mm')} до еды
-                      </span><br/>
+                      <span>{med.interval.format('H:mm')} до еды</span>
+                      <br />
                     </div>
                   ),
               )
@@ -122,10 +138,9 @@ const DependingEating: FC<IProps> = ({
               firstMealWeekdays.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <div>
+                  {helperWarningMarker(firstMealWeekdays, halfHourItem)}
                   <RiMedicineBottleLine style={{ color: 'red' }} />
-                  <span>
-                    Вовремя еды
-                  </span>{' '}<br/>
+                  <span>Вовремя еды</span> <br />
                 </div>
               )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
               [...new Array(med.quantity - 1)].map(
@@ -139,13 +154,12 @@ const DependingEating: FC<IProps> = ({
                   firstMealWeekdays.clone().minute() - halfHourItem.minute() <
                     30 && (
                     <div key={index}>
+                      {helperWarningMarker(firstMealWeekdays, halfHourItem)}
                       <RiMedicineBottleLine
                         key={`while-${index}`}
                         style={{ color: 'red' }}
                       />
-                      <span>
-                        Вовремя еды
-                      </span>{' '}<br/>
+                      <span>Вовремя еды</span> <br />
                     </div>
                   ),
               )
@@ -155,10 +169,9 @@ const DependingEating: FC<IProps> = ({
               firstMealWeekend.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <div>
+                  {helperWarningMarker(firstMealWeekend, halfHourItem)}
                   <RiMedicineBottleLine style={{ color: 'red' }} />
-                  <span>
-                    Вовремя еды
-                  </span>{' '}<br/>
+                  <span>Вовремя еды</span> <br />
                 </div>
               )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
               [...new Array(med.quantity - 1)].map(
@@ -172,13 +185,12 @@ const DependingEating: FC<IProps> = ({
                   firstMealWeekend.clone().minute() - halfHourItem.minute() <
                     30 && (
                     <div key={index}>
+                      {helperWarningMarker(firstMealWeekend, halfHourItem)}
                       <RiMedicineBottleLine
                         key={`while-${index}`}
                         style={{ color: 'red' }}
                       />
-                      <span key={index + 4}>
-                        Вовремя еды
-                      </span>{' '}<br/>
+                      <span key={index + 4}>Вовремя еды</span> <br />
                     </div>
                   ),
               )
@@ -199,10 +211,10 @@ const DependingEating: FC<IProps> = ({
               firstMealWeekdays.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <div>
+                  {helperWarningMarker(firstMealWeekdays, halfHourItem)}
                   <RiMedicineBottleLine style={{ color: 'red' }} />
-                  <span>
-                    {med.interval.format('H:mm')} после еды
-                  </span><br/>
+                  <span>{med.interval.format('H:mm')} после еды</span>
+                  <br />
                 </div>
               )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
               [...new Array(med.quantity - 1)].map(
@@ -216,13 +228,13 @@ const DependingEating: FC<IProps> = ({
                   firstMealWeekdays.clone().minute() - halfHourItem.minute() <
                     30 && (
                     <div key={index}>
+                      {helperWarningMarker(firstMealWeekdays, halfHourItem)}
                       <RiMedicineBottleLine
                         key={`after-${index}`}
                         style={{ color: 'red' }}
                       />
-                      <span>
-                        {med.interval.format('H:mm')} после еды
-                      </span><br/>
+                      <span>{med.interval.format('H:mm')} после еды</span>
+                      <br />
                     </div>
                   ),
               )
@@ -237,10 +249,10 @@ const DependingEating: FC<IProps> = ({
               firstMealWeekend.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <div>
+                  {helperWarningMarker(firstMealWeekend, halfHourItem)}
                   <RiMedicineBottleLine style={{ color: 'red' }} />
-                  <span>
-                    {med.interval.format('H:mm')} после еды
-                  </span><br/>
+                  <span>{med.interval.format('H:mm')} после еды</span>
+                  <br />
                 </div>
               )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
               [...new Array(med.quantity - 1)].map(
@@ -254,12 +266,12 @@ const DependingEating: FC<IProps> = ({
                   firstMealWeekend.clone().minute() - halfHourItem.minute() <
                     30 && (
                     <div key={index}>
+                      {helperWarningMarker(firstMealWeekend, halfHourItem)}
                       <RiMedicineBottleLine
                         key={`after-${index}`}
                         style={{ color: 'red' }}
                       />
-                      <span
-                        key={index + 4}>
+                      <span key={index + 4}>
                         {med.interval.format('H:mm')} после еды
                       </span>
                     </div>

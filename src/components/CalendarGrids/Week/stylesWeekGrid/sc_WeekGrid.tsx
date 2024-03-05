@@ -85,9 +85,11 @@ export const DayOfWeek = styled.div<IDayOfWeek>`
 // Hours Columm
 interface IHourContent {
   $currentHour: boolean;
+  $currentWarning: boolean;
 }
 
 export const HourContent = styled.div<IHourContent>`
+  background-color: #1e1f21; // цвет по-умолчанию
   position: relative;
   display: block;
   width: 100%;
@@ -112,14 +114,14 @@ export const HourContent = styled.div<IHourContent>`
   
   ${(props) => 
   /* текущая по времени ячейка */
-    props.$currentHour
-      ? 'background-color: #3d3e3f'
-      : 'background-color: #1e1f21'};
+    props.$currentHour ? 'background-color: #3d3e3f' : null};
+    
    /* Для того, чтобы текст не растягивал блок, а ставилось в конце ...  */
     /* max-width: 260px; */
    //white-space: nowrap; /* Текст не переносится */
     //overflow: hidden; /* Обрезаем всё за пределами блока */
     //text-overflow: ellipsis; /* Добавляем многоточие */
+    ${(props) => props.$currentWarning ? 'background-color: red' : null}
 `;
 
 

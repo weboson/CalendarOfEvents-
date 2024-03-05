@@ -10,6 +10,7 @@ import MealSchedule from './components/MealSchedule';
 import UsingMedicines from './components/medicines/UsingMedicines';
 // DataBase array
 import takingMedications from '../../../../data/localDataBase/LocalDB_WaysUsing';
+import { useAppSelector } from '../../../../store/hooks';
 
 // types
 interface IProps {
@@ -41,6 +42,10 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
   }
 }); 
 
+    //! Redux-Toolkit
+    const warningMarker = useAppSelector((state) => state.warningMarker)
+    console.log(warningMarker)
+
   return (
     ArrayHalfHoursContent.map((halfHourItem, hourIndex) => (
       <HourContent 
@@ -50,7 +55,15 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
           halfHourItem.isSame(moment(), 'hour') && // проверить на текущий час
           moment().minute() - halfHourItem.minute() < 30 && //exp: 4:01 - 4:00/4:30 = 1/-29 < 30 -> true/true
           moment().minute() - halfHourItem.minute() >= 0 && //exp: 4:01 - 4:00/4:30 = 1/-29 < 30 -> true/false(-29)
-          dayItem.isSame(moment(), 'day') // current Day'
+          dayItem.isSame(moment(), 'day') &&  // current Day'
+          (!warningMarker)
+        }
+
+        $currentWarning={
+          halfHourItem.isSame(moment(), 'hour') && // проверить на текущий час
+          moment().minute() - halfHourItem.minute() < 30 && //exp: 4:01 - 4:00/4:30 = 1/-29 < 30 -> true/true
+          moment().minute() - halfHourItem.minute() >= 0 && //exp: 4:01 - 4:00/4:30 = 1/-29 < 30 -> true/false(-29)
+          dayItem.isSame(moment(), 'day') && (warningMarker)
         }
         // id for autoScrolling at the current hour
         id={halfHourItem.isSame(moment(), 'hour') ? 'autoScroll' : ''} // scroll in Home.tsx

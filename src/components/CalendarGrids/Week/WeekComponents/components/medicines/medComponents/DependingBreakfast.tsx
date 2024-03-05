@@ -4,6 +4,9 @@ import { Moment } from 'moment';
 import { FC } from 'react';
 import { RiMedicineBottleLine } from 'react-icons/ri';
 import { ITakingMedication } from '../../../../../../../data/localDataBase/LocalDB_WaysUsing';
+import moment from 'moment';
+import { readingWarningMarker } from '../../../../../../../store/features/warningMarkerSlice';
+import { useAppDispatch } from '../../../../../../../store/hooks';
 
 interface IProps {
   dayItem: Moment;
@@ -24,6 +27,24 @@ const DependingBreakfast: FC<IProps> = ({
   firstMealWeekdays = firstMealWeekdays.clone();
   firstMealWeekend = firstMealWeekend.clone();
 
+    //! redux-toolkit
+    const dispatch = useAppDispatch(); // передается и используется в helperWarningMarker.tsx
+    // warningMarker = useAppSelector((state) => state.warningMarker) используется в GridDayWithHours.tsx
+    //! helper: возращает потребителям true/false - и там же вызываю useAppDispatch
+  const helperWarningMarker = (
+    firstMeal: Moment,
+    halfHourItem: Moment,
+    dayItem: Moment,
+  ) => {
+    moment().isSame(firstMeal, 'hour') &&
+    dayItem.isSame(moment(), 'day') &&
+    moment().minute() - halfHourItem.minute() < 30 && //exp: 4:01 - 4:00/4:30 = 1/-29 < 30 -> true/true
+    moment().minute() - halfHourItem.minute() >= 0
+      ? dispatch(readingWarningMarker(true))
+      : null;
+  };
+
+
   switch (
     med.position // до/вовремя/после
   ) {
@@ -41,6 +62,7 @@ const DependingBreakfast: FC<IProps> = ({
               firstMealWeekdays.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <div>
+                  {helperWarningMarker(firstMealWeekdays, halfHourItem, dayItem)}
                   <RiMedicineBottleLine 
                     style={{
                       color: 'red',

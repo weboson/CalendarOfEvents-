@@ -1,6 +1,8 @@
 // redux-toolkit - Slice 
-// Чтобы получить состояние данных: => const warningMarker = useAppSelector((state) => state.warningMarker);
-// Чтобы изменить состояние данных: => const dispatch = useAppDispatch(); dispatch(readingWarningMarker(new data));
+// Чтобы получить состояние данных: => const warningMarker = useAppSelector((state) => state.warningMarker) 
+//- использую в ;
+// Чтобы изменить состояние данных: => const dispatch = useAppDispatch(); dispatch(readingWarningMarker(new data)) 
+// - вызывается в DependingEating.tsx и т.д, а использую в helperWarningMarker.tsx;
 //! Warning Marker -  Предупреждающий маркер, когда текущее время совпадает с приёмом лекарства
 import { createSlice } from '@reduxjs/toolkit'
 import type { RootState } from '../store'

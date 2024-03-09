@@ -1,5 +1,5 @@
-//! вертикальный столбик по пол часа на определенный день (datyItem)
-import { FC } from 'react';
+//! 1 столбик ячеек (48шт) - по пол часа на определенный день (datyItem)
+import { FC, useEffect } from 'react';
 import { Moment } from 'moment';
 // sc_styles
 import { HourContent } from '../stylesWeekGrid/sc_WeekGrid';
@@ -10,7 +10,8 @@ import MealSchedule from './components/MealSchedule';
 import UsingMedicines from './components/medicines/UsingMedicines';
 // DataBase array
 import takingMedications from '../../../../data/localDataBase/LocalDB_WaysUsing';
-import { useAppSelector } from '../../../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
+import { readingWarningMarker } from '../../../../store/features/warningMarkerSlice';
 
 // types
 interface IProps {
@@ -18,6 +19,10 @@ interface IProps {
   dayItem: Moment;
 }
 
+
+//! для WarningMarker массив из 2-х элементов
+export const arrBoolean: Array<string> = []; // использую в helperWarningMarker.ts
+console.log(arrBoolean)
 
 const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
   // 48 Half Hours  (content), exemple: 0:00, 0:30, 1:00
@@ -32,7 +37,6 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
   // let arr = dailyRegimes.find((item, index) => item.id == 2)
   // console.log(arr)
 
-
 // выбираем самый большое число из всех элементов массива "takingMedications" у свойства "quantity"(количество приёмом ЛС): 7 раз/день: еда 
  const maxMealFood = takingMedications.reduce(function(prev, current) {
   if (+current.quantity > +prev.quantity) {
@@ -42,9 +46,21 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
   }
 }); 
 
-    //! Redux-Toolkit
-    const warningMarker = useAppSelector((state) => state.warningMarker)
-    console.log(warningMarker)
+  //! WarnigMarker: маркер ячейки, если текущее время совпадает со временем приёма лекарств: 
+  //* color: red, marker in Popup and open MyModalWarning.tsx
+  const dispatch = useAppDispatch(); // индикатор: совпадает ли текущее время со временем приёма ЛС
+  const warningMarker = useAppSelector((state) => state.warningMarker);
+  // console.log(warningMarker)
+  //* for WarningMarker (optimization): чтобы здесь 1раз сразу определить текущий день (столбик), чтобы не определять в каждой заполненой ячейке.
+  // пропс передается: UsingMedicines -> DependingEating/DependingBreakfast/DependingSupper.tsx
+  const currentDayForWirning = dayItem.isSame(moment(), 'day');
+  //* проверяем были ли случаи с true, если хоть один true, значит подсвечиваем ячейку красным цветом
+  useEffect(() => {
+    arrBoolean.find((item) => item == 'true') ? dispatch(readingWarningMarker(true)) : dispatch(readingWarningMarker(false))
+    // очистим массив, чтобы не рос бесконечно
+    // arrBoolean.length = 0;
+  }, [currentDate]) // каждые 60 сек будет проверяться массив на "true"/"false" (currentDate из  Home.tsx)
+
 
   return (
     ArrayHalfHoursContent.map((halfHourItem, hourIndex) => (
@@ -55,15 +71,16 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
           halfHourItem.isSame(moment(), 'hour') && // проверить на текущий час
           moment().minute() - halfHourItem.minute() < 30 && //exp: 4:01 - 4:00/4:30 = 1/-29 < 30 -> true/true
           moment().minute() - halfHourItem.minute() >= 0 && //exp: 4:01 - 4:00/4:30 = 1/-29 < 30 -> true/false(-29)
-          dayItem.isSame(moment(), 'day') &&  // current Day'
-          (!warningMarker)
+          dayItem.isSame(moment(), 'day') && // current day
+          (!warningMarker) // не время приёма лекарства
         }
-
         $currentWarning={
+          //! маркировка 
           halfHourItem.isSame(moment(), 'hour') && // проверить на текущий час
           moment().minute() - halfHourItem.minute() < 30 && //exp: 4:01 - 4:00/4:30 = 1/-29 < 30 -> true/true
           moment().minute() - halfHourItem.minute() >= 0 && //exp: 4:01 - 4:00/4:30 = 1/-29 < 30 -> true/false(-29)
-          dayItem.isSame(moment(), 'day') && (warningMarker)
+          dayItem.isSame(moment(), 'day') && // current day
+          (warningMarker) // не время приёма лекарства
         }
         // id for autoScrolling at the current hour
         id={halfHourItem.isSame(moment(), 'hour') ? 'autoScroll' : ''} // scroll in Home.tsx
@@ -79,7 +96,7 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
   
         {/* //* for Using Medicines (расчет приёма лекарств) */}
         {takingMedications.map((medItem, index) => (
-          <UsingMedicines key={index} dayItem={dayItem} halfHourItem={halfHourItem} med={medItem} />
+          <UsingMedicines key={index} dayItem={dayItem} halfHourItem={halfHourItem} med={medItem} currentDayForWirning={currentDayForWirning}/>
         ))}
       </HourContent>
     ))

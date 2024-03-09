@@ -42,8 +42,6 @@ const lastMealWeekend = mealSchedule[0].modeRegime.weekend.lastMeal.clone()
 const diffIntervalMealWeekend = lastMealWeekend.diff(firstMealWeekend, 'seconds')
 const betweenMealsWeekend = (diffIntervalMealWeekend / (maxmealfood.quantity-1)) 
 
-// ! создать отдельный файл (либо в беке либо во фронте) и передавать объектом
-
 
 if (maxmealfood.depending) { // есть ли зависимость от еды?
   return (

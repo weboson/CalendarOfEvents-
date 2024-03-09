@@ -4,7 +4,7 @@ import { Moment } from 'moment';
 import { FC } from 'react';
 import { RiMedicineBottleLine } from 'react-icons/ri';
 import { ITakingMedication } from '../../../../../../../data/localDataBase/LocalDB_WaysUsing';
-import { helperWarningMarker } from '../helper/helperWarningMarker';
+import { helperWarningMarker } from './helper/helperWarningMarker';
 
 interface IProps {
   dayItem: Moment;
@@ -14,6 +14,7 @@ interface IProps {
   firstMealWeekend: Moment;
   betweenMealsWeekend: number;
   med: ITakingMedication;
+  currentDayForWirning: boolean;
 }
 
 const DependingEating: FC<IProps> = ({
@@ -24,6 +25,7 @@ const DependingEating: FC<IProps> = ({
   firstMealWeekend,
   betweenMealsWeekend,
   med,
+  currentDayForWirning
 }) => {
   // нужен .clone() - иначе add и subtract будут дублировать свои выполнение, и вместо add(6 часов) получим add(12)
   firstMealWeekdays = firstMealWeekdays.clone();
@@ -45,6 +47,7 @@ const DependingEating: FC<IProps> = ({
               firstMealWeekdays.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <>
+                  {currentDayForWirning && helperWarningMarker(halfHourItem)}
                   <RiMedicineBottleLine style={{ color: 'red' }} />
                   <span>{med.interval.format('H:mm')} до еды</span>
                   <br />
@@ -61,6 +64,7 @@ const DependingEating: FC<IProps> = ({
                   firstMealWeekdays.clone().minute() - halfHourItem.minute() <
                     30 && (
                     <div key={index}>
+                      {currentDayForWirning && helperWarningMarker(halfHourItem) || null}
                       <RiMedicineBottleLine
                         key={`before-${index}`}
                         style={{ color: 'red' }}
@@ -81,6 +85,7 @@ const DependingEating: FC<IProps> = ({
               firstMealWeekend.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <div>
+                  {currentDayForWirning && helperWarningMarker(halfHourItem) || null}
                   <RiMedicineBottleLine style={{ color: 'red' }} />
                   <span>{med.interval.format('H:mm')} до еды</span>
                 </div>
@@ -96,6 +101,7 @@ const DependingEating: FC<IProps> = ({
                   firstMealWeekend.clone().minute() - halfHourItem.minute() <
                     30 && (
                     <div key={index}>
+                      {currentDayForWirning && helperWarningMarker(halfHourItem) || null}
                       <RiMedicineBottleLine
                         key={`before-${index}`}
                         style={{ color: 'red' }}
@@ -118,6 +124,7 @@ const DependingEating: FC<IProps> = ({
               firstMealWeekdays.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <div>
+                  {currentDayForWirning && helperWarningMarker(halfHourItem) || null}
                   <RiMedicineBottleLine style={{ color: 'red' }} />
                   <span>Вовремя еды</span> <br />
                 </div>
@@ -133,6 +140,7 @@ const DependingEating: FC<IProps> = ({
                   firstMealWeekdays.clone().minute() - halfHourItem.minute() <
                     30 && (
                     <div key={index}>
+                      {currentDayForWirning && helperWarningMarker(halfHourItem) || null}
                       <RiMedicineBottleLine
                         key={`while-${index}`}
                         style={{ color: 'red' }}
@@ -147,6 +155,7 @@ const DependingEating: FC<IProps> = ({
               firstMealWeekend.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <div>
+                  {currentDayForWirning && helperWarningMarker(halfHourItem) || null}
                   <RiMedicineBottleLine style={{ color: 'red' }} />
                   <span>Вовремя еды</span> <br />
                 </div>
@@ -162,6 +171,7 @@ const DependingEating: FC<IProps> = ({
                   firstMealWeekend.clone().minute() - halfHourItem.minute() <
                     30 && (
                     <div key={index}>
+                      {currentDayForWirning && helperWarningMarker(halfHourItem) || null}
                       <RiMedicineBottleLine
                         key={`while-${index}`}
                         style={{ color: 'red' }}
@@ -187,7 +197,7 @@ const DependingEating: FC<IProps> = ({
               firstMealWeekdays.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <div>
-                  {}
+                  {currentDayForWirning && helperWarningMarker(halfHourItem) || null}
                   <RiMedicineBottleLine style={{ color: 'red' }} />
                   <span>{med.interval.format('H:mm')} после еды</span>
                   <br />
@@ -204,7 +214,7 @@ const DependingEating: FC<IProps> = ({
                   firstMealWeekdays.clone().minute() - halfHourItem.minute() <
                     30 && (
                     <div key={index}>
-                      {helperWarningMarker(firstMealWeekdays, halfHourItem, dayItem)}
+                      {currentDayForWirning && helperWarningMarker(halfHourItem) || null}
                       <RiMedicineBottleLine
                         key={`after-${index}`}
                         style={{ color: 'red' }}
@@ -225,6 +235,7 @@ const DependingEating: FC<IProps> = ({
               firstMealWeekend.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <div>
+                  {currentDayForWirning && helperWarningMarker(halfHourItem) || null}
                   <RiMedicineBottleLine style={{ color: 'red' }} />
                   <span>{med.interval.format('H:mm')} после еды</span>
                   <br />
@@ -241,6 +252,7 @@ const DependingEating: FC<IProps> = ({
                   firstMealWeekend.clone().minute() - halfHourItem.minute() <
                     30 && (
                     <div key={index}>
+                      {currentDayForWirning && helperWarningMarker(halfHourItem) || null}
                       <RiMedicineBottleLine
                         key={`after-${index}`}
                         style={{ color: 'red' }}

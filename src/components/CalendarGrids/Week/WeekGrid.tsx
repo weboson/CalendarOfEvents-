@@ -12,13 +12,11 @@ import moment, { Moment } from 'moment';
 import GridDayWithHours from './WeekComponents/GridDayWithHours';
 import MyPopup from '../../myPopup/MyPopup';
 
-
 interface IProps {
   currentDate: Moment;
 }
 
 const WeekGrid: FC<IProps> = ({ currentDate }) => {
-
   // currentDate - это текущее врем, которое автоматически обновляется (useEffect) каждую минуту в Home.tsx
 
   // Days of week (top panel)
@@ -31,7 +29,7 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
     currentDate.hours(i)
   );
 
-//! Savind/Recovery Scroll position (сохраняет текущий скролл (в mode: Week), даже после перехода на другие компоненты - не нужно постоянно мотать до того места, где остановился)
+// Savind/Recovery Scroll position (сохраняет текущий скролл (в mode: Week), даже после перехода на другие компоненты - не нужно постоянно мотать до того места, где остановился)
  // Знак ! - в TS значит, что уверены, что объект не равен null или Uundefined
  useEffect(() => {
   //1 после события скроллинга пользователя - срабатывает сохраннение в sessionStorage(localStorage сохраняет даже после перезагрузки - нам это не нужно, на только после обновления)
@@ -45,8 +43,7 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
   document.querySelector('#saveScroll')!.scrollTo(0, +sessionStorage.getItem('position')!) // Знак ! - в TS значит, что уверены, что объект не равен null или Uundefined
   }
 , []);
- 
-
+    
   return (
     <GridWrapper id='saveScroll'>
       {/* Side Panel */}

@@ -1,6 +1,6 @@
 // redux-toolkit - Slice 
 // Чтобы получить состояние данных: => const warningMarker = useAppSelector((state) => state.warningMarker) 
-//- использую в ;
+//- использую в helperWarningMarker.ts, GridDayWithHours -> DependingEating/DependingBreakfast/DependingSupper.tsx;
 // Чтобы изменить состояние данных: => const dispatch = useAppDispatch(); dispatch(readingWarningMarker(new data)) 
 // - вызывается в DependingEating.tsx и т.д, а использую в helperWarningMarker.tsx;
 //! Warning Marker -  Предупреждающий маркер, когда текущее время совпадает с приёмом лекарства
@@ -8,7 +8,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { RootState } from '../store'
 
 //! true - нужно принять ЛС / false (по-умолчанию) - нет
-const initialState: boolean = false // по-умолчанию (не время приёма )
+const initialState: boolean = false // по-умолчанию (не время для приёма )
 
 
 export const warningMarkerSlice = createSlice({

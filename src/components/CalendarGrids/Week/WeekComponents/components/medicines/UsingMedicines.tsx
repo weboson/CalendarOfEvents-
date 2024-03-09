@@ -15,9 +15,10 @@ interface IProps {
   dayItem: Moment;
   halfHourItem: Moment;
   med: ITakingMedication;
+  currentDayForWirning: boolean;
 }
 
-const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
+const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med, currentDayForWirning }) => {
   // weekday
   const firstMealWeekdays =
     mealSchedule[0].modeRegime.weekdays.firstMeal.clone(); // обз clone() иначе изменим исходник
@@ -65,9 +66,6 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
     }
   };
 
-  // для Modal-окна - предупреждающего о приёме лекарства
- // console.log(halfHourItem.isSame(moment(), 'hour') && dayItem.isSame(moment(), 'day') ? 'текущий' : null)
-
   if (med.depending) {
     //==================================== есть ли зависимости от завтрака/ужина/еды/
     //* если есть, то какая (еда, завтрак, ужин)?
@@ -77,7 +75,7 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
         //* до, вовремя или после
         return (
           <div
-            //! события наведения и уходы мыши
+            // события наведения и уходы мыши
             onMouseOver={hoverMouseOnMedicine}
             onMouseOut={hoverMouseOnMedicine}
             style={{ cursor: 'help', maxWidth: "fit-content"}}
@@ -90,6 +88,7 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
               firstMealWeekend={firstMealWeekend}
               betweenMealsWeekend={betweenMealsWeekend}
               med={med}
+              currentDayForWirning={currentDayForWirning} 
             />
           </div>
         );
@@ -109,6 +108,7 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
               firstMealWeekdays={firstMealWeekdays}
               firstMealWeekend={firstMealWeekend}
               med={med}
+              currentDayForWirning={currentDayForWirning} 
             />
           </div>
         );
@@ -128,6 +128,7 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med }) => {
               lastMealWeekdays={lastMealWeekdays}
               lastMealWeekend={lastMealWeekend}
               med={med}
+              currentDayForWirning={currentDayForWirning} 
             />
           </div>
         );

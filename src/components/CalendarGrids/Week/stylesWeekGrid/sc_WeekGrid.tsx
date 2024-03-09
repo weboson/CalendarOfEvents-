@@ -114,14 +114,19 @@ export const HourContent = styled.div<IHourContent>`
   
   ${(props) => 
   /* текущая по времени ячейка */
+  // серая ячейка, если текущее время и не совпадает со временем приёма ЛС, иначе карсный
     props.$currentHour ? 'background-color: #3d3e3f' : null};
-    
+   
+  ${(props) => 
+  /* текущая по времени ячейка */
+  // серая ячейка, если текущее время и не совпадает со временем приёма ЛС, иначе карсный
+    props.$currentWarning ? 'background-color: red' : null};
+   
    /* Для того, чтобы текст не растягивал блок, а ставилось в конце ...  */
     /* max-width: 260px; */
    //white-space: nowrap; /* Текст не переносится */
     //overflow: hidden; /* Обрезаем всё за пределами блока */
     //text-overflow: ellipsis; /* Добавляем многоточие */
-    ${(props) => props.$currentWarning ? 'background-color: red' : null}
 `;
 
 

@@ -324,7 +324,7 @@ const takingMedications: ITakingMedications = [
         quantity: 1, // не изменно 1 раз
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[0].oftime, //  'before' ДО
-        interval: moment().hour(7).minute(0), // exm: за 2 часа завтрака 
+        interval: moment().hour(3).minute(0), // exm: за X часа завтрака 
         duration: {
             index: 1,
             title: "months", // moment().subtract(1.5, 'months')
@@ -457,5 +457,6 @@ const takingMedications: ITakingMedications = [
 
     
 ]
+
 
 export default takingMedications

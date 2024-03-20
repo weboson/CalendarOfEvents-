@@ -1,4 +1,4 @@
-//! 1 столбик ячеек (48шт) - по пол часа на определенный день (datyItem)
+//! КАЖДЫЙ СТОЛБИК (их всего 7) ячеек (48шт) - по пол часа на определенный день (datyItem)
 import { FC, useEffect } from 'react';
 import { Moment } from 'moment';
 // sc_styles
@@ -12,7 +12,7 @@ import UsingMedicines from './components/medicines/UsingMedicines';
 import takingMedications from '../../../../data/localDataBase/LocalDB_WaysUsing';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { readingWarningMarker } from '../../../../store/features/warningMarkerSlice';
-
+import { arrWarningCleare } from '../../../../store/features/arrWarningSlice';
 // types
 interface IProps {
   currentDate: Moment;
@@ -20,11 +20,10 @@ interface IProps {
 }
 
 
-//! для WarningMarker массив из 2-х элементов
-export const arrBoolean: Array<string> = []; // использую в helperWarningMarker.ts
-console.log(arrBoolean)
+
 
 const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
+  
   // 48 Half Hours  (content), exemple: 0:00, 0:30, 1:00
   const ArrayHalfHoursContent = [...new Array(48)].map((_, i) =>
     currentDate
@@ -46,22 +45,40 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
   }
 }); 
 
-  //! WarnigMarker: маркер ячейки, если текущее время совпадает со временем приёма лекарств: 
-  //* color: red, marker in Popup and open MyModalWarning.tsx
+
+  
+//! WarnigMarker: маркер ячейки, если текущее время совпадает со временем приёма лекарств:
+  // console.log()
   const dispatch = useAppDispatch(); // индикатор: совпадает ли текущее время со временем приёма ЛС
-  const warningMarker = useAppSelector((state) => state.warningMarker);
-  // console.log(warningMarker)
+  
+  const arrWarning = useAppSelector((state) => state.arrWarning) // массив индикатор.find(){ main indicator
   //* for WarningMarker (optimization): чтобы здесь 1раз сразу определить текущий день (столбик), чтобы не определять в каждой заполненой ячейке.
   // пропс передается: UsingMedicines -> DependingEating/DependingBreakfast/DependingSupper.tsx
-  const currentDayForWirning = dayItem.isSame(moment(), 'day');
+  //const halfHourItemCurrent = useAppSelector((state) => state.halfHourItem)
   //* проверяем были ли случаи с true, если хоть один true, значит подсвечиваем ячейку красным цветом
-  useEffect(() => {
-    arrBoolean.find((item) => item == 'true') ? dispatch(readingWarningMarker(true)) : dispatch(readingWarningMarker(false))
-    // очистим массив, чтобы не рос бесконечно
-    // arrBoolean.length = 0;
-  }, [currentDate]) // каждые 60 сек будет проверяться массив на "true"/"false" (currentDate из  Home.tsx)
-
-
+  // useEffect(() => {
+  //   if(arrWarning.arr.indexOf( true ) != -1) {
+  //     dispatch(readingWarningMarker(true)) // [false,fasle,true]
+  //     dispatch(arrWarningCleare())
+  //   } else {
+  //     dispatch(readingWarningMarker(false))
+  //   }
+  //   //console.log(halfHourItemCurrent) //!
+  //   // arrWarning ? dispatch(readingWarningMarker(true)) : dispatch(readingWarningMarker(false))
+  //   // console.log(arrWarning.find((item) => {
+  //   //   item == true ? true : false
+  //   // }))
+  //   console.log(arrWarning)
+  //   // console.log(arr.indexOf( true ) != -1)
+  //   // dispatch(arrWarningCleare())
+  // }) // каждые 60 сек будет проверяться массив на "true"/"false" (currentDate из  Home.tsx)
+  
+  //! WarnigMarker: маркер ячейки, если текущее время совпадает со временем приёма лекарств:
+  const warningMarker = useAppSelector((state) => state.warningMarker); // общий индикатор
+  const currentDayForWirning = dayItem.isSame(moment(), 'day');
+  
+  
+  
   return (
     ArrayHalfHoursContent.map((halfHourItem, hourIndex) => (
       <HourContent 
@@ -96,7 +113,7 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
   
         {/* //* for Using Medicines (расчет приёма лекарств) */}
         {takingMedications.map((medItem, index) => (
-          <UsingMedicines key={index} dayItem={dayItem} halfHourItem={halfHourItem} med={medItem} currentDayForWirning={currentDayForWirning}/>
+          <UsingMedicines key={index} dayItem={dayItem} halfHourItem={halfHourItem} med={medItem} currentDayForWirning={currentDayForWirning} currentDate={currentDate}/>
         ))}
       </HourContent>
     ))
@@ -104,3 +121,5 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
 };
 
 export default GridDayWithHours;
+
+

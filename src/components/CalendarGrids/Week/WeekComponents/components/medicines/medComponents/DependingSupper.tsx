@@ -44,7 +44,7 @@ const DependingSupper: FC<IProps> = ({
               lastMealWeekdays.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <>
-                {currentDayForWirning && helperWarningMarker(halfHourItem) || null}
+              {/* {currentDayForWirning && helperWarningMarker(halfHourItem) || null} */}
                   <RiMedicineBottleLine
                     style={{
                       color: 'red'}}
@@ -64,7 +64,7 @@ const DependingSupper: FC<IProps> = ({
               lastMealWeekend.clone().minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:21 >= 0  and < 30
               lastMealWeekend.clone().minute() - halfHourItem.minute() < 30 && (
                 <>
-                {currentDayForWirning && helperWarningMarker(halfHourItem) || null}
+                {/* {currentDayForWirning && helperWarningMarker(halfHourItem) || null} */}
                   <RiMedicineBottleLine
                     style={{
                       color: 'red',}}
@@ -85,7 +85,7 @@ const DependingSupper: FC<IProps> = ({
               lastMealWeekdays.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <>
-                {currentDayForWirning && helperWarningMarker(halfHourItem) || null}
+                {/* {currentDayForWirning && helperWarningMarker(halfHourItem) || null} */}
                   <RiMedicineBottleLine
                     style={{
                       color: 'red',}}
@@ -100,7 +100,7 @@ const DependingSupper: FC<IProps> = ({
               lastMealWeekend.clone().minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:21 >= 0  and < 30
               lastMealWeekend.clone().minute() - halfHourItem.minute() < 30 && (
                 <>
-                {currentDayForWirning && helperWarningMarker(halfHourItem) || null}
+                {/* {currentDayForWirning && helperWarningMarker(halfHourItem) || null} */}
                   <RiMedicineBottleLine
                     style={{
                       color: 'red',}}
@@ -126,7 +126,7 @@ const DependingSupper: FC<IProps> = ({
               lastMealWeekdays.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <>
-                {currentDayForWirning && helperWarningMarker(halfHourItem) || null}
+                {/* {currentDayForWirning && helperWarningMarker(halfHourItem) || null} */}
                   <RiMedicineBottleLine
                     style={{
                       color: 'red',}}
@@ -146,7 +146,7 @@ const DependingSupper: FC<IProps> = ({
               lastMealWeekend.clone().minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:21 >= 0  and < 30
               lastMealWeekend.clone().minute() - halfHourItem.minute() < 30 && (
                 <>
-                {currentDayForWirning && helperWarningMarker(halfHourItem) || null}
+                {/* {currentDayForWirning && helperWarningMarker(halfHourItem) || null} */}
                   <RiMedicineBottleLine
                     style={{
                       color: 'red',}}

@@ -4,7 +4,7 @@ import { Moment } from 'moment';
 import { FC } from 'react';
 import { RiMedicineBottleLine } from 'react-icons/ri';
 import { ITakingMedication } from '../../../../../../../data/localDataBase/LocalDB_WaysUsing';
-import { helperWarningMarker } from './helper/helperWarningMarker';
+import HelperWarningMarker from './helper/HelperWarningMarker';
 
 interface IProps {
   dayItem: Moment;
@@ -13,6 +13,7 @@ interface IProps {
   firstMealWeekend: Moment;
   med: ITakingMedication;
   currentDayForWirning: boolean;
+  currentDate: Moment;
 }
 
 const DependingBreakfast: FC<IProps> = ({
@@ -21,7 +22,8 @@ const DependingBreakfast: FC<IProps> = ({
   firstMealWeekdays,
   firstMealWeekend,
   med,
-  currentDayForWirning
+  currentDayForWirning,
+  currentDate,
 }) => {
   // нужен .clone() - иначе add и subtract будут дублировать своё выполнение
   firstMealWeekdays = firstMealWeekdays.clone();
@@ -44,8 +46,8 @@ const DependingBreakfast: FC<IProps> = ({
               firstMealWeekdays.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <>
-                  {currentDayForWirning && helperWarningMarker(halfHourItem)}
-                  <RiMedicineBottleLine 
+                  {(currentDayForWirning) && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
+                  <RiMedicineBottleLine
                     style={{
                       color: 'red',
                       top: '18px',
@@ -54,10 +56,11 @@ const DependingBreakfast: FC<IProps> = ({
                   <span>
                     {/*//! вариант с названием ЛС {`${med.interval.format('H:mm')} ${med?.title}`} */}
                     {med.interval.format('H:mm')} до завтрака
-                  </span><br/>
+                  </span>
+                  <br />
                 </>
-              ) 
-          : // weekend 
+              )
+          : // weekend
             halfHourItem.isSame(
               firstMealWeekend
                 .subtract(med.interval.minute(), 'minute')
@@ -68,18 +71,17 @@ const DependingBreakfast: FC<IProps> = ({
               firstMealWeekend.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <>
-                {currentDayForWirning && helperWarningMarker(halfHourItem)}
+                   {(currentDayForWirning) && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                   <RiMedicineBottleLine
                     style={{
                       color: 'red',
                     }}
                   />
-                  <span>
-                    {med.interval.format('H:mm')} до завтрака
-                  </span><br/>
-                </> 
+                  <span>{med.interval.format('H:mm')} до завтрака</span>
+                  <br />
+                </>
               )
-      )
+      );
       break;
     case 'while': //! ВОВРЕМЯ завтрака
       return (
@@ -90,14 +92,14 @@ const DependingBreakfast: FC<IProps> = ({
               firstMealWeekdays.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <>
-                {currentDayForWirning && helperWarningMarker(halfHourItem)}
+                   {(currentDayForWirning) && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                   <RiMedicineBottleLine
                     style={{
-                      color: 'red',}}
+                      color: 'red',
+                    }}
                   />
-                  <span>
-                    Вовремя завтрака
-                  </span><br/>
+                  <span>Вовремя завтрака</span>
+                  <br />
                 </>
               )
           : // weekend
@@ -106,14 +108,13 @@ const DependingBreakfast: FC<IProps> = ({
               firstMealWeekend.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <>
-                {currentDayForWirning && helperWarningMarker(halfHourItem)}
+                 {(currentDayForWirning) && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                   <RiMedicineBottleLine
                     style={{
-                      color: 'red',}}
+                      color: 'red',
+                    }}
                   />
-                  <span>
-                    Вовремя завтрака
-                  </span>
+                  <span>Вовремя завтрака</span>
                 </>
               )
       );
@@ -132,13 +133,13 @@ const DependingBreakfast: FC<IProps> = ({
               firstMealWeekdays.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <>
-                {currentDayForWirning && helperWarningMarker(halfHourItem)}
+                 {(currentDayForWirning) && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                   <RiMedicineBottleLine
                     style={{
-                      color: 'red'}}/>
-                  <span>
-                    {med.interval.format('H:mm')} после завтрака
-                  </span>
+                      color: 'red',
+                    }}
+                  />
+                  <span>{med.interval.format('H:mm')} после завтрака</span>
                 </>
               )
           : // weekend
@@ -152,14 +153,13 @@ const DependingBreakfast: FC<IProps> = ({
               firstMealWeekend.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <>
-                {currentDayForWirning && helperWarningMarker(halfHourItem)}
+                 {(currentDayForWirning) && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                   <RiMedicineBottleLine
                     style={{
-                      color: 'red',}}
+                      color: 'red',
+                    }}
                   />
-                  <span>
-                    {med.interval.format('H:mm')} после завтрака
-                  </span>
+                  <span>{med.interval.format('H:mm')} после завтрака</span>
                 </>
               )
       );

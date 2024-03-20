@@ -1,3 +1,4 @@
+//! Warning Marker - part 1 (indicator)
 // redux-toolkit - Slice 
 // Чтобы получить состояние данных: => const warningMarker = useAppSelector((state) => state.warningMarker) 
 //- использую в helperWarningMarker.ts, GridDayWithHours -> DependingEating/DependingBreakfast/DependingSupper.tsx;

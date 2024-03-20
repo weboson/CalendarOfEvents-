@@ -1,6 +1,6 @@
 //! приём лекарств
 import { Moment } from 'moment';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 // данные графика питания: first and last eating
 import mealSchedule from '../../../../../../data/localDataBase/localDB_MealSchedule';
 import { ITakingMedication } from '../../../../../../data/localDataBase/LocalDB_WaysUsing';
@@ -16,9 +16,11 @@ interface IProps {
   halfHourItem: Moment;
   med: ITakingMedication;
   currentDayForWirning: boolean;
+  currentDate: Moment;
 }
 
-const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med, currentDayForWirning }) => {
+const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med, currentDayForWirning,  currentDate}) => {
+
   // weekday
   const firstMealWeekdays =
     mealSchedule[0].modeRegime.weekdays.firstMeal.clone(); // обз clone() иначе изменим исходник
@@ -41,7 +43,7 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med, currentDayForW
 
   //! Для Popup - окна
   //Redux-toolkit - из hooks.tsx - для изменения данных
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch(); 
   // Обработчик onMouseOver и onMouseOut: при наведении мышью на ячейку с ЛС, появляется Popup - окно с подробным списком лекарств
   // (еще в самом myPopup.tsx есть событие - чтобы popup не исчезал при наведение на самого popup)
   const hoverMouseOnMedicine = (event: React.MouseEvent) => { // тип атриубта https://habr.com/ru/articles/783858/   
@@ -89,6 +91,7 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med, currentDayForW
               betweenMealsWeekend={betweenMealsWeekend}
               med={med}
               currentDayForWirning={currentDayForWirning} 
+              currentDate={currentDate}
             />
           </div>
         );
@@ -108,7 +111,8 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med, currentDayForW
               firstMealWeekdays={firstMealWeekdays}
               firstMealWeekend={firstMealWeekend}
               med={med}
-              currentDayForWirning={currentDayForWirning} 
+              currentDayForWirning={currentDayForWirning}
+              currentDate={currentDate}
             />
           </div>
         );

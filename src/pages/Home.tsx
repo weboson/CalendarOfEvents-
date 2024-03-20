@@ -34,7 +34,6 @@ const Home: FC = () => {
     const timer = setInterval(() => {
       setToday(moment());
     }, 60000);
-
     return () => {
       clearInterval(timer);
     };

@@ -11,6 +11,9 @@ import {
 import moment, { Moment } from 'moment';
 import GridDayWithHours from './WeekComponents/GridDayWithHours';
 import MyPopup from '../../myPopup/MyPopup';
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import { readingWarningMarker } from '../../../store/features/warningMarkerSlice';
+import { arrWarningCleare } from '../../../store/features/arrWarningSlice';
 
 interface IProps {
   currentDate: Moment;
@@ -18,6 +21,7 @@ interface IProps {
 
 const WeekGrid: FC<IProps> = ({ currentDate }) => {
   // currentDate - это текущее врем, которое автоматически обновляется (useEffect) каждую минуту в Home.tsx
+
 
   // Days of week (top panel)
   const ArrayDays = [...new Array(7)].map(
@@ -44,6 +48,33 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
   }
 , []);
     
+const dispatch = useAppDispatch();
+const arrWarning = useAppSelector((state) => state.arrWarning)
+useEffect(() => {
+  if(arrWarning.arr.indexOf( true ) != -1) {
+    console.log('true DONE')
+    dispatch(readingWarningMarker(true)) // [false,fasle,true]
+    console.log('readingWarningMarker DONE')
+    dispatch(arrWarningCleare()) //!
+    console.log('arrWarningCleare TRUE DONE')
+    return
+  } else if (arrWarning.arr.indexOf( false ) != -1) {
+    console.log('WeekGrid222222222222222')
+    dispatch(readingWarningMarker(false))
+    dispatch(arrWarningCleare()) //!
+    console.log('arrWarningCleare FALSE DONE')
+  }
+    
+  //console.log(halfHourItemCurrent) //!
+  // arrWarning ? dispatch(readingWarningMarker(true)) : dispatch(readingWarningMarker(false))
+  // console.log(arrWarning.find((item) => {
+  //   item == true ? true : false
+  // }))
+  console.log(arrWarning)
+  // console.log(arr.indexOf( true ) != -1)
+  // dispatch(arrWarningCleare())
+}) // каждые 60 сек будет проверяться массив на "true"/"false" (currentDate из  Home.tsx)
+
   return (
     <GridWrapper id='saveScroll'>
       {/* Side Panel */}

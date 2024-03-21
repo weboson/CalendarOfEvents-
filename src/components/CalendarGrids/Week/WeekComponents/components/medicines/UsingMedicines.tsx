@@ -133,6 +133,7 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med, currentDayForW
               lastMealWeekend={lastMealWeekend}
               med={med}
               currentDayForWirning={currentDayForWirning} 
+              currentDate={currentDate}
             />
           </div>
         );
@@ -158,6 +159,8 @@ const UsingMedicines: FC<IProps> = ({ dayItem, halfHourItem, med, currentDayForW
           firstMealWeekend={firstMealWeekend}
           betweenMealsWeekend={betweenMealsWeekend}
           med={med}
+          currentDayForWirning={currentDayForWirning} 
+          currentDate={currentDate}
         />
       </div>
     );

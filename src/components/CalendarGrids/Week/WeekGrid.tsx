@@ -12,7 +12,7 @@ import moment, { Moment } from 'moment';
 import GridDayWithHours from './WeekComponents/GridDayWithHours';
 import MyPopup from '../../myPopup/MyPopup';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-import { readingWarningMarker } from '../../../store/features/warningMarkerSlice';
+import { readingMarkerWarning } from '../../../store/features/markerWarningSlice';
 import { arrWarningCleare } from '../../../store/features/arrWarningSlice';
 
 interface IProps {
@@ -20,7 +20,7 @@ interface IProps {
 }
 
 const WeekGrid: FC<IProps> = ({ currentDate }) => {
-  // currentDate - это текущее врем, которое автоматически обновляется (useEffect) каждую минуту в Home.tsx
+  // currentDate - это текущее время, которое автоматически обновляется (useEffect в Home.tsx) каждую минуту (60000 ms)
 
 
   // Days of week (top panel)
@@ -52,28 +52,16 @@ const dispatch = useAppDispatch();
 const arrWarning = useAppSelector((state) => state.arrWarning)
 useEffect(() => {
   if(arrWarning.arr.indexOf( true ) != -1) {
-    console.log('true DONE')
-    dispatch(readingWarningMarker(true)) // [false,fasle,true]
-    console.log('readingWarningMarker DONE')
-    dispatch(arrWarningCleare()) //!
-    console.log('arrWarningCleare TRUE DONE')
+    dispatch(readingMarkerWarning(true)) // [false,fasle,true]
+    dispatch(arrWarningCleare()) // очищаем массив
     return
   } else if (arrWarning.arr.indexOf( false ) != -1) {
-    console.log('WeekGrid222222222222222')
-    dispatch(readingWarningMarker(false))
-    dispatch(arrWarningCleare()) //!
-    console.log('arrWarningCleare FALSE DONE')
+    dispatch(readingMarkerWarning(false))
+    dispatch(arrWarningCleare()) // очищаем массив
   }
-    
-  //console.log(halfHourItemCurrent) //!
-  // arrWarning ? dispatch(readingWarningMarker(true)) : dispatch(readingWarningMarker(false))
-  // console.log(arrWarning.find((item) => {
-  //   item == true ? true : false
-  // }))
   console.log(arrWarning)
-  // console.log(arr.indexOf( true ) != -1)
-  // dispatch(arrWarningCleare())
-}) // каждые 60 сек будет проверяться массив на "true"/"false" (currentDate из  Home.tsx)
+}) // если в useEffect - нет зависимостей, то рендеринг будет при любом изменении компонента, 
+// а именно каждые 60 сек - из-за currentDate
 
   return (
     <GridWrapper id='saveScroll'>

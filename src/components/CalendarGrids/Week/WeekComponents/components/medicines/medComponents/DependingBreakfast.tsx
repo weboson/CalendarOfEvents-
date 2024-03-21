@@ -46,7 +46,7 @@ const DependingBreakfast: FC<IProps> = ({
               firstMealWeekdays.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <>
-                  {(currentDayForWirning) && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
+                  {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                   <RiMedicineBottleLine
                     style={{
                       color: 'red',
@@ -71,7 +71,7 @@ const DependingBreakfast: FC<IProps> = ({
               firstMealWeekend.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <>
-                   {(currentDayForWirning) && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
+                   {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                   <RiMedicineBottleLine
                     style={{
                       color: 'red',
@@ -92,7 +92,7 @@ const DependingBreakfast: FC<IProps> = ({
               firstMealWeekdays.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <>
-                   {(currentDayForWirning) && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
+                   {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                   <RiMedicineBottleLine
                     style={{
                       color: 'red',
@@ -108,7 +108,7 @@ const DependingBreakfast: FC<IProps> = ({
               firstMealWeekend.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <>
-                 {(currentDayForWirning) && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
+                 {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                   <RiMedicineBottleLine
                     style={{
                       color: 'red',
@@ -133,7 +133,7 @@ const DependingBreakfast: FC<IProps> = ({
               firstMealWeekdays.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <>
-                 {(currentDayForWirning) && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
+                 {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                   <RiMedicineBottleLine
                     style={{
                       color: 'red',
@@ -153,7 +153,7 @@ const DependingBreakfast: FC<IProps> = ({
               firstMealWeekend.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <>
-                 {(currentDayForWirning) && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
+                 {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                   <RiMedicineBottleLine
                     style={{
                       color: 'red',

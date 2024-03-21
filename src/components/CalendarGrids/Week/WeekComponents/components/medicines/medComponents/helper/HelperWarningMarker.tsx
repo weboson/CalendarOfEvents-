@@ -1,54 +1,35 @@
+//! если текущее время == с ячейкой с приёмом ЛС, то в Redux-toolkit изменяется массив (push true/fasle)
 import moment from 'moment';
 import { Moment } from 'moment';
 import { FC, useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../../../../../../store/hooks';
-import { arrWarningPushTrue, arrWarningPushFalse, arrWarningCleare } from '../../../../../../../../store/features/arrWarningSlice';
-import { readingWarningMarker } from '../../../../../../../../store/features/warningMarkerSlice';
-import { sateHalfHourItem } from '../../../../../../../../store/features/halfHourItemSlice';
+import { useAppDispatch } from '../../../../../../../../store/hooks';
+import { arrPushWarning } from '../../../../../../../../store/features/arrWarningSlice';
+
 
 interface IProps {
-  halfHourItem: Moment;
-  currentDate: Moment;
+  halfHourItem: Moment; // так как мы уже имеем заполненную лекарствами ячейку, 
+  // благодаря родительский компонентам, например: DependingBreakfast
+  currentDate: Moment; // рендер (проверка) каждые 60000 ms
 }
 
-const HelperWarningMarker:FC<IProps> = ({halfHourItem, currentDate}) => {
+const HelperWarningMarker:FC<IProps> = ({halfHourItem, currentDate }) => {
   
   const dispatch = useAppDispatch();
   
-useEffect(() => { 
-    
-    
+useEffect(() => {  
     if (halfHourItem.isSame(moment(), 'hour') &&
     moment().minute() - halfHourItem.minute() < 30 && //exp: 4:01 - 4:00/4:30 = 1/-29 < 30 -> true/true
     moment().minute() - halfHourItem.minute() >= 0) {
-      // dispatch(readingWarningMarker(true))
-      dispatch(arrWarningPushTrue([true]))
-      // dispatch(arrWarningCleare())
-      //console.log(halfHourItem.hour()) //!
-      //dispatch(sateHalfHourItem(4))
-      
-      
+      dispatch(arrPushWarning([true])) // if текущее время совпадает с ячейкой с приёмом лекарства, то push в array true
     } 
-    dispatch(arrWarningPushFalse([false]))
-
-// &&
-// moment().minute() - halfHourItem.minute() < 30 && //exp: 4:01 - 4:00/4:30 = 1/-29 < 30 -> true/true
-// moment().minute() - halfHourItem.minute() >= 0
-
-     //&& moment().minute() - halfHourItem.minute() > 30 && moment().minute() - halfHourItem.minute() < 59
-    // dispatch(arrWarningPushFalse([false]))  
-    // dispatch(readingWarningMarker(true));
-    // console.log('TRUE') : console.log('FALSE')
-    // dispatch(readingWarningMarker(false))  // чтобы массив не рос бесконечно, ограничел до 2-х элементов
-    // console.log(`HelperWarningMarker обновлися через 50 секунд`)
-}, [currentDate])
-
-  
-// halfHourItem.isSame(moment(), 'hour') && 
-// halfHourItem.minute() - moment().minute() > 30 // 5:00 - 4:48 = 
+    dispatch(arrPushWarning([false])) // if текущее время совпадает с ячейкой с приёмом лекарства, то push в array false
+}, [currentDate]) // обновление при каждом currentDate (60000ms)
+//* 1) если отсутствует второй аргумент (массив зависимостей), 
+// то запуск useEffect(проверки push) - будет при любом изменении компонента, и будет ошибка (тестировал): слишком много циклов
+//* 2) если же массив зависимостей пустой, то запуск useEffect (проверки push) при первом рендере (монтировании компонента),
+// и почему то не меняет маркер для Warning при переходе на следующую ячейку, то есть при изменении текущего времени.
 
 
-// if(halfHourItem.isSame(moment(), 'hour')) {return <>TRUE</>} else if (!halfHourItem.isSame(moment(), 'hour')) {return <>FALSE</>}
   return (
     <>
     </>

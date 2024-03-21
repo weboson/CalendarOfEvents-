@@ -1,5 +1,5 @@
 //! КАЖДЫЙ СТОЛБИК (их всего 7) ячеек (48шт) - по пол часа на определенный день (datyItem)
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { Moment } from 'moment';
 // sc_styles
 import { HourContent } from '../stylesWeekGrid/sc_WeekGrid';
@@ -10,16 +10,11 @@ import MealSchedule from './components/MealSchedule';
 import UsingMedicines from './components/medicines/UsingMedicines';
 // DataBase array
 import takingMedications from '../../../../data/localDataBase/LocalDB_WaysUsing';
-import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
-import { readingWarningMarker } from '../../../../store/features/warningMarkerSlice';
-import { arrWarningCleare } from '../../../../store/features/arrWarningSlice';
-// types
+import { useAppSelector } from '../../../../store/hooks';
 interface IProps {
   currentDate: Moment;
   dayItem: Moment;
 }
-
-
 
 
 const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
@@ -45,39 +40,10 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
   }
 }); 
 
-
-  
-//! WarnigMarker: маркер ячейки, если текущее время совпадает со временем приёма лекарств:
-  // console.log()
-  const dispatch = useAppDispatch(); // индикатор: совпадает ли текущее время со временем приёма ЛС
-  
-  const arrWarning = useAppSelector((state) => state.arrWarning) // массив индикатор.find(){ main indicator
-  //* for WarningMarker (optimization): чтобы здесь 1раз сразу определить текущий день (столбик), чтобы не определять в каждой заполненой ячейке.
-  // пропс передается: UsingMedicines -> DependingEating/DependingBreakfast/DependingSupper.tsx
-  //const halfHourItemCurrent = useAppSelector((state) => state.halfHourItem)
-  //* проверяем были ли случаи с true, если хоть один true, значит подсвечиваем ячейку красным цветом
-  // useEffect(() => {
-  //   if(arrWarning.arr.indexOf( true ) != -1) {
-  //     dispatch(readingWarningMarker(true)) // [false,fasle,true]
-  //     dispatch(arrWarningCleare())
-  //   } else {
-  //     dispatch(readingWarningMarker(false))
-  //   }
-  //   //console.log(halfHourItemCurrent) //!
-  //   // arrWarning ? dispatch(readingWarningMarker(true)) : dispatch(readingWarningMarker(false))
-  //   // console.log(arrWarning.find((item) => {
-  //   //   item == true ? true : false
-  //   // }))
-  //   console.log(arrWarning)
-  //   // console.log(arr.indexOf( true ) != -1)
-  //   // dispatch(arrWarningCleare())
-  // }) // каждые 60 сек будет проверяться массив на "true"/"false" (currentDate из  Home.tsx)
-  
   //! WarnigMarker: маркер ячейки, если текущее время совпадает со временем приёма лекарств:
-  const warningMarker = useAppSelector((state) => state.warningMarker); // общий индикатор
-  const currentDayForWirning = dayItem.isSame(moment(), 'day');
-  
-  
+  // учавствуют: WeekGrid.tsx, DependingBreakfast, DependingEating etc ... , HelperWarningMarker.tsx
+  const warningMarker = useAppSelector((state) => state.markerWarning); // общий индикатор
+  const currentDayForWirning = dayItem.isSame(moment(), 'day');  
   
   return (
     ArrayHalfHoursContent.map((halfHourItem, hourIndex) => (
@@ -92,7 +58,7 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
           (!warningMarker) // не время приёма лекарства
         }
         $currentWarning={
-          //! маркировка 
+          //! маркировка Warning
           halfHourItem.isSame(moment(), 'hour') && // проверить на текущий час
           moment().minute() - halfHourItem.minute() < 30 && //exp: 4:01 - 4:00/4:30 = 1/-29 < 30 -> true/true
           moment().minute() - halfHourItem.minute() >= 0 && //exp: 4:01 - 4:00/4:30 = 1/-29 < 30 -> true/false(-29)

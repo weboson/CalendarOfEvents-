@@ -4,7 +4,7 @@ import { Moment } from 'moment';
 import { FC } from 'react';
 import { ITakingMedication } from '../../../../../../../data/localDataBase/LocalDB_WaysUsing';
 import { RiMedicineBottleLine } from 'react-icons/ri';
-import { helperWarningMarker } from './helper/helperWarningMarker';
+import HelperWarningMarker from './helper/HelperWarningMarker';
 
 interface IProps {
   dayItem: Moment;
@@ -13,6 +13,7 @@ interface IProps {
   lastMealWeekend: Moment;
   med: ITakingMedication | null;
   currentDayForWirning: boolean;
+  currentDate: Moment;
 }
 
 const DependingSupper: FC<IProps> = ({
@@ -21,7 +22,8 @@ const DependingSupper: FC<IProps> = ({
   lastMealWeekdays,
   lastMealWeekend,
   med,
-  currentDayForWirning
+  currentDayForWirning,
+  currentDate
 }) => {
   // нужен .clone() - иначе add и subtract будут дублировать своё выполнение
   lastMealWeekdays = lastMealWeekdays.clone();
@@ -44,7 +46,7 @@ const DependingSupper: FC<IProps> = ({
               lastMealWeekdays.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <>
-              {/* {currentDayForWirning && helperWarningMarker(halfHourItem) || null} */}
+                  {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                   <RiMedicineBottleLine
                     style={{
                       color: 'red'}}
@@ -64,7 +66,7 @@ const DependingSupper: FC<IProps> = ({
               lastMealWeekend.clone().minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:21 >= 0  and < 30
               lastMealWeekend.clone().minute() - halfHourItem.minute() < 30 && (
                 <>
-                {/* {currentDayForWirning && helperWarningMarker(halfHourItem) || null} */}
+                  {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                   <RiMedicineBottleLine
                     style={{
                       color: 'red',}}
@@ -85,7 +87,7 @@ const DependingSupper: FC<IProps> = ({
               lastMealWeekdays.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <>
-                {/* {currentDayForWirning && helperWarningMarker(halfHourItem) || null} */}
+                  {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                   <RiMedicineBottleLine
                     style={{
                       color: 'red',}}
@@ -100,7 +102,7 @@ const DependingSupper: FC<IProps> = ({
               lastMealWeekend.clone().minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:21 >= 0  and < 30
               lastMealWeekend.clone().minute() - halfHourItem.minute() < 30 && (
                 <>
-                {/* {currentDayForWirning && helperWarningMarker(halfHourItem) || null} */}
+                  {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                   <RiMedicineBottleLine
                     style={{
                       color: 'red',}}
@@ -126,7 +128,7 @@ const DependingSupper: FC<IProps> = ({
               lastMealWeekdays.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <>
-                {/* {currentDayForWirning && helperWarningMarker(halfHourItem) || null} */}
+                  {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                   <RiMedicineBottleLine
                     style={{
                       color: 'red',}}
@@ -146,7 +148,7 @@ const DependingSupper: FC<IProps> = ({
               lastMealWeekend.clone().minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:21 >= 0  and < 30
               lastMealWeekend.clone().minute() - halfHourItem.minute() < 30 && (
                 <>
-                {/* {currentDayForWirning && helperWarningMarker(halfHourItem) || null} */}
+                  {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                   <RiMedicineBottleLine
                     style={{
                       color: 'red',}}

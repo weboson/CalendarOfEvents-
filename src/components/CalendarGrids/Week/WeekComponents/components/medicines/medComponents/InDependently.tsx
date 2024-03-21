@@ -3,6 +3,7 @@ import { Moment } from 'moment';
 import { FC } from 'react';
 import { ITakingMedication } from '../../../../../../../data/localDataBase/LocalDB_WaysUsing';
 import { RiMedicineBottleLine } from 'react-icons/ri';
+import HelperWarningMarker from './helper/HelperWarningMarker';
 
 interface IProps {
   dayItem: Moment;
@@ -12,6 +13,8 @@ interface IProps {
   firstMealWeekend: Moment;
   betweenMealsWeekend: number;
   med: ITakingMedication | null;
+  currentDayForWirning: boolean;
+  currentDate: Moment;
 }
 
 const InDependently: FC<IProps> = ({
@@ -22,6 +25,8 @@ const InDependently: FC<IProps> = ({
   firstMealWeekend,
   betweenMealsWeekend,
   med,
+  currentDayForWirning, 
+  currentDate
 }) => {
   // нужен .clone() - иначе add и subtract будут дублировать свои выполнение, и вместо add(6 часов) получим add(12)
   firstMealWeekdays = firstMealWeekdays.clone();
@@ -36,6 +41,7 @@ const InDependently: FC<IProps> = ({
           halfHourItem.minute() - firstMealWeekdays.minute() >= 0 && // 8:30 - 8:16 >= 0  and < 30
           halfHourItem.minute() - firstMealWeekdays.minute() < 30 && ( // 8:30 - 8:16 < 0  and < 30
             <div>
+              {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
               <RiMedicineBottleLine
                 style={{
                   color: 'red',}}
@@ -56,6 +62,7 @@ const InDependently: FC<IProps> = ({
               halfHourItem.minute() <
               30 ? (
               <div key={index + 1}>
+                {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                 <RiMedicineBottleLine
                   key={`regardless=${index}`}
                   style={{
@@ -72,6 +79,7 @@ const InDependently: FC<IProps> = ({
           halfHourItem.minute() - firstMealWeekend.minute() >= 0 && // 8:30 - 8:16 >= 0  and < 30
           halfHourItem.minute() - firstMealWeekend.minute() < 30 && ( // 8:30 - 8:16 < 0  and < 30
             <div>
+              {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
               <RiMedicineBottleLine
                 style={{
                   color: 'red',}}
@@ -93,6 +101,7 @@ const InDependently: FC<IProps> = ({
               halfHourItem.minute() <
               30 ? (
               <div key={index + 1}>
+                {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                 <RiMedicineBottleLine
                   key={`regardless=${index + 3}`}
                   style={{

@@ -260,7 +260,7 @@ const takingMedications: ITakingMedications = [
         quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[2].oftime, 
-        interval: moment().hour(1).minute(30), 
+        interval: moment().hour(3).minute(0), 
         duration: {
             index: 1,
             title: "months", // moment().subtract(1.5, 'months')
@@ -292,7 +292,7 @@ const takingMedications: ITakingMedications = [
         quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[1].oftime, //  'after' после
-        interval: moment().hour(1).minute(0), // exm: спустя 30 минут после еды 
+        interval: moment().hour(1).minute(30), // exm: спустя 30 минут после еды 
         duration: {
             index: 4,
             title: "months", // moment().subtract(1.5, 'months')
@@ -420,7 +420,7 @@ const takingMedications: ITakingMedications = [
         quantity: 3, // не активен (по-умолчанию 1 раз в день)
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[0].oftime, //  'before' ДО
-        interval: moment().hour(4).minute(30), // 
+        interval: moment().hour(3).minute(30), // 
         duration: {
             index: 3,
             title: "months", // moment().subtract(1.5, 'months')

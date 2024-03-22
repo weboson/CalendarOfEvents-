@@ -58,12 +58,12 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
           (!warningMarker) // не время приёма лекарства
         }
         $currentWarning={
-          //! маркировка Warning
+          //! маркировка (пульсация) Warning
           halfHourItem.isSame(moment(), 'hour') && // проверить на текущий час
           moment().minute() - halfHourItem.minute() < 30 && //exp: 4:01 - 4:00/4:30 = 1/-29 < 30 -> true/true
           moment().minute() - halfHourItem.minute() >= 0 && //exp: 4:01 - 4:00/4:30 = 1/-29 < 30 -> true/false(-29)
           dayItem.isSame(moment(), 'day') && // current day
-          (warningMarker) // не время приёма лекарства
+          (warningMarker) // время приёма лекарства
         }
         // id for autoScrolling at the current hour
         id={halfHourItem.isSame(moment(), 'hour') ? 'autoScroll' : ''} // scroll in Home.tsx

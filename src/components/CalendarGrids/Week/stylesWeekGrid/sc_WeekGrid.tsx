@@ -110,17 +110,30 @@ export const HourContent = styled.div<IHourContent>`
     background-color: #1e1f21; /* цвет плашки */
     border-radius: 0; /* закругления плашки */
     border: 1px solid #5a5959;
-  } 
+  }
+  ${(props) => 
+  /* текущая по времени ячейка */
+    props.$currentHour ? 'background-color: #3d3e3f' : null};
   
   ${(props) => 
-  /* текущая по времени ячейка */
-  // серая ячейка, если текущее время и не совпадает со временем приёма ЛС, иначе карсный
-    props.$currentHour ? 'background-color: #3d3e3f' : null};
-   
-  ${(props) => 
-  /* текущая по времени ячейка */
-  // серая ячейка, если текущее время и не совпадает со временем приёма ЛС, иначе карсный
-    props.$currentWarning ? 'background-color: red' : null};
+  //! Warning: текущая по времени ячейка совпадает со временем приёма лекарств 
+    props.$currentWarning && 
+  //! пульсация красного цвета
+    `opacity: 1;
+      animation: pulse 4s ease-in-out infinite; // Указываем название анимации, время, тип, и нужно ли её повторять
+
+      @keyframes pulse {
+        0% {
+          background-color: #601616c4; 
+        }
+        50% {
+          background-color: #3d0d0d47; 
+        }
+        100% {
+          background-color: #601616c4; 
+        }
+      }
+`};
    
    /* Для того, чтобы текст не растягивал блок, а ставилось в конце ...  */
     /* max-width: 260px; */

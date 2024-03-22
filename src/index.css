@@ -84,3 +84,13 @@ code {
     border: 6px solid #565759;
     transition: "1s ease-in"; 
 }   
+
+
+/* Стили Warning - стили ячейки, когда текущее время совпадает со временем приёма лекарств */
+/* сам класс назначается в GridDayWithHours.tsx */
+.warningClass {
+    /* background-color: #3d0d0d; */
+    color: #ff0000;
+    width: 400px;
+}
+

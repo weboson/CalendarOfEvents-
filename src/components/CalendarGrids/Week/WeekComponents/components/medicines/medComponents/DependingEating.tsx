@@ -1,9 +1,9 @@
 //! Приём Лекарств зависит от приёма пищи (до/вовремя/после)
 // case: Depending of Eating    ---  takingMedications[0].action: waysUsing[0].type
 import { Moment } from 'moment';
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { RiMedicineBottleLine } from 'react-icons/ri';
-import { ITakingMedication } from '../../../../../../../data/localDataBase/LocalDB_WaysUsing';
+import { IRecipesMedication } from '../../../../../../../data/localDataBase/LocalDB_WaysUsing';
 import HelperWarningMarker from './helper/HelperWarningMarker';
 
 interface IProps {
@@ -13,7 +13,7 @@ interface IProps {
   betweenMealsWeekdays: number;
   firstMealWeekend: Moment;
   betweenMealsWeekend: number;
-  med: ITakingMedication;
+  med: IRecipesMedication;
   currentDayForWirning: boolean;
   currentDate: Moment;
 }
@@ -32,7 +32,7 @@ const DependingEating: FC<IProps> = ({
   // нужен .clone() - иначе add и subtract будут дублировать свои выполнение, и вместо add(6 часов) получим add(12)
   firstMealWeekdays = firstMealWeekdays.clone();
   firstMealWeekend = firstMealWeekend.clone();
-
+  // console.log('DependingEating')
 
   switch (med.position) {
     case 'before': //! до
@@ -273,4 +273,5 @@ const DependingEating: FC<IProps> = ({
   }
 };
 
-export default DependingEating;
+// export default DependingEating;
+export const MemoDependingEating = memo(DependingEating); // memo, возможно быстрее будет загружатся лекарства в ячейке

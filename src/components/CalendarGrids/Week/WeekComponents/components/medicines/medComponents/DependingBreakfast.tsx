@@ -1,7 +1,7 @@
 //! Приём Лекарств зависит ПЕРВОГО приёма пищи (до/вовремя/после)
 // case: 'first breakfast'    ---  takingMedications[0].action: waysUsing[1]
 import { Moment } from 'moment';
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { RiMedicineBottleLine } from 'react-icons/ri';
 import { ITakingMedication } from '../../../../../../../data/localDataBase/LocalDB_WaysUsing';
 import HelperWarningMarker from './helper/HelperWarningMarker';
@@ -170,4 +170,5 @@ const DependingBreakfast: FC<IProps> = ({
   }
 };
 
-export default DependingBreakfast;
+// export default DependingBreakfast;
+export const MemoDependingBreakfast = memo(DependingBreakfast); // memo, возможно быстрее будет загружатся лекарства в ячейке

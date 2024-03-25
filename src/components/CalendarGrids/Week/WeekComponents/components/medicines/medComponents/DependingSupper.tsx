@@ -1,8 +1,8 @@
 //! Приём Лекарств зависит от ПОСЛЕДНЕГО приёма пищи (до/вовремя/после)
 // case: 'last supper'    ---  takingMedications[0].action: waysUsing[2]
 import { Moment } from 'moment';
-import { FC } from 'react';
-import { ITakingMedication } from '../../../../../../../data/localDataBase/LocalDB_WaysUsing';
+import { FC, memo } from 'react';
+import { IRecipesMedication } from '../../../../../../../data/localDataBase/LocalDB_WaysUsing';
 import { RiMedicineBottleLine } from 'react-icons/ri';
 import HelperWarningMarker from './helper/HelperWarningMarker';
 
@@ -11,7 +11,7 @@ interface IProps {
   halfHourItem: Moment;
   lastMealWeekdays: Moment;
   lastMealWeekend: Moment;
-  med: ITakingMedication | null;
+  med: IRecipesMedication | null;
   currentDayForWirning: boolean;
   currentDate: Moment;
 }
@@ -166,4 +166,5 @@ const DependingSupper: FC<IProps> = ({
   }
 };
 
-export default DependingSupper;
+// export default DependingSupper;
+export const MemoDependingSupper = memo(DependingSupper); // memo, возможно быстрее будет загружатся лекарства в ячейке

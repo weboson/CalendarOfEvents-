@@ -127,7 +127,7 @@ export const HourContent = styled.div<IHourContent>`
           background-color: #601616c4; 
         }
         50% {
-          background-color: #3d0d0d47; 
+          background-color: #3d0d0d80; 
         }
         100% {
           background-color: #601616c4; 

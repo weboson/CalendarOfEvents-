@@ -1,4 +1,5 @@
 //! если текущее время == с ячейкой с приёмом ЛС, то в Redux-toolkit изменяется массив (push true/fasle)
+// вызывается в DependingEating.tsx, DependingBreakfast и т.д, а использую в HelperWarningMarker.tsx и в WeekGrid.tsx;
 import moment from 'moment';
 import { Moment } from 'moment';
 import { FC, useEffect } from 'react';

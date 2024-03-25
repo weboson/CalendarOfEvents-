@@ -1,7 +1,7 @@
 //! Вне зависимсоти от еды, сна и т.д.
 import { Moment } from 'moment';
-import { FC } from 'react';
-import { ITakingMedication } from '../../../../../../../data/localDataBase/LocalDB_WaysUsing';
+import { FC, memo } from 'react';
+import { IRecipesMedication } from '../../../../../../../data/localDataBase/LocalDB_WaysUsing';
 import { RiMedicineBottleLine } from 'react-icons/ri';
 import HelperWarningMarker from './helper/HelperWarningMarker';
 
@@ -12,7 +12,7 @@ interface IProps {
   betweenMealsWeekdays: number;
   firstMealWeekend: Moment;
   betweenMealsWeekend: number;
-  med: ITakingMedication | null;
+  med: IRecipesMedication | null;
   currentDayForWirning: boolean;
   currentDate: Moment;
 }
@@ -116,4 +116,5 @@ const InDependently: FC<IProps> = ({
   );
 };
 
-export default InDependently;
+// export default InDependently;
+export const MemoInDependently = memo(InDependently); // memo, возможно быстрее будет загружатся лекарства в ячейке

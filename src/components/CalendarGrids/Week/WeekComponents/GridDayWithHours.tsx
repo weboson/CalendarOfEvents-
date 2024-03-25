@@ -1,5 +1,5 @@
 //! КАЖДЫЙ СТОЛБИК (их всего 7) ячеек (48шт) - по пол часа на определенный день (datyItem)
-import { FC } from 'react';
+import { FC, memo, useMemo } from 'react';
 import { Moment } from 'moment';
 // sc_styles
 import { HourContent } from '../stylesWeekGrid/sc_WeekGrid';
@@ -7,38 +7,43 @@ import moment from 'moment';
 import SpaceBetweenMeals from './components/SpaceBetweenMeals'; // график питания: первый и последний приём пищи
 // import UsingMedicines from './components/medicines/UsingMedicines';
 import MealSchedule from './components/MealSchedule';
-import UsingMedicines from './components/medicines/UsingMedicines';
+import { MemoUsingMedicines } from './components/medicines/UsingMedicines';
 // DataBase array
-import takingMedications from '../../../../data/localDataBase/LocalDB_WaysUsing';
+import recipesMedications from '../../../../data/localDataBase/LocalDB_WaysUsing';
+// Redux-Toolkit для получения данных состояния (идникатор для WarnigMarker)
 import { useAppSelector } from '../../../../store/hooks';
+
 interface IProps {
   currentDate: Moment;
   dayItem: Moment;
 }
 
-
 const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
-  
+  // console.log('GridDayWithHours')
+
   // 48 Half Hours  (content), exemple: 0:00, 0:30, 1:00
-  const ArrayHalfHoursContent = [...new Array(48)].map((_, i) =>
+  const ArrayHalfHoursContent = useMemo(() => (
+    [...new Array(48)].map((_, i) =>
     currentDate
       .startOf('day')
       .clone()
       .add(i * 30, 'm'),
-  );
+  )), [currentDate])
 
   //* Пример логики: чтобы искать нужный объект режима дня, по его id
   // let arr = dailyRegimes.find((item, index) => item.id == 2)
   // console.log(arr)
 
 // выбираем самый большое число из всех элементов массива "takingMedications" у свойства "quantity"(количество приёмом ЛС): 7 раз/день: еда 
- const maxMealFood = takingMedications.reduce(function(prev, current) {
-  if (+current.quantity > +prev.quantity) {
-      return current;
-  } else {
-      return prev;
-  }
-}); 
+ const maxMealFood = useMemo(() => (
+  recipesMedications.reduce(function(prev, current) {
+    if (+current.quantity > +prev.quantity) {
+        return current;
+    } else {
+        return prev;
+    }
+  })
+ ), [recipesMedications])
 
   //! WarnigMarker: маркер ячейки, если текущее время совпадает со временем приёма лекарств:
   // учавствуют: WeekGrid.tsx, DependingBreakfast, DependingEating etc ... , HelperWarningMarker.tsx
@@ -78,14 +83,13 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
         
   
         {/* //* for Using Medicines (расчет приёма лекарств) */}
-        {takingMedications.map((medItem, index) => (
-          <UsingMedicines key={index} dayItem={dayItem} halfHourItem={halfHourItem} med={medItem} currentDayForWirning={currentDayForWirning} currentDate={currentDate}/>
+        {recipesMedications.map((medItem, index) => (
+          <MemoUsingMedicines key={index} dayItem={dayItem} halfHourItem={halfHourItem} med={medItem} currentDayForWirning={currentDayForWirning} currentDate={currentDate}/>
         ))}
       </HourContent>
     ))
   )
 };
 
-export default GridDayWithHours;
-
+export const MemoGridDaysHours = memo(GridDayWithHours); // memo, чтобы один раз столбик расчитался, а потом уже 6 раз из памяти рендерился
 

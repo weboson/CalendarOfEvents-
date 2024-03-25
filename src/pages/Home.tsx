@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import {Header} from '../components/Header/Header';
+import { Header } from '../components/Header/Header';
 import Monitor from '../components/Monitor/Monitor';
 import styled from 'styled-components';
 import moment, { Moment } from 'moment';
@@ -9,12 +9,12 @@ import MonthGrid from '../components/CalendarGrids/Month/MonthGrid';
 import { menuModesDate } from '../data/dataMenu';
 import { modesMonitor } from '../data/modesMonitor'; // МАССИВ режимов отображения в Monitor
 import { useAppSelector } from '../store/hooks';
-import WeekGrid from '../components/CalendarGrids/Week/WeekGrid';
+import { MemoWeekGrid } from '../components/CalendarGrids/Week/WeekGrid';
 import DayGrid from '../components/CalendarGrids/Day/DayGrid';
 
 // sc-style
 const ShadowWrapper = styled('div')`
-  height: 600px;  // если просто height: 100% - то header поднимается только при видимом окне
+  height: 600px; // если просто height: 100% - то header поднимается только при видимом окне
   width: 100%;
   /* border: 1px solid #464648; // иначе появляется белая полоса слева при  скролле вниз */
   /* overflow: hidden; */
@@ -29,7 +29,9 @@ const Home: FC = () => {
 
   const [currentDate, setToday] = useState<Moment>(currentMoment || ''); // currentDate в currentDate.ts
 
-//  For dinamic (update) time (чтобы не нужно было обновлять каждый раз, когда время изменилось и обновлялись компоненты)
+  const firstDayOfWeek = currentDate.clone().startOf('month').startOf('week'); // стартовый день: 01.понедельник.2023
+
+  //  For dinamic (update) time (чтобы не нужно было обновлять каждый раз, когда время изменилось и обновлялись компоненты)
   useEffect(() => {
     const timer = setInterval(() => {
       setToday(moment());
@@ -41,14 +43,15 @@ const Home: FC = () => {
 
   // auto scroll "week" for id=#autoScroll: grid hours
   // если данный код установить прямо в GridDayWithHours.tsx - то автоскролл каждый раз при переключении на Week
-  // в GridDayWithHours.tsx есть элемент с 
+  // в GridDayWithHours.tsx есть элемент с
   useEffect(() => {
     setTimeout(
       () =>
-      // автосролл
+        // автосролл
         document
           .querySelector('#autoScroll')! //Знак ! - в TS значит, что уверены, что объект не равен null или Uundefined
-          .scrollIntoView({ // https://learn.javascript.ru/size-and-scroll-window#scrollintoview
+          .scrollIntoView({
+            // https://learn.javascript.ru/size-and-scroll-window#scrollintoview
             behavior: 'smooth',
             block: 'center',
             inline: 'center',
@@ -58,16 +61,13 @@ const Home: FC = () => {
     );
   }, []);
 
-  const firstDayOfWeek = currentDate.clone().startOf('month').startOf('week'); // стартовый день: 01.понедельник.2023
-
   const prevHandler = () => setToday((prev) => prev.clone().subtract(1, mode));
   const todayHandler = () => setToday(moment());
   const nextHandler = () => setToday((prev) => prev.clone().add(1, mode));
-
+  
   // выбранный режим меню (day, week, month, year)
   const indexMenu = useAppSelector((state) => state.menu); // из Readux-toolkit
-
-
+  // console.log(renderMeds)
   return (
     <ShadowWrapper>
       <Header />
@@ -81,16 +81,16 @@ const Home: FC = () => {
       {
         // mode menu: Day, Week, Month, Year
         menuModesDate[indexMenu].title == 'Day' ? (
-          <DayGrid currentDate={currentDate}/>
+          <DayGrid currentDate={currentDate} />
         ) : menuModesDate[indexMenu].title == 'Week' ? (
-          <WeekGrid currentDate={currentDate} />
+          <MemoWeekGrid currentDate={currentDate} />
         ) : menuModesDate[indexMenu].title == 'Month' ? (
           <MonthGrid
             firstDayOfWeek={firstDayOfWeek}
             currentDate={currentDate || null}
           />
         ) : (
-            <YearGrid currentDate={currentDate} />
+          <YearGrid currentDate={currentDate} />
         )
       }
     </ShadowWrapper>

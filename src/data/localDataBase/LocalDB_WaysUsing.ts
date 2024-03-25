@@ -92,7 +92,7 @@ interface Iduration {
 }
 
 // ! пример композиции (на примере одного ЛС)
-export interface ITakingMedication {
+export interface IRecipesMedication {
     id: number
     title: string
     depending: boolean
@@ -104,10 +104,10 @@ export interface ITakingMedication {
     duration: Iduration
 }
 
-interface ITakingMedications extends Array<ITakingMedication>{}
+interface IRecipesMedications extends Array<IRecipesMedication>{}
 
 // разные лекарства
-const takingMedications: ITakingMedications = [
+const recipesMedications: IRecipesMedications = [
     {
         id: 1,
         title: 'Урсосан',
@@ -404,7 +404,7 @@ const takingMedications: ITakingMedications = [
         quantity: 1, // не активен (по-умолчанию 1 раз в день)
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[2].oftime, //  'after' ПОСЛЕ
-        interval: moment().hour(1).minute(0), // 
+        interval: moment().hour(1).minute(20), // 
         duration: {
             index: 3,
             title: "months", // moment().subtract(1.5, 'months')
@@ -448,7 +448,7 @@ const takingMedications: ITakingMedications = [
         quantity: 3, // не активен (по-умолчанию 1 раз в день)
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[2].oftime, //  'after' ПОСЛЕ
-        interval: moment().hour(0).minute(30), // 
+        interval: moment().hour(1).minute(30), // 
         duration: {
             index: 3,
             title: "months", // moment().subtract(1.5, 'months')
@@ -459,4 +459,4 @@ const takingMedications: ITakingMedications = [
 ]
 
 
-export default takingMedications
+export default recipesMedications

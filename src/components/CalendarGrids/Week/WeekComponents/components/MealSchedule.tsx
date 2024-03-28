@@ -1,8 +1,8 @@
-//! Режим питания:  Маркировка моментов приёма пищи в таблице времени и дней
+//! Режим питания:  Маркировка (icon food) моментов приёма пищи в таблице времени и дней
 //! Планирую добавить функциональность: 2 вида: в будни и выходные (также как и режимы дня)
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import mealSchedule from '../../../../../data/localDataBase/localDB_MealSchedule';
-import { ITakingMedication } from '../../../../../data/localDataBase/LocalDB_WaysUsing';
+import { IRecipesMedication } from '../../../../../data/localDataBase/LocalDB_WaysUsing';
 import { MdOutlineFastfood } from 'react-icons/md';
 import { Moment } from 'moment';
 import { FoodTooltip } from '../../stylesWeekGrid/sc_WeekGrid';
@@ -12,35 +12,55 @@ import { FoodTooltip } from '../../stylesWeekGrid/sc_WeekGrid';
 interface IProps {
   dayItem: Moment
   halfHourItem: Moment
-  maxmealfood: ITakingMedication
+  maxmealfood: IRecipesMedication
+  currentDate: Moment
 }
 
-const MealSchedule: FC<IProps> = ({ halfHourItem, dayItem, maxmealfood }) => {
+const MealSchedule: FC<IProps> = ({ halfHourItem, dayItem, maxmealfood, currentDate }) => {
 
 //* weekday
 // приёмы пищи:
-// 1-й приём пищи
-const firstMealWeekdays = mealSchedule[0].modeRegime.weekdays.firstMeal.clone() // обз clone() иначе изменим исходник
+// 1-й приём пищи.
+// входящий тип данных {hour: 8, minute: 0}
+// установка времени относительно динамичному currentDate, 
+// exem: moment().set({'year': 2024, 'month': 3, 'date': 1})
+const firstMealWeekdays = useMemo(()=> (
+  currentDate.set({
+    'hour': mealSchedule[0].modeRegime.weekdays.firstMeal.hour, 
+    'minute': mealSchedule[0].modeRegime.weekdays.firstMeal.minute}).clone() // обз clone() иначе изменим исходник
+), [currentDate])
 // последний приём пищи
-const lastMealWeekdays = mealSchedule[0].modeRegime.weekdays.lastMeal.clone()
+const lastMealWeekdays = useMemo(() => (
+  currentDate.set({
+    'hour': mealSchedule[0].modeRegime.weekdays.lastMeal.hour, 
+    'minute': mealSchedule[0].modeRegime.weekdays.lastMeal.minute}).clone()
+), [currentDate]) 
 
-//* интервал (промежуточные приёмы пищи)
+//* интервал (промежуточные приёмы пищи): diff - это разница в moment
 // время между 1-м и последним приёмом пищи = последняя еда - первая еды, вычист по секундам (точнее, чем минуты/часы)
-const diffIntervalMealWeekdays = lastMealWeekdays.diff(firstMealWeekdays, 'seconds') // 50400000 в миллисекундах (~14 часов), чтобы интервалы были одинаковыми  - разница (инервал времени между 1-м и last едой)
+const diffIntervalMealWeekdays = useMemo(() => (lastMealWeekdays.diff(firstMealWeekdays, 'seconds')), [lastMealWeekdays, firstMealWeekdays])  // 50400000 в миллисекундах (~14 часов), чтобы интервалы были одинаковыми  - разница (инервал времени между 1-м и last едой)
 //console.log(diffIntervalMealWeekdays) // 50400000
-// интервал времени / количество приёма ЛЕкарств                      
+// интервал времени / количество приёма Лекарств                      
 // -1 потому что (в начале завтрак -1)
-const betweenMealsWeekdays = Math.floor(diffIntervalMealWeekdays / (maxmealfood.quantity-1)) // 50400000(~14 ч) / 3-1раз/день = 3.5 часа - 
+const betweenMealsWeekdays = useMemo(() => (Math.floor(diffIntervalMealWeekdays / (maxmealfood.quantity-1))), [diffIntervalMealWeekdays, maxmealfood]) // 50400000(~14 ч) / 3-1раз/день = 3.5 часа - 
 //console.log(betweenMealsWeekdays); // 3 (каждые три часа принимать пищу, так как принимать таблетку после еды)
-
 
 //* weekend
 // тоже самое только weekend
-const firstMealWeekend = mealSchedule[0].modeRegime.weekend.firstMeal.clone() // обз clone() иначе изменим исходник
-const lastMealWeekend = mealSchedule[0].modeRegime.weekend.lastMeal.clone()
+const firstMealWeekend = useMemo(() => (
+  currentDate.set({
+    'hour': mealSchedule[0].modeRegime.weekend.firstMeal.hour, 
+    'minute': mealSchedule[0].modeRegime.weekend.firstMeal.minute}).clone() 
+), [currentDate])
 
-const diffIntervalMealWeekend = lastMealWeekend.diff(firstMealWeekend, 'seconds')
-const betweenMealsWeekend = (diffIntervalMealWeekend / (maxmealfood.quantity-1)) 
+const lastMealWeekend = useMemo(() => (
+  currentDate.set({
+    'hour': mealSchedule[0].modeRegime.weekend.lastMeal.hour, 
+    'minute': mealSchedule[0].modeRegime.weekend.lastMeal.minute}).clone()
+), [currentDate]) 
+
+const diffIntervalMealWeekend = useMemo(() => (lastMealWeekend.diff(firstMealWeekend, 'seconds')), [lastMealWeekend, firstMealWeekend])
+const betweenMealsWeekend = useMemo(() => (Math.floor(diffIntervalMealWeekend / (maxmealfood.quantity-1))), [diffIntervalMealWeekend, maxmealfood])  
 
 
 if (maxmealfood.depending) { // есть ли зависимость от еды?

@@ -1,6 +1,6 @@
 //! приём лекарств
 import { Moment } from 'moment';
-import { FC, memo, useMemo } from 'react';
+import { FC, memo, useEffect, useMemo, useState } from 'react';
 // данные графика питания: first and last eating
 import mealSchedule from '../../../../../../data/localDataBase/localDB_MealSchedule';
 import { IRecipesMedication } from '../../../../../../data/localDataBase/LocalDB_WaysUsing';
@@ -26,7 +26,7 @@ const UsingMedicines: FC<IProps> = ({
   currentDayForWirning,
   currentDate,
 }) => {
-  // console.log('UsingMedicines')
+
   // weekday: интервал между первым и последней едой
   const firstMealWeekdays =
     mealSchedule[0].modeRegime.weekdays.firstMeal.clone(); // обз clone() иначе изменим исходник
@@ -51,7 +51,7 @@ const UsingMedicines: FC<IProps> = ({
   )), [lastMealWeekend, firstMealWeekend])
   const betweenMealsWeekend = diffIntervalMealWeekend / (med.quantity - 1);
 
-  //! Для Popup - окна
+  //! Для Popup - окна (появляется при наведение на конкертный приём ЛС)
   //Redux-toolkit - из hooks.tsx - для изменения данных
   const dispatch = useAppDispatch();
   // Обработчик onMouseOver и onMouseOut: при наведении мышью на ячейку с ЛС, появляется Popup - окно с подробным списком лекарств

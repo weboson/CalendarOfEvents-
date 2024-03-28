@@ -4,11 +4,17 @@
 import moment, { Moment } from "moment"
 
 
+interface IFirstMealLastMeal {
+  hour: number
+  minute: number
+}
+
+
 // свойства выходных или будней
 interface IWeek {
   id: number
-  firstMeal: Moment
-  lastMeal: Moment
+  firstMeal: IFirstMealLastMeal
+  lastMeal: IFirstMealLastMeal
 }
 
 interface IModeRegime {
@@ -16,13 +22,18 @@ interface IModeRegime {
   weekend: IWeek // режим питания в выходные
 }
 
+interface ICreatedAtUpdatedAt {
+  day: number
+  month: number
+  year: number
+}
 // объект графика питания
 interface ISchedule {
     id: number
     title: string
     modeRegime: IModeRegime
-    createdAt: Moment | string
-    updatedAt: Moment | string
+    createdAt: ICreatedAtUpdatedAt
+    updatedAt: ICreatedAtUpdatedAt
 }
 // массив объектов
 export  interface IMealSchedule extends Array<ISchedule>{}
@@ -42,19 +53,19 @@ const mealSchedule: IMealSchedule = [
     modeRegime: {
       weekdays: {
         id: 2,
-        //!если добавлять минуты (minute(25)), то  искажается. Ведь, интервал между таблетками и едой, становиться разный, мы ведь фикисруем только час или пол часа
-        // .minute(0) обязательно, иначе при сравнении будет: ...minute() < 0
-        firstMeal: moment().hour(8).minute(0), // 8:00  
-        lastMeal: moment().hour(20).minute(0), // 22:00
+        //!если добавлять минуты '8:23', то  искажается. Ведь, интервал между таблетками и едой, становиться разный, мы ведь фикисруем только час или пол часа
+        // обязательно округленно, либо ..30, либо ...00, иначе: ...23 < 0 и интервалы начнут гулятьы 
+        firstMeal: {hour: 8, minute: 0}, // 8:00  - объект, чтобы распарсить и установить в currenDate
+        lastMeal: {hour: 22, minute: 0}, // 22:00
       },
       weekend: { // по-умолчанию схож с weekdays, но user может изменить
         id: 3,
-        firstMeal: moment().hour(9).minute(0), // советуется бодровстовать 14-16 часов
-        lastMeal: moment().hour(22).minute(0),
+        firstMeal: {hour: 9, minute: 0}, // советуется бодровстовать 14-16 часов
+        lastMeal: {hour: 22, minute: 0},
       },
     },
-    createdAt: '12.12.2023',
-    updatedAt: '14.12.2023',
+    createdAt: {day: 20, month: 3, year: 2024}, // объект, чтобы распарсить и установить в currenDate
+    updatedAt: {day: 20, month: 3, year: 2024}, // user может изменять начало курса (приёма пищи)
   },
   {
     id: 2,
@@ -62,20 +73,19 @@ const mealSchedule: IMealSchedule = [
     modeRegime: {
       weekdays: {
         id: 2,
-        firstMeal: moment().hour(7).minute(0), // советуется бодровстовать 14-16 часов
-        lastMeal: moment().hour(20).minute(0),
+        firstMeal: {hour: 7, minute: 0}, // советуется бодровстовать 14-16 часов
+        lastMeal: {hour: 20, minute: 0},
       },
       weekend: { // по-умолчанию схож с weekdays, но user может изменить
         id: 3,
-        firstMeal: moment().hour(9).minute(0), // советуется бодровстовать 14-16 часов
-        lastMeal: moment().hour(20).minute(0),
+        firstMeal: {hour: 9, minute: 0}, // советуется бодровстовать 14-16 часов
+        lastMeal: {hour: 20, minute: 0},
       },
     },
-    createdAt: '12.12.2023',
-    updatedAt: '14.12.2023',
+    createdAt: {day: 12, month: 1, year: 2024},
+    updatedAt: {day: 12, month: 1, year: 2024},
   },
 
 ]
-
 
 export default mealSchedule;

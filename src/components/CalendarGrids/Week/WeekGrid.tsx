@@ -21,7 +21,6 @@ interface IProps {
 
 const WeekGrid: FC<IProps> = ({ currentDate }) => {
   // currentDate - это текущее время, которое автоматически обновляется (useEffect в Home.tsx) каждую минуту (60000 ms)
-  // console.log('WeekGrid');
 
   // Days of week (top panel)
   const ArrayDays = useMemo(

@@ -48,7 +48,8 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
   //! WarnigMarker: маркер ячейки, если текущее время совпадает со временем приёма лекарств:
   // учавствуют: WeekGrid.tsx, DependingBreakfast, DependingEating etc ... , HelperWarningMarker.tsx
   const warningMarker = useAppSelector((state) => state.markerWarning); // общий индикатор
-  const currentDayForWirning = dayItem.isSame(moment(), 'day');  
+  // текущий день, для Warning
+  const currentDayForWirning = useMemo(()=> (dayItem.isSame(moment(), 'day')), [dayItem]);  
   
   return (
     ArrayHalfHoursContent.map((halfHourItem, hourIndex) => (
@@ -75,17 +76,17 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
       >
         {/* //* icons Sun & Moon (space between firs и last eating)*/}
         {/* data: localDB_MealSchedule.ts */}
-        <SpaceBetweenMeals dayItem={dayItem} halfHourItem={halfHourItem} />
+        <SpaceBetweenMeals dayItem={dayItem} halfHourItem={halfHourItem} currentDate={currentDate}/>
   
         {/* //* icons Food (firs и last eating)*/}
         {/* data: localDB_MealSchedule.ts */}
-        <MealSchedule dayItem={dayItem} halfHourItem={halfHourItem}  maxmealfood={maxMealFood}/>
+        <MealSchedule dayItem={dayItem} halfHourItem={halfHourItem}  maxmealfood={maxMealFood} currentDate={currentDate}/>
         
   
         {/* //* for Using Medicines (расчет приёма лекарств) */}
-        {recipesMedications.map((medItem, index) => (
+        {/* {recipesMedications.map((medItem, index) => (
           <MemoUsingMedicines key={index} dayItem={dayItem} halfHourItem={halfHourItem} med={medItem} currentDayForWirning={currentDayForWirning} currentDate={currentDate}/>
-        ))}
+        ))} */}
       </HourContent>
     ))
   )

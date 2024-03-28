@@ -121,7 +121,11 @@ const recipesMedications: IRecipesMedications = [
             index: 3,
             title: "months", // moment().subtract(1.5, 'months')
         }, // продолжительность курса до 3 месяца  
-        
+        // start: { // начало курса (по-умолчанию будет дата создания)
+
+        // },
+        // createDateRecipe: Date,// дата создания рецепта одного ЛС
+        // updateDateRecipe: Date, // возможность изменить 
         
     },
     {
@@ -420,7 +424,7 @@ const recipesMedications: IRecipesMedications = [
         quantity: 3, // не активен (по-умолчанию 1 раз в день)
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[0].oftime, //  'before' ДО
-        interval: moment().hour(3).minute(30), // 
+        interval: moment().hour(4).minute(0), // 
         duration: {
             index: 3,
             title: "months", // moment().subtract(1.5, 'months')

@@ -18,14 +18,14 @@ const initialState: StateProp  = {
 export const arrWarningSlice = createSlice({
     name: 'arrWarning',
     initialState,
+    //! использую два редюсера (метода), привер и доков: https://redux-toolkit.js.org/tutorials/typescript
     reducers: {
       arrPushWarning: (state, action) => { // добавляет в массив, true/fasle
           state.arr = [...state.arr, ...action.payload]
         },
       arrWarningCleare: (state) => { // очищает массив (типа сброс состояния)
         state.arr.length = 0
-        },
-        
+        },        
     },
   })
   

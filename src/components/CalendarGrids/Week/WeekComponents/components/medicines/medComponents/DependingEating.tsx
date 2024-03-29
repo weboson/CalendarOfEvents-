@@ -42,17 +42,17 @@ const DependingEating: FC<IProps> = ({
         dayItem.day() !== 6 && dayItem.day() !== 0
           ? (halfHourItem.isSame(
               firstMealWeekdays
-                .subtract(med.interval.minute(), 'minute')
-                .subtract(med.interval.hour(), 'hour'),
+                .subtract(med.interval.minute, 'minute')
+                .subtract(med.interval.hour, 'hour'),
               'hour',
-            ) &&
+            ) && 
               firstMealWeekdays.clone().minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:21 >= 0  and < 30
               firstMealWeekdays.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <>
                   {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                   <RiMedicineBottleLine style={{ color: 'red' }} />
-                  <span>{med.interval.format('H:mm')} до еды</span>
+                  <span>{`${med.title}`}</span>
                   <br />
                 </>
               )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
@@ -72,7 +72,7 @@ const DependingEating: FC<IProps> = ({
                         key={`before-${index}`}
                         style={{ color: 'red' }}
                       />
-                      <span>{med.interval.format('H:mm')} до еды</span>
+                      <span>{`${med.title}`}</span>
                       <br />
                     </div>
                   ),
@@ -80,8 +80,8 @@ const DependingEating: FC<IProps> = ({
           : // weekend
             (halfHourItem.isSame(
               firstMealWeekend
-                .subtract(med.interval.minute(), 'minute')
-                .subtract(med.interval.hour(), 'hour'),
+                .subtract(med.interval.minute, 'minute')
+                .subtract(med.interval.hour, 'hour'),
               'hour',
             ) &&
               firstMealWeekend.clone().minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:21 >= 0  and < 30
@@ -90,7 +90,7 @@ const DependingEating: FC<IProps> = ({
                 <div>
                   {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                   <RiMedicineBottleLine style={{ color: 'red' }} />
-                  <span>{med.interval.format('H:mm')} до еды</span>
+                  <span>{`${med.title}`}</span>
                 </div>
               )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
               [...new Array(med.quantity - 1)].map(
@@ -109,7 +109,7 @@ const DependingEating: FC<IProps> = ({
                         key={`before-${index}`}
                         style={{ color: 'red' }}
                       />
-                      <span>{med.interval.format('H:mm')} до еды</span>
+                      <span>{`${med.title}`}</span>
                       <br />
                     </div>
                   ),
@@ -129,7 +129,7 @@ const DependingEating: FC<IProps> = ({
                 <div>
                   {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                   <RiMedicineBottleLine style={{ color: 'red' }} />
-                  <span>Вовремя еды</span> <br />
+                  <span>{`${med.title}`}</span> <br />
                 </div>
               )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
               [...new Array(med.quantity - 1)].map(
@@ -148,7 +148,7 @@ const DependingEating: FC<IProps> = ({
                         key={`while-${index}`}
                         style={{ color: 'red' }}
                       />
-                      <span>Вовремя еды</span> <br />
+                      <span>{`${med.title}`}</span> <br />
                     </div>
                   ),
               )
@@ -160,7 +160,7 @@ const DependingEating: FC<IProps> = ({
                 <div>
                   {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                   <RiMedicineBottleLine style={{ color: 'red' }} />
-                  <span>Вовремя еды</span> <br />
+                  <span>{`${med.title}`}</span> <br />
                 </div>
               )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
               [...new Array(med.quantity - 1)].map(
@@ -179,7 +179,7 @@ const DependingEating: FC<IProps> = ({
                         key={`while-${index}`}
                         style={{ color: 'red' }}
                       />
-                      <span key={index + 4}>Вовремя еды</span> <br />
+                      <span key={index + 4}>{`${med.title}`}</span> <br />
                     </div>
                   ),
               )
@@ -192,8 +192,8 @@ const DependingEating: FC<IProps> = ({
         dayItem.day() !== 6 && dayItem.day() !== 0
           ? (halfHourItem.isSame(
               firstMealWeekdays
-                .add(med.interval.minute(), 'minute')
-                .add(med.interval.hour(), 'hour'),
+                .add(med.interval.minute, 'minute')
+                .add(med.interval.hour, 'hour'),
               'hour',
             ) &&
               firstMealWeekdays.clone().minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:21 >= 0  and < 30
@@ -202,7 +202,7 @@ const DependingEating: FC<IProps> = ({
                 <div>
                   {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                   <RiMedicineBottleLine style={{ color: 'red' }} />
-                  <span>{med.interval.format('H:mm')} после еды</span>
+                  <span>{`${med.title}`}</span>
                   <br />
                 </div>
               )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
@@ -222,7 +222,7 @@ const DependingEating: FC<IProps> = ({
                         key={`after-${index}`}
                         style={{ color: 'red' }}
                       />
-                      <span>{med.interval.format('H:mm')} после еды</span>
+                      <span>{`${med.title}`}</span>
                       <br />
                     </div>
                   ),
@@ -230,8 +230,8 @@ const DependingEating: FC<IProps> = ({
           : // weekend
             (halfHourItem.isSame(
               firstMealWeekend
-                .add(med.interval.minute(), 'minute')
-                .add(med.interval.hour(), 'hour'),
+                .add(med.interval.minute, 'minute')
+                .add(med.interval.hour, 'hour'),
               'hour',
             ) &&
               firstMealWeekend.clone().minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:21 >= 0  and < 30
@@ -240,7 +240,7 @@ const DependingEating: FC<IProps> = ({
                 <div>
                   {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                   <RiMedicineBottleLine style={{ color: 'red' }} />
-                  <span>{med.interval.format('H:mm')} после еды</span>
+                  <span>{`${med.title}`}</span>
                   <br />
                 </div>
               )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
@@ -261,7 +261,7 @@ const DependingEating: FC<IProps> = ({
                         style={{ color: 'red' }}
                       />
                       <span key={index + 4}>
-                        {med.interval.format('H:mm')} после еды
+                      {`${med.title}`}
                       </span>
                     </div>
                   ),
@@ -274,4 +274,4 @@ const DependingEating: FC<IProps> = ({
 };
 
 // export default DependingEating;
-export const MemoDependingEating = memo(DependingEating); // memo, возможно быстрее будет загружатся лекарства в ячейке
+export const DependingEatingMemo = memo(DependingEating); // memo, возможно быстрее будет загружатся лекарства в ячейке

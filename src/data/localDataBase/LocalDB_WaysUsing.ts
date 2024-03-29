@@ -91,6 +91,12 @@ interface Iduration {
 
 }
 
+interface Iinterval {
+    hour: number
+    minute: number
+}
+
+
 // ! пример композиции (на примере одного ЛС)
 export interface IRecipesMedication {
     id: number
@@ -100,9 +106,19 @@ export interface IRecipesMedication {
     quantity: number
     unitTime: string
     position: string
-    interval: Moment | null
+    interval: Iinterval
     duration: Iduration
+    start: string
+    createDateRecipe: string
+    updateDateRecipe: string
 }
+
+
+// years	
+//quarters	
+//months	
+//weeks	
+//days	
 
 interface IRecipesMedications extends Array<IRecipesMedication>{}
 
@@ -116,32 +132,36 @@ const recipesMedications: IRecipesMedications = [
         quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[0].oftime, // Используется константа(потом будет в Form) в массива 
-        interval: moment().hour(0).minute(30), // exm: спустя 45 минут после еды 
+        interval: { // exm: спустя 30 минут после еды 
+            hour: 0,
+            minute: 30
+        }, 
         duration: {
-            index: 3,
-            title: "months", // moment().subtract(1.5, 'months')
+            index: 7,
+            title: "days", // currenDate <= currenDate.set(3, 'months')
         }, // продолжительность курса до 3 месяца  
-        // start: { // начало курса (по-умолчанию будет дата создания)
-
-        // },
-        // createDateRecipe: Date,// дата создания рецепта одного ЛС
-        // updateDateRecipe: Date, // возможность изменить 
+        // start: {day: 26, month: 3, year: 2024}, // вариант в виде объекта
+        start: '28.03.2024', // начало курса (по-умолчанию будет дата создания) - чтобы user сам мог котролировать начало
+        createDateRecipe: '28.03.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '28.03.2024', //  возможность изменить весь рецепт
         
     },
     {
         id: 2,
-        title: 'Бифидокс1',
+        title: 'Бифидокс1 2 недели',
         depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0].type, // 'eating' - приём пищи
         quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[0].oftime, // Используется константа(потом будет в Form) в массива 
-        interval: moment().hour(0).minute(30), // exm: спустя 45 минут после еды 
-        duration: {
-            index: 3,
-            title: "months", // moment().subtract(1.5, 'months')
-        }, // продолжительность курса до 2 месяца  
-        
+        interval: { hour: 7, minute: 30}, // exm: спустя 45 минут после еды 
+        duration: { // продолжительность курса до 2 месяца 
+            index: 2,
+            title: 'day', 
+        },  
+        start: '30.03.2024',
+        createDateRecipe: '30.03.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '30.03.2024', //  возможность изменить весь рецепт
         
     },
     {
@@ -152,12 +172,14 @@ const recipesMedications: IRecipesMedications = [
         quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[0].oftime, // Используется константа(потом будет в Form) в массива 
-        interval: moment().hour(0).minute(30), // exm: спустя 45 минут после еды 
-        duration: {
-            index: 3,
-            title: "months", // moment().subtract(1.5, 'months')
-        }, // продолжительность курса до 2 месяца  
-        
+        interval: { hour: 0, minute: 45}, // exm: спустя 45 минут после еды 
+        duration: { // продолжительность курса до 2 месяца 
+            index: 1,
+            title: 'months', 
+        },  
+        start: '30.03.2024',
+        createDateRecipe: '30.03.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '30.03.2024', //  возможность изменить весь рецепт
         
     },
     {
@@ -168,13 +190,14 @@ const recipesMedications: IRecipesMedications = [
         quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[0].oftime, // Используется константа(потом будет в Form) в массива 
-        interval: moment().hour(0).minute(30), // exm: спустя 45 минут после еды 
-        duration: {
-            index: 3,
-            title: "months", // moment().subtract(1.5, 'months')
-        }, // продолжительность курса до 2 месяца  
-        
-        
+        interval: { hour: 0, minute: 45}, // exm: спустя 45 минут после еды 
+        duration: { // продолжительность курса до 2 месяца 
+            index: 1,
+            title: 'months', 
+        },  
+        start: '30.03.2024',
+        createDateRecipe: '30.03.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '30.03.2024', //  возможность изменить весь рецепт   
     },
     {
         id: 5,
@@ -184,12 +207,14 @@ const recipesMedications: IRecipesMedications = [
         quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[0].oftime, // Используется константа(потом будет в Form) в массива 
-        interval: moment().hour(0).minute(30), // exm: спустя 45 минут после еды 
-        duration: {
-            index: 3,
-            title: "months", // moment().subtract(1.5, 'months')
-        }, // продолжительность курса до 2 месяца  
-        
+        interval: { hour: 0, minute: 45}, // exm: спустя 45 минут после еды 
+        duration: { // продолжительность курса до 2 месяца 
+            index: 1,
+            title: 'months', 
+        },  
+        start: '30.03.2024',
+        createDateRecipe: '30.03.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '30.03.2024', //  возможность изменить весь рецепт
         
     },
     {
@@ -200,12 +225,14 @@ const recipesMedications: IRecipesMedications = [
         quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[0].oftime, // Используется константа(потом будет в Form) в массива 
-        interval: moment().hour(0).minute(30), // exm: спустя 45 минут после еды 
-        duration: {
-            index: 3,
-            title: "months", // moment().subtract(1.5, 'months')
-        }, // продолжительность курса до 2 месяца  
-        
+        interval: { hour: 0, minute: 45}, // exm: спустя 45 минут после еды 
+        duration: { // продолжительность курса до 2 месяца 
+            index: 1,
+            title: 'months', 
+        },  
+        start: '30.03.2024',
+        createDateRecipe: '30.03.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '30.03.2024', //  возможность изменить весь рецепт
         
     },
     {
@@ -216,12 +243,14 @@ const recipesMedications: IRecipesMedications = [
         quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[0].oftime, // Используется константа(потом будет в Form) в массива 
-        interval: moment().hour(0).minute(30), // exm: спустя 45 минут после еды 
-        duration: {
-            index: 3,
-            title: "months", // moment().subtract(1.5, 'months')
-        }, // продолжительность курса до 2 месяца  
-        
+        interval: { hour: 0, minute: 45}, // exm: спустя 45 минут после еды 
+        duration: { // продолжительность курса до 2 месяца 
+            index: 1,
+            title: 'months', 
+        },  
+        start: '30.03.2024',
+        createDateRecipe: '30.03.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '30.03.2024', //  возможность изменить весь рецепт
         
     },
     {
@@ -232,12 +261,14 @@ const recipesMedications: IRecipesMedications = [
         quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[0].oftime, // Используется константа(потом будет в Form) в массива 
-        interval: moment().hour(0).minute(30), // exm: спустя 45 минут после еды 
-        duration: {
-            index: 3,
-            title: "months", // moment().subtract(1.5, 'months')
-        }, // продолжительность курса до 2 месяца  
-        
+        interval: { hour: 0, minute: 45}, // exm: спустя 45 минут после еды 
+        duration: { // продолжительность курса до 2 месяца 
+            index: 1,
+            title: 'months', 
+        },  
+        start: '30.03.2024',
+        createDateRecipe: '30.03.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '30.03.2024', //  возможность изменить весь рецепт
         
     },
     {
@@ -248,12 +279,14 @@ const recipesMedications: IRecipesMedications = [
         quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[0].oftime, // Используется константа(потом будет в Form) в массива 
-        interval: moment().hour(0).minute(30), // exm: спустя 45 минут после еды 
-        duration: {
-            index: 3,
-            title: "months", // moment().subtract(1.5, 'months')
-        }, // продолжительность курса до 2 месяца  
-        
+        interval: { hour: 0, minute: 45}, // exm: спустя 45 минут после еды 
+        duration: { // продолжительность курса до 2 месяца 
+            index: 1,
+            title: 'months', 
+        },  
+        start: '30.03.2024',
+        createDateRecipe: '30.03.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '30.03.2024', //  возможность изменить весь рецепт 
         
     },
     {
@@ -264,13 +297,14 @@ const recipesMedications: IRecipesMedications = [
         quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[2].oftime, 
-        interval: moment().hour(3).minute(0), 
-        duration: {
+        interval: { hour: 0, minute: 45}, // exm: спустя 45 минут после еды 
+        duration: { // продолжительность курса до 2 месяца 
             index: 1,
-            title: "months", // moment().subtract(1.5, 'months')
-        }, // продолжительность курса до 1 месяц 
-        
-        
+            title: 'months', 
+        },  
+        start: '30.03.2024',
+        createDateRecipe: '30.03.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '30.03.2024', //  возможность изменить весь рецепт 
     },
     {
         id: 11,
@@ -280,13 +314,14 @@ const recipesMedications: IRecipesMedications = [
         quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[0].oftime, //   не активен
-        interval: moment().hour(0).minute(0), // exm: спустя 30 минут после еды 
-        duration: {
-            index: 3,
-            title: "months", // moment().subtract(1.5, 'months')
-        }, // продолжительность курса до 3 месяца  
-        
-        
+        interval: { hour: 0, minute: 45}, // exm: спустя 45 минут после еды 
+        duration: { // продолжительность курса до 2 месяца 
+            index: 1,
+            title: 'months', 
+        },  
+        start: '30.03.2024',
+        createDateRecipe: '30.03.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '30.03.2024', //  возможность изменить весь рецепт
     },
     {
         id: 12,
@@ -296,13 +331,14 @@ const recipesMedications: IRecipesMedications = [
         quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[1].oftime, //  'after' после
-        interval: moment().hour(1).minute(30), // exm: спустя 30 минут после еды 
-        duration: {
-            index: 4,
-            title: "months", // moment().subtract(1.5, 'months')
-        }, // продолжительность курса до 4 месяца  
-        
-        
+        interval: { hour: 0, minute: 45}, // exm: спустя 45 минут после еды 
+        duration: { // продолжительность курса до 2 месяца 
+            index: 1,
+            title: 'months', 
+        },  
+        start: '30.03.2024',
+        createDateRecipe: '30.03.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '30.03.2024', //  возможность изменить весь рецепт
     },
     {
         id: 13,
@@ -312,13 +348,14 @@ const recipesMedications: IRecipesMedications = [
         quantity: 1, // не изменно 1 раз
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[0].oftime, //  'before' ДО
-        interval: moment().hour(3).minute(0), // exm: за 30 минут ДО еды 
-        duration: {
-            index: 5,
-            title: "months", // moment().subtract(1.5, 'months')
-        }, // продолжительность курса до 5 месяца  
-        
-        
+        interval: { hour: 0, minute: 45}, // exm: спустя 45 минут после еды 
+        duration: { // продолжительность курса до 2 месяца 
+            index: 1,
+            title: 'months', 
+        },  
+        start: '30.03.2024',
+        createDateRecipe: '30.03.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '30.03.2024', //  возможность изменить весь рецепт
     },
     {
         id: 14,
@@ -328,13 +365,14 @@ const recipesMedications: IRecipesMedications = [
         quantity: 1, // не изменно 1 раз
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[0].oftime, //  'before' ДО
-        interval: moment().hour(7).minute(0), // exm: за X часа завтрака 
-        duration: {
+        interval: { hour: 0, minute: 45}, // exm: спустя 45 минут после еды 
+        duration: { // продолжительность курса до 2 месяца 
             index: 1,
-            title: "months", // moment().subtract(1.5, 'months')
-        }, // продолжительность курса до 1 месяц 
-        
-        
+            title: 'months', 
+        },  
+        start: '30.03.2024',
+        createDateRecipe: '30.03.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '30.03.2024', //  возможность изменить весь рецепт
     },
     {
         id: 15,
@@ -344,13 +382,14 @@ const recipesMedications: IRecipesMedications = [
         quantity: 1, // не активен (по-умолчанию 1 раз)
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[1].oftime, //  'while' ВОВРЕМЯ
-        interval: moment().hour(0).minute(45), // не активен
-        duration: {
-            index: 5,
-            title: "months", // moment().subtract(1.5, 'months')
-        }, // продолжительность курса до 5 месяца  
-        
-        
+        interval: { hour: 0, minute: 45}, // exm: спустя 45 минут после еды 
+        duration: { // продолжительность курса до 2 месяца 
+            index: 1,
+            title: 'months', 
+        },  
+        start: '30.03.2024',
+        createDateRecipe: '30.03.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '30.03.2024', //  возможность изменить весь рецепт
     },
     {
         id: 16,
@@ -360,13 +399,14 @@ const recipesMedications: IRecipesMedications = [
         quantity: 1, // не активен (по-умолчанию 1 раз)
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[2].oftime, //  'after' ВОВРЕМЯ
-        interval: moment().hour(4).minute(0), // не активен
-        duration: {
+        interval: { hour: 0, minute: 45}, // exm: спустя 45 минут после еды 
+        duration: { // продолжительность курса до 2 месяца 
             index: 1,
-            title: "months", // moment().subtract(1.5, 'months')
-        }, // продолжительность курса до 1 месяца  
-        
-        
+            title: 'months', 
+        },  
+        start: '30.03.2024',
+        createDateRecipe: '30.03.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '30.03.2024', //  возможность изменить весь рецепт
     },
     {
         id: 17,
@@ -376,13 +416,14 @@ const recipesMedications: IRecipesMedications = [
         quantity: 1, // не активен (по-умолчанию 1 раз в день)
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[0].oftime, //  'before' ДО
-        interval: moment().hour(1).minute(30), // 
-        duration: {
-            index: 3,
-            title: "months", // moment().subtract(1.5, 'months')
-        }, // продолжительность курса до 3 месяца  
-        
-        
+        interval: { hour: 0, minute: 45}, // exm: спустя 45 минут после еды 
+        duration: { // продолжительность курса до 2 месяца 
+            index: 1,
+            title: 'months', 
+        },  
+        start: '30.03.2024',
+        createDateRecipe: '30.03.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '30.03.2024', //  возможность изменить весь рецепт
     },
     {
         id: 18,
@@ -392,13 +433,14 @@ const recipesMedications: IRecipesMedications = [
         quantity: 1, // не активен (по-умолчанию 1 раз в день)
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[1].oftime, //  'while' ВОВРЕМЯ
-        interval: moment().hour(1).minute(30), // не активен
-        duration: {
-            index: 6,
-            title: "months", // moment().subtract(1.5, 'months')
-        }, // продолжительность курса до 6 месяца  
-        
-        
+        interval: { hour: 0, minute: 45}, // exm: спустя 45 минут после еды 
+        duration: { // продолжительность курса до 2 месяца 
+            index: 1,
+            title: 'months', 
+        },  
+        start: '30.03.2024',
+        createDateRecipe: '30.03.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '30.03.2024', //  возможность изменить весь рецепт
     },
     {
         id: 19,
@@ -408,13 +450,14 @@ const recipesMedications: IRecipesMedications = [
         quantity: 1, // не активен (по-умолчанию 1 раз в день)
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[2].oftime, //  'after' ПОСЛЕ
-        interval: moment().hour(1).minute(20), // 
-        duration: {
-            index: 3,
-            title: "months", // moment().subtract(1.5, 'months')
-        }, // продолжительность курса до 3 месяца  , // продолжительность курса 3 месяца
-        
-        
+        interval: { hour: 0, minute: 45}, // exm: спустя 45 минут после еды 
+        duration: { // продолжительность курса до 2 месяца 
+            index: 1,
+            title: 'months', 
+        },  
+        start: '30.03.2024',
+        createDateRecipe: '30.03.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '30.03.2024', //  возможность изменить весь рецепт
     },
     {
         id: 20,
@@ -424,11 +467,14 @@ const recipesMedications: IRecipesMedications = [
         quantity: 3, // не активен (по-умолчанию 1 раз в день)
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[0].oftime, //  'before' ДО
-        interval: moment().hour(4).minute(0), // 
-        duration: {
-            index: 3,
-            title: "months", // moment().subtract(1.5, 'months')
-        }, // продолжительность курса до 3 месяца  
+        interval: { hour: 0, minute: 45}, // exm: спустя 45 минут после еды 
+        duration: { // продолжительность курса до 2 месяца 
+            index: 1,
+            title: 'months', 
+        },  
+        start: '30.03.2024',
+        createDateRecipe: '30.03.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '30.03.2024', //  возможность изменить весь рецепт
     },
     {
         id: 21,
@@ -438,11 +484,14 @@ const recipesMedications: IRecipesMedications = [
         quantity: 3, // не активен (по-умолчанию 1 раз в день)
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[2].oftime, //  'after' ПОСЛЕ
-        interval: moment().hour(5).minute(0), // 
-        duration: {
-            index: 3,
-            title: "months", // moment().subtract(1.5, 'months')
-        }, // продолжительность курса до 3 месяца  
+        interval: { hour: 0, minute: 45}, // exm: спустя 45 минут после еды 
+        duration: { // продолжительность курса до 2 месяца 
+            index: 1,
+            title: 'months', 
+        },  
+        start: '30.03.2024',
+        createDateRecipe: '30.03.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '30.03.2024', //  возможность изменить весь рецепт
     },
     {
         id: 22,
@@ -452,11 +501,14 @@ const recipesMedications: IRecipesMedications = [
         quantity: 3, // не активен (по-умолчанию 1 раз в день)
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[2].oftime, //  'after' ПОСЛЕ
-        interval: moment().hour(1).minute(30), // 
-        duration: {
-            index: 3,
-            title: "months", // moment().subtract(1.5, 'months')
-        }, // продолжительность курса до 3 месяца  
+        interval: { hour: 0, minute: 45}, // exm: спустя 45 минут после еды 
+        duration: { // продолжительность курса до 2 месяца 
+            index: 1,
+            title: 'months', 
+        },  
+        start: '30.03.2024',
+        createDateRecipe: '30.03.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '30.03.2024', //  возможность изменить весь рецепт
     },
 
     

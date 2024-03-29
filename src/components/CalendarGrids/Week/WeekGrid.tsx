@@ -9,7 +9,7 @@ import {
   WrapperColumn,
 } from './stylesWeekGrid/sc_WeekGrid';
 import moment, { Moment } from 'moment';
-import { MemoGridDaysHours } from './WeekComponents/GridDayWithHours';
+import { GridDaysHoursMemo } from './WeekComponents/GridDayWithHours';
 import MyPopup from '../../myPopup/MyPopup';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { readingMarkerWarning } from '../../../store/features/markerWarningSlice';
@@ -21,7 +21,6 @@ interface IProps {
 
 const WeekGrid: FC<IProps> = ({ currentDate }) => {
   // currentDate - это текущее время, которое автоматически обновляется (useEffect в Home.tsx) каждую минуту (60000 ms)
-
   // Days of week (top panel)
   const ArrayDays = useMemo(
     () =>
@@ -114,10 +113,11 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
             </DayOfWeek>
 
             {/* Grid Day with Hours (Content) */}
-            <MemoGridDaysHours
+            <GridDaysHoursMemo
               currentDate={currentDate}
               dayItem={dayItem}
             />
+            
           </WrapperColumn>
         ))}
         {/* При наведении на лекарсвто - появляется Popup-окно с подробным описанием ЛС */}

@@ -31,7 +31,7 @@ const MyPopup: FC = () => {
           <p>
             {medicine?.depending
               ? medicine?.position == 'before'
-                ? `За ${medicine?.interval?.format('H:mm')} ` +
+                ? `За ${medicine.interval.hour}:${medicine.interval.minute} ` + 
                   'до ' +
                   `${
                     medicine?.action == 'eating'
@@ -49,7 +49,7 @@ const MyPopup: FC = () => {
                       ? 'завтрака'
                       : 'ужина'
                   }`
-                : `Спустя ${medicine?.interval?.format('H:mm')} ` +
+                : `Спустя ${medicine.interval.hour}:${medicine.interval.minute} ` +
                   'после ' +
                   `${
                     medicine?.action == 'eating'

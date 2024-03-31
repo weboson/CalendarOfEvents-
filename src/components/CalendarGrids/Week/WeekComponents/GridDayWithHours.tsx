@@ -95,7 +95,8 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
       />
 
       {/* //* for Using Medicines (расчет приёма лекарств) */}
-      {recipesMedications.map((medItem, index) => (        
+      {recipesMedications.map((medItem, index) => ( 
+        //! для расчета курса, временной диапазон приёмов ЛС, epm: курс 1 месяц, то есть интервал с 23 марта по 23 апреля       
         (moment(medItem.start, 'DD.MM.YYYY') <= dayItem) &&
         //! потом можно в форме всплывающий мини календарь и там высчитывать курс и автовыбор на определенную дату
         (dayItem <= moment(medItem.start, 'DD.MM.YYYY').clone().add(medItem.duration.index, medItem.duration.title)) && 

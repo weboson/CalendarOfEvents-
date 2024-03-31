@@ -76,9 +76,9 @@ const MyPopup: FC = () => {
           Курс лечения:{' '}
           <p>
             {medicine?.duration.index + ' '}
-            {medicine?.duration.title == 'day'
+            {medicine?.duration.title == 'days'
               ? 'день'
-              : medicine?.duration.title == 'week'
+              : medicine?.duration.title == 'weeks'
               ? 'неделя'
               : medicine?.duration.title == 'months'
               ? 'месяц'

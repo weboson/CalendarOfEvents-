@@ -46,7 +46,7 @@ const InDependently: FC<IProps> = ({
                 style={{
                   color: 'red',}}
               />
-              <span>Независимо
+              <span>{`${med.title}`}
               </span><br/>
             </div>
           )) ||
@@ -69,7 +69,7 @@ const InDependently: FC<IProps> = ({
                     color: 'red',}}
                 />
                 <span>
-                  Независимо
+                {`${med.title}`}
                 </span><br/>
               </div>
             ) : null,
@@ -85,7 +85,7 @@ const InDependently: FC<IProps> = ({
                   color: 'red',}}
               />
               <span>
-                Независимо
+              {`${med.title}`}
               </span><br/>
             </div>
           )) ||
@@ -108,7 +108,7 @@ const InDependently: FC<IProps> = ({
                     color: 'red',}}
                 />
                 <span>
-                  Независимо
+                  {`${med.title}`}
                 </span><br/>
               </div>
             ) : null,
@@ -117,4 +117,4 @@ const InDependently: FC<IProps> = ({
 };
 
 // export default InDependently;
-export const MemoInDependently = memo(InDependently); // memo, возможно быстрее будет загружатся лекарства в ячейке
+export const InDependentlyMemo = memo(InDependently); // memo, возможно быстрее будет загружатся лекарства в ячейке

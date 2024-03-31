@@ -1,16 +1,15 @@
 //! приём лекарств
 import { Moment } from 'moment';
-import { FC, memo, useEffect, useMemo, useState } from 'react';
+import { FC, memo, useMemo } from 'react';
 // данные графика питания: first and last eating
 import mealSchedule from '../../../../../../data/localDataBase/localDB_MealSchedule';
 import { IRecipesMedication } from '../../../../../../data/localDataBase/LocalDB_WaysUsing';
 import { DependingEatingMemo } from './medComponents/DependingEating';
-import { MemoDependingBreakfast } from './medComponents/DependingBreakfast';
-import { MemoDependingSupper } from './medComponents/DependingSupper';
-import { MemoInDependently } from './medComponents/InDependently';
+import { DependingBreakfastMemo } from './medComponents/DependingBreakfast';
+import { DependingSupperMemo } from './medComponents/DependingSupper';
+import { InDependentlyMemo } from './medComponents/InDependently';
 import { useAppDispatch } from '../../../../../../store/hooks';
 import { readingPopupData } from '../../../../../../store/features/popupDataSlice';
-import moment from 'moment';
 
 interface IProps {
   dayItem: Moment;
@@ -151,7 +150,7 @@ const UsingMedicines: FC<IProps> = ({
               onMouseOut={hoverMouseOnMedicine}
               style={{ cursor: 'help', maxWidth: 'fit-content' }}
             >
-              {/* <MemoDependingBreakfast
+              <DependingBreakfastMemo
                 dayItem={dayItem}
                 halfHourItem={halfHourItem}
                 firstMealWeekdays={firstMealWeekdays}
@@ -159,7 +158,7 @@ const UsingMedicines: FC<IProps> = ({
                 med={med}
                 currentDayForWirning={currentDayForWirning}
                 currentDate={currentDate}
-              /> */}
+              />
             </div>
           );
   
@@ -172,7 +171,7 @@ const UsingMedicines: FC<IProps> = ({
               onMouseOut={hoverMouseOnMedicine}
               style={{ cursor: 'help', maxWidth: 'fit-content' }}
             >
-              {/* <MemoDependingSupper
+              <DependingSupperMemo
                 dayItem={dayItem}
                 halfHourItem={halfHourItem}
                 lastMealWeekdays={lastMealWeekdays}
@@ -180,7 +179,7 @@ const UsingMedicines: FC<IProps> = ({
                 med={med}
                 currentDayForWirning={currentDayForWirning}
                 currentDate={currentDate}
-              /> */}
+              />
             </div>
           );
           break;
@@ -197,7 +196,7 @@ const UsingMedicines: FC<IProps> = ({
           onMouseOut={hoverMouseOnMedicine}
           style={{ cursor: 'help', maxWidth: 'fit-content' }}
         >
-          {/* <MemoInDependently
+          <InDependentlyMemo
             dayItem={dayItem}
             halfHourItem={halfHourItem}
             firstMealWeekdays={firstMealWeekdays}
@@ -207,7 +206,7 @@ const UsingMedicines: FC<IProps> = ({
             med={med}
             currentDayForWirning={currentDayForWirning}
             currentDate={currentDate}
-          /> */}
+          />
         </div>
       );
     }

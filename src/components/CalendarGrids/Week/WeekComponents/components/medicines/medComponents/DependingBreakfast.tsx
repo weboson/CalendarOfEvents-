@@ -3,7 +3,7 @@
 import { Moment } from 'moment';
 import { FC, memo } from 'react';
 import { RiMedicineBottleLine } from 'react-icons/ri';
-import { ITakingMedication } from '../../../../../../../data/localDataBase/LocalDB_WaysUsing';
+import { IRecipesMedication } from '../../../../../../../data/localDataBase/LocalDB_WaysUsing';
 import HelperWarningMarker from './helper/HelperWarningMarker';
 
 interface IProps {
@@ -11,7 +11,7 @@ interface IProps {
   halfHourItem: Moment;
   firstMealWeekdays: Moment;
   firstMealWeekend: Moment;
-  med: ITakingMedication;
+  med: IRecipesMedication;
   currentDayForWirning: boolean;
   currentDate: Moment;
 }
@@ -38,8 +38,8 @@ const DependingBreakfast: FC<IProps> = ({
         dayItem.day() !== 6 && dayItem.day() !== 0
           ? halfHourItem.isSame(
               firstMealWeekdays
-                .subtract(med.interval.minute(), 'minute')
-                .subtract(med.interval.hour(), 'hour'),
+                .subtract(med.interval.minute, 'minute')
+                .subtract(med.interval.hour, 'hour'),
               'hour',
             ) &&
               firstMealWeekdays.clone().minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:21 >= 0  and < 30
@@ -55,7 +55,7 @@ const DependingBreakfast: FC<IProps> = ({
                   />
                   <span>
                     {/*//! вариант с названием ЛС {`${med.interval.format('H:mm')} ${med?.title}`} */}
-                    {med.interval.format('H:mm')} до завтрака
+                    {`${med.title}`}
                   </span>
                   <br />
                 </>
@@ -63,8 +63,8 @@ const DependingBreakfast: FC<IProps> = ({
           : // weekend
             halfHourItem.isSame(
               firstMealWeekend
-                .subtract(med.interval.minute(), 'minute')
-                .subtract(med.interval.hour(), 'hour'),
+                .subtract(med.interval.minute, 'minute')
+                .subtract(med.interval.hour, 'hour'),
               'hour',
             ) &&
               firstMealWeekend.clone().minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:21 >= 0  and < 30
@@ -77,7 +77,7 @@ const DependingBreakfast: FC<IProps> = ({
                       color: 'red',
                     }}
                   />
-                  <span>{med.interval.format('H:mm')} до завтрака</span>
+                  <span>{`${med.title}`}</span>
                   <br />
                 </>
               )
@@ -98,7 +98,7 @@ const DependingBreakfast: FC<IProps> = ({
                       color: 'red',
                     }}
                   />
-                  <span>Вовремя завтрака</span>
+                  <span>{`${med.title}`}</span>
                   <br />
                 </>
               )
@@ -114,7 +114,7 @@ const DependingBreakfast: FC<IProps> = ({
                       color: 'red',
                     }}
                   />
-                  <span>Вовремя завтрака</span>
+                  <span>{`${med.title}`}</span>
                 </>
               )
       );
@@ -125,8 +125,8 @@ const DependingBreakfast: FC<IProps> = ({
         dayItem.day() !== 6 && dayItem.day() !== 0
           ? halfHourItem.isSame(
               firstMealWeekdays
-                .add(med.interval.minute(), 'minute')
-                .add(med.interval.hour(), 'hour'),
+                .add(med.interval.minute, 'minute')
+                .add(med.interval.hour, 'hour'),
               'hour',
             ) &&
               firstMealWeekdays.clone().minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:21 >= 0  and < 30
@@ -139,14 +139,14 @@ const DependingBreakfast: FC<IProps> = ({
                       color: 'red',
                     }}
                   />
-                  <span>{med.interval.format('H:mm')} после завтрака</span>
+                  <span>{`${med.title}`}</span>
                 </>
               )
           : // weekend
             halfHourItem.isSame(
               firstMealWeekend
-                .add(med.interval.minute(), 'minute')
-                .add(med.interval.hour(), 'hour'),
+                .add(med.interval.minute, 'minute')
+                .add(med.interval.hour, 'hour'),
               'hour',
             ) &&
               firstMealWeekend.clone().minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:21 >= 0  and < 30
@@ -159,7 +159,7 @@ const DependingBreakfast: FC<IProps> = ({
                       color: 'red',
                     }}
                   />
-                  <span>{med.interval.format('H:mm')} после завтрака</span>
+                  <span>{`${med.title}`}</span>
                 </>
               )
       );
@@ -171,4 +171,4 @@ const DependingBreakfast: FC<IProps> = ({
 };
 
 // export default DependingBreakfast;
-export const MemoDependingBreakfast = memo(DependingBreakfast); // memo, возможно быстрее будет загружатся лекарства в ячейке
+export const DependingBreakfastMemo = memo(DependingBreakfast); // memo, возможно быстрее будет загружатся лекарства в ячейке

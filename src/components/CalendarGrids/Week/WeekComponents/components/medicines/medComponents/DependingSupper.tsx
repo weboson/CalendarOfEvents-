@@ -38,8 +38,8 @@ const DependingSupper: FC<IProps> = ({
         dayItem.day() !== 6 && dayItem.day() !== 0
           ? halfHourItem.isSame(
               lastMealWeekdays
-                .subtract(med.interval.minute(), 'minute')
-                .subtract(med.interval.hour(), 'hour'),
+                .subtract(med.interval.minute, 'minute')
+                .subtract(med.interval.hour, 'hour'),
               'hour',
             ) &&
               lastMealWeekdays.clone().minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:21 >= 0  and < 30
@@ -52,15 +52,15 @@ const DependingSupper: FC<IProps> = ({
                       color: 'red'}}
                   />
                   <span>
-                    {med.interval.format('H:mm')} до ужина
+                  {`${med.title}`}
                   </span><br/>
                 </>
               )
           : // weekend
             halfHourItem.isSame(
               lastMealWeekend
-                .subtract(med.interval.minute(), 'minute')
-                .subtract(med.interval.hour(), 'hour'),
+                .subtract(med.interval.minute, 'minute')
+                .subtract(med.interval.hour, 'hour'),
               'hour',
             ) &&
               lastMealWeekend.clone().minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:21 >= 0  and < 30
@@ -72,7 +72,7 @@ const DependingSupper: FC<IProps> = ({
                       color: 'red',}}
                   />
                   <span>
-                    {med.interval.format('H:mm')} до ужина
+                  {`${med.title}`}
                   </span><br/>
                 </>
               )
@@ -93,7 +93,7 @@ const DependingSupper: FC<IProps> = ({
                       color: 'red',}}
                   />
                   <span>
-                    Вовремя ужина
+                  {`${med.title}`}
                   </span><br/>
                 </>
               )
@@ -108,7 +108,7 @@ const DependingSupper: FC<IProps> = ({
                       color: 'red',}}
                   />
                   <span>
-                    Вовремя ужина
+                  {`${med.title}`}
                   </span><br/>
                 </>
               )
@@ -120,8 +120,8 @@ const DependingSupper: FC<IProps> = ({
         dayItem.day() !== 6 && dayItem.day() !== 0
           ? halfHourItem.isSame(
               lastMealWeekdays
-                .add(med.interval.minute(), 'minute')
-                .add(med.interval.hour(), 'hour'),
+                .add(med.interval.minute, 'minute')
+                .add(med.interval.hour, 'hour'),
               'hour',
             ) &&
               lastMealWeekdays.clone().minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:21 >= 0  and < 30
@@ -134,15 +134,15 @@ const DependingSupper: FC<IProps> = ({
                       color: 'red',}}
                   />
                   <span>
-                    {med.interval.format('H:mm')} после ужина
+                    {`${med.title}`}
                   </span><br/>
                 </>
               )
           : // weekend
             halfHourItem.isSame(
               lastMealWeekend
-                .add(med.interval.minute(), 'minute')
-                .add(med.interval.hour(), 'hour'),
+                .add(med.interval.minute, 'minute')
+                .add(med.interval.hour, 'hour'),
               'hour',
             ) &&
               lastMealWeekend.clone().minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:21 >= 0  and < 30
@@ -154,7 +154,7 @@ const DependingSupper: FC<IProps> = ({
                       color: 'red',}}
                   />
                   <span>
-                    {med.interval.format('H:mm')} после ужина
+                  {`${med.title}`}
                   </span><br/>
                 </>
               )
@@ -167,4 +167,4 @@ const DependingSupper: FC<IProps> = ({
 };
 
 // export default DependingSupper;
-export const MemoDependingSupper = memo(DependingSupper); // memo, возможно быстрее будет загружатся лекарства в ячейке
+export const DependingSupperMemo = memo(DependingSupper); // memo, возможно быстрее будет загружатся лекарства в ячейке

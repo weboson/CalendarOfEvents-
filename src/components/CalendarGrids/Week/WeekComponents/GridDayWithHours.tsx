@@ -6,7 +6,7 @@ import { HourContent } from '../stylesWeekGrid/sc_WeekGrid';
 import moment from 'moment';
 import SpaceBetweenMeals from './components/SpaceBetweenMeals'; // график питания: первый и последний приём пищи
 // import UsingMedicines from './components/medicines/UsingMedicines';
-import MealSchedule from './components/MealSchedule';
+import { MealScheduleMemo } from './components/MealSchedule';
 import { UsingMedicinesMemo } from './components/medicines/UsingMedicines';
 // DataBase array
 import recipesMedications from '../../../../data/localDataBase/LocalDB_WaysUsing';
@@ -47,7 +47,7 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
           return prev;
         }
       }),
-    [recipesMedications],
+    []
   );
 
   //! WarnigMarker: маркер ячейки, если текущее время совпадает со временем приёма лекарств:
@@ -87,7 +87,7 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
 
       {/* //* icons Food (firs и last eating)*/}
       {/* data: localDB_MealSchedule.ts */}
-      <MealSchedule
+      <MealScheduleMemo
         dayItem={dayItem}
         halfHourItem={halfHourItem}
         maxmealfood={maxMealFood}

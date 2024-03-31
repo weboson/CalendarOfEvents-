@@ -1,6 +1,6 @@
 //! Режим питания:  Маркировка (icon food) моментов приёма пищи в таблице времени и дней
 //! Планирую добавить функциональность: 2 вида: в будни и выходные (также как и режимы дня)
-import { FC, useMemo } from 'react';
+import { FC, memo, useMemo } from 'react';
 import { IRecipesMedication } from '../../../../../data/localDataBase/LocalDB_WaysUsing';
 import { MdOutlineFastfood } from 'react-icons/md';
 import { Moment } from 'moment';
@@ -26,24 +26,23 @@ const MealSchedule: FC<IProps> = ({
   // exem: moment().set({'year': 2024, 'month': 3, 'date': 1})
   //* weekday
   // 1-й приём пищи.
-  const firstMealWeekdays = useMemo(() => (
+  const firstMealWeekdays = 
     currentDate
     .set({
       hour: mealSchedule[0].modeRegime.weekdays.firstMeal.hour,
       minute: mealSchedule[0].modeRegime.weekdays.firstMeal.minute,
     })
     .clone() // обз clone() иначе изменим исходник
-  ), [currentDate])
+  
 
   // последний приём пищи
-  const lastMealWeekdays = useMemo(() => (
+  const lastMealWeekdays = 
     currentDate
     .set({
       hour: mealSchedule[0].modeRegime.weekdays.lastMeal.hour,
       minute: mealSchedule[0].modeRegime.weekdays.lastMeal.minute,
     })
-    .clone()
-  ), [currentDate]) 
+    .clone();
 
   //* интервал (промежуточные приёмы пищи): diff - это разница в moment
   // время между 1-м и последним приёмом пищи = последняя еда - первая еды, вычист по секундам (точнее, чем минуты/часы)
@@ -62,27 +61,21 @@ const MealSchedule: FC<IProps> = ({
 
   //* weekend
   // тоже самое только weekend
-  const firstMealWeekend = useMemo(
-    () =>
+  const firstMealWeekend = 
       currentDate
         .set({
           hour: mealSchedule[0].modeRegime.weekend.firstMeal.hour,
           minute: mealSchedule[0].modeRegime.weekend.firstMeal.minute,
         })
-        .clone(),
-    [currentDate],
-  );
+        .clone();
 
-  const lastMealWeekend = useMemo(
-    () =>
+  const lastMealWeekend = 
       currentDate
         .set({
           hour: mealSchedule[0].modeRegime.weekend.lastMeal.hour,
           minute: mealSchedule[0].modeRegime.weekend.lastMeal.minute,
         })
-        .clone(),
-    [currentDate],
-  );
+        .clone();
 
   const diffIntervalMealWeekend = useMemo(
     () => lastMealWeekend.diff(firstMealWeekend, 'seconds'),
@@ -168,4 +161,4 @@ const MealSchedule: FC<IProps> = ({
   }
 };
 
-export default MealSchedule;
+export const MealScheduleMemo = memo(MealSchedule);

@@ -46,7 +46,7 @@ const InDependently: FC<IProps> = ({
                 style={{
                   color: 'red',}}
               />
-              <span>{`${med.title}`}
+              <span className={`medElemUnic${med.id}`}>{`${med.title}`}
               </span><br/>
             </div>
           )) ||
@@ -68,7 +68,7 @@ const InDependently: FC<IProps> = ({
                   style={{
                     color: 'red',}}
                 />
-                <span>
+                <span className={`medElemUnic${med.id}`}>
                 {`${med.title}`}
                 </span><br/>
               </div>
@@ -84,7 +84,7 @@ const InDependently: FC<IProps> = ({
                 style={{
                   color: 'red',}}
               />
-              <span>
+              <span className={`medElemUnic${med.id}`}>
               {`${med.title}`}
               </span><br/>
             </div>
@@ -107,7 +107,7 @@ const InDependently: FC<IProps> = ({
                   style={{
                     color: 'red',}}
                 />
-                <span>
+                <span className={`medElemUnic${med.id}`}>
                   {`${med.title}`}
                 </span><br/>
               </div>

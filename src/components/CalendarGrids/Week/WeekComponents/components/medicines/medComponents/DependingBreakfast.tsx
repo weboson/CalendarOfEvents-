@@ -53,8 +53,7 @@ const DependingBreakfast: FC<IProps> = ({
                       top: '18px',
                     }}
                   />
-                  <span>
-                    {/*//! вариант с названием ЛС {`${med.interval.format('H:mm')} ${med?.title}`} */}
+                  <span className={`medElemUnic${med.id}`}>
                     {`${med.title}`}
                   </span>
                   <br />
@@ -77,7 +76,7 @@ const DependingBreakfast: FC<IProps> = ({
                       color: 'red',
                     }}
                   />
-                  <span>{`${med.title}`}</span>
+                  <span className={`medElemUnic${med.id}`}>{`${med.title}`}</span>
                   <br />
                 </>
               )
@@ -98,7 +97,7 @@ const DependingBreakfast: FC<IProps> = ({
                       color: 'red',
                     }}
                   />
-                  <span>{`${med.title}`}</span>
+                  <span className={`medElemUnic${med.id}`}>{`${med.title}`}</span>
                   <br />
                 </>
               )
@@ -114,7 +113,7 @@ const DependingBreakfast: FC<IProps> = ({
                       color: 'red',
                     }}
                   />
-                  <span>{`${med.title}`}</span>
+                  <span className={`medElemUnic${med.id}`}>{`${med.title}`}</span>
                 </>
               )
       );
@@ -139,7 +138,7 @@ const DependingBreakfast: FC<IProps> = ({
                       color: 'red',
                     }}
                   />
-                  <span>{`${med.title}`}</span>
+                  <span className={`medElemUnic${med.id}`}>{`${med.title}`}</span>
                 </>
               )
           : // weekend
@@ -159,7 +158,7 @@ const DependingBreakfast: FC<IProps> = ({
                       color: 'red',
                     }}
                   />
-                  <span>{`${med.title}`}</span>
+                  <span className={`medElemUnic${med.id}`}>{`${med.title}`}</span>
                 </>
               )
       );

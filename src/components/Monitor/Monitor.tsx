@@ -28,21 +28,21 @@ const Monitor: FC<IMonitorProps> = ({
 
   return (
     <DivWrapper>
-      {mode == 'month' ? (
-        <div>
+      {mode == 'months' ? (
+        <div id='red'>
           <TitleWrapper>{currentDate.format('MMMM')}</TitleWrapper>
           <TextWrapper>{currentDate.format('YYYY')}</TextWrapper>
         </div>
-      ) : mode == 'year' ? (
+      ) : mode == 'years' ? (
         <div>
           <TitleWrapper>{currentDate.format('YYYY')}</TitleWrapper>
         </div>
-      ) : mode == 'week' ? (
+      ) : mode == 'weeks' ? (
         <div>
           <TitleWrapper>{`${currentDate.clone().startOf('week').format('D')}-${currentDate.clone().endOf('week').format('D')} `}</TitleWrapper>
           <TextWrapper>{currentDate.format('MMMM yyyy')}</TextWrapper>
         </div>
-      ) : mode == 'day' ? (
+      ) : mode == 'days' ? (
         <div>
           <TitleWrapper>{currentDate.format('dddd')}</TitleWrapper>
           <TextWrapper>{currentDate.format('D')}</TextWrapper>

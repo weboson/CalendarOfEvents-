@@ -1,4 +1,5 @@
-//! приём лекарств
+//! приём лекарств: каждая ячейка проверяет на соответсвие с каждым лекарством в массиве: 
+// 7 столбов * 48 получасов в день * 22 элментов в массиве рецептов = 1056
 import { Moment } from 'moment';
 import { FC, memo, useMemo } from 'react';
 // данные графика питания: first and last eating
@@ -26,7 +27,7 @@ const UsingMedicines: FC<IProps> = ({
   currentDayForWirning,
   currentDate,
 }) => {
-  
+
   // weekday: интервал между первым и последней едой
   const firstMealWeekdays = useMemo(() => (
     currentDate
@@ -112,7 +113,7 @@ const UsingMedicines: FC<IProps> = ({
       display: none;`;
     }
   };
-  
+
     if (med.depending) {
       //==================================== есть ли зависимости от завтрака/ужина/еды/
       //* если есть, то какая (еда, завтрак, ужин)?
@@ -122,10 +123,10 @@ const UsingMedicines: FC<IProps> = ({
           //* до, вовремя или после
           return (
             <div
-              // события наведения и уходы мыши
               onMouseOver={hoverMouseOnMedicine}
               onMouseOut={hoverMouseOnMedicine}
               style={{ cursor: 'help', maxWidth: 'fit-content' }}
+              
             >
               <DependingEatingMemo
                 dayItem={dayItem}

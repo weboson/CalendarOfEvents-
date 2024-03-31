@@ -9,7 +9,7 @@ import MonthGrid from '../components/CalendarGrids/Month/MonthGrid';
 import { menuModesDate } from '../data/dataMenu';
 import { modesMonitor } from '../data/modesMonitor'; // МАССИВ режимов отображения в Monitor
 import { useAppSelector } from '../store/hooks';
-import { MemoWeekGrid } from '../components/CalendarGrids/Week/WeekGrid';
+import  WeekGrid from '../components/CalendarGrids/Week/WeekGrid';
 import DayGrid from '../components/CalendarGrids/Day/DayGrid';
 
 // sc-style
@@ -83,7 +83,7 @@ const Home: FC = () => {
         menuModesDate[indexMenu].title == 'Day' ? (
           <DayGrid currentDate={currentDate} />
         ) : menuModesDate[indexMenu].title == 'Week' ? (
-          <MemoWeekGrid currentDate={currentDate} />
+          <WeekGrid currentDate={currentDate}/>
         ) : menuModesDate[indexMenu].title == 'Month' ? (
           <MonthGrid
             firstDayOfWeek={firstDayOfWeek}

@@ -52,7 +52,7 @@ const DependingEating: FC<IProps> = ({
                 <>
                   {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                   <RiMedicineBottleLine style={{ color: 'red' }} />
-                  <span>{`${med.title}`}</span>
+                  <span className={`medElemUnic${med.id}`}>{`${med.title}`}</span>
                   <br />
                 </>
               )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
@@ -72,7 +72,7 @@ const DependingEating: FC<IProps> = ({
                         key={`before-${index}`}
                         style={{ color: 'red' }}
                       />
-                      <span>{`${med.title}`}</span>
+                      <span className={`medElemUnic${med.id}`}>{`${med.title}`}</span>
                       <br />
                     </div>
                   ),
@@ -90,7 +90,7 @@ const DependingEating: FC<IProps> = ({
                 <div>
                   {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                   <RiMedicineBottleLine style={{ color: 'red' }} />
-                  <span>{`${med.title}`}</span>
+                  <span className={`medElemUnic${med.id}`}>{`${med.title}`}</span>
                 </div>
               )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
               [...new Array(med.quantity - 1)].map(
@@ -109,7 +109,7 @@ const DependingEating: FC<IProps> = ({
                         key={`before-${index}`}
                         style={{ color: 'red' }}
                       />
-                      <span>{`${med.title}`}</span>
+                      <span className={`medElemUnic${med.id}`}>{`${med.title}`}</span>
                       <br />
                     </div>
                   ),
@@ -129,7 +129,7 @@ const DependingEating: FC<IProps> = ({
                 <div>
                   {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                   <RiMedicineBottleLine style={{ color: 'red' }} />
-                  <span>{`${med.title}`}</span> <br />
+                  <span className={`medElemUnic${med.id}`}>{`${med.title}`}</span> <br />
                 </div>
               )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
               [...new Array(med.quantity - 1)].map(
@@ -148,7 +148,7 @@ const DependingEating: FC<IProps> = ({
                         key={`while-${index}`}
                         style={{ color: 'red' }}
                       />
-                      <span>{`${med.title}`}</span> <br />
+                      <span className={`medElemUnic${med.id}`}>{`${med.title}`}</span> <br />
                     </div>
                   ),
               )
@@ -160,7 +160,7 @@ const DependingEating: FC<IProps> = ({
                 <div>
                   {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                   <RiMedicineBottleLine style={{ color: 'red' }} />
-                  <span>{`${med.title}`}</span> <br />
+                  <span className={`medElemUnic${med.id}`}>{`${med.title}`}</span> <br />
                 </div>
               )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
               [...new Array(med.quantity - 1)].map(
@@ -179,7 +179,7 @@ const DependingEating: FC<IProps> = ({
                         key={`while-${index}`}
                         style={{ color: 'red' }}
                       />
-                      <span key={index + 4}>{`${med.title}`}</span> <br />
+                      <span className={`medElemUnic${med.id}`} key={index + 4}>{`${med.title}`}</span> <br />
                     </div>
                   ),
               )
@@ -202,7 +202,7 @@ const DependingEating: FC<IProps> = ({
                 <div>
                   {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                   <RiMedicineBottleLine style={{ color: 'red' }} />
-                  <span>{`${med.title}`}</span>
+                  <span className={`medElemUnic${med.id}`}>{`${med.title}`}</span>
                   <br />
                 </div>
               )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
@@ -222,7 +222,7 @@ const DependingEating: FC<IProps> = ({
                         key={`after-${index}`}
                         style={{ color: 'red' }}
                       />
-                      <span>{`${med.title}`}</span>
+                      <span className={`medElemUnic${med.id}`}>{`${med.title}`}</span>
                       <br />
                     </div>
                   ),
@@ -240,7 +240,7 @@ const DependingEating: FC<IProps> = ({
                 <div>
                   {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                   <RiMedicineBottleLine style={{ color: 'red' }} />
-                  <span>{`${med.title}`}</span>
+                  <span className={`medElemUnic${med.id}`}>{`${med.title}`}</span>
                   <br />
                 </div>
               )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
@@ -260,7 +260,7 @@ const DependingEating: FC<IProps> = ({
                         key={`after-${index}`}
                         style={{ color: 'red' }}
                       />
-                      <span key={index + 4}>
+                      <span className={`medElemUnic${med.id}`} key={index + 4}>
                       {`${med.title}`}
                       </span>
                     </div>

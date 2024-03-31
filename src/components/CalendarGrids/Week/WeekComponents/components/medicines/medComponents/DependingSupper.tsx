@@ -51,7 +51,7 @@ const DependingSupper: FC<IProps> = ({
                     style={{
                       color: 'red'}}
                   />
-                  <span>
+                  <span className={`medElemUnic${med.id}`}>
                   {`${med.title}`}
                   </span><br/>
                 </>
@@ -71,7 +71,7 @@ const DependingSupper: FC<IProps> = ({
                     style={{
                       color: 'red',}}
                   />
-                  <span>
+                  <span className={`medElemUnic${med.id}`}>
                   {`${med.title}`}
                   </span><br/>
                 </>
@@ -92,7 +92,7 @@ const DependingSupper: FC<IProps> = ({
                     style={{
                       color: 'red',}}
                   />
-                  <span>
+                  <span className={`medElemUnic${med.id}`}>
                   {`${med.title}`}
                   </span><br/>
                 </>
@@ -107,7 +107,7 @@ const DependingSupper: FC<IProps> = ({
                     style={{
                       color: 'red',}}
                   />
-                  <span>
+                  <span className={`medElemUnic${med.id}`}>
                   {`${med.title}`}
                   </span><br/>
                 </>
@@ -133,7 +133,7 @@ const DependingSupper: FC<IProps> = ({
                     style={{
                       color: 'red',}}
                   />
-                  <span>
+                  <span className={`medElemUnic${med.id}`}>
                     {`${med.title}`}
                   </span><br/>
                 </>
@@ -153,7 +153,7 @@ const DependingSupper: FC<IProps> = ({
                     style={{
                       color: 'red',}}
                   />
-                  <span>
+                  <span className={`medElemUnic${med.id}`}>
                   {`${med.title}`}
                   </span><br/>
                 </>

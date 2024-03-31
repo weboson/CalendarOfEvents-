@@ -157,7 +157,7 @@ const recipesMedications: IRecipesMedications = [
         interval: { hour: 7, minute: 30}, // exm: спустя 45 минут после еды 
         duration: { // продолжительность курса до 2 месяца 
             index: 2,
-            title: 'day', 
+            title: 'days', 
         },  
         start: '25.03.2024',
         createDateRecipe: '25.03.2024',//  дата создания рецепта одного ЛС
@@ -393,13 +393,13 @@ const recipesMedications: IRecipesMedications = [
     },
     {
         id: 16,
-        title: 'Анальгин',
+        title: 'Анальгин2',
         depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[1].type, // 'first breakfast' - в зависимости от 1-го приёма пищи
         quantity: 1, // не активен (по-умолчанию 1 раз)
         unitTime: unitTime[0].type, // day -  в день
-        position: positionAction[2].oftime, //  'after' ВОВРЕМЯ
-        interval: { hour: 0, minute: 45}, // exm: спустя 45 минут после еды 
+        position: positionAction[0].oftime, //  'after' ВОВРЕМЯ
+        interval: { hour: 4, minute: 30}, // exm: спустя 45 минут после еды 
         duration: { // продолжительность курса до 2 месяца 
             index: 1,
             title: 'months', 

@@ -14,6 +14,8 @@ import MyPopup from '../../myPopup/MyPopup';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { readingMarkerWarning } from '../../../store/features/markerWarningSlice';
 import { arrWarningCleare } from '../../../store/features/arrWarningSlice';
+// data
+import recipesMedications from '../../../data/localDataBase/LocalDB_WaysUsing';
 
 interface IProps {
   currentDate: Moment;
@@ -22,6 +24,8 @@ interface IProps {
 const WeekGrid: FC<IProps> = ({ currentDate }) => {
   // currentDate - это текущее время, которое автоматически обновляется (useEffect в Home.tsx) каждую минуту (60000 ms)
   // Days of week (top panel)
+  // console.log('WeekGrid')
+
   const ArrayDays = useMemo(
     () =>
       // useMemo, чтобы расчет проводился один раз, остальное из памяти кеша
@@ -59,7 +63,7 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
       .scrollTo(0, +sessionStorage.getItem('position')!); // Знак ! - в TS значит, что уверены, что объект не равен null или Uundefined
   }, []);
 
-  //! WarnigMarker: маркер ячейки, если текущее время совпадает со временем приёма лекарств:
+  // WarnigMarker: маркер ячейки, если текущее время совпадает со временем приёма лекарств:
   // вызывается в DependingEating.tsx, DependingBreakfast и т.д, а использую в HelperWarningMarker.tsx;
   const dispatch = useAppDispatch();
   const arrWarning = useAppSelector((state) => state.arrWarning);
@@ -75,6 +79,30 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
     // console.log(arrWarning)
   }); // если в useEffect - нет зависимостей, то рендеринг будет при любом изменении компонента,
   // а именно каждые 60 сек - из-за currentDate
+
+//! цветные лекарства
+    // рандомные цвета
+  function getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) { // exm: #123456
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+  
+// назначение стилей
+  useEffect(() => {   
+      recipesMedications.map((itemMed) => {
+        const color = getRandomColor() // цвет
+      for (const elem of document.querySelectorAll(`.medElemUnic${itemMed.id}`)) {
+        elem.style.cssText = 
+        `background-color: ${color};
+         color: black`
+       }
+      }) 
+    }, [])
+
 
   return (
     <GridWrapper id="saveScroll">
@@ -120,7 +148,7 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
             
           </WrapperColumn>
         ))}
-        {/* При наведении на лекарсвто - появляется Popup-окно с подробным описанием ЛС */}
+        {/* При наведении на лекарство - появляется Popup-окно с подробным описанием ЛС */}
         {/* Обработчик в UsingMedicines.tsx */}
         <MyPopup />
       </WrapperTopPanelAndContent>
@@ -129,4 +157,4 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
 };
 
 // export default WeekGrid;
-export const MemoWeekGrid = memo(WeekGrid); // memo, чтобы один раз столбик расчитался, а потом уже 6 раз из памяти рендерился
+export default WeekGrid; // memo, чтобы один раз столбик расчитался, а потом уже 6 раз из памяти рендерился

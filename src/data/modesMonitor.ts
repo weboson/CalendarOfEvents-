@@ -2,7 +2,7 @@
 // used CalendarGrid.tsx
 interface IModesMonitorObj {
     id: number;
-    title: string;
+    title: 'days' | 'weeks' | 'months' | 'years'; // for .subtract(1, 'days' | 'weeks' | etc)
   }
   
   interface IModesMonitor extends Array<IModesMonitorObj>{}
@@ -10,8 +10,8 @@ interface IModesMonitorObj {
   // в данном проекте, значения менять не будем - толькот чтение по меняющемуся (active button) index. 
   // Просто учимся Rudax Toolkit)
 export const modesMonitor: IModesMonitor = [
-    {id: 1, title: 'day'}, 
-    {id: 2, title: 'week'}, 
-    {id: 3, title: 'month'}, 
-    {id: 4, title: 'year'},
+    {id: 1, title: 'days'}, 
+    {id: 2, title: 'weeks'}, 
+    {id: 3, title: 'months'}, 
+    {id: 4, title: 'years'},
   ]

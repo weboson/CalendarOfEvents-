@@ -6,7 +6,7 @@ export const GridWrapper = styled.div`
   display: block;
   background-color: #1e1f21;
   min-width: 100%;
-  height: 88.5vh; //! чтобы скролл window не появляся
+  height: 90.8vh; //! чтобы скролл window не появляся
   overflow-y: scroll;
   &::-webkit-scrollbar {
     // style scroll

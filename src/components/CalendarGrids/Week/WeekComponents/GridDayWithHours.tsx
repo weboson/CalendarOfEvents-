@@ -19,7 +19,6 @@ interface IProps {
 }
 
 const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
-  // console.log('GridDayWithHours')
   
   // 48 Half Hours  (content), exemple: 0:00, 0:30, 1:00
   const ArrayHalfHoursContent = useMemo(
@@ -58,8 +57,9 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
     () => dayItem.isSame(moment(), 'day'),
     [dayItem],
   );
-  
+
   return ArrayHalfHoursContent.map((halfHourItem, hourIndex) => (
+    // каждая ячейка 7 * 48
     <HourContent
       key={hourIndex + 3}
       $currentHour={
@@ -95,13 +95,15 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
       />
 
       {/* //* for Using Medicines (расчет приёма лекарств) */}
-      {recipesMedications.map((medItem, index) => ( 
-        //! для расчета курса, временной диапазон приёмов ЛС, epm: курс 1 месяц, то есть интервал с 23 марта по 23 апреля       
+      {recipesMedications.map((medItem, index) => (
+          //! для расчета курса, временной диапазон приёмов ЛС, epm: курс 1 месяц, то есть интервал с 23 марта по 23 апреля       
         (moment(medItem.start, 'DD.MM.YYYY') <= dayItem) &&
         //! потом можно в форме всплывающий мини календарь и там высчитывать курс и автовыбор на определенную дату
         (dayItem <= moment(medItem.start, 'DD.MM.YYYY').clone().add(medItem.duration.index, medItem.duration.title)) && 
+        
         <UsingMedicinesMemo key={index} dayItem={dayItem} halfHourItem={halfHourItem} med={medItem} currentDayForWirning={currentDayForWirning} currentDate={currentDate}/>
-      ))
+        )         
+      )
       }
 
     </HourContent>

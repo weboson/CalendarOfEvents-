@@ -1,4 +1,4 @@
-import { FC, memo, useEffect, useMemo } from 'react';
+import { FC, useEffect, useMemo} from 'react';
 import {
   GridWrapper,
   DaySidePanel,
@@ -16,6 +16,7 @@ import { readingMarkerWarning } from '../../../store/features/markerWarningSlice
 import { arrWarningCleare } from '../../../store/features/arrWarningSlice';
 // data
 import recipesMedications from '../../../data/localDataBase/LocalDB_WaysUsing';
+import { arrayColors } from '../../../data/Colors';
 
 interface IProps {
   currentDate: Moment;
@@ -41,7 +42,6 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
     () => [...new Array(24)].map((_, i) => currentDate.hours(i)),
     [currentDate],
   );
-
 
   // Memorization/Recovery Scroll position (сохраняет текущий скролл (в mode: Week), даже после перехода на другие компоненты - не нужно постоянно мотать до того места, где остановился)
   // Знак ! - в TS значит, что уверены, что объект не равен null или Uundefined
@@ -76,33 +76,28 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
       dispatch(readingMarkerWarning(false)); // [false,fasle,fasle]
       dispatch(arrWarningCleare()); // очищаем массив
     }
-    // console.log(arrWarning)
   }); // если в useEffect - нет зависимостей, то рендеринг будет при любом изменении компонента,
   // а именно каждые 60 сек - из-за currentDate
 
-//! цветные лекарства
-    // рандомные цвета
-  function getRandomColor() {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) { // exm: #123456
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  }
-  
-// назначение стилей
-  useEffect(() => {   
-      recipesMedications.map((itemMed) => {
-        const color = getRandomColor() // цвет
-      for (const elem of document.querySelectorAll(`.medElemUnic${itemMed.id}`)) {
+  //! цветные лекарства:
+ // массив цветов (arrayColors) генерируется в Colors.ts - в отдельном файле, т.к. генерируется 1 раз (для решения бага: если ЛС исчезнет, и если он снова появится, то уже без цвета )
+  // назначение стилей
+  useEffect(() => {
+    recipesMedications.map((itemMed, index) => {
+      // const color = getRandomColor();
+      for (const elem of document.querySelectorAll(
+        `.medElemUnic${itemMed.id}`, // привер классов (таким же методом назанченные в InDependently.tsx и тд.): medElemUnic6, medElemUnic7, medElemUnic12 etc
+      )) {
         elem.style.cssText = 
-        `background-color: ${color};
-         color: black`
-       }
-      }) 
-    }, [])
-
+        `background-color: ${arrayColors[index] || 'white'};
+          color: black;
+          padding: 0 8px`;
+      }
+    });
+  }); 
+  // если без массива зависимостей, то будет при каждом измененеии менятся цвет.
+  // С currenDate также будет себя вести, как без массива,
+  // если пустой массива, то при 1-й загрузке
 
   return (
     <GridWrapper id="saveScroll">
@@ -141,11 +136,7 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
             </DayOfWeek>
 
             {/* Grid Day with Hours (Content) */}
-            <GridDaysHoursMemo
-              currentDate={currentDate}
-              dayItem={dayItem}
-            />
-            
+            <GridDaysHoursMemo currentDate={currentDate} dayItem={dayItem} />
           </WrapperColumn>
         ))}
         {/* При наведении на лекарство - появляется Popup-окно с подробным описанием ЛС */}

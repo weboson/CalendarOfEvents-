@@ -83,7 +83,7 @@ const Home: FC = () => {
         menuModesDate[indexMenu].title == 'Day' ? (
           <DayGrid currentDate={currentDate} />
         ) : menuModesDate[indexMenu].title == 'Week' ? (
-          <WeekGrid currentDate={currentDate}/>
+          <WeekGrid currentDate={currentDate} />
         ) : menuModesDate[indexMenu].title == 'Month' ? (
           <MonthGrid
             firstDayOfWeek={firstDayOfWeek}

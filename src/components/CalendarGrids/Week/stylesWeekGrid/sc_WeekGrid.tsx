@@ -1,5 +1,6 @@
 // styles for WeekGrid.tsx
 import styled from 'styled-components';
+import recipesMedications from '../../../../data/localDataBase/LocalDB_WaysUsing';
 
 // main block
 export const GridWrapper = styled.div`
@@ -116,9 +117,9 @@ export const HourContent = styled.div<IHourContent>`
     props.$currentHour ? 'background-color: #3d3e3f' : null};
   
   ${(props) => 
-  //! Warning: текущая по времени ячейка совпадает со временем приёма лекарств 
+  // Warning: текущая по времени ячейка совпадает со временем приёма лекарств 
     props.$currentWarning && 
-  //! пульсация красного цвета
+  // пульсация красного цвета
     `opacity: 1;
       animation: pulse 4s ease-in-out infinite; // Указываем название анимации, время, тип, и нужно ли её повторять
 

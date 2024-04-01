@@ -399,7 +399,7 @@ const recipesMedications: IRecipesMedications = [
         quantity: 1, // не активен (по-умолчанию 1 раз)
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[0].oftime, //  'after' ВОВРЕМЯ
-        interval: { hour: 3, minute: 30}, // exm: спустя 45 минут после еды 
+        interval: { hour: 5, minute: 0}, // exm: спустя 45 минут после еды 
         duration: { // продолжительность курса до 2 месяца 
             index: 1,
             title: 'months', 

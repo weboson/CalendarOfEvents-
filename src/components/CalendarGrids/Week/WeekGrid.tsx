@@ -86,9 +86,9 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
     recipesMedications.map((itemMed, index) => {
       // const color = getRandomColor();
       for (const elem of document.querySelectorAll(
-        `.medElemUnic${itemMed.id}`, // привер классов (таким же методом назанченные в InDependently.tsx и тд.): medElemUnic6, medElemUnic7, medElemUnic12 etc
+        `.medElemUnic${itemMed.id}`, // пример классов: medElemUnic6, medElemUnic7, medElemUnic12 etc - (таким же методом назанченные в InDependently.tsx и тд.)
       )) {
-        elem.style.cssText = 
+        elem.style.cssText += 
         `background-color: ${arrayColors[index] || 'white'};
           color: black;
           padding: 0 8px`;

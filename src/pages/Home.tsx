@@ -31,15 +31,19 @@ const Home: FC = () => {
 
   const firstDayOfWeek = currentDate.clone().startOf('month').startOf('week'); // стартовый день: 01.понедельник.2023
 
+  const prevHandler = () => setToday((prev) => prev.clone().subtract(1, mode));
+  const todayHandler = () => setToday(moment());
+  const nextHandler = () => setToday((next) => next.clone().add(1, mode));
+
   //  For dinamic (update) time (чтобы не нужно было обновлять каждый раз, когда время изменилось и обновлялись компоненты)
   useEffect(() => {
     const timer = setInterval(() => {
-      setToday(moment());
+      currentDate.isSame(moment()) && setToday(moment()) // если выбранная (кнопками) неделя схожа с реальной неделей, то устанавливаем currentDate на текущее
     }, 60000);
     return () => {
       clearInterval(timer);
     };
-  }, []);
+  }); // без массива зависимости, чтобы currentDate постоянно обновлялся (был актулаьных), он запоминается в setInterval
 
   // auto scroll "week" for id=#autoScroll: grid hours
   // если данный код установить прямо в GridDayWithHours.tsx - то автоскролл каждый раз при переключении на Week
@@ -60,10 +64,6 @@ const Home: FC = () => {
       1200,
     );
   }, []);
-
-  const prevHandler = () => setToday((prev) => prev.clone().subtract(1, mode));
-  const todayHandler = () => setToday(moment());
-  const nextHandler = () => setToday((prev) => prev.clone().add(1, mode));
   
   // выбранный режим меню (day, week, month, year)
   const indexMenu = useAppSelector((state) => state.menu); // из Readux-toolkit

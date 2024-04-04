@@ -1,16 +1,6 @@
 // styled for Monitor.tsx
-
-import { Moment } from "moment";
 import styled from "styled-components";
 
-
-// ts тип для пропс
-export interface IMonitorProps {
-    currentDate: Moment
-    prevHandler: () => void
-    todayHandler: () => void
-    nextHandler: () => void
-  }
 
 export const DivWrapper = styled('div')`
     display: flex;
@@ -33,18 +23,39 @@ export const ButtonsWrapper = styled('div')`
     display: flex;
     align-items: center;
 `
-export const ButtonWrapper = styled('button')`
+interface IButtonWrapper {
+    $isActiveDate: boolean
+}
+export const ButtonWrapper = styled('button')<IButtonWrapper>`
     border: unset;
     background-color: #565759;
     height: 20px;
-    margin-right: 2px;
-    border-radius: 4px;
     color: #E6E6E6;
     cursor: pointer;
+        /* кнопки < и > "светятся", если отображена текущая неделя, день, месяц, год, */
+  ${(props) =>
+    props.$isActiveDate ? 'background-color: #E6E6E6; color: #565759;' : null}
+    /* &:nth-child(1) {
+        margin-bottom: 20px;
+        color: red !important;
+    } */
+    /* закругление краёв первой и последней кнопки */
+    &:first-child {
+        border-radius: 4px 0 0 4px
+  }
+    &:last-child {
+        border-radius: 0 4px 4px 0 
+  }
 `
-export const TodayButton = styled(ButtonWrapper)`
+interface ITodayButton {
+    $isActiveDate: boolean
+}
+export const TodayButton = styled(ButtonWrapper)<ITodayButton>` // styled(ButtonWrapper) - наследует стили
     padding-right: 16px;
     padding-left: 16px;
     font-weight: bold;
     cursor: pointer;
+    /* кнопка ToDay "светится", если отображена текущая неделя, день, месяц, год, */
+  ${(props) =>
+    props.$isActiveDate ? 'background-color: #E6E6E6; color: #565759;' : null}
 `;

@@ -1,5 +1,5 @@
 // show from above: current date (exemple: November 30 (from Month), 2023 (from Year))
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import {
   DivWrapper,
   TextWrapper,
@@ -7,12 +7,19 @@ import {
   ButtonsWrapper,
   ButtonWrapper,
   TodayButton,
-  IMonitorProps,
 } from '../Monitor/stylesMonitor/sc_Monitor';
 import { useAppSelector } from '../../store/hooks';
 import { modesMonitor } from '../../data/modesMonitor';
+import { Moment } from 'moment';
+import moment from 'moment';
 
-
+// ts тип для пропс
+interface IMonitorProps {
+  currentDate: Moment
+  prevHandler: () => void
+  todayHandler: () => void
+  nextHandler: () => void
+}
 
 const Monitor: FC<IMonitorProps> = ({
   currentDate,
@@ -25,6 +32,10 @@ const Monitor: FC<IMonitorProps> = ({
 
   const mode = modesMonitor[index].title; // 'month' (режим отображения заголовка в Monitor: Month)
   // console.log(modesMonitor[index].title)
+
+  // active button (mode): "<", "Today" or ">"
+  // const [modeDate, setModeDate] = useState(false)
+  // setModeDate(true); // active mode Date
 
   return (
     <DivWrapper>
@@ -51,9 +62,9 @@ const Monitor: FC<IMonitorProps> = ({
         'Заголовок (Monitor.tsx)'
       }
       <ButtonsWrapper>
-        <ButtonWrapper onClick={prevHandler}> &lt; </ButtonWrapper>
-        <TodayButton onClick={todayHandler}>Today</TodayButton>
-        <ButtonWrapper onClick={nextHandler}> &gt; </ButtonWrapper>
+        <ButtonWrapper onClick={prevHandler} $isActiveDate={(moment().isAfter(currentDate, mode))  ? true : false}> &lt; </ButtonWrapper>
+        <TodayButton onClick={todayHandler} $isActiveDate={currentDate.isSame(moment(), mode) ? true : false}>Today</TodayButton>
+        <ButtonWrapper onClick={nextHandler} $isActiveDate={(moment().isBefore(currentDate, mode))  ? true : false}> &gt; </ButtonWrapper>
       </ButtonsWrapper>
     </DivWrapper>
   );

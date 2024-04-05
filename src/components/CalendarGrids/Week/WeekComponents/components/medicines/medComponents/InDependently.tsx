@@ -17,7 +17,8 @@ interface IProps {
   currentDate: Moment;
 }
 
-const InDependently: FC<IProps> = ({
+const InDependently: FC<IProps> = memo(
+  ({
   dayItem,
   halfHourItem,
   firstMealWeekdays,
@@ -114,7 +115,8 @@ const InDependently: FC<IProps> = ({
             ) : null,
           )
   );
-};
+}
+);
 
 // export default InDependently;
-export const InDependentlyMemo = memo(InDependently); // memo, возможно быстрее будет загружатся лекарства в ячейке
+export default InDependently; // memo, возможно быстрее будет загружатся лекарства в ячейке

@@ -16,7 +16,7 @@ interface IProps {
   currentDate: Moment;
 }
 
-const DependingBreakfast: FC<IProps> = ({
+const DependingBreakfast: FC<IProps> = memo(({
   dayItem,
   halfHourItem,
   firstMealWeekdays,
@@ -167,7 +167,8 @@ const DependingBreakfast: FC<IProps> = ({
     default:
       break;
   }
-};
+}
+);
 
 // export default DependingBreakfast;
-export const DependingBreakfastMemo = memo(DependingBreakfast); // memo, возможно быстрее будет загружатся лекарства в ячейке
+export default DependingBreakfast; // memo, возможно быстрее будет загружатся лекарства в ячейке

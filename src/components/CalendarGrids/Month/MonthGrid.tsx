@@ -9,6 +9,7 @@ import {
   MonthWrapper,
 } from './stylesMonthGrid/sc_MonthGrid';
 import moment from 'moment';
+import DayContent from './DayContent';
 
 interface IProps {
   firstDayOfWeek: Moment;
@@ -57,6 +58,9 @@ const CalendarGrid: FC<IProps> = ({ firstDayOfWeek, currentDate }) => {
                 )}
               </DayWrapper>
             </RowInCell>
+            <DayContent currentDate={currentDate}>
+              
+            </DayContent>
           </CellWrapper>
         ))}
       </GridWrapper>

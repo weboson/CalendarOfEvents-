@@ -77,11 +77,11 @@ const MyPopup: FC = () => {
           <p>
             {medicine?.duration.index + ' '}
             {medicine?.duration.title == 'days'
-              ? 'день'
+              ? 'дня/дней/день'
               : medicine?.duration.title == 'weeks'
-              ? 'неделя'
+              ? 'недели/ей'
               : medicine?.duration.title == 'months'
-              ? 'месяц'
+              ? 'месяц/месяцев'
               : 'год'}
           </p>
         </li>

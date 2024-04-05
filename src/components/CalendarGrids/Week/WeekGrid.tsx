@@ -9,14 +9,14 @@ import {
   WrapperColumn,
 } from './stylesWeekGrid/sc_WeekGrid';
 import moment, { Moment } from 'moment';
-import { GridDaysHoursMemo } from './WeekComponents/GridDayWithHours';
+import GridDaysHours from './WeekComponents/GridDayWithHours';
 import MyPopup from '../../myPopup/MyPopup';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { readingMarkerWarning } from '../../../store/features/markerWarningSlice';
 import { arrWarningCleare } from '../../../store/features/arrWarningSlice';
 // data
 import recipesMedications from '../../../data/localDataBase/LocalDB_WaysUsing';
-import { arrayColors } from '../../../data/Colors';
+import { arrayColors } from '../../../data/colors';
 
 interface IProps {
   currentDate: Moment;
@@ -136,7 +136,7 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
             </DayOfWeek>
 
             {/* Grid Day with Hours (Content) */}
-            <GridDaysHoursMemo currentDate={currentDate} dayItem={dayItem} />
+            <GridDaysHours currentDate={currentDate} dayItem={dayItem} />
           </WrapperColumn>
         ))}
         {/* При наведении на лекарство - появляется Popup-окно с подробным описанием ЛС */}

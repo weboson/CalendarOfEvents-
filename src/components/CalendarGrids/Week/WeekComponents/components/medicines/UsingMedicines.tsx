@@ -1,14 +1,14 @@
-//! приём лекарств: каждая ячейка проверяет на соответсвие с каждым лекарством в массиве: 
+//! приём лекарств: каждая ячейка проверяет на соответсвие с каждым лекарством в массиве:
 // 7 столбов * 48 получасов в день * 22 элментов в массиве рецептов = 1056
 import { Moment } from 'moment';
 import { FC, memo, useMemo } from 'react';
 // данные графика питания: first and last eating
 import mealSchedule from '../../../../../../data/localDataBase/localDB_MealSchedule';
 import { IRecipesMedication } from '../../../../../../data/localDataBase/LocalDB_WaysUsing';
-import { DependingEatingMemo } from './medComponents/DependingEating';
-import { DependingBreakfastMemo } from './medComponents/DependingBreakfast';
-import { DependingSupperMemo } from './medComponents/DependingSupper';
-import { InDependentlyMemo } from './medComponents/InDependently';
+import DependingEating from './medComponents/DependingEating';
+import DependingBreakfast from './medComponents/DependingBreakfast';
+import DependingSupper from './medComponents/DependingSupper';
+import InDependently from './medComponents/InDependently';
 import { useAppDispatch } from '../../../../../../store/hooks';
 import { readingPopupData } from '../../../../../../store/features/popupDataSlice';
 
@@ -20,99 +20,97 @@ interface IProps {
   currentDate: Moment;
 }
 
-const UsingMedicines: FC<IProps> = ({
-  dayItem,
-  halfHourItem,
-  med,
-  currentDayForWirning,
-  currentDate,
-}) => {
+const UsingMedicines: FC<IProps> = memo(
+  ({ dayItem, halfHourItem, med, currentDayForWirning, currentDate }) => {
+    // weekday: интервал между первым и последней едой
+    const firstMealWeekdays = useMemo(
+      () =>
+        currentDate
+          .set({
+            hour: mealSchedule[0].modeRegime.weekdays.firstMeal.hour,
+            minute: mealSchedule[0].modeRegime.weekdays.firstMeal.minute,
+          })
+          .clone(), // обз clone() иначе изменим исходник
+      [currentDate],
+    );
 
-  // weekday: интервал между первым и последней едой
-  const firstMealWeekdays = useMemo(() => (
-    currentDate
-    .set({
-      hour: mealSchedule[0].modeRegime.weekdays.firstMeal.hour,
-      minute: mealSchedule[0].modeRegime.weekdays.firstMeal.minute,
-    })
-    .clone() // обз clone() иначе изменим исходник
-  ), [currentDate])
+    const lastMealWeekdays = useMemo(
+      () =>
+        currentDate
+          .set({
+            hour: mealSchedule[0].modeRegime.weekdays.lastMeal.hour,
+            minute: mealSchedule[0].modeRegime.weekdays.lastMeal.minute,
+          })
+          .clone(),
+      [currentDate],
+    );
 
-  const lastMealWeekdays = useMemo(() => (
-    currentDate
-    .set({
-      hour: mealSchedule[0].modeRegime.weekdays.lastMeal.hour,
-      minute: mealSchedule[0].modeRegime.weekdays.lastMeal.minute,
-    })
-    .clone()
-  ), [currentDate]) 
+    const diffIntervalMealWeekdays = useMemo(
+      () => lastMealWeekdays.diff(firstMealWeekdays, 'seconds'),
+      [firstMealWeekdays, lastMealWeekdays],
+    );
 
-  const diffIntervalMealWeekdays = useMemo(
-    () => lastMealWeekdays.diff(firstMealWeekdays, 'seconds'),
-    [firstMealWeekdays, lastMealWeekdays],
-  );
+    const betweenMealsWeekdays = useMemo(
+      () => diffIntervalMealWeekdays / (med.quantity - 1),
+      [diffIntervalMealWeekdays, med.quantity],
+    );
 
-  const betweenMealsWeekdays = useMemo(
-    () => diffIntervalMealWeekdays / (med.quantity - 1),
-    [diffIntervalMealWeekdays, med.quantity],
-  );
+    // weekend: интервал между первым и последней едой
+    const firstMealWeekend = useMemo(
+      () =>
+        currentDate
+          .set({
+            hour: mealSchedule[0].modeRegime.weekend.firstMeal.hour,
+            minute: mealSchedule[0].modeRegime.weekend.firstMeal.minute,
+          })
+          .clone(),
+      [currentDate],
+    ); // обз clone() иначе изменим исходник
 
-  // weekend: интервал между первым и последней едой
-  const firstMealWeekend = useMemo(
-    () =>
-      currentDate
-        .set({
-          hour: mealSchedule[0].modeRegime.weekend.firstMeal.hour,
-          minute: mealSchedule[0].modeRegime.weekend.firstMeal.minute,
-        })
-        .clone(),
-    [currentDate],
-  ); // обз clone() иначе изменим исходник
-  
-  const lastMealWeekend = useMemo(
-    () =>
-      currentDate
-        .set({
-          hour: mealSchedule[0].modeRegime.weekend.lastMeal.hour,
-          minute: mealSchedule[0].modeRegime.weekend.lastMeal.minute,
-        })
-        .clone(),
-    [currentDate],
-  );
+    const lastMealWeekend = useMemo(
+      () =>
+        currentDate
+          .set({
+            hour: mealSchedule[0].modeRegime.weekend.lastMeal.hour,
+            minute: mealSchedule[0].modeRegime.weekend.lastMeal.minute,
+          })
+          .clone(),
+      [currentDate],
+    );
 
-  const diffIntervalMealWeekend = useMemo(() => (lastMealWeekend.diff(
-    firstMealWeekend,
-    'seconds',
-  )), [lastMealWeekend, firstMealWeekend])
-  const betweenMealsWeekend = diffIntervalMealWeekend / (med.quantity - 1);
+    const diffIntervalMealWeekend = useMemo(
+      () => lastMealWeekend.diff(firstMealWeekend, 'seconds'),
+      [lastMealWeekend, firstMealWeekend],
+    );
+    const betweenMealsWeekend = diffIntervalMealWeekend / (med.quantity - 1);
 
-  //! Для Popup - окна (появляется при наведение на конкертный приём ЛС)
-  //Redux-toolkit - из hooks.tsx - для изменения данных
-  const dispatch = useAppDispatch();
-  // Обработчик onMouseOver и onMouseOut: при наведении мышью на ячейку с ЛС, появляется Popup - окно с подробным списком лекарств
-  // (еще в самом myPopup.tsx есть событие - чтобы popup не исчезал при наведение на самого popup)
-  const hoverMouseOnMedicine = (event: React.MouseEvent) => {
-    // тип атриубта https://habr.com/ru/articles/783858/
-    const top = event.clientY;
-    const left = event.clientX;
-    // popup
-    const line = document.querySelector('#IdPopup');
-    // span
-    if (event.type == 'mouseover') {
-      // если мышь наведена на элемент
-      // меняем данные (redux-toolkit)
-      dispatch(readingPopupData(med.id)); // передаю только id лекарства, в popup буду find()
-      line!.style.cssText += `
+    //! Для Popup - окна (появляется при наведение на конкертный приём ЛС)
+    //Redux-toolkit - из hooks.tsx - для изменения данных
+    const dispatch = useAppDispatch();
+    // Обработчик onMouseOver и onMouseOut: при наведении мышью на ячейку с ЛС, появляется Popup - окно с подробным списком лекарств
+    // (еще в самом myPopup.tsx есть событие - чтобы popup не исчезал при наведение на самого popup)
+    const hoverMouseOnMedicine = (event: React.MouseEvent) => {
+      // тип атриубта https://habr.com/ru/articles/783858/
+      const top = event.clientY;
+      const left = event.clientX;
+      // popup
+      const line = document.querySelector('#IdPopup');
+      // span
+      if (event.type == 'mouseover') {
+        // если мышь наведена на элемент
+        // меняем данные (redux-toolkit)
+        dispatch(readingPopupData(med.id)); // передаю только id лекарства, в popup буду find()
+        line!.style.cssText += `
       top: ${top - 350}px;
       left: ${left - 10}px;
       display: flex;
       animation: show 1s forwards;`;
-    } else {
-      // если мышь ушла с элемента (mouseout)
-      line!.style.cssText += `
+      } else {
+        // если мышь ушла с элемента (mouseout)
+        line!.style.cssText += `
       display: none;`;
-    }
-  };
+      }
+    };
 
     if (med.depending) {
       //==================================== есть ли зависимости от завтрака/ужина/еды/
@@ -126,9 +124,8 @@ const UsingMedicines: FC<IProps> = ({
               onMouseOver={hoverMouseOnMedicine}
               onMouseOut={hoverMouseOnMedicine}
               style={{ cursor: 'help', maxWidth: 'fit-content' }}
-              
             >
-              <DependingEatingMemo
+              <DependingEating
                 dayItem={dayItem}
                 halfHourItem={halfHourItem}
                 firstMealWeekdays={firstMealWeekdays}
@@ -142,7 +139,7 @@ const UsingMedicines: FC<IProps> = ({
             </div>
           );
           break;
-  
+
         // ---------------------------------
         case 'first breakfast': //============================= от первого завтрака
           return (
@@ -151,7 +148,7 @@ const UsingMedicines: FC<IProps> = ({
               onMouseOut={hoverMouseOnMedicine}
               style={{ cursor: 'help', maxWidth: 'fit-content' }}
             >
-              <DependingBreakfastMemo
+              <DependingBreakfast
                 dayItem={dayItem}
                 halfHourItem={halfHourItem}
                 firstMealWeekdays={firstMealWeekdays}
@@ -162,7 +159,7 @@ const UsingMedicines: FC<IProps> = ({
               />
             </div>
           );
-  
+
           break;
         // ---------------------------------
         case 'last supper': //================================= от последнего ужина
@@ -172,7 +169,7 @@ const UsingMedicines: FC<IProps> = ({
               onMouseOut={hoverMouseOnMedicine}
               style={{ cursor: 'help', maxWidth: 'fit-content' }}
             >
-              <DependingSupperMemo
+              <DependingSupper
                 dayItem={dayItem}
                 halfHourItem={halfHourItem}
                 lastMealWeekdays={lastMealWeekdays}
@@ -184,7 +181,7 @@ const UsingMedicines: FC<IProps> = ({
             </div>
           );
           break;
-  
+
         // ---------------------------------
         default:
           break;
@@ -197,7 +194,7 @@ const UsingMedicines: FC<IProps> = ({
           onMouseOut={hoverMouseOnMedicine}
           style={{ cursor: 'help', maxWidth: 'fit-content' }}
         >
-          <InDependentlyMemo
+          <InDependently
             dayItem={dayItem}
             halfHourItem={halfHourItem}
             firstMealWeekdays={firstMealWeekdays}
@@ -211,7 +208,8 @@ const UsingMedicines: FC<IProps> = ({
         </div>
       );
     }
-  };
+  },
+);
 
 // export default UsingMedicines;
-export const UsingMedicinesMemo = memo(UsingMedicines); // memo, возможно быстрее будет загружатся лекарства в ячейке
+export default UsingMedicines; // memo, возможно быстрее будет загружатся лекарства в ячейке

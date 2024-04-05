@@ -14,7 +14,7 @@ interface IProps {
   currentDate: Moment;
 }
 
-const MealSchedule: FC<IProps> = ({
+const MealSchedule: FC<IProps> = memo(({
   halfHourItem,
   dayItem,
   currentDate,
@@ -159,6 +159,7 @@ const MealSchedule: FC<IProps> = ({
       </>
     );
   }
-};
+}
+);
 
-export const MealScheduleMemo = memo(MealSchedule);
+export default MealSchedule;

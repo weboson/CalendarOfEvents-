@@ -6,8 +6,8 @@ import { HourContent } from '../stylesWeekGrid/sc_WeekGrid';
 import moment from 'moment';
 import SpaceBetweenMeals from './components/SpaceBetweenMeals'; // график питания: первый и последний приём пищи
 // import UsingMedicines from './components/medicines/UsingMedicines';
-import { MealScheduleMemo } from './components/MealSchedule';
-import { UsingMedicinesMemo } from './components/medicines/UsingMedicines';
+import MealSchedule from './components/MealSchedule';
+import UsingMedicines from './components/medicines/UsingMedicines';
 // DataBase array
 import recipesMedications from '../../../../data/localDataBase/LocalDB_WaysUsing';
 // Redux-Toolkit для получения данных состояния (идникатор для WarnigMarker)
@@ -18,7 +18,8 @@ interface IProps {
   dayItem: Moment;
 }
 
-const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
+const GridDayWithHours: FC<IProps> = memo(
+  ({ currentDate, dayItem }) => {
   
   // 48 Half Hours  (content), exemple: 0:00, 0:30, 1:00
   const ArrayHalfHoursContent = useMemo(
@@ -87,7 +88,7 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
 
       {/* //* icons Food (firs и last eating)*/}
       {/* data: localDB_MealSchedule.ts */}
-      <MealScheduleMemo
+      <MealSchedule
         dayItem={dayItem}
         halfHourItem={halfHourItem}
         maxmealfood={maxMealFood}
@@ -101,13 +102,14 @@ const GridDayWithHours: FC<IProps> = ({ currentDate, dayItem }) => {
         // < - чтобы не было так: 5 дней приёма, превратились в 7 (если <= и =>)
         (dayItem < moment(medItem.start, 'DD.MM.YYYY').clone().add(medItem.duration.index, medItem.duration.title)) && 
         
-        <UsingMedicinesMemo key={index} dayItem={dayItem} halfHourItem={halfHourItem} med={medItem} currentDayForWirning={currentDayForWirning} currentDate={currentDate}/>
+        <UsingMedicines key={index} dayItem={dayItem} halfHourItem={halfHourItem} med={medItem} currentDayForWirning={currentDayForWirning} currentDate={currentDate}/>
         )       
       )
       }
 
     </HourContent>
   ));
-};
+}
+)
 
-export const GridDaysHoursMemo = memo(GridDayWithHours); // memo, чтобы один раз столбик расчитался, а потом уже 6 раз из памяти рендерился
+export default GridDayWithHours; // memo, чтобы один раз столбик расчитался, а потом уже 6 раз из памяти рендерился

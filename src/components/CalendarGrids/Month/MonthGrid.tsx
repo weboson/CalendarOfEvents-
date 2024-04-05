@@ -14,6 +14,7 @@ import MedicinesMonth from './DayContent';
 // data
 import recipesMedications from '../../../data/localDataBase/LocalDB_WaysUsing';
 import { arrayColors } from '../../../data/colors';
+import MyPopup from '../../myPopup/MyPopup';
 
 interface IProps {
   firstDayOfWeek: Moment;
@@ -103,6 +104,7 @@ const MonthGrid: FC<IProps> = ({ firstDayOfWeek, currentDate }) => {
           </CellWrapper>
         ))}
       </GridWrapper>
+      <MyPopup />
     </MonthWrapper>
   );
 };

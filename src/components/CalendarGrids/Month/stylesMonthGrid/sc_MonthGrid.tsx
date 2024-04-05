@@ -104,3 +104,18 @@ export const DayContent = styled('div')`
     border: 1px solid #5a5959;
   }
 `
+
+// при наведении, поялвяется квадратик светло-серый
+export const WrapperIcon = styled('div')`
+  cursor: help; 
+  display: inline;
+  width: 100%;
+  height: 100%;
+  border-radius: 10%;
+
+  &:hover {
+    /* color: red; // не работает, почему стили перезаписываются в MonthGrid.tsx */
+    background-color: #E6E6E6;
+
+  }
+`

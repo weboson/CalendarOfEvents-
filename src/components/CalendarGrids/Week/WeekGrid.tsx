@@ -110,7 +110,6 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
       )) {
         elem.style.cssText += 
         `background-color: ${arrayColors[index] || 'white'};
-          color: black;
           padding: 0 8px`;
       }
     });

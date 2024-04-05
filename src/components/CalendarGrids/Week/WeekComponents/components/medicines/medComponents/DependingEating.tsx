@@ -5,6 +5,7 @@ import { FC, memo } from 'react';
 import { RiMedicineBottleLine } from 'react-icons/ri';
 import { IRecipesMedication } from '../../../../../../../data/localDataBase/LocalDB_WaysUsing';
 import HelperWarningMarker from './helper/HelperWarningMarker';
+import { WrapperSpanWeek } from '../../../../stylesWeekGrid/sc_WeekGrid';
 
 interface IProps {
   dayItem: Moment;
@@ -59,9 +60,10 @@ const DependingEating: FC<IProps> = memo(
                       />
                     )}
                     <RiMedicineBottleLine style={{ color: 'red' }} />
-                    <span
+                    <WrapperSpanWeek
                       className={`medElemUnic${med.id}`}
-                    >{`${med.title}`}</span>
+                    >{`${med.title}`}
+                    </WrapperSpanWeek>
                     <br />
                   </>
                 )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
@@ -87,9 +89,9 @@ const DependingEating: FC<IProps> = memo(
                           key={`before-${index}`}
                           style={{ color: 'red' }}
                         />
-                        <span
+                        <WrapperSpanWeek
                           className={`medElemUnic${med.id}`}
-                        >{`${med.title}`}</span>
+                        >{`${med.title}`}</WrapperSpanWeek>
                         <br />
                       </div>
                     ),
@@ -113,9 +115,9 @@ const DependingEating: FC<IProps> = memo(
                       />
                     )}
                     <RiMedicineBottleLine style={{ color: 'red' }} />
-                    <span
+                    <WrapperSpanWeek
                       className={`medElemUnic${med.id}`}
-                    >{`${med.title}`}</span>
+                    >{`${med.title}`}</WrapperSpanWeek>
                   </div>
                 )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
                 [...new Array(med.quantity - 1)].map(
@@ -139,9 +141,9 @@ const DependingEating: FC<IProps> = memo(
                           key={`before-${index}`}
                           style={{ color: 'red' }}
                         />
-                        <span
+                        <WrapperSpanWeek
                           className={`medElemUnic${med.id}`}
-                        >{`${med.title}`}</span>
+                        >{`${med.title}`}</WrapperSpanWeek>
                         <br />
                       </div>
                     ),
@@ -167,9 +169,9 @@ const DependingEating: FC<IProps> = memo(
                       />
                     )}
                     <RiMedicineBottleLine style={{ color: 'red' }} />
-                    <span
+                    <WrapperSpanWeek
                       className={`medElemUnic${med.id}`}
-                    >{`${med.title}`}</span>{' '}
+                    >{`${med.title}`}</WrapperSpanWeek>{' '}
                     <br />
                   </div>
                 )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
@@ -195,9 +197,9 @@ const DependingEating: FC<IProps> = memo(
                           key={`while-${index}`}
                           style={{ color: 'red' }}
                         />
-                        <span
+                        <WrapperSpanWeek
                           className={`medElemUnic${med.id}`}
-                        >{`${med.title}`}</span>{' '}
+                        >{`${med.title}`}</WrapperSpanWeek>{' '}
                         <br />
                       </div>
                     ),
@@ -216,9 +218,9 @@ const DependingEating: FC<IProps> = memo(
                       />
                     )}
                     <RiMedicineBottleLine style={{ color: 'red' }} />
-                    <span
+                    <WrapperSpanWeek
                       className={`medElemUnic${med.id}`}
-                    >{`${med.title}`}</span>{' '}
+                    >{`${med.title}`}</WrapperSpanWeek>{' '}
                     <br />
                   </div>
                 )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
@@ -243,10 +245,10 @@ const DependingEating: FC<IProps> = memo(
                           key={`while-${index}`}
                           style={{ color: 'red' }}
                         />
-                        <span
+                        <WrapperSpanWeek
                           className={`medElemUnic${med.id}`}
                           key={index + 4}
-                        >{`${med.title}`}</span>{' '}
+                        >{`${med.title}`}</WrapperSpanWeek>{' '}
                         <br />
                       </div>
                     ),
@@ -276,9 +278,9 @@ const DependingEating: FC<IProps> = memo(
                       />
                     )}
                     <RiMedicineBottleLine style={{ color: 'red' }} />
-                    <span
+                    <WrapperSpanWeek
                       className={`medElemUnic${med.id}`}
-                    >{`${med.title}`}</span>
+                    >{`${med.title}`}</WrapperSpanWeek>
                     <br />
                   </div>
                 )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
@@ -304,9 +306,9 @@ const DependingEating: FC<IProps> = memo(
                           key={`after-${index}`}
                           style={{ color: 'red' }}
                         />
-                        <span
+                        <WrapperSpanWeek
                           className={`medElemUnic${med.id}`}
-                        >{`${med.title}`}</span>
+                        >{`${med.title}`}</WrapperSpanWeek>
                         <br />
                       </div>
                     ),
@@ -330,9 +332,9 @@ const DependingEating: FC<IProps> = memo(
                       />
                     )}
                     <RiMedicineBottleLine style={{ color: 'red' }} />
-                    <span
+                    <WrapperSpanWeek
                       className={`medElemUnic${med.id}`}
-                    >{`${med.title}`}</span>
+                    >{`${med.title}`}</WrapperSpanWeek>
                     <br />
                   </div>
                 )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
@@ -357,12 +359,12 @@ const DependingEating: FC<IProps> = memo(
                           key={`after-${index}`}
                           style={{ color: 'red' }}
                         />
-                        <span
+                        <WrapperSpanWeek
                           className={`medElemUnic${med.id}`}
                           key={index + 4}
                         >
                           {`${med.title}`}
-                        </span>
+                        </WrapperSpanWeek>
                       </div>
                     ),
                 )

@@ -5,6 +5,7 @@ import { FC, memo } from 'react';
 import { RiMedicineBottleLine } from 'react-icons/ri';
 import { IRecipesMedication } from '../../../../../../../data/localDataBase/LocalDB_WaysUsing';
 import HelperWarningMarker from './helper/HelperWarningMarker';
+import { WrapperSpanWeek } from '../../../../stylesWeekGrid/sc_WeekGrid';
 
 interface IProps {
   dayItem: Moment;
@@ -53,9 +54,9 @@ const DependingBreakfast: FC<IProps> = memo(({
                       top: '18px',
                     }}
                   />
-                  <span className={`medElemUnic${med.id}`}>
+                  <WrapperSpanWeek className={`medElemUnic${med.id}`}>
                     {`${med.title}`}
-                  </span>
+                  </WrapperSpanWeek>
                   <br />
                 </>
               )
@@ -76,7 +77,7 @@ const DependingBreakfast: FC<IProps> = memo(({
                       color: 'red',
                     }}
                   />
-                  <span className={`medElemUnic${med.id}`}>{`${med.title}`}</span>
+                  <WrapperSpanWeek className={`medElemUnic${med.id}`}>{`${med.title}`}</WrapperSpanWeek>
                   <br />
                 </>
               )
@@ -97,7 +98,7 @@ const DependingBreakfast: FC<IProps> = memo(({
                       color: 'red',
                     }}
                   />
-                  <span className={`medElemUnic${med.id}`}>{`${med.title}`}</span>
+                  <WrapperSpanWeek className={`medElemUnic${med.id}`}>{`${med.title}`}</WrapperSpanWeek>
                   <br />
                 </>
               )
@@ -113,7 +114,7 @@ const DependingBreakfast: FC<IProps> = memo(({
                       color: 'red',
                     }}
                   />
-                  <span className={`medElemUnic${med.id}`}>{`${med.title}`}</span>
+                  <WrapperSpanWeek className={`medElemUnic${med.id}`}>{`${med.title}`}</WrapperSpanWeek>
                 </>
               )
       );
@@ -138,7 +139,7 @@ const DependingBreakfast: FC<IProps> = memo(({
                       color: 'red',
                     }}
                   />
-                  <span className={`medElemUnic${med.id}`}>{`${med.title}`}</span>
+                  <WrapperSpanWeek className={`medElemUnic${med.id}`}>{`${med.title}`}</WrapperSpanWeek>
                 </>
               )
           : // weekend
@@ -158,7 +159,7 @@ const DependingBreakfast: FC<IProps> = memo(({
                       color: 'red',
                     }}
                   />
-                  <span className={`medElemUnic${med.id}`}>{`${med.title}`}</span>
+                  <WrapperSpanWeek className={`medElemUnic${med.id}`}>{`${med.title}`}</WrapperSpanWeek>
                 </>
               )
       );

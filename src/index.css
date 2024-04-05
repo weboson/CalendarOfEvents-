@@ -41,17 +41,6 @@ code {
     z-index: 2;
 }
 
-/* при наведении на лекарство меняет цвет */
-#saveScroll span {
-    cursor: help;
-    color: gray;
-    font-size: 14px;
-}
-
-#saveScroll span:hover {
-    color: white;
-}
-
  /* For Diet (Стилизация иконки "food") */
 .food {
     color: #fffb00;

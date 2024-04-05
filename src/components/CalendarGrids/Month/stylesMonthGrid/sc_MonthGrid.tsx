@@ -36,7 +36,7 @@ export interface ICellWrapperProps {
 
 export const CellWrapper = styled.div<ICellWrapperProps>`
   min-width: 120px;
-  min-height: ${(props) => (props.$isHeader ? 24 : 135.5)}px;
+  height: ${(props) => (props.$isHeader ? 24 : 135.5)}px;
   background-color: ${(props) => (props.$isWeekend ? '#272829' : '#1e1f21')};
 /*если текущий месяц И еще выходной = такой цвет :
   если просто текущий месяц то = такой цвет 
@@ -85,5 +85,22 @@ export const CurrentDay = styled('div')`
 
 // контент каждого дня (ячейки месяца)
 export const DayContent = styled('div')`
+  max-height: 100%;
   width: 90%;
+  /* скролл */
+  overflow: auto;// если контент не вмещается, появляется скролл
+  /* стили скролла */
+  &::-webkit-scrollbar {
+    // style scroll
+    width: 10px;
+  } /* ширина scrollbar */
+  &::-webkit-scrollbar-track {
+    background: #565759;
+    /* border-radius: 20px;  */
+  } /* цвет дорожки */
+  &::-webkit-scrollbar-thumb {
+    background-color: #1e1f21; /* цвет плашки */
+    border-radius: 0; /* закругления плашки */
+    border: 1px solid #5a5959;
+  }
 `

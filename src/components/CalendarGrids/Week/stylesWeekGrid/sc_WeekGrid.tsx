@@ -99,6 +99,7 @@ export const HourContent = styled.div<IHourContent>`
   border-right: 1px solid #565759;
   /* если контент (лекарства) слишком много в блоке, пояляется сролл */
   overflow-y: auto; 
+  /* стили скролла */
   &::-webkit-scrollbar {
     // style scroll
     width: 10px;

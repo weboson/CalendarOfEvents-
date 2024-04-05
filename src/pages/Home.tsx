@@ -44,26 +44,6 @@ const Home: FC = () => {
       clearInterval(timer);
     };
   }); // без массива зависимости, чтобы currentDate постоянно обновлялся (был актулаьных), он запоминается в setInterval
-
-  // auto scroll "week" for id=#autoScroll: grid hours
-  // если данный код установить прямо в GridDayWithHours.tsx - то автоскролл каждый раз при переключении на Week
-  // в GridDayWithHours.tsx есть элемент с
-  useEffect(() => {
-    setTimeout(
-      () =>
-        // автосролл
-        document
-          .querySelector('#autoScroll')! //Знак ! - в TS значит, что уверены, что объект не равен null или Uundefined
-          .scrollIntoView({
-            // https://learn.javascript.ru/size-and-scroll-window#scrollintoview
-            behavior: 'smooth',
-            block: 'center',
-            inline: 'center',
-          }),
-
-      1200,
-    );
-  }, []);
   
   // выбранный режим меню (day, week, month, year)
   const indexMenu = useAppSelector((state) => state.menu); // из Readux-toolkit

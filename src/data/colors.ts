@@ -1,4 +1,4 @@
-//! массив цветов для цветных лекарств в WeekGrid.tsx
+//! массив рандомных цветов для цветных лекарств в WeekGrid.tsx, MonthGrid.tsx
 import recipesMedications from "./localDataBase/LocalDB_WaysUsing";
 
  // метод для рандомного цвета

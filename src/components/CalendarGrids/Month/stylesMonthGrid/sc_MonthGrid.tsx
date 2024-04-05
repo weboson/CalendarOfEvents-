@@ -80,3 +80,10 @@ export const CurrentDay = styled('div')`
   align-items: center;
   justify-content: center;
 `;
+
+
+
+// контент каждого дня (ячейки месяца)
+export const DayContent = styled('div')`
+  width: 90%;
+`

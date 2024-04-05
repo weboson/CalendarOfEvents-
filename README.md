@@ -10,7 +10,7 @@
 ![image](https://github.com/weboson/CalendarOfEvents-/assets/42917939/87356e55-6dcb-4914-a98f-61b408f57701)
 
 ### Month Mode
-![Calendar-Month-mode](https://github.com/weboson/CalendarOfEvents-/assets/42917939/a8bd1a61-eb1b-4ca7-8f98-f3cadf1b4172)
+![image](https://github.com/weboson/CalendarOfEvents-/assets/42917939/6c45fd85-9c56-4823-b063-0932807ca1b3)
 
 ### Year Mode
 ![Calendar-Year-mode-layout-V3](https://github.com/weboson/CalendarOfEvents-/assets/42917939/7a174078-df25-4440-9890-6606d92da863)

@@ -38,9 +38,9 @@ export const CellWrapper = styled.div<ICellWrapperProps>`
   min-width: 120px;
   min-height: ${(props) => (props.$isHeader ? 24 : 135.5)}px;
   background-color: ${(props) => (props.$isWeekend ? '#272829' : '#1e1f21')};
-/*если выбранный месяц И еще выходной = такой цвет :
-  если просто выбранный месяц то = такой цвет 
-  иначе (дни вне выбраного месяца) по умолчанию = такой цвет*/
+/*если текущий месяц И еще выходной = такой цвет :
+  если просто текущий месяц то = такой цвет 
+  иначе (дни вне текущего месяца) по умолчанию = такой цвет*/
   ${(props => (
     (props.$isSelecctedMonth && props.$isWeekend) ? 'color: #919294' :
     (props.$isSelecctedMonth) ? 'color: #dddcdd' :

@@ -16,7 +16,7 @@ const MyPopup: FC = () => {
   return (
     <WrapperMyModal
       id="IdPopup"
-      style={popup ? { display: 'flex' } : { display: 'none' }}
+      style={popup ? { display: 'flex',  animation: '', } : { animation: 'hidden 1s forwards'}}
       onMouseOver={() => setPopup(true)}
       onMouseOut={() => setPopup(false)}
     >

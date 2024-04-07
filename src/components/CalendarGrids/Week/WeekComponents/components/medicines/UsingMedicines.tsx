@@ -109,7 +109,7 @@ const UsingMedicines: FC<IProps> = memo(
         line!.style.cssText += `
           display: flex;
           top: ${box.top + window.scrollY - 350}px;
-          left: ${box.left + window.scrollX + 100}px;
+          left: ${box.left + window.scrollX + ((dayItem.day() !== 0) ? 100 : -350)}px; 
           animation: show 1s forwards;`; // сама анимация "show" описана myPopup -> sc_MyPopup.tsx
           } else if (event.type == 'mouseout'){
             // если мышь ушла с элемента (mouseout)

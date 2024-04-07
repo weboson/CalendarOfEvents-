@@ -9,21 +9,28 @@ import { WrapperIcon } from './stylesMonthGrid/sc_MonthGrid';
 
 interface IMedicines {
   currentDate: Moment;
+  dayItem: Moment
   med: IRecipesMedication;
   sum: string | number;
 }
 
-const MedicinesMonth: FC<IMedicines> = memo(({ currentDate, med, sum }) => {
+const MedicinesMonth: FC<IMedicines> = memo(({ currentDate, med, sum, dayItem }) => {
     
       //! Для Popup - окна (появляется при наведение на конкертный приём ЛС)
     //Redux-toolkit - из hooks.tsx - для изменения данных
     const dispatch = useAppDispatch();
     // Обработчик onMouseOver и onMouseOut: при наведении мышью на ячейку с ЛС, появляется Popup - окно с подробным списком лекарств
     // (еще в самом myPopup.tsx есть событие - чтобы popup не исчезал при наведение на самого popup)
-    const hoverMouseOnMedicine = (event: React.MouseEvent) => {
-      // тип атриубта https://habr.com/ru/articles/783858/
-      const top = event.clientY;
-      const left = event.clientX;
+    const hoverMouseOnMedicine = (event: React.MouseEvent<HTMLElement>): void => {
+      // тип атрибута https://habr.com/ru/articles/783858/
+      // вариант с положение Popup относительно курсора
+      // const top = event.clientY;
+      // const left = event.clientX;
+
+      //* положение Popup относительно элемента (текст лекарства) на который навели курсор
+      const box = event.currentTarget.getBoundingClientRect(); // возращает объект, exmple: DOMRect {x: 865.453125, y: 665, width: 89.90625, height: 21, top: 665, …}
+      // подробнее: https://learn.javascript.ru/coordinates#getCoords
+      // console.log(box)
       // popup
       const line = document.querySelector('#IdPopup');
       // span
@@ -32,15 +39,15 @@ const MedicinesMonth: FC<IMedicines> = memo(({ currentDate, med, sum }) => {
         // меняем данные (redux-toolkit)
         dispatch(readingPopupData(med.id)); // передаю только id лекарства, в popup буду find()
         line!.style.cssText += `
-      top: ${top - 200}px;
-      left: ${left - 0}px;
-      display: flex;
-      animation: show 1s forwards;`;
-      } else {
-        // если мышь ушла с элемента (mouseout)
-        line!.style.cssText += `
-      display: none;`;
-      }
+          display: flex;
+          top: ${box.top + window.scrollY - 350}px;
+          left: ${box.left + window.scrollX + ((dayItem.day() === 6 || dayItem.day() == 0) ? -380 : 20)}px; 
+          animation: show 1s forwards;`; // сама анимация "show" описана myPopup -> sc_MyPopup.tsx/ в воскрсенье Popup left: 100px
+          } else if (event.type == 'mouseout'){
+            // если мышь ушла с элемента (mouseout)
+            line!.style.cssText += `
+              animation: hidden 3s forwards;`; // сама анимация "hidden" описана myPopup -> sc_MyPopup.tsx
+          }
     };
 
   return (

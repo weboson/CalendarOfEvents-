@@ -97,6 +97,7 @@ const MonthGrid: FC<IProps> = ({ firstDayOfWeek, currentDate }) => {
                       currentDate={currentDate}
                       med={medItem}
                       sum={array.length}
+                      dayItem={dayItem}
                     />
                   ),
               )}

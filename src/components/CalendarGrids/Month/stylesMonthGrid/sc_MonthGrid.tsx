@@ -119,3 +119,12 @@ export const WrapperIcon = styled('div')`
 
   }
 `
+
+
+// счетчик
+export const CounterWrapper = styled.span`
+  bottom: 0;
+  color: #555759;
+  line-height: 0;
+  margin-left: 2px;
+`

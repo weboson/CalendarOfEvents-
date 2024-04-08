@@ -11,11 +11,9 @@ interface IMedicines {
   currentDate: Moment;
   dayItem: Moment
   med: IRecipesMedication;
-  sum: string | number;
 }
 
-const MedicinesMonth: FC<IMedicines> = memo(({ currentDate, med, sum, dayItem }) => {
-    
+const MedicinesMonth: FC<IMedicines> = memo(({ currentDate, med, dayItem}) => {
       //! Для Popup - окна (появляется при наведение на конкертный приём ЛС)
     //Redux-toolkit - из hooks.tsx - для изменения данных
     const dispatch = useAppDispatch();
@@ -49,12 +47,12 @@ const MedicinesMonth: FC<IMedicines> = memo(({ currentDate, med, sum, dayItem })
               animation: hidden 3s forwards;`; // сама анимация "hidden" описана myPopup -> sc_MyPopup.tsx
           }
     };
-
+    
   return (
     <WrapperIcon 
         onMouseOver={hoverMouseOnMedicine}
         onMouseOut={hoverMouseOnMedicine}>
-            <RiMedicineBottleLine className={`medElemUnic${med.id}`}/>
+            <RiMedicineBottleLine className={`medElemUnic${med.id}`} />
     </WrapperIcon>
       
   );

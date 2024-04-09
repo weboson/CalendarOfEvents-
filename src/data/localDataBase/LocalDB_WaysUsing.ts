@@ -120,7 +120,7 @@ export interface IRecipesMedication {
 //weeks	
 //days	
 
-interface IRecipesMedications extends Array<IRecipesMedication>{}
+export interface IRecipesMedications extends Array<IRecipesMedication>{}
 
 // разные лекарства
 const recipesMedications: IRecipesMedications = [

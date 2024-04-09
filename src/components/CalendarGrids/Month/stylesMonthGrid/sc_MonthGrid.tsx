@@ -123,8 +123,64 @@ export const WrapperIcon = styled('div')`
 
 // счетчик
 export const CounterWrapper = styled.span`
+  cursor: help;
   bottom: 0;
   color: #555759;
   line-height: 0;
   margin-left: 2px;
+`
+
+// Popup список для счётчика
+export const MyPopupListStyle = styled.div`
+   /* по-умолчанию */
+   display: none; // изночально его Popup нет на верстке (а то он изображен при переходе меню)
+  position: fixed;
+  flex-direction: column; // display: flex в UsingMedicines и MyPopup
+  margin: 20px;
+  padding: 20px;
+  z-index: 3; // выше top-panel дней недели
+  background-color: #e6e6e6;
+  color: #565759; 
+  /* width: 400px;
+    height: 400px; */
+  min-width: fit-content; // шириной в контент // положение меняется в UsingMedicines.tsx
+  min-height: fit-content; // высотой в контент
+  font-family: Roboto, serif;
+  line-height: 1;
+  border: 6px solid #565759;  
+  /* transition: "1s ease-in";  */
+  /* animation: show 10 s; */
+  /* -webkit-animation: fadeIn 2s;
+  -moz-animation: fadeIn 12s;
+  -o-animation: fadeIn 12s;
+  -ms-animation: fadeIn 2s; */
+ @keyframes show {
+    // медленное появление 
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes hidden {
+    // медленное исчезновение: повешано, как на заголовок ЛС, так и на сам MyPopup (когда курсор уходит)
+    0% {
+      opacity: 1;
+      display: flex;
+    }
+    100% {
+      opacity: 0;  
+      display: none;
+    }
+  }
+  
+  h6 {
+    font-size: 24px;
+    margin: 25px 0 25px 0;
+    word-wrap: break-word; // перенос по словам (если не помещаются в окне)
+  }
+  ul > li {
+    font-size: 20px;
+  }
 `

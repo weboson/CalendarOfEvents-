@@ -12,7 +12,8 @@ import recipesMedications from "./localDataBase/LocalDB_WaysUsing";
     return color;
   }
 
-  export const arrayColors = ['blue'];
+  export const arrayColors = ['blue']; // массив по-умолчанию
+  
   recipesMedications.map(() => {
     arrayColors.push(getRandomColor())
   })

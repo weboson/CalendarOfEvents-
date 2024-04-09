@@ -7,13 +7,12 @@ import { useAppDispatch } from '../../../store/hooks';
 import { readingPopupData } from '../../../store/features/popupDataSlice';
 import { WrapperIcon } from './stylesMonthGrid/sc_MonthGrid';
 
-interface IMedicines {
-  currentDate: Moment;
+interface IProps {
   dayItem: Moment
   med: IRecipesMedication;
 }
 
-const MedicinesMonth: FC<IMedicines> = memo(({ currentDate, med, dayItem}) => {
+const MedicinesMonth: FC<IProps> = memo(({med, dayItem}) => {
       //! Для Popup - окна (появляется при наведение на конкертный приём ЛС)
     //Redux-toolkit - из hooks.tsx - для изменения данных
     const dispatch = useAppDispatch();
@@ -38,7 +37,7 @@ const MedicinesMonth: FC<IMedicines> = memo(({ currentDate, med, dayItem}) => {
         dispatch(readingPopupData(med.id)); // передаю только id лекарства, в popup буду find()
         line!.style.cssText += `
           display: flex;
-          top: ${box.top + window.scrollY - 350}px;
+          top: ${box.top + window.scrollY - 200}px;
           left: ${box.left + window.scrollX + ((dayItem.day() === 6 || dayItem.day() == 0) ? -380 : 20)}px; 
           animation: show 1s forwards;`; // сама анимация "show" описана myPopup -> sc_MyPopup.tsx/ в воскрсенье Popup left: 100px
           } else if (event.type == 'mouseout'){

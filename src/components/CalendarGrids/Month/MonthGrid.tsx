@@ -16,7 +16,7 @@ import MedicinesMonth from './DayContent';
 import recipesMedications from '../../../data/localDataBase/LocalDB_WaysUsing';
 import { arrayColors } from '../../../data/colors';
 import MyPopup from '../../myPopup/MyPopup';
-import СounterMedicines from './СounterMedicines';
+import CounterMonth from './CounterMonth';
 
 interface IProps {
   firstDayOfWeek: Moment;
@@ -52,7 +52,6 @@ const MonthGrid: FC<IProps> = ({ firstDayOfWeek, currentDate }) => {
 
   // счетчик
   let count = 0;
-
   return (
     <MonthWrapper>
       {/* Weekday headers */}
@@ -96,29 +95,26 @@ const MonthGrid: FC<IProps> = ({ firstDayOfWeek, currentDate }) => {
                       .clone()
                       .add(medItem.duration.index, medItem.duration.title)
                 ) {
-                  if (dayItem) {
                     count++; // счетчик
+                    return (
+                      <MedicinesMonth
+                        key={index}
+                        med={medItem}
+                        dayItem={dayItem}
+                      />
+                    );
                   }
-                  return (
-                    <MedicinesMonth
-                      key={index}
-                      currentDate={currentDate}
-                      med={medItem}
-                      dayItem={dayItem}
-                    />
-                  );
-                }
+
                 return null;
               })}
-              <CounterWrapper key={index}>
-                {/* счетчик */}
-                {(count !== 0) && `x${count}`} 
-                {/*Вызываемая функция СБРОСА счетчика. обязательно должен быть return */}
-                {(() => {
-                  count = 0;
-                  return null;
-                })()}
-              </CounterWrapper>
+              {/* счетчик + полный список ЛС кадой ячейки в Popup*/}
+              
+              <CounterMonth index={index} count={count} dayItem={dayItem} recipesMedications={recipesMedications} />
+              {/*Вызываемая функция СБРОСА счетчика. обязательно должен быть return */}
+              {(() => {
+                count = 0;
+                return null;
+              })()}
             </DayContent>
           </CellWrapper>
         ))}

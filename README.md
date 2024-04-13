@@ -9,8 +9,11 @@
 ### Week Mode
 ![image](https://github.com/weboson/CalendarOfEvents-/assets/42917939/87356e55-6dcb-4914-a98f-61b408f57701)
 
-### Month Mode
+### Month Mode (Popup id)
 ![image](https://github.com/weboson/CalendarOfEvents-/assets/42917939/618c3e3b-3d66-4f13-89ce-12081a37fe1e)
+
+### Month Mode (Popup list)
+![image](https://github.com/weboson/CalendarOfEvents-/assets/42917939/9b670426-c4f3-4d32-a63f-919ae6008109)
 
 ### Year Mode
 ![Calendar-Year-mode-layout-V3](https://github.com/weboson/CalendarOfEvents-/assets/42917939/7a174078-df25-4440-9890-6606d92da863)

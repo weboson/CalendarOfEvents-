@@ -125,15 +125,20 @@ export const WrapperIcon = styled('div')`
 export const CounterWrapper = styled.span`
   cursor: help;
   bottom: 0;
-  color: #555759;
   line-height: 0;
   margin-left: 2px;
+  color: #555759;
+  &:hover {
+    color: red;
+  }
 `
 
 // Popup список для счётчика
 export const MyPopupListStyle = styled.div`
+
+  line-height: 1;
    /* по-умолчанию */
-   display: none; // изночально его Popup нет на верстке (а то он изображен при переходе меню)
+  display: none; // изначально Popup нет на верстке (а то он изображен при переходе меню)
   position: fixed;
   flex-direction: column; // display: flex в UsingMedicines и MyPopup
   margin: 20px;
@@ -141,13 +146,13 @@ export const MyPopupListStyle = styled.div`
   z-index: 3; // выше top-panel дней недели
   background-color: #e6e6e6;
   color: #565759; 
-  /* width: 400px;
-    height: 400px; */
+  /* width: 400px; */
+    /* height: 600px;  */
+    overflow: Auto ;
   min-width: fit-content; // шириной в контент // положение меняется в UsingMedicines.tsx
-  min-height: fit-content; // высотой в контент
+  max-height: 600px; // высотой в контент
   font-family: Roboto, serif;
-  line-height: 1;
-  border: 6px solid #565759;  
+  border: 6px solid #565759;
   /* transition: "1s ease-in";  */
   /* animation: show 10 s; */
   /* -webkit-animation: fadeIn 2s;
@@ -180,7 +185,8 @@ export const MyPopupListStyle = styled.div`
     margin: 25px 0 25px 0;
     word-wrap: break-word; // перенос по словам (если не помещаются в окне)
   }
-  ul > li {
-    font-size: 20px;
-  }
+`
+
+export const MyPopupListStyleLi = styled.div`
+  font-size: 22px;
 `

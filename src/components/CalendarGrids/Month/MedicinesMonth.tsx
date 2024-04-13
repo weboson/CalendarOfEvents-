@@ -3,9 +3,9 @@ import { FC, memo } from 'react';
 // type fo med
 import { IRecipesMedication } from '../../../data/localDataBase/LocalDB_WaysUsing';
 import { RiMedicineBottleLine } from 'react-icons/ri';
-import { useAppDispatch } from '../../../store/hooks';
-import { readingPopupData } from '../../../store/features/popupDataSlice';
 import { WrapperIcon } from './stylesMonthGrid/sc_MonthGrid';
+import { readingPopupData } from '../../../store/features/popupDataSlice';
+import { useAppDispatch } from '../../../store/hooks';
 
 interface IProps {
   dayItem: Moment

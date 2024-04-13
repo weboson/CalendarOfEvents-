@@ -1,4 +1,5 @@
-import { FC, useEffect, useState } from 'react';
+// вывод сетки ячеек (42 штуки)
+import { FC, useEffect } from 'react';
 import { Moment } from 'moment'; // Moment - это специальный тип для TS
 import {
   GridWrapper,
@@ -8,15 +9,15 @@ import {
   CurrentDay,
   MonthWrapper,
   DayContent,
-  CounterWrapper,
 } from './stylesMonthGrid/sc_MonthGrid';
 import moment from 'moment';
-import MedicinesMonth from './DayContent';
+import MedicinesMonth from './MedicinesMonth';
 // data
 import recipesMedications from '../../../data/localDataBase/LocalDB_WaysUsing';
 import { arrayColors } from '../../../data/colors';
 import MyPopup from '../../myPopup/MyPopup';
 import CounterMonth from './CounterMonth';
+import MyPopupList from './MyPopupList';
 
 interface IProps {
   firstDayOfWeek: Moment;
@@ -25,7 +26,6 @@ interface IProps {
 
 const MonthGrid: FC<IProps> = ({ firstDayOfWeek, currentDate }) => {
   // console.log('MonthGrid');
-
   // чтобы не мутировать исходник, делаем копию объекта (clone от moment), а не ссылки объекта
   const day = firstDayOfWeek.clone().subtract(1, 'day'); // -1 день для смещения отчета на 1 день, иначе календарь врёт на 1 день
   // и прибавлям каждую итерацию +1 день и выводим его, но не меняем исходник, ведь мы клонируем clone()
@@ -50,8 +50,9 @@ const MonthGrid: FC<IProps> = ({ firstDayOfWeek, currentDate }) => {
     });
   });
 
-  // счетчик
+  // создание счетчика
   let count = 0;
+
   return (
     <MonthWrapper>
       {/* Weekday headers */}
@@ -69,12 +70,15 @@ const MonthGrid: FC<IProps> = ({ firstDayOfWeek, currentDate }) => {
 
       {/* Days Grid */}
       <GridWrapper>
+        {/* //! 42 ячейки .map() */}
         {daysArray.map((dayItem, index) => (
+          // каждая ячейка
           <CellWrapper
             key={dayItem.unix()}
             $isWeekend={dayItem.day() === 6 || dayItem.day() === 0}
             $isSelecctedMonth={$isSelecctedMonth(dayItem)}
           >
+            {/* вывод числа месяца */}
             <RowInCell $justifyContent={'flex-end'}>
               <DayWrapper>
                 {!isCurrentDay(dayItem) ? (
@@ -90,12 +94,12 @@ const MonthGrid: FC<IProps> = ({ firstDayOfWeek, currentDate }) => {
               {recipesMedications.map((medItem, index) => {
                 if (
                   moment(medItem.start, 'DD.MM.YYYY') <= dayItem &&
-                  dayItem <
-                    moment(medItem.start, 'DD.MM.YYYY')
-                      .clone()
-                      .add(medItem.duration.index, medItem.duration.title)
+                  dayItem < moment(medItem.start, 'DD.MM.YYYY')
+                  .clone().add(medItem.duration.index, medItem.duration.title)
                 ) {
-                    count++; // счетчик
+                  //* счетчик (all meds current day)  
+                  count++; 
+                    // лекарства
                     return (
                       <MedicinesMonth
                         key={index}
@@ -104,21 +108,23 @@ const MonthGrid: FC<IProps> = ({ firstDayOfWeek, currentDate }) => {
                       />
                     );
                   }
-
-                return null;
+                return null; // пустая ячейка
               })}
-              {/* счетчик + полный список ЛС кадой ячейки в Popup*/}
-              
-              <CounterMonth index={index} count={count} dayItem={dayItem} recipesMedications={recipesMedications} />
-              {/*Вызываемая функция СБРОСА счетчика. обязательно должен быть return */}
+              {}
+              {/* вывод счетчика + полный список ЛС каждой ячейки в MyPopupList*/}
+              <CounterMonth index={index} count={count} dayItem={dayItem} />
+              {/* //! список лекарств на текущий день (классы разные: id={`MyPopupList${index}`}) */}
+              <MyPopupList dayItem={dayItem} index={index}/>
+              {/*Вызываемая функция СБРОСА счетчика, в конце рендера каждой ячейки. обязательно должен быть return */}
               {(() => {
-                count = 0;
+                count = 0; 
                 return null;
               })()}
             </DayContent>
           </CellWrapper>
         ))}
       </GridWrapper>
+      
       <MyPopup />
     </MonthWrapper>
   );

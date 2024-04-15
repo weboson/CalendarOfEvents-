@@ -23,7 +23,7 @@ const MyPopupList: FC<Iprops> = ({dayItem, index}) => {
       onMouseOver={() => setPopup(true)}
       onMouseOut={() => setPopup(false)}
     >
-      <h6>Список лекарств:</h6>
+      <h6 style={{lineHeight: '0',}}>Список лекарств:</h6>
       <div>
         {recipesMedications.map(
             (medItem, index) => 

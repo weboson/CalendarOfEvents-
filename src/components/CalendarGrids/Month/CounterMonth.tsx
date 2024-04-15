@@ -1,13 +1,6 @@
 import { FC, memo } from 'react';
 import { CounterWrapper } from './stylesMonthGrid/sc_MonthGrid';
 import { Moment } from 'moment';
-// массив из базы данных БД
-import recipesMedications from '../../../data/localDataBase/LocalDB_WaysUsing';
-import MyPopupList from './MyPopupList';
-import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-import { readingPopupListState } from '../../../store/features/popupListSlice';
-import moment from 'moment';
-
 interface IProps {
   index: number;
   count: number;
@@ -16,12 +9,6 @@ interface IProps {
 
 const CounterMonth: FC<IProps> = memo(
   ({ index, count, dayItem }) => {
-  
-    // получение состояние MyPopupList (показан или нет)
-    // если навести на счетчик, то MyPopupList отрендерится, если убрать то размонтируется (в случае самого MyPopupList также)
-    const popupListState = useAppSelector((state) => state.popupList) 
-    // для изменения состояние MyPopupList
-    const dispatch = useAppDispatch();  
     
     //! Для Popup - окна (появляется при наведение на конкертный приём ЛС)
     //Redux-toolkit - из hooks.tsx - для изменения данных
@@ -33,18 +20,19 @@ const CounterMonth: FC<IProps> = memo(
       // подробнее: https://learn.javascript.ru/coordinates#getCoords
       // console.log(box)
       // popup
-      const line = document.querySelector(`#MyPopupList${index}`); //! окна не видимы в каждой ячейке, и уникальыне классы
+      const line = document.querySelector(`#MyPopupList${index}`); //! окна не видимы. они в каждой ячейке, и уникальыне классы (можно med.id вместо index)
       // span
       if (event.type == 'mouseover') {
         // монтируем MyPopupList
         // закроем MyPopup.tsx чтобы не перекрывал MyPopupList.tsx
         document.querySelector('#IdPopup')!.style.cssText = `display: none;`; // MyPopup.tsx
+        // target.top + высота popup > высота окна ? target.top - (окно - target.top - высота Popup) : просто target.top - высота Popup / 2
+        //* Math.abs() чтобы отрицательное число сделать положительным: https://sky.pro/wiki/javascript/prevraschenie-otritsatelnykh-chisel-v-polozhitelnye-v-java-script/
         line!.style.cssText += `
           display: flex;
-          top: ${box.top + window.scrollY - 230}px;
+          top: ${((box.top + 300) > document.documentElement.clientHeight - 100) ? (box.top - (Math.abs(document.documentElement.clientHeight - box.top - 700))) : box.top - 200}px; 
           left: ${
-            box.left +
-            window.scrollX +
+            box.left + 
             (dayItem.day() === 6 || dayItem.day() == 0 ? -300 : 20)
           }px; 
           animation: show 1s forwards;`; // сама анимация "show" описана myPopup -> sc_MyPopup.tsx/ в воскрсенье Popup left: 100px

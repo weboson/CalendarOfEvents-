@@ -150,7 +150,7 @@ export const MyPopupListStyle = styled.div`
     /* height: 600px;  */
     overflow: Auto ;
   min-width: fit-content; // шириной в контент // положение меняется в UsingMedicines.tsx
-  max-height: 600px; // высотой в контент
+  max-height: 650px; // высотой в контент
   font-family: Roboto, serif;
   border: 6px solid #565759;
   /* transition: "1s ease-in";  */

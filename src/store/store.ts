@@ -5,7 +5,6 @@ import selectedModeMonitorReducer from './features/selectedModeMonitorSlice'
 import popupDataReducer from './features/popupDataSlice'
 import readingMarkerWarning from './features/markerWarningSlice'
 import arrWarningReducer from './features/arrWarningSlice'
-import popupListReducer from './features/popupListSlice'
 
 
 export const store = configureStore({
@@ -15,7 +14,6 @@ export const store = configureStore({
     popupData: popupDataReducer, // содержание MyPopup.tsx
     markerWarning: readingMarkerWarning, // Warning part 1: push array, exemple: [true, false, fasle]. Rendering each: HelperWarningMarker.tsx
     arrWarning: arrWarningReducer, // Warning part 2: indicator (true/false or on/off). Rendering: WeekGrid.tsx
-    popupList: popupListReducer, // Popup - окно вывод списка лекарств (MyPopupList.tsx)
   },
 })
 

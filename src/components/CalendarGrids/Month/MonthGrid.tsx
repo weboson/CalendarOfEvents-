@@ -1,5 +1,5 @@
 // вывод сетки ячеек (42 штуки)
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Moment } from 'moment'; // Moment - это специальный тип для TS
 import {
   GridWrapper,
@@ -52,6 +52,10 @@ const MonthGrid: FC<IProps> = ({ firstDayOfWeek, currentDate }) => {
 
   // создание счетчика
   let count = 0;
+  let [arr, setArr] = useState([])
+  const hendler = (id) => {
+    setArr([...arr, id])
+  }
 
   return (
     <MonthWrapper>

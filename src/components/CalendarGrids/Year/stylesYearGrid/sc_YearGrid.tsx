@@ -81,22 +81,28 @@ export const CurrentDay = styled.div`
 
 // For Cell Days
 interface ICellDayProps  {
+  // это выходной день?
   $isWeekend?: boolean
+  // это текущий день?
   $isCurrentDay?: boolean
-  $isCurrentDays?: boolean
+  // эти дни входят в текущий месяц?
+  $isCurrentDaysOfMonth?: boolean
+  // в этот день есть приём лекарства?
+  $isMedicines: boolean
 }
 
 export const CellDay = styled.div<ICellDayProps>`
+  display: flex;
   text-align: center;
   font-size: 18px;
   background-color: #1e1f21;
   ${(props => (
     (props.$isWeekend) ? 'color: #212121' : 
     (props.$isCurrentDay) ? 'color: red' :
-    (props.$isCurrentDays) ? 'color: #ffffff' :
+    (props.$isCurrentDaysOfMonth) ? 'color: #ffffff' :
     'color: #919294'
-   
   ))};
+  ${(props => ((props.$isMedicines) ? 'background-color: #353434' : null))};
 `
 
 

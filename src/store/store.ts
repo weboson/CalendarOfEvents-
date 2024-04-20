@@ -9,8 +9,11 @@ import arrWarningReducer from './features/arrWarningSlice'
 
 export const store = configureStore({
   reducer: {
+    // for Header
     menu: menuReducer, // режим меню
+    // for Monitor
     selectedModeMonitor: selectedModeMonitorReducer, // режим отображения заголовка (месяц, неделя и т.д.) шапки (Monitor) 
+    // for WeekGrid
     popupData: popupDataReducer, // содержание MyPopup.tsx
     markerWarning: readingMarkerWarning, // Warning part 1: push array, exemple: [true, false, fasle]. Rendering each: HelperWarningMarker.tsx
     arrWarning: arrWarningReducer, // Warning part 2: indicator (true/false or on/off). Rendering: WeekGrid.tsx

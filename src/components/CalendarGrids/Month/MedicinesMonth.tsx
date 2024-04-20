@@ -38,7 +38,7 @@ const MedicinesMonth: FC<IProps> = memo(({med, dayItem}) => {
         line!.style.cssText += `
           display: flex;
           top: ${box.top + window.scrollY - 200}px;
-          left: ${box.left + window.scrollX + ((dayItem.day() === 6 || dayItem.day() == 0) ? -380 : 20)}px; 
+          left: ${box.left + window.scrollX + ((dayItem.day() === 6 || dayItem.day() == 0) ? -380 : 0)}px; 
           animation: show 1s forwards;`; // сама анимация "show" описана myPopup -> sc_MyPopup.tsx/ в воскрсенье Popup left: 100px
           } else if (event.type == 'mouseout'){
             // если мышь ушла с элемента (mouseout)

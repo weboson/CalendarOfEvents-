@@ -33,7 +33,6 @@ const MyPopupList: FC<Iprops> = ({dayItem, index}) => {
                   .clone()
                   .add(medItem.duration.index, medItem.duration.title) && (
                 <MyPopupListStyleLi
-                  className=''
                   key={index}
                   style={{display: 'block'}}
                 >

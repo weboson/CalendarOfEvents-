@@ -39,8 +39,8 @@ const Home: FC = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       // если currentDate !не равна текущему времени, значит изменить его в текущее время
-      currentDate.isSame(moment()) && setToday(moment()) 
-    }, 6000);
+      !(currentDate.isSame(moment())) && setToday(moment()) 
+    }, 60000);
     return () => {
       clearInterval(timer);
     };

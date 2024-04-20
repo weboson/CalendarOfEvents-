@@ -38,8 +38,9 @@ const Home: FC = () => {
   //  For dinamic (update) time (чтобы не нужно было обновлять каждый раз, когда время изменилось и обновлялись компоненты)
   useEffect(() => {
     const timer = setInterval(() => {
-      currentDate.isSame(moment()) && setToday(moment()) // если выбранная (кнопками) неделя схожа с реальной неделей, то устанавливаем currentDate на текущее
-    }, 60000);
+      // если currentDate !не равна текущему времени, значит изменить его в текущее время
+      currentDate.isSame(moment()) && setToday(moment()) 
+    }, 6000);
     return () => {
       clearInterval(timer);
     };

@@ -36,6 +36,11 @@ const DependingEating: FC<IProps> = memo(
     firstMealWeekend = firstMealWeekend.clone();
     // console.log('DependingEating')
 
+    let marker = false;
+    const helperTo = (bool: boolean) => {
+      marker = bool;
+      return true;
+    }
     switch (med.position) {
       case 'before': //! до
         return (
@@ -66,7 +71,7 @@ const DependingEating: FC<IProps> = memo(
                     </WrapperSpanWeek>
                     <br />
                   </>
-                )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
+                ) ) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
                 [...new Array(med.quantity - 1)].map(
                   (_, index) =>
                     halfHourItem.isSame(

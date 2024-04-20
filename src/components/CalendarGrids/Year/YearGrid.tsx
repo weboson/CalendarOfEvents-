@@ -28,21 +28,21 @@ const YearGrid: FC<IProps> = ({ currentDate }) => {
   );
 
   // for marker cell with medicines
-  let count = false;
+  let marker = false;
   const helper = (bool: boolean) => {
-    count = bool; // true/fasle
+    marker = bool; // true/fasle
     return null;
   };
 
   return (
     <WrapperYear>
       <GridWrapperYear>
-        {ArrayMonths.map((dayItem, index) => (
+        {ArrayMonths.map((monthItem, index) => (
           <WrapperMothCell
             key={index + 1}
-            $isCurrentMonth={dayItem.isSame(moment(), 'month') ? true : false}
+            $isCurrentMonth={monthItem.isSame(moment(), 'month') ? true : false}
           >
-            <MothTitle>{dayItem.format('MMMM')}</MothTitle>
+            <MothTitle>{monthItem.format('MMMM')}</MothTitle>
 
             {/* Week */}
             <WrapperWeek>
@@ -58,37 +58,38 @@ const YearGrid: FC<IProps> = ({ currentDate }) => {
             <СellMonths key={index + 3}>
               {[...new Array(42)].map((_, i) => {
                 // сохраню хоть что-то в переменную, чтобы не дублировать код
-                const iDay = dayItem
+                const iDay = monthItem
                   .clone()
                   .startOf('month')
                   .startOf('week')
                   .add(i, 'day'); // переменная каждого дня
+                  
+                  {recipesMedications.map((medItem, index) =>
+                    // расчет интервала (курс приёма лекарств)
+                    moment(medItem.start, 'DD.MM.YYYY') <= iDay &&
+                    iDay <
+                      moment(medItem.start, 'DD.MM.YYYY')
+                        .clone()
+                        .add(medItem.duration.index, medItem.duration.title)
+                      ? // если схоть одно лекарсвто находится в ячейке (в определенный день), то маркеруем true (далее ставим иконку)
+                        helper(true)
+                      : // или fasle
+                        helper(false),
+                  )}
 
                 return (
                   <CellDay
                     key={i}
                     $isCurrentDay={
-                      iDay.isSame(moment(), 'day') &&
-                      dayItem.isSame(moment(), 'month')
+                      iDay.isSame(currentDate, 'day') &&
+                      monthItem.isSame(currentDate, 'month')
                     }
                     $isCurrentDaysOfMonth={
-                      iDay.isSame(moment(), 'month') &&
-                      dayItem.isSame(moment(), 'month')
+                      iDay.isSame(currentDate, 'month') &&
+                      monthItem.isSame(currentDate, 'month')
                     }
-                    $isMedicines={count}
+                    $isMedicines={marker}
                   >
-                    {recipesMedications.map((medItem, index) =>
-                      // расчет интервала (курс приёма лекарств)
-                      moment(medItem.start, 'DD.MM.YYYY') <= iDay &&
-                      iDay <
-                        moment(medItem.start, 'DD.MM.YYYY')
-                          .clone()
-                          .add(medItem.duration.index, medItem.duration.title)
-                        ? // если схоть одно лекарсвто находится в ячейке (в определенный день), то маркеруем true (далее ставим иконку)
-                          helper(true)
-                        : // или fasle
-                          helper(false),
-                    )}
                     {iDay.format('D')}
                   </CellDay>
                 );

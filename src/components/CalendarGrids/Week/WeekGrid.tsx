@@ -88,7 +88,7 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
   const dispatch = useAppDispatch();
   const arrWarning = useAppSelector((state) => state.arrWarning);
   useEffect(() => {
-    if (arrWarning.arr.indexOf(true) != -1) {
+    if (arrWarning.arr.indexOf(true) != -1) { // arr.indexOf(item, from) ищет item начиная с индекса from и возвращает номер индекса, на котором был найден искомый элемент, в противном случае -1.
       dispatch(readingMarkerWarning(true)); // [false,fasle,true]
       dispatch(arrWarningCleare()); // очищаем массив
       return;
@@ -99,6 +99,7 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
   }); // если в useEffect - нет зависимостей, то рендеринг будет при любом изменении компонента,
   // а именно каждые 60 сек - из-за currentDate
 
+  console.log(arrWarning.arr)
   //! цветные лекарства:
  // массив цветов (arrayColors) генерируется в Colors.ts - в отдельном файле, т.к. генерируется 1 раз (для решения бага: если ЛС исчезнет, и если он снова появится, то уже без цвета )
   // назначение стилей

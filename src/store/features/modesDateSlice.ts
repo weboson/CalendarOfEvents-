@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { RootState } from '../store'
 
 //! index active menu (по-умолчанию)
-const initialState: number = 3;
+const initialState: number = 1;
 
 export const menuSlice = createSlice({
   name: 'menu',

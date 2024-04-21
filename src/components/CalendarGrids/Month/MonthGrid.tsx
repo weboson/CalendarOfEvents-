@@ -32,7 +32,7 @@ const MonthGrid: FC<IProps> = ({ firstDayOfWeek, currentDate }) => {
   const daysArray = [...new Array(42)].map(() => day.add(1, 'day').clone());
 
   // проверка на текущий день, чтобы его маркировать
-  const isCurrentDay = (day: object) => moment().isSame(day, 'day');
+  const isCurrentDay = (day: object) => currentDate.isSame(day, 'day');
   // подцветка дней входящие в выбранный месяц
   const $isSelecctedMonth = (day: object) => currentDate.isSame(day, 'month');
 
@@ -52,10 +52,6 @@ const MonthGrid: FC<IProps> = ({ firstDayOfWeek, currentDate }) => {
 
   // создание счетчика
   let count = 0;
-  let [arr, setArr] = useState([])
-  const hendler = (id) => {
-    setArr([...arr, id])
-  }
 
   return (
     <MonthWrapper>

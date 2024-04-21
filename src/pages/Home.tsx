@@ -40,6 +40,10 @@ const Home: FC = () => {
     const timer = setInterval(() => {
       // если currentDate !не равна текущему времени, значит изменить его в текущее время
       !(currentDate.isSame(moment())) && setToday(moment()) 
+      // шаблон для установки времени: moment('24/12/2019 09:15:00', "DD MM YYYY hh:mm:ss");
+      //- setToday(moment('30.04.2024', 'DD.MM.YYYY')) 
+      //  или setToday(moment('7:00', 'hh:mm')) - время почему-то не устанавливается
+      // - для проверки зависимсоти от установленного нами текущей даты
     }, 60000);
     return () => {
       clearInterval(timer);

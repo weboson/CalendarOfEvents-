@@ -55,8 +55,8 @@ const GridDayWithHours: FC<IProps> = memo(
   const warningMarker = useAppSelector((state) => state.markerWarning); // общий индикатор
   // текущий день, для Warning
   const currentDayForWirning = useMemo(
-    () => dayItem.isSame(moment(), 'day'),
-    [dayItem],
+    () => dayItem.isSame(currentDate, 'day'),
+    [dayItem, currentDate],
   );
 
   return ArrayHalfHoursContent.map((halfHourItem, hourIndex) => (
@@ -68,7 +68,7 @@ const GridDayWithHours: FC<IProps> = memo(
         halfHourItem.isSame(moment(), 'hour') && // проверить на текущий час
         moment().minute() - halfHourItem.minute() < 30 && //exp: 4:01 - 4:00/4:30 = 1/-29 < 30 -> true/true
         moment().minute() - halfHourItem.minute() >= 0 && //exp: 4:01 - 4:00/4:30 = 1/-29 < 30 -> true/false(-29)
-        dayItem.isSame(moment(), 'day') && // current day
+        dayItem.isSame(currentDate, 'day') && // current day
         !warningMarker // не время приёма лекарства
       }
       $currentWarning={
@@ -76,7 +76,7 @@ const GridDayWithHours: FC<IProps> = memo(
         halfHourItem.isSame(moment(), 'hour') && // проверить на текущий час
         moment().minute() - halfHourItem.minute() < 30 && //exp: 4:01 - 4:00/4:30 = 1/-29 < 30 -> true/true
         moment().minute() - halfHourItem.minute() >= 0 && //exp: 4:01 - 4:00/4:30 = 1/-29 < 30 -> true/false(-29)
-        dayItem.isSame(moment(), 'day') && // current day
+        dayItem.isSame(currentDate, 'day') && // current day
         warningMarker // время приёма лекарства
       }
       // id for autoScrolling at the current hour

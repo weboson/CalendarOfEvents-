@@ -9,7 +9,7 @@ import {
   WrapperColumn,
 } from './stylesWeekGrid/sc_WeekGrid';
 import moment, { Moment } from 'moment';
-import GridDaysHours from './WeekComponents/GridDayWithHours';
+import GridDayWithHours from './WeekComponents/GridDayWithHours';
 import MyPopup from '../../myPopup/MyPopup';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { readingMarkerWarning } from '../../../store/features/markerWarningSlice';
@@ -146,7 +146,6 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
         {ArrayDays.map((dayItem, index) => (
           <WrapperColumn
             key={index + 1}
-            $currentDay={dayItem.isSame(moment(), 'day')}
           >
             <DayOfWeek
               key={index + 2}
@@ -156,7 +155,7 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
             </DayOfWeek>
 
             {/* Grid Day with Hours (Content) */}
-            <GridDaysHours currentDate={currentDate} dayItem={dayItem} />
+            <GridDayWithHours currentDate={currentDate} dayItem={dayItem} />
           </WrapperColumn>
         ))}
         {/* При наведении на лекарство - появляется Popup-окно с подробным описанием ЛС */}

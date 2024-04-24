@@ -88,7 +88,7 @@ interface IHourContent {
   $currentWarning: boolean;
 }
 
-export const HourContent = styled.div<IHourContent>`
+export const HalfHoursContent = styled.div<IHourContent>`
   background-color: #1e1f21; // цвет по-умолчанию
   position: relative;
   display: block;

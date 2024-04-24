@@ -2,7 +2,7 @@
 import { FC, memo, useMemo } from 'react';
 import { Moment } from 'moment';
 // sc_styles
-import { HourContent } from '../stylesWeekGrid/sc_WeekGrid';
+import { HalfHoursContent } from '../stylesWeekGrid/sc_WeekGrid';
 import moment from 'moment';
 import SpaceBetweenMeals from './components/SpaceBetweenMeals'; // график питания: первый и последний приём пищи
 // import UsingMedicines from './components/medicines/UsingMedicines';
@@ -37,7 +37,7 @@ const GridDayWithHours: FC<IProps> = memo(
   // let arr = dailyRegimes.find((item, index) => item.id == 2)
   // console.log(arr)
 
-  // выбираем самый большое (количесвто приёмов еды из рецептов) число из всех элементов массива "takingMedications" у свойства "quantity"(количество приёмом ЛС): 7 раз/день: еда
+  // выбираем самый большое (количество приёмов еды из рецептов) число из всех элементов массива "takingMedications" у свойства "quantity"(количество приёмом ЛС): 7 раз/день: еда
   const maxMealFood = useMemo( // для дочернего MealSchedule.tsx 
     () =>
       recipesMedications.reduce(function (prev, current) {
@@ -61,7 +61,7 @@ const GridDayWithHours: FC<IProps> = memo(
 
   return ArrayHalfHoursContent.map((halfHourItem, hourIndex) => (
     // каждая ячейка 7 * 48
-    <HourContent
+    <HalfHoursContent
       key={hourIndex + 3}
       $currentHour={
         // Условие (порядок важен): при 4:02 маркировался 4:00, а при 4:32 маркировка только 4:30 (но не 4:00). То есть интервалы по *:30 мин.
@@ -107,7 +107,7 @@ const GridDayWithHours: FC<IProps> = memo(
       )
       }
 
-    </HourContent>
+    </HalfHoursContent>
   ));
 }
 )

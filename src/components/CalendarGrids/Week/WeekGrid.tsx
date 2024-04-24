@@ -35,7 +35,7 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
       () =>
         // автосролл
         document
-          .querySelector('#autoScroll')! //Знак ! - в TS значит, что уверены, что объект не равен null или Uundefined
+          .querySelector('#autoScrollWeek')! //Знак ! - в TS значит, что уверены, что объект не равен null или Uundefined
           .scrollIntoView({
             // https://learn.javascript.ru/size-and-scroll-window#scrollintoview
             behavior: 'smooth',

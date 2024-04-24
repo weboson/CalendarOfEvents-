@@ -22,9 +22,9 @@ code {
 }
 
 #root {
-    height: 100%;
+    height: 100vh;   /*! главная высота */ /* index.css(100vh), cs_calendarHeader.tsx(4vh), sc_Monitor.tsx(7vh), sc_DayGrid.tsx(89vh)/ */
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: center;
 }
 

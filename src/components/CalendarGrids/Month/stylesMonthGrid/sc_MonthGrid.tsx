@@ -8,7 +8,7 @@ export interface IGridWrapperProps {
 
 // Wrapper main
 export const MonthWrapper = styled.div`
-  min-height: 100%;
+  height: 89vh;
 `
 
 // for Cell
@@ -36,7 +36,7 @@ export interface ICellWrapperProps {
 
 export const CellWrapper = styled.div<ICellWrapperProps>`
   min-width: 120px;
-  height: ${(props) => (props.$isHeader ? 24 : 135.5)}px;
+  height: ${(props) => (props.$isHeader ? 24 : 136.4)}px; //136.4 или 4.4 : 14vh //! главная высота в index.css(100vh), и остальное cs_calendarHeader.tsx(4vh), sc_Monitor.tsx(7vh)
   background-color: ${(props) => (props.$isWeekend ? '#272829' : '#1e1f21')};
 /*если текущий месяц И еще выходной = такой цвет :
   если просто текущий месяц то = такой цвет 

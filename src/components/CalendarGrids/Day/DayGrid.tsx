@@ -9,6 +9,7 @@ import {
 } from './stylesDayGrid/sc_DayGrid';
 import DateBoard from './DayComponents/DateBoard';
 import GridCalendar from './DayComponents/GridCalendar';
+import ListDay from './DayComponents/listDay/ListDay';
 
 interface IProps {
   currentDate: Moment;
@@ -30,7 +31,9 @@ const DayGrid: FC<IProps> = ({currentDate}) => {
         </BottomLeftSection>
       </LeftSection>
       {/* Right */}
-      <RightSection></RightSection>
+      <RightSection>
+        <ListDay />
+      </RightSection>
     </WrapperBlock>
   );
 };

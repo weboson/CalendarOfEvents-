@@ -1,13 +1,12 @@
 // styles for WeekGrid.tsx
 import styled from 'styled-components';
-import recipesMedications from '../../../../data/localDataBase/LocalDB_WaysUsing';
 
 // main block
 export const GridWrapper = styled.div`
   display: block;
   background-color: #1e1f21;
   min-width: 100%;
-  height: 88.5vh; //! чтобы скролл window не появляся
+  height: 89vh; //! главная высота в index.css(100vh), и остальное cs_calendarHeader.tsx(4vh), sc_Monitor.tsx(7vh),
   overflow-y: scroll;
   &::-webkit-scrollbar {
     // style scroll

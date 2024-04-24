@@ -3,13 +3,15 @@ import styled from "styled-components";
 
 // Wrapper main block
 export const WrapperBlock = styled.div`
+    height: 89vh;  /* index.css(100vh), cs_calendarHeader.tsx(4vh), sc_Monitor.tsx(7vh), sc_DayGrid.tsx(89vh)/ */
     display: flex;
-    flex-wrap: wrap; // обязательно для адаптива
+    flex-wrap: nowrap; // в строку горизонтально (for adaptive)
     overflow-x: auto;
     /* justify-content:space-between; */
     background-color: #1e1f21;
-    min-height: 694px;
-    min-width: 1210px;
+    @media (max-width: 1210px) {
+      flex-wrap: wrap; // столбик вертикальный  https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap
+  }
 
 `
 
@@ -23,25 +25,13 @@ export const LeftSection = styled.div`
   }
 `
 
-//!--- Right Section
-export const RightSection = styled.div`
-    background-color: #1e1f21;
-    /* flex:50%; */
-    min-width: 605px;
-    /* для адаптива */
-    @media (max-width: 1210px) {
-      flex: 100%;
-  }
-`
-
 //!--- Top Left Section
 export const TopLeftSection = styled.div`
   display: flex;
   flex-direction: row;  
   justify-content: space-between;
-  height: 35%;
   width: 100%;
-  /* border: 1px solid grey; */
+  border: 1px solid grey;
 `
 // Tablo (10 decemder, sunday)
 export const DateBoardSection = styled.div`
@@ -125,10 +115,33 @@ export const CellDay = styled.div<ICellDayProps>`
    
   ))};
 `
-
-
-//!===Buttom Left Section
+// Buttom Left Section
 export const BottomLeftSection = styled.div`
   height: 65%;
   /* border: 1px solid grey; */
 `
+
+
+//!--- Right Section
+export const RightSection = styled.div`
+    display: flex;
+    flex-direction: row;  
+    justify-content: space-between;
+    background-color: #1e1f21;
+    width: 100%;
+    /* flex:50%; */
+    /* min-width: 605px; */
+    /* для адаптива */
+    @media (max-width: 1210px) {
+      /* flex-wrap: wrap; */
+      flex: 100%;
+  }
+`
+//! List for the day
+export const WrapperListDay = styled.div`
+/* display: flex;
+  width: 100%;
+  height: 100%; */
+  background-color: #fff;
+  color: red;
+`     

@@ -3,7 +3,7 @@ import styled from 'styled-components'; // библиотека, которая 
 
 // Main wrapper
 export const WrapperYear = styled.div`
-  height: 88.5vh;
+  height: 89vh; //! главная высота в index.css(100vh), и остальное cs_calendarHeader.tsx(4vh), sc_Monitor.tsx(7vh)
   width: 100%;
   background-color: #1e1f21;
 `

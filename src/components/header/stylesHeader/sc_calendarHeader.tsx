@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 export const DivWrapper = styled('div')`
   background-color: #2a282d;
-  height: 37px;
+  height: 4vh; /* index.css(100vh), cs_calendarHeader.tsx(4vh), sc_Monitor.tsx(7vh), sc_DayGrid.tsx(89vh)/ */
   display: flex;
   justify-content: space-between;
   align-items: center;

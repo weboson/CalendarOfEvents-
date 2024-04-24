@@ -3,12 +3,13 @@ import styled from "styled-components";
 
 
 export const DivWrapper = styled('div')`
+    height: 7vh; /* index.css(100vh), cs_calendarHeader.tsx(4vh), sc_Monitor.tsx(7vh), sc_DayGrid.tsx(89vh)/ */
     display: flex;
     min-width: 300px;
     justify-content: space-between;
     background-color: #1e1f21;
     color: #DCDDDD;
-    padding: 15px;
+    padding: 10px 16px;
 `
 
 export const TextWrapper = styled('span')`

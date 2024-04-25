@@ -51,7 +51,7 @@ const Home: FC = () => {
   
   // auto scroll "week"/"Day"for id=#autoScroll: 
   // если данный код установить прямо в GridDayWithHours.tsx - то автоскролл каждый раз при переключении на Week
-  //! в GridDayWithHours.tsx, ListDayHalfHours.tsx есть элемент с id=#autoScroll
+  // в GridDayWithHours.tsx, ListDayHalfHours.tsx есть элемент с id=#autoScroll
   useEffect(() => {
     setTimeout(
       () =>

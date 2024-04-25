@@ -47,10 +47,10 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
   useEffect(() => {
     //1 после события скроллинга пользователя - срабатывает сохраннение в sessionStorage(localStorage сохраняет даже после перезагрузки - нам это не нужно, на только после обновления)
     document
-      .querySelector('#saveScroll')!
+      .querySelector('#saveScrollWeek')!
       .addEventListener('scroll', function () {
         const currentScroll = document
-          .querySelector('#saveScroll')!
+          .querySelector('#saveScrollWeek')!
           .scrollTop.toString(); // получили текущий сролл (to String)
         sessionStorage.setItem('position', currentScroll); // сохранили в Storage
       });
@@ -58,7 +58,7 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
     //2  получаем значение свойств scrollTop и используем его, чтобы скроллить на эту позицию
     // console.log(sessionStorage.getItem('position'))
     document
-      .querySelector('#saveScroll')!
+      .querySelector('#saveScrollWeek')!
       .scrollTo(0, +sessionStorage.getItem('position')!); // Знак ! - в TS значит, что уверены, что объект не равен null или Uundefined
   }, []);
 
@@ -99,7 +99,7 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
   // если пустой массива, то при 1-й загрузке
 
   return (
-    <GridWrapper id="saveScroll">
+    <GridWrapper id="saveScrollWeek">
       {/* Side Panel */}
       <WrapperSidePanel>
         {/* Title: "Day" */}

@@ -23,6 +23,7 @@ const ListDayHalfHours: FC<IProps> = ({ currentDate }) => {
   const warningMarker = false;
   return ArrayHalfHoursContent.map((halfHourItem, hourIndex) => (
     <HalfHoursContent
+      id="saveScrollDay"
       key={hourIndex + 3}
       $currentHalfHour={
         // Условие (порядок важен): при 4:02 маркировался 4:00, а при 4:32 маркировка только 4:30 (но не 4:00). То есть интервалы по *:30 мин.

@@ -35,7 +35,7 @@ const ListDayHalfHours: FC<IProps> = ({ currentDate }) => {
         id={halfHourItem.isSame(moment(), 'hour') && // проверить на текущий час
         moment().minute() - halfHourItem.minute() < 30 && 
         moment().minute() - halfHourItem.minute() >= 0 // проверим на текущий получас
-        ? 'autoScrollDay' : ''} // scroll in Home.tsx
+        ? 'autoScroll' : ''} //! scrolling in Home.tsx
     >
       22
     </HalfHoursContent>

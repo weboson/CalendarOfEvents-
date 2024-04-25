@@ -17,26 +17,6 @@ interface IProps {
 
 const Day: FC<IProps> = ({currentDate}) => {
 
-
-  // auto scroll "week" for id=#autoScrollDay: grid hours
-  // в ListDayHalfHours.tsx есть элемент с
-  useEffect(() => {
-    setTimeout(
-      () =>
-        // автосролл
-        document
-          .querySelector('#autoScrollDay')! //Знак ! - в TS значит, что уверены, что объект не равен null или Uundefined
-          .scrollIntoView({
-            // https://learn.javascript.ru/size-and-scroll-window#scrollintoview
-            behavior: 'smooth',
-            block: 'center',
-            inline: 'center',
-          }),
-
-      1200,
-    );
-  }, []);
-
   return (
     <WrapperBlock>
         {/* Left */}

@@ -207,7 +207,7 @@ const recipesMedications: IRecipesMedications = [
         quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[0].oftime, // Используется константа(потом будет в Form) в массива 
-        interval: { hour: 2, minute: 0}, // exm: спустя 45 минут после еды 
+        interval: { hour: 3, minute: 30}, // exm: спустя 45 минут после еды 
         duration: { // продолжительность курса до 2 месяца 
             index: 1,
             title: 'months', 

@@ -83,7 +83,7 @@ const GridDayWithHours: FC<IProps> = memo(
       id={halfHourItem.isSame(moment(), 'hour') && 
       moment().minute() - halfHourItem.minute() < 30 && 
       moment().minute() - halfHourItem.minute() >= 0 // проверим на текущий получас
-      ? 'autoScrollWeek' : ''} // scroll in Home.tsx
+      ? 'autoScroll' : ''} // scroll in Home.tsx
     >
       {/* //* icons Sun & Moon (space between firs и last eating)*/}
       {/* data: localDB_MealSchedule.ts */}

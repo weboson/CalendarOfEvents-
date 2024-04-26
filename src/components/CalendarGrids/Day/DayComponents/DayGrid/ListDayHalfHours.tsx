@@ -2,6 +2,7 @@ import { Moment } from 'moment';
 import { FC, useMemo } from 'react';
 import { HalfHoursContent } from '../../stylesDayGrid/sc_DayGrid';
 import moment from 'moment';
+import TimeLine from './TimeLine';
 
 interface IProps {
   currentDate: Moment;
@@ -21,6 +22,7 @@ const ListDayHalfHours: FC<IProps> = ({ currentDate }) => {
   );
 
   const warningMarker = false;
+
   return ArrayHalfHoursContent.map((halfHourItem, hourIndex) => (
     <HalfHoursContent
       id="saveScrollDay"
@@ -36,9 +38,16 @@ const ListDayHalfHours: FC<IProps> = ({ currentDate }) => {
         id={halfHourItem.isSame(moment(), 'hour') && // проверить на текущий час
         moment().minute() - halfHourItem.minute() < 30 && 
         moment().minute() - halfHourItem.minute() >= 0 // проверим на текущий получас
-        ? 'autoScroll' : ''} //! scrolling in Home.tsx
+        ? 'autoScroll' : ''} // scrolling in Home.tsx
     >
-      22
+        {/* //! Временная ШКАЛА */}
+        { // текущее время - для временной шкалы, как и с $currentHalfHour
+        halfHourItem.isSame(moment(), 'hour') && // проверить на текущий час
+        moment().minute() - halfHourItem.minute() < 30 && 
+        moment().minute() - halfHourItem.minute() >= 0 && // проверим на текущий получас
+        <TimeLine currentDate={currentDate}/>}
+      
+
     </HalfHoursContent>
   ));
 };

@@ -219,3 +219,34 @@ export const HalfHoursContent = styled.div<IHourContent>`
   /* текущая по времени ячейка */
     props.$currentHalfHour ? 'background-color: #3d3e3f' : null};
 `
+
+//! TimeLine
+// временная шкала
+export const Line = styled.div`
+  height: 2%;
+  /* width присваивается в скрипте в TimeLine.tsx */
+  /* width: 1.6%; // первая минута: 100% / 60 = 1,666...  */
+  /* background-color: #E6E6E6; */
+  /* градиент методом box-shadow */
+  background: #00ffd5;
+  box-shadow: 0 -200px 100px -120px skyblue inset; // skyblue - это цвет
+  border-radius: 50%;
+  animation: background 3s infinite alternate;
+/* анимация градиента */
+@keyframes background {
+  50% {
+    background: skyblue;
+    box-shadow: 0 -200px 100px -100px yellowgreen inset;
+  }
+}
+/* второй способ анимированного градиента. Минус в том, что я не смог использовать %, только px в background-position */
+  /* background-position: 0;
+  background: linear-gradient(to right, #63e4a1, #591cf3, #fffcc0, #00ffea, #3ede8b ); // градиент
+  animation: background 10s infinite linear; 
+  @keyframes background {
+  100% {
+    background-position: 1000px;
+  }  */
+/* } */
+`
+

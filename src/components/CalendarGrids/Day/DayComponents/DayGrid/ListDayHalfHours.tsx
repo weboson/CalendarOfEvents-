@@ -3,6 +3,8 @@ import { FC, useMemo } from 'react';
 import { HalfHoursContent } from '../../stylesDayGrid/sc_DayGrid';
 import moment from 'moment';
 import TimeLine from './TimeLine';
+// расчет режима дня (для Moon, Sun)
+import DaySpaceBetweenMeals from '../DaySpaceBetweenMeals';
 
 interface IProps {
   currentDate: Moment;
@@ -47,7 +49,9 @@ const ListDayHalfHours: FC<IProps> = ({ currentDate }) => {
         moment().minute() - halfHourItem.minute() >= 0 && // проверим на текущий получас
         <TimeLine currentDate={currentDate}/>}
       
-
+      {/* //* icons Sun & Moon (space between firs и last eating)*/}
+      {/* data: localDB_MealSchedule.ts */}
+      <DaySpaceBetweenMeals halfHourItem={halfHourItem} currentDate={currentDate}/>
     </HalfHoursContent>
   ));
 };

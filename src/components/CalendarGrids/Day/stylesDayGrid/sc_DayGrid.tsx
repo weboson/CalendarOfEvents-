@@ -115,6 +115,8 @@ export const CellDay = styled.div<ICellDayProps>`
       : 'color: #919294'};
 `;
 
+
+
 //! Buttom Left Section
 export const BottomLeftSection = styled.div`
   height: 65%;
@@ -145,6 +147,7 @@ export const WrapperGridDay = styled.div`
   background-color: #1e1f21;
   min-width: 100%;
   height: 100%; 
+
   overflow-y: scroll;
   /* стили скролла */
   &::-webkit-scrollbar {
@@ -186,7 +189,7 @@ export const WrapperListHalfHours = styled.div<IHourSidePanel>`
 
 // Grid
 export const WrapperList = styled.div`
-  width: 100vw;
+  width: 60vw;
 `;
 
 // Half Hours
@@ -201,6 +204,7 @@ export const HalfHoursContent = styled.div<IHourContent>`
   width: 100%;
   height: 115px;
   border-top: 1px solid #565759;
+  border-right: 1px solid #565759;
   /* если контент (лекарства) слишком много в блоке, пояляется сролл */
   overflow-y: auto; 
   /* стили скролла */
@@ -250,3 +254,19 @@ export const Line = styled.div`
 /* } */
 `
 
+//! Режим дня (Moon/ Sun) 
+//* Icons
+//* Not Styled-components - sc не работают с svg от react-icons
+// For Daily Regimes (стилизация иконок "GoSun" и "GoMoon")
+// GoSun 
+export const stylesSun = {
+  color: '#565759',
+  float: 'right',
+  margin: '1px 1px 0 0',
+}
+// GoMoon
+export const stylesMoon = {
+  color: '#565759',
+  float: 'right',
+  margin: '1px 1px 0 0',
+}

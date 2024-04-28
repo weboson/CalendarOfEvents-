@@ -1,10 +1,10 @@
-//! Режим питания:  Маркировка (icon food) моментов приёма пищи в таблице времени и дней
-//! Планирую добавить функциональность: 2 вида: в будни и выходные (также как и режимы дня)
+//! Режим питания:  Маркировка (icon food) моментов приёма пищи в таблице времени и днеq недели (weekday, weekend)
+//! 2 вида: в будни и выходные (также как и режимы дня (Moon, Sun))
 import { FC, memo, useMemo } from 'react';
 import { IRecipesMedication } from '../../../../../data/localDataBase/LocalDB_WaysUsing';
 import { MdOutlineFastfood } from 'react-icons/md';
 import { Moment } from 'moment';
-import { FoodTooltip } from '../../stylesWeekGrid/sc_WeekGrid';
+import { FoodTooltip, StyleIconFood } from '../../stylesWeekGrid/sc_WeekGrid';
 import mealSchedule from '../../../../../data/localDataBase/localDB_MealSchedule';
 
 interface IProps {
@@ -98,7 +98,9 @@ const MealSchedule: FC<IProps> = memo(({
                 firstMealWeekdays.minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:21 >= 0  and < 30
                 firstMealWeekdays.minute() - halfHourItem.minute() < 30 && (
                   <FoodTooltip data-title="Приём пищи" key={1}>
-                    <MdOutlineFastfood className="food" />
+                    <StyleIconFood>
+                    <MdOutlineFastfood />
+                    </StyleIconFood>
                   </FoodTooltip>
                 )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
               [...new Array(maxmealfood.quantity)].map((_, index) =>
@@ -120,7 +122,9 @@ const MealSchedule: FC<IProps> = memo(({
                   halfHourItem.minute() <
                   30 ? (
                   <FoodTooltip data-title="Приём пищи" key={index + 2}>
-                    <MdOutlineFastfood className="food" />
+                    <StyleIconFood>
+                      <MdOutlineFastfood />
+                    </StyleIconFood>
                   </FoodTooltip>
                 ) : null,
               )
@@ -129,7 +133,9 @@ const MealSchedule: FC<IProps> = memo(({
                 firstMealWeekend.minute() - halfHourItem.minute() >= 0 && // 22:30 - 22:00 >= 0  and < 30
                 firstMealWeekend.minute() - halfHourItem.minute() < 30 && (
                   <FoodTooltip data-title="Приём пищи" key={22}>
-                    <MdOutlineFastfood className="food" />
+                    <StyleIconFood>
+                      <MdOutlineFastfood />
+                    </StyleIconFood>
                   </FoodTooltip>
                 )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
               [...new Array(maxmealfood.quantity)].map((_, index) =>
@@ -151,7 +157,9 @@ const MealSchedule: FC<IProps> = memo(({
                   halfHourItem.minute() <
                   30 ? ( // схравнение по минуте
                   <FoodTooltip data-title="Приём пищи" key={index + 22}>
-                    <MdOutlineFastfood className="food" />
+                    <StyleIconFood>
+                      <MdOutlineFastfood />
+                    </StyleIconFood>
                   </FoodTooltip>
                 ) : null,
               )

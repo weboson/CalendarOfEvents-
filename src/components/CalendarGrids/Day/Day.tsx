@@ -22,10 +22,10 @@ const Day: FC<IProps> = ({currentDate}) => {
   useEffect(() => {
     //1 после события скроллинга пользователя - срабатывает сохраннение в sessionStorage(localStorage сохраняет даже после перезагрузки - нам это не нужно, на только после обновления)
     document
-      .querySelector('#saveScrollDay')!
+      .querySelector('.saveScrollDay')!
       .addEventListener('scroll', function () {
         const currentScrollDay = document
-          .querySelector('#saveScrollDay')!
+          .querySelector('.saveScrollDay')!
           .scrollTop.toString(); // получили текущий сролл (to String)
         sessionStorage.setItem('nameCurrentScrollDay', currentScrollDay); // сохранили в Storage
       });
@@ -33,7 +33,7 @@ const Day: FC<IProps> = ({currentDate}) => {
     //2  получаем значение свойств scrollTop и используем его, чтобы скроллить на эту позицию
     // console.log(sessionStorage.getItem('position'))
     document
-      .querySelector('#saveScrollDay')!
+      .querySelector('.saveScrollDay')!
       .scrollTo(0, +sessionStorage.getItem('nameCurrentScrollDay')!); // Знак ! - в TS значит, что уверены, что объект не равен null или Undefined
   }, []);
 

@@ -41,20 +41,6 @@ code {
     z-index: 2;
 }
 
- /* For Diet (Стилизация иконки "food") */
-.food {
-    color: #fffb00;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    margin: 0px 3px 3px 0px;
-}
-
-.food:hover {
-    color: red;
-
-}
-
 #popup {
     display: flex; 
     position: fixed;

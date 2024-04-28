@@ -3,8 +3,11 @@ import { FC, useMemo } from 'react';
 import { HalfHoursContent } from '../../stylesDayGrid/sc_DayGrid';
 import moment from 'moment';
 import TimeLine from './TimeLine';
-// расчет режима дня (для Moon, Sun)
-import DaySpaceBetweenMeals from '../DaySpaceBetweenMeals';
+// расчет режима дня (для Moon, Sun) - for DataBase
+import DaySpaceBetweenMeals from './DaySpaceBetweenMeals';
+// режим митания. icon food
+import DayMealSchedule from './DayMealSchedule';
+import recipesMedications from '../../../../../data/localDataBase/LocalDB_WaysUsing';
 
 interface IProps {
   currentDate: Moment;
@@ -23,11 +26,25 @@ const ListDayHalfHours: FC<IProps> = ({ currentDate }) => {
     [currentDate],
   );
 
+    // для icons Food
+  // выбираем самый большое (количество приёмов еды из рецептов) число из всех элементов массива "takingMedications" у свойства "quantity"(количество приёмом ЛС): 7 раз/день: еда
+    const maxMealFood = useMemo( // для дочернего MealSchedule.tsx 
+    () =>
+      recipesMedications.reduce(function (prev, current) {
+        if (+current.quantity > +prev.quantity) {
+          return current;
+        } else {
+          return prev;
+        }
+      }),
+    []
+  );  
+
   const warningMarker = false;
 
   return ArrayHalfHoursContent.map((halfHourItem, hourIndex) => (
     <HalfHoursContent
-      id="saveScrollDay"
+      className="saveScrollDay"
       key={hourIndex + 3}
       $currentHalfHour={
         // Условие (порядок важен): при 4:02 маркировался 4:00, а при 4:32 маркировка только 4:30 (но не 4:00). То есть интервалы по *:30 мин.
@@ -52,6 +69,7 @@ const ListDayHalfHours: FC<IProps> = ({ currentDate }) => {
       {/* //* icons Sun & Moon (space between firs и last eating)*/}
       {/* data: localDB_MealSchedule.ts */}
       <DaySpaceBetweenMeals halfHourItem={halfHourItem} currentDate={currentDate}/>
+      <DayMealSchedule  halfHourItem={halfHourItem} currentDate={currentDate} maxmealfood={maxMealFood}/>
     </HalfHoursContent>
   ));
 };

@@ -1,11 +1,11 @@
 //! Промежуток времени между 1-м и последним приёмом пищи: 2 вида режима: в будни и в выходные
 // (как в Week () только вместо dayItem меняющийся (в меню < ToDay >) currentDate)
 import { FC, useMemo } from 'react';
-import mealSchedule from '../../../../data/localDataBase/localDB_MealSchedule';
+import mealSchedule from '../../../../../data/localDataBase/localDB_MealSchedule';
 import { Moment } from 'moment';
 import { GoSun } from 'react-icons/go';
 import { BsMoon } from 'react-icons/bs';
-import { stylesMoon, stylesSun } from '../stylesDayGrid/sc_DayGrid';
+import { stylesMoon, stylesSun } from '../../stylesDayGrid/sc_DayGrid';
 
 interface IProps {
     halfHourItem: Moment;

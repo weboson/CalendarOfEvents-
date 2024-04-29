@@ -210,6 +210,7 @@ export const HalfHoursContent = styled.div<IHourContent>`
   overflow-y: auto; 
   /* стили скролла */
   &::-webkit-scrollbar {
+    width: 18px;
   } /* ширина scrollbar */
   &::-webkit-scrollbar-track {
     background: #565759;

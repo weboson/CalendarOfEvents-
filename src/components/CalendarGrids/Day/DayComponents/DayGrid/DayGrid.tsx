@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import {
   WrapperListHalfHours,
   WrapperList,
@@ -8,6 +8,8 @@ import {
 import { Moment } from 'moment';
 import moment from 'moment';
 import ListDayHalfHours from './ListDayHalfHours';
+import recipesMedications from '../../../../../data/localDataBase/LocalDB_WaysUsing';
+import { arrayColors } from '../../../../../data/colors';
 
 interface IProps {
   currentDate: Moment;
@@ -20,6 +22,25 @@ const DayGrid: FC<IProps> = ({ currentDate }) => {
     () => [...new Array(24)].map((_, i) => currentDate.hours(i)),
     [currentDate],
   );
+
+    //! цветные лекарства:
+ // массив цветов (arrayColors) генерируется в Colors.ts - в отдельном файле, т.к. генерируется 1 раз (для решения бага: если ЛС исчезнет, и если он снова появится, то уже без цвета )
+  // назначение стилей
+  useEffect(() => {
+    recipesMedications.map((itemMed, index) => {
+      // const color = getRandomColor();
+      for (const elem of document.querySelectorAll(
+        `.medElemUnic${itemMed.id}`, // пример классов: medElemUnic6, medElemUnic7, medElemUnic12 etc - (таким же методом назанченные в InDependently.tsx и тд.)
+      )) {
+        elem.style.cssText += 
+        `background-color: ${arrayColors[index] || 'white'};
+          padding: 0 8px`;
+      }
+    });
+  }); 
+  // если без массива зависимостей, то будет при каждом измененеии менятся цвет.
+  // С currenDate также будет себя вести, как без массива,
+  // если пустой массива, то при 1-й загрузке
 
   return (
     <WrapperGridDay id="saveScrollDay">

@@ -195,7 +195,7 @@ export const WrapperList = styled.div`
 // Half Hours
 interface IHourContent {
   $currentHalfHour: boolean;
-  // $currentWarning: boolean;
+  $currentWarning: boolean;
 }
 
 export const HalfHoursContent = styled.div<IHourContent>`
@@ -224,6 +224,26 @@ export const HalfHoursContent = styled.div<IHourContent>`
   ${(props) => 
   /* текущая по времени ячейка */
     props.$currentHalfHour ? 'background-color: #3d3e3f' : null};
+  
+  ${(props) => 
+  // Warning: текущая по времени ячейка совпадает со временем приёма лекарств 
+    props.$currentWarning && 
+  // пульсация красного цвета
+    `opacity: 1;
+      animation: pulse 4s ease-in-out infinite; // Указываем название анимации, время, тип, и нужно ли её повторять
+
+      @keyframes pulse {
+        0% {
+          background-color: #601616c4; 
+        }
+        50% {
+          background-color: #3d0d0d80; 
+        }
+        100% {
+          background-color: #601616c4; 
+        }
+      }
+`};
 `
 
 //! TimeLine

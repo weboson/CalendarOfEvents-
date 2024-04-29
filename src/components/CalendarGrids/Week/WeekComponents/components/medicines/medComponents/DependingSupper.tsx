@@ -4,7 +4,7 @@ import { Moment } from 'moment';
 import { FC, memo } from 'react';
 import { IRecipesMedication } from '../../../../../../../data/localDataBase/LocalDB_WaysUsing';
 import { RiMedicineBottleLine } from 'react-icons/ri';
-import HelperWarningMarker from './helper/HelperWarningMarker';
+import HelperWarningMarker from '../../../../../../helper/HelperWarningMarker';
 import { WrapperSpanWeek } from '../../../../stylesWeekGrid/sc_WeekGrid';
 
 interface IProps {

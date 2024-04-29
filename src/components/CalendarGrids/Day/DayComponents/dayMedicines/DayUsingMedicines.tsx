@@ -16,10 +16,11 @@ interface IProps {
   halfHourItem: Moment;
   med: IRecipesMedication;
   currentDate: Moment;
+  currentDayForWirning: boolean
 }
 
 const DayUsingMedicines: FC<IProps> = memo(
-  ({ halfHourItem, med, currentDate }) => {
+  ({ halfHourItem, med, currentDate, currentDayForWirning }) => {
     // weekday: интервал между первым и последней едой
     const firstMealWeekdays = useMemo(
       () =>
@@ -104,6 +105,7 @@ const DayUsingMedicines: FC<IProps> = memo(
                 betweenMealsWeekend={betweenMealsWeekend}
                 med={med}
                 currentDate={currentDate}
+                currentDayForWirning={currentDayForWirning}
               />
             </div>
           );
@@ -123,6 +125,7 @@ const DayUsingMedicines: FC<IProps> = memo(
                 firstMealWeekend={firstMealWeekend}
                 med={med}
                 currentDate={currentDate}
+                currentDayForWirning={currentDayForWirning}
               />
             </div>
           );
@@ -142,6 +145,7 @@ const DayUsingMedicines: FC<IProps> = memo(
                 lastMealWeekend={lastMealWeekend}
                 med={med}
                 currentDate={currentDate}
+                currentDayForWirning={currentDayForWirning}
               />
             </div>
           );
@@ -167,6 +171,7 @@ const DayUsingMedicines: FC<IProps> = memo(
             betweenMealsWeekend={betweenMealsWeekend}
             med={med}
             currentDate={currentDate}
+            currentDayForWirning={currentDayForWirning}
           />
         </div>
       );

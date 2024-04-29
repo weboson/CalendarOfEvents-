@@ -5,6 +5,7 @@ import { FC, memo } from 'react';
 import { RiMedicineBottleLine } from 'react-icons/ri';
 import { IRecipesMedication } from '../../../../../../data/localDataBase/LocalDB_WaysUsing';
 import { WrapperSpanDay } from '../../../stylesDayGrid/sc_DayGrid';
+import HelperWarningMarker from '../../../../../helper/HelperWarningMarker';
 
 interface IProps {
   halfHourItem: Moment;
@@ -12,6 +13,7 @@ interface IProps {
   firstMealWeekend: Moment;
   med: IRecipesMedication;
   currentDate: Moment;
+  currentDayForWirning: boolean
 }
 
 const DayDependingBreakfast: FC<IProps> = memo(({
@@ -20,6 +22,7 @@ const DayDependingBreakfast: FC<IProps> = memo(({
   firstMealWeekend,
   med,
   currentDate,
+  currentDayForWirning
 }) => {
   // нужен .clone() - иначе add и subtract будут дублировать своё выполнение
   firstMealWeekdays = firstMealWeekdays.clone();
@@ -42,7 +45,7 @@ const DayDependingBreakfast: FC<IProps> = memo(({
               firstMealWeekdays.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <>
-                  {/* <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/> */}
+                  {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                   <RiMedicineBottleLine
                     style={{
                       color: 'red',
@@ -66,7 +69,7 @@ const DayDependingBreakfast: FC<IProps> = memo(({
               firstMealWeekend.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <>
-                   {/* <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/> */}
+                  {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                   <RiMedicineBottleLine
                     style={{
                       color: 'red',
@@ -87,7 +90,7 @@ const DayDependingBreakfast: FC<IProps> = memo(({
               firstMealWeekdays.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <>
-                   {/* <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/> */}
+                  {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                   <RiMedicineBottleLine
                     style={{
                       color: 'red',
@@ -103,7 +106,7 @@ const DayDependingBreakfast: FC<IProps> = memo(({
               firstMealWeekend.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <>
-                 {/* <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/> */}
+                  {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                   <RiMedicineBottleLine
                     style={{
                       color: 'red',
@@ -128,7 +131,7 @@ const DayDependingBreakfast: FC<IProps> = memo(({
               firstMealWeekdays.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <>
-                 {/* <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/> */}
+                  {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                   <RiMedicineBottleLine
                     style={{
                       color: 'red',
@@ -148,7 +151,7 @@ const DayDependingBreakfast: FC<IProps> = memo(({
               firstMealWeekend.clone().minute() - halfHourItem.minute() <
                 30 && (
                 <>
-                 {/* <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/> */}
+                  {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
                   <RiMedicineBottleLine
                     style={{
                       color: 'red',

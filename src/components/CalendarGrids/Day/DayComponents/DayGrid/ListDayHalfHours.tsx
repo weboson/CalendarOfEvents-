@@ -9,6 +9,7 @@ import DaySpaceBetweenMeals from './DaySpaceBetweenMeals';
 import DayMealSchedule from './DayMealSchedule';
 import recipesMedications from '../../../../../data/localDataBase/LocalDB_WaysUsing';
 import DayUsingMedicines from '../dayMedicines/DayUsingMedicines';
+import { useAppSelector } from '../../../../../store/hooks';
 
 interface IProps {
   currentDate: Moment;
@@ -42,7 +43,14 @@ const ListDayHalfHours: FC<IProps> = ({ currentDate }) => {
     [],
   );
 
-  const warningMarker = false;
+    //! WarnigMarker: маркер ячейки, если текущее время совпадает со временем приёма лекарств:
+  // учавствуют: WeekGrid.tsx, DependingBreakfast, DependingEating etc ... , HelperWarningMarker.tsx
+  const warningMarker = useAppSelector((state) => state.markerWarning); // общий индикатор
+  // текущий день, для Warning
+  const currentDayForWirning = useMemo(
+    () => currentDate.isSame(currentDate, 'day'),
+    [currentDate],
+  );
 
   return ArrayHalfHoursContent.map((halfHourItem, hourIndex) => (
     <HalfHoursContent
@@ -62,8 +70,17 @@ const ListDayHalfHours: FC<IProps> = ({ currentDate }) => {
           ? 'autoScroll'
           : ''
       } // scrolling in Home.tsx
+
+      $currentWarning={
+        //! маркировка (пульсация) Warning
+        halfHourItem.isSame(moment(), 'hour') && // проверить на текущий час
+        moment().minute() - halfHourItem.minute() < 30 && //exp: 4:01 - 4:00/4:30 = 1/-29 < 30 -> true/true
+        moment().minute() - halfHourItem.minute() >= 0 && //exp: 4:01 - 4:00/4:30 = 1/-29 < 30 -> true/false(-29)
+        currentDate.isSame(currentDate, 'day') && //! ? current day
+        warningMarker // время приёма лекарства
+      }
     >
-      {/* //! Временная ШКАЛА */}
+      {/* // Временная ШКАЛА */}
       {
         // текущее время - для временной шкалы, как и с $currentHalfHour
         halfHourItem.isSame(moment(), 'hour') && // проверить на текущий час
@@ -100,6 +117,7 @@ const ListDayHalfHours: FC<IProps> = ({ currentDate }) => {
               halfHourItem={halfHourItem}
               med={medItem}
               currentDate={currentDate}
+              currentDayForWirning={currentDayForWirning}
             />
           ),
       )}

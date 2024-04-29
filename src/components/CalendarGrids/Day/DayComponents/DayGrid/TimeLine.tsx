@@ -17,7 +17,7 @@ const TimeLine: FC<IProps> = ({ currentDate }) => {
     // сколько минут, столько и +1.66 к шагу
     for (let i = 1; i <= moment().minutes(); i++) { // halfHourItem.minute() - почему то не работает
       // прибавляем к step +1.6 (1.6% как 1 минута)
-      step += 1.6; // первая минута: 100% / 60 = 1,666... 
+      step += 1.66; // первая минута: 100% / 60 = 1,666... 
     }
     document.querySelector('#timeline')!.style.width = `${step}%`; // добавляем ширину для элемента (#timeline)
   }, [currentDate]); // меняется в зависимости от currentDate(раз в 60 сек)

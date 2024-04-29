@@ -3,8 +3,8 @@
 import moment from 'moment';
 import { Moment } from 'moment';
 import { FC, useEffect } from 'react';
-import { useAppDispatch } from '../../../../../../../../store/hooks';
-import { arrPushWarning } from '../../../../../../../../store/features/arrWarningSlice';
+import { useAppDispatch } from '../../store/hooks';
+import { arrPushWarning } from '../../store/features/arrWarningSlice';
 
 
 interface IProps {

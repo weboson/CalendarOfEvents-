@@ -159,9 +159,9 @@ const recipesMedications: IRecipesMedications = [
             index: 2,
             title: 'days', 
         },  
-        start: '27.03.2024',
-        createDateRecipe: '27.03.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '27.03.2024', //  возможность изменить весь рецепт
+        start: '07.04.2024',
+        createDateRecipe: '07.04.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '07.04.2024', //  возможность изменить весь рецепт
         
     },
     {
@@ -177,9 +177,9 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '27.03.2024',
-        createDateRecipe: '27.03.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '27.03.2024', //  возможность изменить весь рецепт
+        start: '07.04.2024',
+        createDateRecipe: '07.04.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '07.04.2024', //  возможность изменить весь рецепт
         
     },
     {
@@ -195,9 +195,9 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '27.03.2024',
-        createDateRecipe: '27.03.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '27.03.2024', //  возможность изменить весь рецепт   
+        start: '07.04.2024',
+        createDateRecipe: '07.04.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '07.04.2024', //  возможность изменить весь рецепт   
     },
     {
         id: 5,
@@ -212,9 +212,9 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '27.03.2024',
-        createDateRecipe: '27.03.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '27.03.2024', //  возможность изменить весь рецепт
+        start: '07.04.2024',
+        createDateRecipe: '07.04.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '07.04.2024', //  возможность изменить весь рецепт
         
     },
     {
@@ -230,9 +230,9 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '27.03.2024',
-        createDateRecipe: '27.03.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '27.03.2024', //  возможность изменить весь рецепт
+        start: '07.04.2024',
+        createDateRecipe: '07.04.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '07.04.2024', //  возможность изменить весь рецепт
         
     },
     {
@@ -248,9 +248,9 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '27.03.2024',
-        createDateRecipe: '27.03.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '27.03.2024', //  возможность изменить весь рецепт
+        start: '07.04.2024',
+        createDateRecipe: '07.04.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '07.04.2024', //  возможность изменить весь рецепт
         
     },
     {
@@ -266,9 +266,9 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '27.03.2024',
-        createDateRecipe: '27.03.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '27.03.2024', //  возможность изменить весь рецепт
+        start: '07.04.2024',
+        createDateRecipe: '07.04.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '07.04.2024', //  возможность изменить весь рецепт
         
     },
     {
@@ -284,9 +284,9 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '27.03.2024',
-        createDateRecipe: '27.03.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '27.03.2024', //  возможность изменить весь рецепт 
+        start: '07.04.2024',
+        createDateRecipe: '07.04.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '07.04.2024', //  возможность изменить весь рецепт 
         
     },
     {
@@ -302,9 +302,9 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '27.03.2024',
-        createDateRecipe: '27.03.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '27.03.2024', //  возможность изменить весь рецепт 
+        start: '07.04.2024',
+        createDateRecipe: '07.04.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '07.04.2024', //  возможность изменить весь рецепт 
     },
     {
         id: 11,
@@ -319,9 +319,9 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '27.03.2024',
-        createDateRecipe: '27.03.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '27.03.2024', //  возможность изменить весь рецепт
+        start: '07.04.2024',
+        createDateRecipe: '07.04.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '07.04.2024', //  возможность изменить весь рецепт
     },
     {
         id: 12,
@@ -336,9 +336,9 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '27.03.2024',
-        createDateRecipe: '27.03.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '27.03.2024', //  возможность изменить весь рецепт
+        start: '07.04.2024',
+        createDateRecipe: '07.04.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '07.04.2024', //  возможность изменить весь рецепт
     },
     {
         id: 13,
@@ -353,9 +353,9 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '27.03.2024',
-        createDateRecipe: '27.03.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '27.03.2024', //  возможность изменить весь рецепт
+        start: '07.04.2024',
+        createDateRecipe: '07.04.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '07.04.2024', //  возможность изменить весь рецепт
     },
     {
         id: 14,
@@ -370,9 +370,9 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '27.03.2024',
-        createDateRecipe: '27.03.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '27.03.2024', //  возможность изменить весь рецепт
+        start: '07.04.2024',
+        createDateRecipe: '07.04.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '07.04.2024', //  возможность изменить весь рецепт
     },
     {
         id: 15,
@@ -387,9 +387,9 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '27.03.2024',
-        createDateRecipe: '27.03.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '27.03.2024', //  возможность изменить весь рецепт
+        start: '07.04.2024',
+        createDateRecipe: '07.04.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '07.04.2024', //  возможность изменить весь рецепт
     },
     {
         id: 16,
@@ -404,9 +404,9 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '27.03.2024',
-        createDateRecipe: '27.03.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '27.03.2024', //  возможность изменить весь рецепт
+        start: '07.04.2024',
+        createDateRecipe: '07.04.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '07.04.2024', //  возможность изменить весь рецепт
     },
     {
         id: 17,
@@ -421,9 +421,9 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '27.03.2024',
-        createDateRecipe: '27.03.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '27.03.2024', //  возможность изменить весь рецепт
+        start: '07.04.2024',
+        createDateRecipe: '07.04.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '07.04.2024', //  возможность изменить весь рецепт
     },
     {
         id: 18,
@@ -438,9 +438,9 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '27.03.2024',
-        createDateRecipe: '27.03.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '27.03.2024', //  возможность изменить весь рецепт
+        start: '07.04.2024',
+        createDateRecipe: '07.04.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '07.04.2024', //  возможность изменить весь рецепт
     },
     {
         id: 19,
@@ -455,9 +455,9 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '27.03.2024',
-        createDateRecipe: '27.03.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '27.03.2024', //  возможность изменить весь рецепт
+        start: '07.04.2024',
+        createDateRecipe: '07.04.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '07.04.2024', //  возможность изменить весь рецепт
     },
     {
         id: 20,
@@ -472,9 +472,9 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '27.03.2024',
-        createDateRecipe: '27.03.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '27.03.2024', //  возможность изменить весь рецепт
+        start: '07.04.2024',
+        createDateRecipe: '07.04.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '07.04.2024', //  возможность изменить весь рецепт
     },
     {
         id: 21,
@@ -489,9 +489,9 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '27.03.2024',
-        createDateRecipe: '27.03.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '27.03.2024', //  возможность изменить весь рецепт
+        start: '07.04.2024',
+        createDateRecipe: '07.04.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '07.04.2024', //  возможность изменить весь рецепт
     },
     {
         id: 22,
@@ -506,9 +506,9 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '27.03.2024',
-        createDateRecipe: '27.03.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '27.03.2024', //  возможность изменить весь рецепт
+        start: '07.04.2024',
+        createDateRecipe: '07.04.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '07.04.2024', //  возможность изменить весь рецепт
     },
 
     

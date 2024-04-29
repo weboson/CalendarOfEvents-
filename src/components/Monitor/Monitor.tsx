@@ -55,7 +55,7 @@ const Monitor: FC<IMonitorProps> = ({
         </div>
       ) : mode == 'days' ? (
         <div>
-          <TitleWrapper>{currentDate.format('dddd')}</TitleWrapper>
+          <TitleWrapper>{currentDate.format('MMMM, dddd')}</TitleWrapper>
           <TextWrapper>{currentDate.format('D')}</TextWrapper>
         </div>
       ):

@@ -325,3 +325,20 @@ export const FoodTooltip = styled.span`
 		}
 	}
 `
+
+//! для текста лекарства
+export const WrapperSpanDay = styled.span`
+    cursor: help;
+    color: black;
+    font-size: 14px;
+    display: inline;
+    width: 100%;
+    height: 100%;
+    &:hover {
+      background-color: #E6E6E6;
+      color: white;
+      padding: 10px;
+      text-decoration: underline;
+
+}
+`

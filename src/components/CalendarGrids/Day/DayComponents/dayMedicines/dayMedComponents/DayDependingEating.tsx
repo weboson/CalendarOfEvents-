@@ -3,32 +3,28 @@
 import { Moment } from 'moment';
 import { FC, memo } from 'react';
 import { RiMedicineBottleLine } from 'react-icons/ri';
-import { IRecipesMedication } from '../../../../../../../data/localDataBase/LocalDB_WaysUsing';
-import HelperWarningMarker from './helper/HelperWarningMarker';
-import { WrapperSpanWeek } from '../../../../stylesWeekGrid/sc_WeekGrid';
+import { IRecipesMedication } from '../../../../../../data/localDataBase/LocalDB_WaysUsing';
+import { WrapperSpanDay } from '../../../stylesDayGrid/sc_DayGrid';
+// import HelperWarningMarker from './helper/HelperWarningMarker';
 
 interface IProps {
-  dayItem: Moment;
   halfHourItem: Moment;
   firstMealWeekdays: Moment;
   betweenMealsWeekdays: number;
   firstMealWeekend: Moment;
   betweenMealsWeekend: number;
   med: IRecipesMedication;
-  currentDayForWirning: boolean;
   currentDate: Moment;
 }
 
-const DependingEating: FC<IProps> = memo(
+const DayDependingEating: FC<IProps> = memo(
   ({
-    dayItem,
     halfHourItem,
     firstMealWeekdays,
     betweenMealsWeekdays,
     firstMealWeekend,
     betweenMealsWeekend,
     med,
-    currentDayForWirning,
     currentDate,
   }) => {
     // нужен .clone() - иначе add и subtract будут дублировать свои выполнение, и вместо add(6 часов) получим add(12)
@@ -41,7 +37,7 @@ const DependingEating: FC<IProps> = memo(
         return (
           // weekday
           // первый приём ЛС
-          dayItem.day() !== 6 && dayItem.day() !== 0
+          currentDate.day() !== 6 && currentDate.day() !== 0
             ? (halfHourItem.isSame(
                 firstMealWeekdays
                   .subtract(med.interval.minute, 'minute')
@@ -53,17 +49,15 @@ const DependingEating: FC<IProps> = memo(
                 firstMealWeekdays.clone().minute() - halfHourItem.minute() <
                   30 && (
                   <>
-                    {currentDayForWirning && (
-                      <HelperWarningMarker
+                      {/* <HelperWarningMarker
                         halfHourItem={halfHourItem}
                         currentDate={currentDate}
-                      />
-                    )}
+                      /> */}
                     <RiMedicineBottleLine style={{ color: 'red' }} />
-                    <WrapperSpanWeek
+                    <WrapperSpanDay
                       className={`medElemUnic${med.id}`}
                     >{`${med.title}`}
-                    </WrapperSpanWeek>
+                    </WrapperSpanDay>
                     <br />
                   </>
                 ) ) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
@@ -79,19 +73,17 @@ const DependingEating: FC<IProps> = memo(
                     firstMealWeekdays.clone().minute() - halfHourItem.minute() <
                       30 && (
                       <div key={index}>
-                        {currentDayForWirning && (
-                          <HelperWarningMarker
+                          {/* <HelperWarningMarker
                             halfHourItem={halfHourItem}
                             currentDate={currentDate}
-                          />
-                        )}
+                          /> */}
                         <RiMedicineBottleLine
                           key={`before-${index}`}
                           style={{ color: 'red' }}
                         />
-                        <WrapperSpanWeek
+                        <WrapperSpanDay
                           className={`medElemUnic${med.id}`}
-                        >{`${med.title}`}</WrapperSpanWeek>
+                        >{`${med.title}`}</WrapperSpanDay>
                         <br />
                       </div>
                     ),
@@ -108,16 +100,14 @@ const DependingEating: FC<IProps> = memo(
                 firstMealWeekend.clone().minute() - halfHourItem.minute() <
                   30 && (
                   <div>
-                    {currentDayForWirning && (
-                      <HelperWarningMarker
+                      {/* <HelperWarningMarker
                         halfHourItem={halfHourItem}
                         currentDate={currentDate}
-                      />
-                    )}
+                      /> */}
                     <RiMedicineBottleLine style={{ color: 'red' }} />
-                    <WrapperSpanWeek
+                    <WrapperSpanDay
                       className={`medElemUnic${med.id}`}
-                    >{`${med.title}`}</WrapperSpanWeek>
+                    >{`${med.title}`}</WrapperSpanDay>
                   </div>
                 )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
                 [...new Array(med.quantity - 1)].map(
@@ -131,19 +121,17 @@ const DependingEating: FC<IProps> = memo(
                     firstMealWeekend.clone().minute() - halfHourItem.minute() <
                       30 && (
                       <div key={index}>
-                        {currentDayForWirning && (
-                          <HelperWarningMarker
+                          {/* <HelperWarningMarker
                             halfHourItem={halfHourItem}
                             currentDate={currentDate}
-                          />
-                        )}
+                          /> */}
                         <RiMedicineBottleLine
                           key={`before-${index}`}
                           style={{ color: 'red' }}
                         />
-                        <WrapperSpanWeek
+                        <WrapperSpanDay
                           className={`medElemUnic${med.id}`}
-                        >{`${med.title}`}</WrapperSpanWeek>
+                        >{`${med.title}`}</WrapperSpanDay>
                         <br />
                       </div>
                     ),
@@ -155,23 +143,21 @@ const DependingEating: FC<IProps> = memo(
         return (
           // weekday
           // первый приём ЛС
-          dayItem.day() !== 6 && dayItem.day() !== 0
+          currentDate.day() !== 6 && currentDate.day() !== 0
             ? (halfHourItem.isSame(firstMealWeekdays, 'hour') &&
                 firstMealWeekdays.clone().minute() - halfHourItem.minute() >=
                   0 && // 22:30 - 22:21 >= 0  and < 30
                 firstMealWeekdays.clone().minute() - halfHourItem.minute() <
                   30 && (
                   <div>
-                    {currentDayForWirning && (
-                      <HelperWarningMarker
+                      {/* <HelperWarningMarker
                         halfHourItem={halfHourItem}
                         currentDate={currentDate}
-                      />
-                    )}
+                      /> */}
                     <RiMedicineBottleLine style={{ color: 'red' }} />
-                    <WrapperSpanWeek
+                    <WrapperSpanDay
                       className={`medElemUnic${med.id}`}
-                    >{`${med.title}`}</WrapperSpanWeek>{' '}
+                    >{`${med.title}`}</WrapperSpanDay>{' '}
                     <br />
                   </div>
                 )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
@@ -187,19 +173,17 @@ const DependingEating: FC<IProps> = memo(
                     firstMealWeekdays.clone().minute() - halfHourItem.minute() <
                       30 && (
                       <div key={index}>
-                        {currentDayForWirning && (
-                          <HelperWarningMarker
+                          {/* <HelperWarningMarker
                             halfHourItem={halfHourItem}
                             currentDate={currentDate}
-                          />
-                        )}
+                          /> */}
                         <RiMedicineBottleLine
                           key={`while-${index}`}
                           style={{ color: 'red' }}
                         />
-                        <WrapperSpanWeek
+                        <WrapperSpanDay
                           className={`medElemUnic${med.id}`}
-                        >{`${med.title}`}</WrapperSpanWeek>{' '}
+                        >{`${med.title}`}</WrapperSpanDay>{' '}
                         <br />
                       </div>
                     ),
@@ -211,16 +195,14 @@ const DependingEating: FC<IProps> = memo(
                 firstMealWeekend.clone().minute() - halfHourItem.minute() <
                   30 && (
                   <div>
-                    {currentDayForWirning && (
-                      <HelperWarningMarker
+                      {/* <HelperWarningMarker
                         halfHourItem={halfHourItem}
                         currentDate={currentDate}
-                      />
-                    )}
+                      /> */}
                     <RiMedicineBottleLine style={{ color: 'red' }} />
-                    <WrapperSpanWeek
+                    <WrapperSpanDay
                       className={`medElemUnic${med.id}`}
-                    >{`${med.title}`}</WrapperSpanWeek>{' '}
+                    >{`${med.title}`}</WrapperSpanDay>{' '}
                     <br />
                   </div>
                 )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
@@ -235,20 +217,18 @@ const DependingEating: FC<IProps> = memo(
                     firstMealWeekend.clone().minute() - halfHourItem.minute() <
                       30 && (
                       <div key={index}>
-                        {currentDayForWirning && (
-                          <HelperWarningMarker
+                          {/* <HelperWarningMarker
                             halfHourItem={halfHourItem}
                             currentDate={currentDate}
-                          />
-                        )}
+                          /> */}
                         <RiMedicineBottleLine
                           key={`while-${index}`}
                           style={{ color: 'red' }}
                         />
-                        <WrapperSpanWeek
+                        <WrapperSpanDay
                           className={`medElemUnic${med.id}`}
                           key={index + 4}
-                        >{`${med.title}`}</WrapperSpanWeek>{' '}
+                        >{`${med.title}`}</WrapperSpanDay>{' '}
                         <br />
                       </div>
                     ),
@@ -259,7 +239,7 @@ const DependingEating: FC<IProps> = memo(
         return (
           // weekday
           // первый приём ЛС
-          dayItem.day() !== 6 && dayItem.day() !== 0
+          currentDate.day() !== 6 && currentDate.day() !== 0
             ? (halfHourItem.isSame(
                 firstMealWeekdays
                   .add(med.interval.minute, 'minute')
@@ -271,16 +251,14 @@ const DependingEating: FC<IProps> = memo(
                 firstMealWeekdays.clone().minute() - halfHourItem.minute() <
                   30 && (
                   <div>
-                    {currentDayForWirning && (
-                      <HelperWarningMarker
+                      {/* <HelperWarningMarker
                         halfHourItem={halfHourItem}
                         currentDate={currentDate}
-                      />
-                    )}
+                      /> */}
                     <RiMedicineBottleLine style={{ color: 'red' }} />
-                    <WrapperSpanWeek
+                    <WrapperSpanDay
                       className={`medElemUnic${med.id}`}
-                    >{`${med.title}`}</WrapperSpanWeek>
+                    >{`${med.title}`}</WrapperSpanDay>
                     <br />
                   </div>
                 )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
@@ -296,19 +274,17 @@ const DependingEating: FC<IProps> = memo(
                     firstMealWeekdays.clone().minute() - halfHourItem.minute() <
                       30 && (
                       <div key={index}>
-                        {currentDayForWirning && (
-                          <HelperWarningMarker
+                          {/* <HelperWarningMarker
                             halfHourItem={halfHourItem}
                             currentDate={currentDate}
-                          />
-                        )}
+                          /> */}
                         <RiMedicineBottleLine
                           key={`after-${index}`}
                           style={{ color: 'red' }}
                         />
-                        <WrapperSpanWeek
+                        <WrapperSpanDay
                           className={`medElemUnic${med.id}`}
-                        >{`${med.title}`}</WrapperSpanWeek>
+                        >{`${med.title}`}</WrapperSpanDay>
                         <br />
                       </div>
                     ),
@@ -325,16 +301,14 @@ const DependingEating: FC<IProps> = memo(
                 firstMealWeekend.clone().minute() - halfHourItem.minute() <
                   30 && (
                   <div>
-                    {currentDayForWirning && (
-                      <HelperWarningMarker
+                      {/* <HelperWarningMarker
                         halfHourItem={halfHourItem}
                         currentDate={currentDate}
-                      />
-                    )}
+                      /> */}
                     <RiMedicineBottleLine style={{ color: 'red' }} />
-                    <WrapperSpanWeek
+                    <WrapperSpanDay
                       className={`medElemUnic${med.id}`}
-                    >{`${med.title}`}</WrapperSpanWeek>
+                    >{`${med.title}`}</WrapperSpanDay>
                     <br />
                   </div>
                 )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
@@ -349,22 +323,20 @@ const DependingEating: FC<IProps> = memo(
                     firstMealWeekend.clone().minute() - halfHourItem.minute() <
                       30 && (
                       <div key={index}>
-                        {currentDayForWirning && (
-                          <HelperWarningMarker
+                          {/* <HelperWarningMarker
                             halfHourItem={halfHourItem}
                             currentDate={currentDate}
-                          />
-                        )}
+                          /> */}
                         <RiMedicineBottleLine
                           key={`after-${index}`}
                           style={{ color: 'red' }}
                         />
-                        <WrapperSpanWeek
+                        <WrapperSpanDay
                           className={`medElemUnic${med.id}`}
                           key={index + 4}
                         >
                           {`${med.title}`}
-                        </WrapperSpanWeek>
+                        </WrapperSpanDay>
                       </div>
                     ),
                 )
@@ -377,4 +349,4 @@ const DependingEating: FC<IProps> = memo(
 );
 
 // export default DependingEating;
-export default DependingEating; // memo, возможно быстрее будет загружатся лекарства в ячейке
+export default DayDependingEating; // memo, возможно быстрее будет загружатся лекарства в ячейке

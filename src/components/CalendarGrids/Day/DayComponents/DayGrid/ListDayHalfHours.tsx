@@ -8,6 +8,7 @@ import DaySpaceBetweenMeals from './DaySpaceBetweenMeals';
 // режим митания. icon food
 import DayMealSchedule from './DayMealSchedule';
 import recipesMedications from '../../../../../data/localDataBase/LocalDB_WaysUsing';
+import DayUsingMedicines from '../dayMedicines/DayUsingMedicines';
 
 interface IProps {
   currentDate: Moment;
@@ -26,9 +27,10 @@ const ListDayHalfHours: FC<IProps> = ({ currentDate }) => {
     [currentDate],
   );
 
-    // для icons Food
+  // для icons Food
   // выбираем самый большое (количество приёмов еды из рецептов) число из всех элементов массива "takingMedications" у свойства "quantity"(количество приёмом ЛС): 7 раз/день: еда
-    const maxMealFood = useMemo( // для дочернего MealSchedule.tsx 
+  const maxMealFood = useMemo(
+    // для дочернего MealSchedule.tsx
     () =>
       recipesMedications.reduce(function (prev, current) {
         if (+current.quantity > +prev.quantity) {
@@ -37,8 +39,8 @@ const ListDayHalfHours: FC<IProps> = ({ currentDate }) => {
           return prev;
         }
       }),
-    []
-  );  
+    [],
+  );
 
   const warningMarker = false;
 
@@ -53,23 +55,55 @@ const ListDayHalfHours: FC<IProps> = ({ currentDate }) => {
         moment().minute() - halfHourItem.minute() >= 0 && //exp: 4:01 - 4:00/4:30 = 1/-29 < 30 -> true/false(-29)
         !warningMarker // не время приёма лекарства
       }
-        // id for autoScrolling at the current hour
-        id={halfHourItem.isSame(moment(), 'hour') && // проверить на текущий час
-        moment().minute() - halfHourItem.minute() < 30 && 
-        moment().minute() - halfHourItem.minute() >= 0 // проверим на текущий получас
-        ? 'autoScroll' : ''} // scrolling in Home.tsx
-    >
-        {/* //! Временная ШКАЛА */}
-        { // текущее время - для временной шкалы, как и с $currentHalfHour
+      // id for autoScrolling at the current hour
+      id={
         halfHourItem.isSame(moment(), 'hour') && // проверить на текущий час
-        moment().minute() - halfHourItem.minute() < 30 && 
-        moment().minute() - halfHourItem.minute() >= 0 && // проверим на текущий получас
-        <TimeLine currentDate={currentDate}/>}
-      
+        moment().minute() - halfHourItem.minute() < 30 &&
+        moment().minute() - halfHourItem.minute() >= 0 // проверим на текущий получас
+          ? 'autoScroll'
+          : ''
+      } // scrolling in Home.tsx
+    >
+      {/* //! Временная ШКАЛА */}
+      {
+        // текущее время - для временной шкалы, как и с $currentHalfHour
+        halfHourItem.isSame(moment(), 'hour') && // проверить на текущий час
+          moment().minute() - halfHourItem.minute() < 30 &&
+          moment().minute() - halfHourItem.minute() >= 0 && ( // проверим на текущий получас
+            <TimeLine currentDate={currentDate} />
+          )
+      }
+
       {/* //* icons Sun & Moon (space between firs и last eating)*/}
       {/* data: localDB_MealSchedule.ts */}
-      <DaySpaceBetweenMeals halfHourItem={halfHourItem} currentDate={currentDate}/>
-      <DayMealSchedule  halfHourItem={halfHourItem} currentDate={currentDate} maxmealfood={maxMealFood}/>
+      <DaySpaceBetweenMeals
+        halfHourItem={halfHourItem}
+        currentDate={currentDate}
+      />
+      <DayMealSchedule
+        halfHourItem={halfHourItem}
+        currentDate={currentDate}
+        maxmealfood={maxMealFood}
+      />
+
+      {/* //* for Using Medicines (расчет приёма лекарств) */}
+      {recipesMedications.map(
+        (medItem, index) =>
+          // для расчета интервала курса (дни/месяцы/годы приёма), временной диапазон приёмов ЛС, epm: курс 1 месяц, то есть интервал с 23 марта по 23 апреля
+          moment(medItem.start, 'DD.MM.YYYY') <= currentDate &&
+          // < - чтобы не было так: 5 дней приёма, превратились в 7 (если <= и =>)
+          currentDate <
+            moment(medItem.start, 'DD.MM.YYYY')
+              .clone()
+              .add(medItem.duration.index, medItem.duration.title) && (
+            <DayUsingMedicines
+              key={index}
+              halfHourItem={halfHourItem}
+              med={medItem}
+              currentDate={currentDate}
+            />
+          ),
+      )}
     </HalfHoursContent>
   ));
 };

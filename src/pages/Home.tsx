@@ -1,3 +1,4 @@
+//* в moment.js месяцы начинаются с 0 по 11
 import { FC, useEffect, useState } from 'react';
 import { Header } from '../components/Header/Header';
 import Monitor from '../components/Monitor/Monitor';

@@ -91,7 +91,7 @@ const DayMealSchedule: FC<IProps> = memo(
                   firstMealWeekdays.minute() - halfHourItem.minute() < 30 && (
                     <FoodTooltip data-title="Приём пищи" key={1}>
                       <StyleIconFood>
-                        <MdOutlineFastfood />
+                        <MdOutlineFastfood size={30}/>
                       </StyleIconFood>
                     </FoodTooltip>
                   )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
@@ -115,7 +115,7 @@ const DayMealSchedule: FC<IProps> = memo(
                     30 ? (
                     <FoodTooltip data-title="Приём пищи" key={index + 2}>
                       <StyleIconFood>
-                        <MdOutlineFastfood />
+                        <MdOutlineFastfood size={30}/>
                       </StyleIconFood>
                     </FoodTooltip>
                   ) : null,
@@ -126,7 +126,7 @@ const DayMealSchedule: FC<IProps> = memo(
                   firstMealWeekend.minute() - halfHourItem.minute() < 30 && (
                     <FoodTooltip data-title="Приём пищи" key={22}>
                       <StyleIconFood>
-                        <MdOutlineFastfood />
+                        <MdOutlineFastfood size={30}/>
                       </StyleIconFood>
                     </FoodTooltip>
                   )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
@@ -150,7 +150,7 @@ const DayMealSchedule: FC<IProps> = memo(
                     30 ? ( // схравнение по минуте
                     <FoodTooltip data-title="Приём пищи" key={index + 22}>
                       <StyleIconFood>
-                        <MdOutlineFastfood />
+                        <MdOutlineFastfood size={30}/>
                       </StyleIconFood>
                     </FoodTooltip>
                   ) : null,

@@ -46,16 +46,9 @@ const DayDependingBreakfast: FC<IProps> = memo(({
                 30 && (
                 <>
                   {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
-                  <RiMedicineBottleLine
-                    style={{
-                      color: 'red',
-                      top: '18px',
-                    }}
-                  />
                   <WrapperSpanDay className={`medElemUnic${med.id}`}>
                     {`${med.title}`}
                   </WrapperSpanDay>
-                  <br />
                 </>
               )
           : // weekend
@@ -70,13 +63,7 @@ const DayDependingBreakfast: FC<IProps> = memo(({
                 30 && (
                 <>
                   {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
-                  <RiMedicineBottleLine
-                    style={{
-                      color: 'red',
-                    }}
-                  />
                   <WrapperSpanDay className={`medElemUnic${med.id}`}>{`${med.title}`}</WrapperSpanDay>
-                  <br />
                 </>
               )
       );
@@ -91,13 +78,7 @@ const DayDependingBreakfast: FC<IProps> = memo(({
                 30 && (
                 <>
                   {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
-                  <RiMedicineBottleLine
-                    style={{
-                      color: 'red',
-                    }}
-                  />
                   <WrapperSpanDay className={`medElemUnic${med.id}`}>{`${med.title}`}</WrapperSpanDay>
-                  <br />
                 </>
               )
           : // weekend
@@ -107,11 +88,6 @@ const DayDependingBreakfast: FC<IProps> = memo(({
                 30 && (
                 <>
                   {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
-                  <RiMedicineBottleLine
-                    style={{
-                      color: 'red',
-                    }}
-                  />
                   <WrapperSpanDay className={`medElemUnic${med.id}`}>{`${med.title}`}</WrapperSpanDay>
                 </>
               )
@@ -132,11 +108,6 @@ const DayDependingBreakfast: FC<IProps> = memo(({
                 30 && (
                 <>
                   {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
-                  <RiMedicineBottleLine
-                    style={{
-                      color: 'red',
-                    }}
-                  />
                   <WrapperSpanDay className={`medElemUnic${med.id}`}>{`${med.title}`}</WrapperSpanDay>
                 </>
               )
@@ -152,11 +123,6 @@ const DayDependingBreakfast: FC<IProps> = memo(({
                 30 && (
                 <>
                   {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
-                  <RiMedicineBottleLine
-                    style={{
-                      color: 'red',
-                    }}
-                  />
                   <WrapperSpanDay className={`medElemUnic${med.id}`}>{`${med.title}`}</WrapperSpanDay>
                 </>
               )

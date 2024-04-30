@@ -54,15 +54,9 @@ const DayDependingSupper: FC<IProps> = memo(
                         currentDate={currentDate}
                       />
                     )}
-                    <RiMedicineBottleLine
-                      style={{
-                        color: 'red',
-                      }}
-                    />
                     <WrapperSpanDay className={`medElemUnic${med.id}`}>
                       {`${med.title}`}
                     </WrapperSpanDay>
-                    <br />
                   </>
                 )
             : // weekend
@@ -82,15 +76,9 @@ const DayDependingSupper: FC<IProps> = memo(
                         currentDate={currentDate}
                       />
                     )}
-                    <RiMedicineBottleLine
-                      style={{
-                        color: 'red',
-                      }}
-                    />
                     <WrapperSpanDay className={`medElemUnic${med.id}`}>
                       {`${med.title}`}
                     </WrapperSpanDay>
-                    <br />
                   </>
                 )
         );
@@ -111,15 +99,9 @@ const DayDependingSupper: FC<IProps> = memo(
                         currentDate={currentDate}
                       />
                     )}
-                    <RiMedicineBottleLine
-                      style={{
-                        color: 'red',
-                      }}
-                    />
                     <WrapperSpanDay className={`medElemUnic${med.id}`}>
                       {`${med.title}`}
                     </WrapperSpanDay>
-                    <br />
                   </>
                 )
             : // weekend
@@ -134,15 +116,9 @@ const DayDependingSupper: FC<IProps> = memo(
                         currentDate={currentDate}
                       />
                     )}
-                    <RiMedicineBottleLine
-                      style={{
-                        color: 'red',
-                      }}
-                    />
                     <WrapperSpanDay className={`medElemUnic${med.id}`}>
                       {`${med.title}`}
                     </WrapperSpanDay>
-                    <br />
                   </>
                 )
         );
@@ -168,15 +144,9 @@ const DayDependingSupper: FC<IProps> = memo(
                         currentDate={currentDate}
                       />
                     )}
-                    <RiMedicineBottleLine
-                      style={{
-                        color: 'red',
-                      }}
-                    />
                     <WrapperSpanDay className={`medElemUnic${med.id}`}>
                       {`${med.title}`}
                     </WrapperSpanDay>
-                    <br />
                   </>
                 )
             : // weekend
@@ -196,15 +166,9 @@ const DayDependingSupper: FC<IProps> = memo(
                         currentDate={currentDate}
                       />
                     )}
-                    <RiMedicineBottleLine
-                      style={{
-                        color: 'red',
-                      }}
-                    />
                     <WrapperSpanDay className={`medElemUnic${med.id}`}>
                       {`${med.title}`}
                     </WrapperSpanDay>
-                    <br />
                   </>
                 )
         );

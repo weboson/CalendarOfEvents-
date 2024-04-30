@@ -52,17 +52,17 @@ const DaySpaceBetweenMeals:FC<IProps> = ({halfHourItem, currentDate}) => {
           halfHourItem.isSame(firstMealWeekdays, 'minute') || // || - иначе на 30 мин позже маркирует
           halfHourItem.isSameOrAfter(firstMealWeekdays) && // 8:00 >= 8:00 (weekdays)
           halfHourItem.isSameOrBefore(lastMealWeekdays) ? ( // 8:00 <= 22:00
-              <GoSun style={stylesSun}/>
+              <GoSun style={stylesSun} size={28}/>
           ) : (
-              <BsMoon style={stylesMoon}/>
+              <BsMoon style={stylesMoon} size={28}/>
           ) // "weekend"
         ) : currentDate.day() == 6 || currentDate.day() == 0 ? (
           halfHourItem.isSame(firstMealWeekend, 'minute') || // || - иначе на 30 мин позже маркирует
           halfHourItem >= firstMealWeekend && 
           halfHourItem <= lastMealWeekend ? (
-              <GoSun style={stylesSun}/>
+              <GoSun style={stylesSun} size={28}/>
           ) : (
-              <BsMoon style={stylesMoon}/>
+              <BsMoon style={stylesMoon} size={28}/>
           )
         ) : null}
       </>

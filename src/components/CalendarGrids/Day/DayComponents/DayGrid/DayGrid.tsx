@@ -76,7 +76,7 @@ const DayGrid: FC<IProps> = ({ currentDate }) => {
               'hour',
             )}
           >
-            {HourSideItem.hour(index).format('H:00 A')}
+            {HourSideItem.hour(index).format('H:00')}
           </WrapperListHalfHours>
         ))}
       </WrapperSidePanel>

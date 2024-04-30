@@ -43,12 +43,8 @@ const DayInDependently: FC<IProps> = memo(
           halfHourItem.minute() - firstMealWeekdays.minute() < 30 && ( // 8:30 - 8:16 < 0  and < 30
             <div>
               {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
-              <RiMedicineBottleLine
-                style={{
-                  color: 'red',}}
-              />
               <WrapperSpanDay className={`medElemUnic${med.id}`}>{`${med.title}`}
-              </WrapperSpanDay><br/>
+              </WrapperSpanDay>
             </div>
           )) ||
           [...new Array(med.quantity)].map((_, index) =>
@@ -64,11 +60,6 @@ const DayInDependently: FC<IProps> = memo(
               30 ? (
               <div key={index + 1}>
               {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
-                <RiMedicineBottleLine
-                  key={`regardless=${index}`}
-                  style={{
-                    color: 'red',}}
-                />
                 <WrapperSpanDay className={`medElemUnic${med.id}`}>
                 {`${med.title}`}
                 </WrapperSpanDay><br/>
@@ -81,10 +72,6 @@ const DayInDependently: FC<IProps> = memo(
           halfHourItem.minute() - firstMealWeekend.minute() < 30 && ( // 8:30 - 8:16 < 0  and < 30
             <div>
               {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
-              <RiMedicineBottleLine
-                style={{
-                  color: 'red',}}
-              />
               <WrapperSpanDay className={`medElemUnic${med.id}`}>
               {`${med.title}`}
               </WrapperSpanDay><br/>
@@ -103,11 +90,6 @@ const DayInDependently: FC<IProps> = memo(
               30 ? (
               <div key={index + 1}>
               {currentDayForWirning && <HelperWarningMarker halfHourItem={halfHourItem} currentDate={currentDate}/>}
-                <RiMedicineBottleLine
-                  key={`regardless=${index + 3}`}
-                  style={{
-                    color: 'red',}}
-                />
                 <WrapperSpanDay className={`medElemUnic${med.id}`}>
                   {`${med.title}`}
                 </WrapperSpanDay><br/>

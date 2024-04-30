@@ -58,12 +58,11 @@ const DayDependingEating: FC<IProps> = memo(
                         currentDate={currentDate}
                       />
                     )}
-                    <RiMedicineBottleLine style={{ color: 'red' }} />
                     <WrapperSpanDay
                       className={`medElemUnic${med.id}`}
                     >{`${med.title}`}
                     </WrapperSpanDay>
-                    <br />
+                    
                   </>
                 ) ) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
                 [...new Array(med.quantity - 1)].map(
@@ -84,14 +83,10 @@ const DayDependingEating: FC<IProps> = memo(
                         currentDate={currentDate}
                       />
                     )}
-                        <RiMedicineBottleLine
-                          key={`before-${index}`}
-                          style={{ color: 'red' }}
-                        />
                         <WrapperSpanDay
                           className={`medElemUnic${med.id}`}
                         >{`${med.title}`}</WrapperSpanDay>
-                        <br />
+                        
                       </div>
                     ),
                 )
@@ -113,7 +108,6 @@ const DayDependingEating: FC<IProps> = memo(
                         currentDate={currentDate}
                       />
                     )}
-                    <RiMedicineBottleLine style={{ color: 'red' }} />
                     <WrapperSpanDay
                       className={`medElemUnic${med.id}`}
                     >{`${med.title}`}</WrapperSpanDay>
@@ -136,14 +130,10 @@ const DayDependingEating: FC<IProps> = memo(
                         currentDate={currentDate}
                       />
                     )}
-                        <RiMedicineBottleLine
-                          key={`before-${index}`}
-                          style={{ color: 'red' }}
-                        />
                         <WrapperSpanDay
                           className={`medElemUnic${med.id}`}
                         >{`${med.title}`}</WrapperSpanDay>
-                        <br />
+                        
                       </div>
                     ),
                 )
@@ -167,11 +157,10 @@ const DayDependingEating: FC<IProps> = memo(
                         currentDate={currentDate}
                       />
                     )}
-                    <RiMedicineBottleLine style={{ color: 'red' }} />
                     <WrapperSpanDay
                       className={`medElemUnic${med.id}`}
                     >{`${med.title}`}</WrapperSpanDay>{' '}
-                    <br />
+                    
                   </div>
                 )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
                 [...new Array(med.quantity - 1)].map(
@@ -192,14 +181,10 @@ const DayDependingEating: FC<IProps> = memo(
                         currentDate={currentDate}
                       />
                     )}
-                        <RiMedicineBottleLine
-                          key={`while-${index}`}
-                          style={{ color: 'red' }}
-                        />
                         <WrapperSpanDay
                           className={`medElemUnic${med.id}`}
                         >{`${med.title}`}</WrapperSpanDay>{' '}
-                        <br />
+                        
                       </div>
                     ),
                 )
@@ -216,11 +201,10 @@ const DayDependingEating: FC<IProps> = memo(
                         currentDate={currentDate}
                       />
                     )}
-                    <RiMedicineBottleLine style={{ color: 'red' }} />
                     <WrapperSpanDay
                       className={`medElemUnic${med.id}`}
                     >{`${med.title}`}</WrapperSpanDay>{' '}
-                    <br />
+                    
                   </div>
                 )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
                 [...new Array(med.quantity - 1)].map(
@@ -240,15 +224,11 @@ const DayDependingEating: FC<IProps> = memo(
                         currentDate={currentDate}
                       />
                     )}
-                        <RiMedicineBottleLine
-                          key={`while-${index}`}
-                          style={{ color: 'red' }}
-                        />
                         <WrapperSpanDay
                           className={`medElemUnic${med.id}`}
                           key={index + 4}
                         >{`${med.title}`}</WrapperSpanDay>{' '}
-                        <br />
+                        
                       </div>
                     ),
                 )
@@ -276,11 +256,10 @@ const DayDependingEating: FC<IProps> = memo(
                         currentDate={currentDate}
                       />
                     )}
-                    <RiMedicineBottleLine style={{ color: 'red' }} />
                     <WrapperSpanDay
                       className={`medElemUnic${med.id}`}
                     >{`${med.title}`}</WrapperSpanDay>
-                    <br />
+                    
                   </div>
                 )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
                 [...new Array(med.quantity - 1)].map(
@@ -301,14 +280,9 @@ const DayDependingEating: FC<IProps> = memo(
                         currentDate={currentDate}
                       />
                     )}
-                        <RiMedicineBottleLine
-                          key={`after-${index}`}
-                          style={{ color: 'red' }}
-                        />
                         <WrapperSpanDay
                           className={`medElemUnic${med.id}`}
                         >{`${med.title}`}</WrapperSpanDay>
-                        <br />
                       </div>
                     ),
                 )
@@ -330,11 +304,9 @@ const DayDependingEating: FC<IProps> = memo(
                         currentDate={currentDate}
                       />
                     )}
-                    <RiMedicineBottleLine style={{ color: 'red' }} />
                     <WrapperSpanDay
                       className={`medElemUnic${med.id}`}
                     >{`${med.title}`}</WrapperSpanDay>
-                    <br />
                   </div>
                 )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
                 [...new Array(med.quantity - 1)].map(
@@ -354,10 +326,6 @@ const DayDependingEating: FC<IProps> = memo(
                         currentDate={currentDate}
                       />
                     )}
-                        <RiMedicineBottleLine
-                          key={`after-${index}`}
-                          style={{ color: 'red' }}
-                        />
                         <WrapperSpanDay
                           className={`medElemUnic${med.id}`}
                           key={index + 4}

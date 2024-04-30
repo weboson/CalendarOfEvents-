@@ -1,6 +1,6 @@
 import { Moment } from 'moment';
 import { FC, useMemo } from 'react';
-import { HalfHoursContent } from '../../stylesDayGrid/sc_DayGrid';
+import { HalfHoursContent, WrapperFlexMedicines } from '../../stylesDayGrid/sc_DayGrid';
 import moment from 'moment';
 import TimeLine from './TimeLine';
 // расчет режима дня (для Moon, Sun) - for DataBase
@@ -103,6 +103,7 @@ const ListDayHalfHours: FC<IProps> = ({ currentDate }) => {
       />
 
       {/* //* for Using Medicines (расчет приёма лекарств) */}
+      <WrapperFlexMedicines>
       {recipesMedications.map(
         (medItem, index) =>
           // для расчета интервала курса (дни/месяцы/годы приёма), временной диапазон приёмов ЛС, epm: курс 1 месяц, то есть интервал с 23 марта по 23 апреля
@@ -121,6 +122,8 @@ const ListDayHalfHours: FC<IProps> = ({ currentDate }) => {
             />
           ),
       )}
+      </WrapperFlexMedicines>
+
     </HalfHoursContent>
   ));
 };

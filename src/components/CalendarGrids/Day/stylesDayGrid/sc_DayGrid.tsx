@@ -176,6 +176,7 @@ interface IHourSidePanel {
 }
 // Hours
 export const WrapperListHalfHours = styled.div<IHourSidePanel>`
+  font-size: 1.6em;
   ${(props) => (props.$currentSideHour ? 'color: red;' : 'color: #E6E6E6;')}
   background-color: #1e1f21;
   text-align: center;
@@ -346,14 +347,19 @@ export const FoodTooltip = styled.span`
 		}
 	}
 `
-
-//! для текста лекарства
+//! Medicines
+// стопка Medicines
+export const WrapperFlexMedicines = styled.span`
+  display: flex;
+  flex-wrap: wrap; // перенос на следующую строку, если не влазиет (то есть scroll-x точно не будет)
+`
+// для текста лекарства
 export const WrapperSpanDay = styled.span`
     cursor: help;
     color: black;
-    font-size: 14px;
-    display: inline;
-    width: 100%;
+    font-size: 2em;
+    /* display: inline; */
+    /* width: 100%; */
     height: 100%;
     &:hover {
       background-color: #E6E6E6;

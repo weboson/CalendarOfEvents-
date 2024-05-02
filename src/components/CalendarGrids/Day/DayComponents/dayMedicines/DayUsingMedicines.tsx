@@ -9,8 +9,8 @@ import DayDependingEating from './dayMedComponents/DayDependingEating';
 import DayDependingBreakfast from './dayMedComponents/DayDependingBreakfast';
 import DayDependingSupper from './dayMedComponents/DayDependingSupper';
 import DayInDependently from './dayMedComponents/DayInDependently';
-// import { useAppDispatch } from '../../../../../../store/hooks';
-// import { readingPopupData } from '../../../../../../store/features/popupDataSlice';
+import { useAppDispatch } from '../../../../../store/hooks';
+import { chosenMedicineID } from '../../../../../store/features/chosenMedicineDaySlice';
 
 interface IProps {
   halfHourItem: Moment;
@@ -83,6 +83,14 @@ const DayUsingMedicines: FC<IProps> = memo(
     );
     const betweenMealsWeekend = diffIntervalMealWeekend / (med.quantity - 1);
 
+    //! обработчик клика для Recipte окна (Day)
+    //Redux-toolkit - из hooks.tsx - для изменения данных
+    const dispatch = useAppDispatch();
+    const ClickOnMedicine = (): void => {
+      // передаем данные (id лекарства)
+      // метод как readingPopupData в Week
+      dispatch(chosenMedicineID(med.id));
+    }
 
     if (med.depending) {
       //==================================== есть ли зависимости от завтрака/ужина/еды/
@@ -93,8 +101,7 @@ const DayUsingMedicines: FC<IProps> = memo(
           //* до, вовремя или после
           return (
             <div
-            //   onMouseOver={hoverMouseOnMedicine}
-            //   onMouseOut={hoverMouseOnMedicine}
+              onClick={ClickOnMedicine}
               style={{ cursor: 'help', maxWidth: 'fit-content' }}
             >
               <DayDependingEating
@@ -115,8 +122,7 @@ const DayUsingMedicines: FC<IProps> = memo(
         case 'first breakfast': //============================= от первого завтрака
           return (
             <div
-            //   onMouseOver={hoverMouseOnMedicine}
-            //   onMouseOut={hoverMouseOnMedicine}
+              onClick={ClickOnMedicine}
               style={{ cursor: 'help', maxWidth: 'fit-content' }}
             >
               <DayDependingBreakfast
@@ -135,8 +141,7 @@ const DayUsingMedicines: FC<IProps> = memo(
         case 'last supper': //================================= от последнего ужина
           return (
             <div
-            //   onMouseOver={hoverMouseOnMedicine}
-            //   onMouseOut={hoverMouseOnMedicine}
+              onClick={ClickOnMedicine}
               style={{ cursor: 'help', maxWidth: 'fit-content' }}
             >
               <DayDependingSupper
@@ -159,8 +164,7 @@ const DayUsingMedicines: FC<IProps> = memo(
       //======================================================= ВНЕ ЗАВИСИМОСТИ ОТ ЕДЫ
       return (
         <div
-        //   onMouseOver={hoverMouseOnMedicine}
-        //   onMouseOut={hoverMouseOnMedicine}
+          onClick={ClickOnMedicine}
           style={{ cursor: 'help', maxWidth: 'fit-content' }}
         >
           <DayInDependently

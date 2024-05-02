@@ -11,7 +11,7 @@ export const popupDataSlice = createSlice({
   initialState,
   reducers: {
     readingPopupData: (state, action) => (
-        state = action.payload // наприме: {id: 3, title: 'Month', format: 'MMMM'} (из dataMenu.ts)
+        state = action.payload 
     )
   },
 })

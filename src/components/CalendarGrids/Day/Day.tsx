@@ -2,21 +2,22 @@ import { Moment } from 'moment';
 import { FC, useEffect } from 'react';
 import {
   BottomLeftSection,
-  LeftSection,
-  RightSection,
+  CalendarSection,
+  DayGridSection,
+  RecipeSection,
   TopLeftSection,
   WrapperBlock,
 } from './stylesDayGrid/sc_DayGrid';
 import DateBoard from './DayComponents/DateBoard';
 import DayCalendar from './DayComponents/DayCalendar';
 import DayGrid from './DayComponents/DayGrid/DayGrid';
+import RecipeWindow from './DayComponents/RecipeWindow/RecipeWindow';
 
 interface IProps {
   currentDate: Moment;
 }
 
-const Day: FC<IProps> = ({currentDate}) => {
-
+const Day: FC<IProps> = ({ currentDate }) => {
   // Memorization/Recovery Scroll position (сохраняет текущий скролл (как в Week), даже после перехода на другие компоненты - не нужно постоянно мотать до того места, где остановился)
   // Знак ! - в TS значит, что уверены, что объект не равен null или Uundefined
   useEffect(() => {
@@ -39,12 +40,15 @@ const Day: FC<IProps> = ({currentDate}) => {
 
   return (
     <WrapperBlock>
-        {/* Left */}
+      {/* Left */}
+      <DayGridSection>
+        <DayGrid currentDate={currentDate} />
+      </DayGridSection>
 
       {/* Right */}
-      <RightSection>
-        <DayGrid currentDate={currentDate} />
-      </RightSection>
+      <RecipeSection>
+        <RecipeWindow />
+      </RecipeSection>
     </WrapperBlock>
   );
 };

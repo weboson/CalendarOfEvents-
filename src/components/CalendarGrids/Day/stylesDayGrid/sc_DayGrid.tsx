@@ -299,12 +299,12 @@ export const WrapperRecipe = styled("div")`
   font-family: Roboto, serif;
    h2 {
     text-align: center;
-    font-size: 3em;
+    font-size: 2.4em;
     line-height: 100%;
   };
   li {
-    font-size: 2.4em;
-    line-height: 83%;
+    font-size: 2em;
+    line-height: 50%;
   }
   p {
     color: red;

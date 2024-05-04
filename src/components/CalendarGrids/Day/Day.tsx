@@ -1,15 +1,10 @@
 import { Moment } from 'moment';
 import { FC, useEffect } from 'react';
 import {
-  BottomLeftSection,
-  CalendarSection,
   DayGridSection,
   RecipeSection,
-  TopLeftSection,
   WrapperBlock,
 } from './stylesDayGrid/sc_DayGrid';
-import DateBoard from './DayComponents/DateBoard';
-import DayCalendar from './DayComponents/DayCalendar';
 import DayGrid from './DayComponents/DayGrid/DayGrid';
 import RecipeWindow from './DayComponents/RecipeWindow/RecipeWindow';
 
@@ -47,7 +42,7 @@ const Day: FC<IProps> = ({ currentDate }) => {
 
       {/* Right */}
       <RecipeSection>
-        <RecipeWindow />
+        <RecipeWindow currentDate={currentDate}/>
       </RecipeSection>
     </WrapperBlock>
   );

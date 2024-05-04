@@ -209,7 +209,7 @@ const recipesMedications: IRecipesMedications = [
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[0].oftime, // Используется константа(потом будет в Form) в массива 
         interval: { hour: 4, minute: 0}, // exm: спустя 45 минут после еды 
-        duration: { // продолжительность курса до 2 месяца 
+        duration: { // продолжительность курса 1 месяца 
             index: 1,
             title: 'months', 
         },  
@@ -227,7 +227,7 @@ const recipesMedications: IRecipesMedications = [
         unitTime: unitTime[0].type, // day -  в день
         position: positionAction[0].oftime, // Используется константа(потом будет в Form) в массива 
         interval: { hour: 0, minute: 45}, // exm: спустя 45 минут после еды 
-        duration: { // продолжительность курса до 2 месяца 
+        duration: { // продолжительность курса 1 месяца 
             index: 1,
             title: 'months', 
         },  
@@ -402,10 +402,10 @@ const recipesMedications: IRecipesMedications = [
         position: positionAction[0].oftime, //  'after' ВОВРЕМЯ
         interval: { hour: 6, minute: 0}, // exm: спустя 45 минут после еды 
         duration: { // продолжительность курса до 2 месяца 
-            index: 1,
+            index: 2,
             title: 'months', 
         },  
-        start: '07.04.2024',
+        start: '10.04.2024',
         createDateRecipe: '07.04.2024',//  дата создания рецепта одного ЛС
         updateDateRecipe: '07.04.2024', //  возможность изменить весь рецепт
     },

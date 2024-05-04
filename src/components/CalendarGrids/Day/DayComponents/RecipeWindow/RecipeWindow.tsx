@@ -9,8 +9,14 @@ import {
   WrapperRecipe,
   WrapperRecipeWindow,
 } from '../../stylesDayGrid/sc_DayGrid';
+import { Moment } from 'moment';
+import moment from 'moment';
 
-const RecipeWindow: FC = () => {
+interface IProps {
+  currentDate: Moment;
+}
+
+const RecipeWindow: FC<IProps> = ({currentDate}) => {
   //Redux-toolkit - из hooks.tsx -
   // получили id лекарства
   const idMed = useAppSelector((state) => state.chosenMedicine); // изменение состояния (useAppDispatch) в DayUsingMedicines.tsx
@@ -91,6 +97,24 @@ const RecipeWindow: FC = () => {
                         ? 'месяц/месяцев'
                         : 'год'}
                     </p>
+                  </li>
+                  <li>
+                    Начало приёма: 
+                    <br />
+                    <p>{moment(medicine.start, 'DD.MM.YYYY').format('DD.MM.YYYY')}</p>
+                  </li>
+                  <li>
+                    {/* сколько осталось принимать (diff - это разница) */}
+                    Осталось принимать:{' '}
+                    <br />
+                    <p>{(moment(medicine.start, 'DD.MM.YYYY').add(medicine.duration.index, `${medicine.duration.title}`) > moment()) ? // если старт + курс > текущего дня, то
+                    (moment(medicine.start, 'DD.MM.YYYY').add(medicine.duration.index, `${medicine.duration.title}`).diff(moment(), 'day')) + ' день/дней/дня' : // (стартовый день + длительность курса) - текущее время = сколько осталось принимать
+                    `завершение курса ${(moment(medicine.start, 'DD.MM.YYYY').add(medicine.duration.index, `${medicine.duration.title}`).format('DD.MM.YYYY'))} `} </p>
+                  </li>
+                  <li>
+                    Завершение курса (до):{' '}
+                    <br />
+                    <p>{moment(medicine.start, 'DD.MM.YYYY').add(medicine.duration.index, `${medicine.duration.title}`).format('DD.MM.YYYY')}</p>
                   </li>
                 </ul>
         ) : (<p style={{fontSize: '3em'}}>Чтобы узнать подробности <br/> - кликните мышкой по любому лекарству</p>)}

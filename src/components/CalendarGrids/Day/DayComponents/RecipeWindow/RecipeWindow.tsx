@@ -94,7 +94,7 @@ const RecipeWindow: FC<IProps> = ({currentDate}) => {
                         : medicine?.duration.title == 'weeks'
                         ? 'недели/ей'
                         : medicine?.duration.title == 'months'
-                        ? 'месяц/месяцев'
+                        ? 'месяца/месяцев'
                         : 'год'}
                     </p>
                   </li>

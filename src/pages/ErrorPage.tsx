@@ -3,7 +3,9 @@ import {FC} from 'react';
 const ErrorPage:FC = () => {
     return (
         <div>
-            <p>404</p>
+            <h1>Error 404</h1>
+            <p>Такой стрницы не существует</p>
+            <p>Хотите вернутся на <a href="/">главную</a>главную?</p>
         </div>
     );
 };

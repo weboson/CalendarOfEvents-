@@ -42,7 +42,6 @@ interface IModeDateButtonProps {
 export const ModeDateButton = styled('button')<IModeDateButtonProps>`
   border: unset;
   height: 20px;
-
   padding-right: 16px;
   padding-left: 16px;
   font-weight: bold;
@@ -58,9 +57,12 @@ export const ModeDateButton = styled('button')<IModeDateButtonProps>`
   color: ${(props) => (props.$isCurrentModeDate ? '#565759' : '#E6E6E6;')};
 `;
 
+
+
 // unput "search" через Form от react-router-dom
 export const SearchWrapper = styled.div`
-
+  display: flex;
+  flex-direction: row;
 `
 
 export const FormRouterSearch = styled(Form)`

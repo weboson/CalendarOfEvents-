@@ -11,26 +11,26 @@ import {
   FormRouterSearch,
   InputSearch,
   InputButtonSearch,
+  ButtonRecipes,
+  RecipesWrapper,
 } from './stylesHeader/sc_calendarHeader';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { readingMenu } from '../../store/features/modesDateSlice';
 import { menuModesDate } from '../../data/dataMenu';
 
-
 const Headers: FC = () => {
-
   // redux-toolkit
-  const activeMenu = useAppSelector((state) => state.menu)
+  const activeMenu = useAppSelector((state) => state.menu);
 
-  const dispatch = useAppDispatch()
-  
+  const dispatch = useAppDispatch();
+
   const handleClick = (index: number) => {
     // redux-toolkit
-    dispatch(readingMenu(index))
+    dispatch(readingMenu(index));
   };
-  console.log('rememo')
+  console.log('rememo');
   return (
-    <div id='header'> 
+    <div id="header">
       <DivWrapper>
         {/* Заголовок */}
         <TitleCalendarWrapper>
@@ -47,7 +47,6 @@ const Headers: FC = () => {
               // active button/mode
               onClick={() => handleClick(index)}
               $isCurrentModeDate={activeMenu == index ? true : false}
-              
               // закругление крайних углов
               $extremeButtonLeft={array.indexOf(item) === 0 ? true : false}
               $extremeButtonRight={
@@ -59,10 +58,15 @@ const Headers: FC = () => {
           ))}
         </ButtonsWrapper>
         {/* Поиск */}
+
         <SearchWrapper>
+
+
           <FormRouterSearch>
-            <InputButtonSearch><FaSearch/></InputButtonSearch>
-            <InputSearch placeholder='Search'/>
+            <InputButtonSearch>
+              <FaSearch />
+            </InputButtonSearch>
+            <InputSearch placeholder="Search" />
           </FormRouterSearch>
         </SearchWrapper>
       </DivWrapper>

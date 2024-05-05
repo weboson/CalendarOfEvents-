@@ -4,7 +4,7 @@
 ## Screenshots
 
 ### Day Mode
-![image](https://github.com/weboson/CalendarOfEvents-/assets/42917939/8b529183-95d3-4965-9c72-86ab3cd0cbec)
+![image](https://github.com/weboson/CalendarOfEvents-/assets/42917939/9e4cbb61-bcdf-4730-b97a-eb3753a9cca3)
 
 ### Week Mode
 ![image](https://github.com/weboson/CalendarOfEvents-/assets/42917939/87356e55-6dcb-4914-a98f-61b408f57701)

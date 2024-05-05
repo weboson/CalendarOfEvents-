@@ -1,5 +1,5 @@
 // show from above: current date (exemple: November 30 (from Month), 2023 (from Year))
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import {
   DivWrapper,
   TextWrapper,
@@ -56,7 +56,8 @@ const Monitor: FC<IMonitorProps> = ({
       ) : mode == 'days' ? (
         <div>
           <TitleWrapper>{currentDate.format('MMMM, dddd')}</TitleWrapper>
-          <TextWrapper>{currentDate.format('D')}</TextWrapper>
+          <TextWrapper>{currentDate.format('D,')}</TextWrapper>
+          <TextWrapper>{currentDate.format(' H:mm')}</TextWrapper>
         </div>
       ):
         'Заголовок (Monitor.tsx)'

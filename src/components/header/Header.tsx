@@ -17,6 +17,9 @@ import {
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { readingMenu } from '../../store/features/modesDateSlice';
 import { menuModesDate } from '../../data/dataMenu';
+// Recipes - будет отдельной страницей
+// link от React-router-dom  - для НЕ ПЕРЕЗАГРУЖАЕМЫХ страницу  ССЫЛОК
+import { Link } from 'react-router-dom';
 
 const Headers: FC = () => {
   // redux-toolkit
@@ -60,7 +63,14 @@ const Headers: FC = () => {
         {/* Поиск */}
 
         <SearchWrapper>
-
+          {/*//! кнопка 'Recipes' */}
+          <RecipesWrapper>
+            <ButtonRecipes
+            // $isActiveButtonRecipes = {}
+            >
+              Recipes
+            </ButtonRecipes>
+          </RecipesWrapper>
 
           <FormRouterSearch>
             <InputButtonSearch>

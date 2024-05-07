@@ -57,6 +57,23 @@ export const ModeDateButton = styled('button')<IModeDateButtonProps>`
   color: ${(props) => (props.$isCurrentModeDate ? '#565759' : '#E6E6E6;')};
 `;
 
+// кнопка "Recipes"
+export const RecipesWrapper = styled.div`
+  display: flex;
+`
+
+export const ButtonRecipes = styled('button')`
+  border: unset;
+  height: 20px;
+  background-color: #565759;
+  color: #E6E6E6;
+  padding-right: 16px;
+  padding-left: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-right: 7px;
+`
 
 
 // unput "search" через Form от react-router-dom

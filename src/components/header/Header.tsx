@@ -44,21 +44,24 @@ const Headers: FC = () => {
         </TitleCalendarWrapper>
         {/* Menu */}
         <ButtonsWrapper>
-          {menuModesDate.map((item, index, array) => (
-            <ModeDateButton
-              key={index}
-              // active button/mode
-              onClick={() => handleClick(index)}
-              $isCurrentModeDate={activeMenu == index ? true : false}
-              // закругление крайних углов
-              $extremeButtonLeft={array.indexOf(item) === 0 ? true : false}
-              $extremeButtonRight={
-                array.indexOf(item) === array.length - 1 ? true : false
-              }
-            >
-              {item.title}
-            </ModeDateButton>
-          ))}
+          {/* //! Link от react-router-dom: то есть, чтобы при нажатии кнопок режимов был автоматический переход в среду Home (localhost), а то в localhost/recipes кнопки не работают */}
+        <Link to={'/'}>
+            {menuModesDate.map((item, index, array) => (
+              <ModeDateButton
+                key={index}
+                // active button/mode
+                onClick={() => handleClick(index)}
+                $isCurrentModeDate={activeMenu == index ? true : false}
+                // закругление крайних углов
+                $extremeButtonLeft={array.indexOf(item) === 0 ? true : false}
+                $extremeButtonRight={
+                  array.indexOf(item) === array.length - 1 ? true : false
+                }
+              >
+                {item.title}
+              </ModeDateButton>
+            ))}
+            </Link>
         </ButtonsWrapper>
         {/* Поиск */}
 

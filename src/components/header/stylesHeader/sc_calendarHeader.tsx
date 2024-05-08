@@ -9,6 +9,9 @@ export const DivWrapper = styled('div')`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  a { // убрать с Link (которая в верстке <a> ) подчеркивание
+    text-decoration: none;
+  }
 `;
 
 export const TitleCalendar = styled('h3')`
@@ -24,6 +27,7 @@ export const StyleIconPlus = styled.div`
   padding-left: 4px;
 `;
 export const TitleCalendarWrapper = styled.div`
+text-decoration: none;
   display: flex;
 `;
 

@@ -36,16 +36,18 @@ const Headers: FC = () => {
     <div id="header">
       <DivWrapper>
         {/* Заголовок */}
+          <Link to={'/'}>
         <TitleCalendarWrapper>
-          <TitleCalendar>Calendar of events</TitleCalendar>
-          <StyleIconPlus>
-            <FaCalendarPlus />
-          </StyleIconPlus>
+            <TitleCalendar>Calendar of events</TitleCalendar>
+            <StyleIconPlus>
+              <FaCalendarPlus />
+            </StyleIconPlus>
         </TitleCalendarWrapper>
+          </Link>
         {/* Menu */}
         <ButtonsWrapper>
           {/* //! Link от react-router-dom: то есть, чтобы при нажатии кнопок режимов был автоматический переход в среду Home (localhost), а то в localhost/recipes кнопки не работают */}
-        <Link to={'/'}>
+          <Link to={'/'}>
             {menuModesDate.map((item, index, array) => (
               <ModeDateButton
                 key={index}
@@ -61,18 +63,21 @@ const Headers: FC = () => {
                 {item.title}
               </ModeDateButton>
             ))}
-            </Link>
+          </Link>
         </ButtonsWrapper>
         {/* Поиск */}
 
         <SearchWrapper>
           {/*//! кнопка 'Recipes' */}
           <RecipesWrapper>
-            <ButtonRecipes
-            // $isActiveButtonRecipes = {}
-            >
-              Recipes
-            </ButtonRecipes>
+            {/* //! ссылка */}
+            <Link to={'/recipes'}>
+              <ButtonRecipes
+              // $isActiveButtonRecipes = {}
+              >
+                Recipes
+              </ButtonRecipes>
+            </Link>
           </RecipesWrapper>
 
           <FormRouterSearch>

@@ -1,8 +1,8 @@
 //* массив режимов отображения заголовка в Monitor.tsx, exemple: November 2023 (режим Month), 2023 (Year) 
-// used CalendarGrid.tsx
+// used CalendarGrid
 interface IModesMonitorObj {
     id: number;
-    title: 'days' | 'weeks' | 'months' | 'years'; // for .subtract(1, 'days' | 'weeks' | etc)
+    title: 'days' | 'weeks' | 'months' | 'years' ; // for .subtract(1, 'days' | 'weeks' | etc)
   }
   
   interface IModesMonitor extends Array<IModesMonitorObj>{}
@@ -14,4 +14,5 @@ export const modesMonitor: IModesMonitor = [
     {id: 2, title: 'weeks'}, 
     {id: 3, title: 'months'}, 
     {id: 4, title: 'years'},
+    {id: 5, title: 'days'}, // для RecipePage: в Monitor отображается формат Day 
   ]

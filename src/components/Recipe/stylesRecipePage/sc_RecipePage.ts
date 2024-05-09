@@ -8,7 +8,8 @@ export const WrapperRecipes = styled.div`
   flex-wrap: nowrap; // в строку горизонтально (for adaptive)
   overflow-x: auto;
   /* justify-content:space-between; */
-  background-color: #1e1f21;
+  /* background-color: #1e1f21; */
+  background-color: yellow;
   @media (max-width: 1210px) {
     flex-wrap: wrap; // столбик вертикальный  https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap
   }

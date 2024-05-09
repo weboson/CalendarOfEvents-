@@ -11,8 +11,8 @@ import {
   FormRouterSearch,
   InputSearch,
   InputButtonSearch,
-  ButtonRecipes,
-  RecipesWrapper,
+  LoginWrapper,
+  ButtonLogin,
 } from './stylesHeader/sc_calendarHeader';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { readingMenu } from '../../store/features/modesDateSlice';
@@ -22,63 +22,87 @@ import { menuModesDate } from '../../data/dataMenu';
 import { Link } from 'react-router-dom';
 
 const Headers: FC = () => {
-  // redux-toolkit
-  const activeMenu = useAppSelector((state) => state.menu);
-
+  const activeMenu = useAppSelector((state) => state.menu)
+  
   const dispatch = useAppDispatch();
-
   const handleClick = (index: number) => {
     // redux-toolkit
     dispatch(readingMenu(index));
+    
   };
   console.log('rememo');
   return (
     <div id="header">
       <DivWrapper>
         {/* Заголовок */}
-          <Link to={'/'}>
-        <TitleCalendarWrapper>
+        <Link to={'/'}>
+          <TitleCalendarWrapper>
             <TitleCalendar>Calendar of events</TitleCalendar>
             <StyleIconPlus>
               <FaCalendarPlus />
             </StyleIconPlus>
-        </TitleCalendarWrapper>
-          </Link>
+          </TitleCalendarWrapper>
+        </Link>
         {/* Menu */}
         <ButtonsWrapper>
-          {/* //! Link от react-router-dom: то есть, чтобы при нажатии кнопок режимов был автоматический переход в среду Home (localhost), а то в localhost/recipes кнопки не работают */}
+          {/* // Link от react-router-dom*/}
+          {/*//! кнопки из массива: Day,Week,Month,Year */}
           <Link to={'/'}>
-            {menuModesDate.map((item, index, array) => (
-              <ModeDateButton
-                key={index}
-                // active button/mode
-                onClick={() => handleClick(index)}
-                $isCurrentModeDate={activeMenu == index ? true : false}
-                // закругление крайних углов
-                $extremeButtonLeft={array.indexOf(item) === 0 ? true : false}
-                $extremeButtonRight={
-                  array.indexOf(item) === array.length - 1 ? true : false
-                }
-              >
-                {item.title}
-              </ModeDateButton>
-            ))}
+            {menuModesDate.map((item, index, array) => {
+              if (index < 4) {
+                return (
+                  <ModeDateButton
+                    key={index}
+                    // active button/mode
+                    onClick={() => handleClick(index)}
+                    $isCurrentModeDate={activeMenu == index ? true : false}
+                    // закругление углов левого края (кнопки Day)
+                    $extremeButtonLeft={
+                      array.indexOf(item) === 0 ? true : false
+                    }
+                    $extremeButtonRight={
+                      false
+                    }
+                  >
+                    {item.title}
+                  </ModeDateButton>
+                );
+              }
+            })}
+          </Link>
+          {/*//! отдельно: Кнопка страницы Рецепты (Recipes) */}
+          <Link to={'/recipes'}>
+          <ModeDateButton
+                    key={4}
+                    // active button/mode
+                    onClick={() => handleClick(4)}
+                    $isCurrentModeDate={activeMenu == 4 ? true : false}
+                    // закругление углов левого края (кнопки Day)
+                    $extremeButtonLeft={
+                      false
+                    }
+                    $extremeButtonRight={
+                      true
+                    }
+                  >
+                    {menuModesDate[4].title}
+                  </ModeDateButton>
           </Link>
         </ButtonsWrapper>
         {/* Поиск */}
 
         <SearchWrapper>
           {/*//! кнопка 'Recipes' */}
-          <RecipesWrapper>
+          <LoginWrapper>
             {/* //! ссылка */}
-            <Link to={'/recipes'}>
-              <ButtonRecipes
-              // $isActiveButtonRecipes = {}
+            <Link to={'/login'}>
+              <ButtonLogin
+              // $isActiveButtonLogin = {}
               >
-                Recipes
-              </ButtonRecipes>
+                login
+              </ButtonLogin>
             </Link>
-          </RecipesWrapper>
+          </LoginWrapper>
 
           <FormRouterSearch>
             <InputButtonSearch>

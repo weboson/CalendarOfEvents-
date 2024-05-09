@@ -14,5 +14,6 @@ export const menuModesDate: IMenuModesDate = [
     {id: 1, title: 'Day', format: 'D'}, 
     {id: 2, title: 'Week', format: 'WWW'}, 
     {id: 3, title: 'Month', format: 'D'}, 
-    {id: 4, title: 'Year', format: 'YYYY'}, 
+    {id: 4, title: 'Year', format: 'YYYY'},
+    {id: 5, title: 'Recipes', format: 'D'}, // страница рецептов
   ]

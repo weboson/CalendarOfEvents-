@@ -67,7 +67,8 @@ const Home: FC = () => {
           />
         ) : menuModesDate[indexMenu].title == 'Year' ? (
           <YearGrid currentDate={currentDate} />
-        ) : ( <Day currentDate={currentDate} />) // если RecipesPage (для страницы Recipes, отображение Monitor, как в Day)
+        ) : menuModesDate[indexMenu].title == 'Recipes' ? ( // RecipesPage 
+          <Day currentDate={currentDate} />) : null
       }
     </>
   );

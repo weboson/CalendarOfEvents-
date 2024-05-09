@@ -1,12 +1,12 @@
 import { FC } from 'react';
 import { WrapperRecipes } from './stylesRecipePage/sc_RecipePage';
 
-const RecipeForm: FC = () => {
+const RecipePage: FC = () => {
     return (
         <WrapperRecipes>
-            12345
+12
         </WrapperRecipes>
     );
 };
 
-export default RecipeForm;
+export default RecipePage;

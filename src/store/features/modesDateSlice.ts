@@ -4,7 +4,10 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { RootState } from '../store'
 
 //! index active menu (по-умолчанию)
-const initialState: number = 0;
+const initialState: number =  0;
+
+
+
 
 export const menuSlice = createSlice({
   name: 'menu',
@@ -12,7 +15,7 @@ export const menuSlice = createSlice({
   reducers: {
     readingMenu: (state, action) => (
         state = action.payload // наприме: {id: 3, title: 'Month', format: 'MMMM'} (из dataMenu.ts)
-    )
+    )  
   },
 })
 

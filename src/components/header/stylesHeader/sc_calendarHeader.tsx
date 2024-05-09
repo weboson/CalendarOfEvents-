@@ -61,12 +61,12 @@ export const ModeDateButton = styled('button')<IModeDateButtonProps>`
   color: ${(props) => (props.$isCurrentModeDate ? '#565759' : '#E6E6E6;')};
 `;
 
-// кнопка "Recipes"
-export const RecipesWrapper = styled.div`
+// кнопка "Login"
+export const LoginWrapper = styled.div`
   display: flex;
 `
 
-export const ButtonRecipes = styled('button')`
+export const ButtonLogin = styled('button')`
   border: unset;
   height: 20px;
   background-color: #565759;

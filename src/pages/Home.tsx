@@ -16,7 +16,7 @@ interface ArrayContextType extends Array<Moment> {}
 
 const Home: FC = () => {
     //! текущее время (currentDate) передается, как context из <Outlet context={f}/> - файл Lauout.tsx 
-    const [currentDate, prevHandler, todayHandler, nextHandler] = useOutletContext<ArrayContextType>(); //! useOutletContext - это из react-router-dom (чтобы перадть пропсы)
+    const [currentDate, prevHandler, todayHandler, nextHandler] = useOutletContext<ArrayContextType>(); //! useOutletContext - это из react-router-dom (чтобы передать пропсы)
 
   
     const firstDayOfWeek = currentDate.clone().startOf('month').startOf('week'); // стартовый день: 01.понедельник.2023
@@ -65,9 +65,9 @@ const Home: FC = () => {
             firstDayOfWeek={firstDayOfWeek}
             currentDate={currentDate || null}
           />
-        ) : (
+        ) : menuModesDate[indexMenu].title == 'Year' ? (
           <YearGrid currentDate={currentDate} />
-        )
+        ) : ( <Day currentDate={currentDate} />) // если RecipesPage (для страницы Recipes, отображение Monitor, как в Day)
       }
     </>
   );

@@ -1,4 +1,5 @@
 // show from above: current date (exemple: November 30 (from Month), 2023 (from Year))
+// 
 import { FC } from 'react';
 import {
   DivWrapper,
@@ -15,10 +16,10 @@ import moment from 'moment';
 
 // ts тип для пропс
 interface IMonitorProps {
-  currentDate: Moment
-  prevHandler: () => void
-  todayHandler: () => void
-  nextHandler: () => void
+  currentDate: Moment;
+  prevHandler: () => void;
+  todayHandler: () => void;
+  nextHandler: () => void;
 }
 
 const Monitor: FC<IMonitorProps> = ({
@@ -40,7 +41,7 @@ const Monitor: FC<IMonitorProps> = ({
   return (
     <DivWrapper>
       {mode == 'months' ? (
-        <div id='red'>
+        <div id="red">
           <TitleWrapper>{currentDate.format('MMMM')}</TitleWrapper>
           <TextWrapper>{currentDate.format('YYYY')}</TextWrapper>
         </div>
@@ -50,7 +51,13 @@ const Monitor: FC<IMonitorProps> = ({
         </div>
       ) : mode == 'weeks' ? (
         <div>
-          <TitleWrapper>{`${currentDate.clone().startOf('week').format('D')}-${currentDate.clone().endOf('week').format('D')} `}</TitleWrapper>
+          <TitleWrapper>{`${currentDate
+            .clone()
+            .startOf('week')
+            .format('D')}-${currentDate
+            .clone()
+            .endOf('week')
+            .format('D')} `}</TitleWrapper>
           <TextWrapper>{currentDate.format('MMMM yyyy')}</TextWrapper>
         </div>
       ) : mode == 'days' ? (
@@ -59,13 +66,34 @@ const Monitor: FC<IMonitorProps> = ({
           <TextWrapper>{currentDate.format('D,')}</TextWrapper>
           <TextWrapper>{currentDate.format(' H:mm')}</TextWrapper>
         </div>
-      ):
-        'Заголовок (Monitor.tsx)'
-      }
+      ) : ( //это не обязательно: если ничего, то режим отображения, как в Day 
+        <div>
+          <TitleWrapper>{currentDate.format('MMMM, dddd')}</TitleWrapper>
+          <TextWrapper>{currentDate.format('D,')}</TextWrapper>
+          <TextWrapper>{currentDate.format(' H:mm')}</TextWrapper>
+        </div>
+      )}
       <ButtonsWrapper>
-        <ButtonWrapper onClick={prevHandler} $isActiveDate={(moment().isAfter(currentDate, mode))  ? true : false}> &lt; </ButtonWrapper>
-        <TodayButton onClick={todayHandler} $isActiveDate={currentDate.isSame(moment(), mode) ? true : false}>Today</TodayButton>
-        <ButtonWrapper onClick={nextHandler} $isActiveDate={(moment().isBefore(currentDate, mode))  ? true : false}> &gt; </ButtonWrapper>
+        <ButtonWrapper
+          onClick={prevHandler}
+          $isActiveDate={moment().isAfter(currentDate, mode) ? true : false}
+        >
+          {' '}
+          &lt;{' '}
+        </ButtonWrapper>
+        <TodayButton
+          onClick={todayHandler}
+          $isActiveDate={currentDate.isSame(moment(), mode) ? true : false}
+        >
+          Today
+        </TodayButton>
+        <ButtonWrapper
+          onClick={nextHandler}
+          $isActiveDate={moment().isBefore(currentDate, mode) ? true : false}
+        >
+          {' '}
+          &gt;{' '}
+        </ButtonWrapper>
       </ButtonsWrapper>
     </DivWrapper>
   );

@@ -25,7 +25,10 @@ const Headers: FC = () => {
   const activeMenu = useAppSelector((state) => state.menu)
   
   const dispatch = useAppDispatch();
+  // console.log(window.location.pathname);
   const handleClick = (index: number) => {
+    //! записал активную кнопку меню в хранилище, используется в modesDateSlice.ts
+    sessionStorage.setItem('IndexMenu', index.toString()); // например, если нажать на кнопку "Recipes", то после обновления страницы, будет режим "Recipes"
     // redux-toolkit
     dispatch(readingMenu(index));
     
@@ -70,7 +73,7 @@ const Headers: FC = () => {
               }
             })}
           </Link>
-          {/*//! отдельно: Кнопка страницы Рецепты (Recipes) */}
+          {/*//! Кнопка страницы Рецепты (Recipes) */}
           <Link to={'/recipes'}>
           <ModeDateButton
                     key={4}

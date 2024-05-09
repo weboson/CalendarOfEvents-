@@ -4,7 +4,9 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { RootState } from '../store'
 
 //! index active menu (по-умолчанию)
-const initialState: number =  0;
+//! если user уже нажал какую-то кнопку меню, то сохранится, как по-умолчанию и после обновления страницы сохранится
+//! если впервые зашли, то активное меню (белый цвет) будет 0 (Day)
+const initialState: number = +sessionStorage.getItem('IndexMenu') || 0;
 
 
 

@@ -4,9 +4,10 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { RootState } from '../store'
 
 //! index active menu (по-умолчанию)
-//! если user уже нажал какую-то кнопку меню, то сохранится, как по-умолчанию и после обновления страницы сохранится
-//! если впервые зашли, то активное меню (белый цвет) будет 0 (Day)
-const initialState: number = +sessionStorage.getItem('IndexMenu') || 0;
+// const initialState: number = +sessionStorage.getItem('IndexMenu') || 0; // old option
+// если страница /recipes, то активная кнопка (белая) будет 4-я, то есть "recipes", если '/' (home) то 0 ("Day")
+// или если user уже нажимал кнопку меню, то она запомнится (в sessionStorage) и воссоздатся.
+const initialState: number = (window.location.pathname == '/recipes') ? 4 : +sessionStorage.getItem('IndexMenu') ? 0 : 0
 
 
 
@@ -16,8 +17,8 @@ export const menuSlice = createSlice({
   initialState,
   reducers: {
     readingMenu: (state, action) => (
-        state = action.payload // наприме: {id: 3, title: 'Month', format: 'MMMM'} (из dataMenu.ts)
-    )  
+      state = action.payload // наприме: {id: 3, title: 'Month', format: 'MMMM'} (из dataMenu.ts)
+    )
   },
 })
 

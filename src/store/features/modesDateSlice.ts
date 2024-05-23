@@ -7,7 +7,8 @@ import type { RootState } from '../store'
 // const initialState: number = +sessionStorage.getItem('IndexMenu') || 0; // old option
 // если страница /recipes, то активная кнопка (белая) будет 4-я, то есть "recipes", если '/' (home) то 0 ("Day")
 // или если user уже нажимал кнопку меню, то она запомнится (в sessionStorage) и воссоздатся.
-const initialState: number = (window.location.pathname == '/recipes') ? 4 : +sessionStorage.getItem('IndexMenu') ? 0 : 0
+// Способ react-router-dom: let location = useLocation(); location.pathname, подробнее: https://reactrouter.com/en/main/hooks/use-location#locationkey
+const initialState: number = (window.location.pathname == '/recipes') ? 4 : +sessionStorage.getItem('IndexMenu')
 
 
 

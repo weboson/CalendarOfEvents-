@@ -1,48 +1,24 @@
-//! Вариант со общим состоянием, для всей формы (setFormData)
-import { useState } from "react";
+//! Форма с использованием библиотеки "react-hook-form"
+import {FC} from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+// types form
+import { FormValues } from './recipe.interface';
 
-export default function Multiple() {
-  const [formData, setFormData] = useState({name: "",email: "",message: ""});
+const RecipeForm:FC = () => {
 
-  // при каждом вводе в определенного поля, 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    console.log(name)
-    // [name] - потому что в form (HTMLFormElement.length) несколько элементов управления (input) с атрибутом "name" (сам недоконца понял)
-    //  иначе вводить можно будет только в первый элемент формы (поле "name")
-    setFormData((prevFormData) => ({ ...prevFormData, [name]: value })); 
-  };
+  const { register, handleSubmit } = useForm<FormValues>()
 
-  // событие для submit (просто alert), может быть и отправка на сервер
-  const handleSubmit = (event) => {
-    event.preventDefault(); 
-    alert(`Name: ${formData.name}, Email: ${formData.email}, Message: ${formData.message}`
-    );
-};
+  const onSubmit: SubmitHandler<FormValues> = (data) => console.log(data) // return object
 
   return (
-    <>    
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="name">Name:</label>
-      <input type="text" id="name" name="name" value={formData.name} onChange={handleChange}/>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <input {...register("firstName")} />
+      <input {...register("lastName")} />
+      <input type="email" {...register("email")} />
 
-      <label htmlFor="email">Email:</label>
-      <input type="email" id="email" name="email" value={formData.email} onChange={handleChange}/>
-
-      <label htmlFor="message">Message:</label>
-      <textarea id="message" name="message" value={formData.message} onChange={handleChange}/>
-
-      <button type="submit">Submit</button>
+      <input type="submit" />
     </form>
-    <div>
-      {/* отображение вводимых данных */}
-      <br />
-      {formData.name}
-      <br />
-      {formData.email}
-      <br />
-      {formData.message}
-    </div>
-    </>
-  );
-}
+  )
+};
+
+export default RecipeForm;

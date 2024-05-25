@@ -27,8 +27,9 @@
 3. Reduxjs/toolkit: "^1.9.7",
 4. React-router-dom: "^6.15.0"
 5. React-icons: "^4.12.0"
-6. Moment": "^2.29.4"
-7. Styled-components": "^6.1.1"
+6. Moment: "^2.29.4"
+7. Styled-components: "^6.1.1"
+8. React-hook-form: "^7.51.5"
 
 ## Backend: 
 1. Typescript": "^5.0.2",

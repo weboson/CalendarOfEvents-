@@ -1,24 +1,34 @@
-//! Форма с использованием библиотеки "react-hook-form"
-import {FC} from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
-// types form
-import { FormValues } from './recipe.interface';
+//! Нативный вариант формы с использованием встроенного в JS класса new FormData()
+// инфа из видео: https://youtu.be/4-SOv7eTfoQ?t=511
+// инфа из учебника: https://learn.javascript.ru/formdata
+import { FC, useState } from 'react';
 
-const RecipeForm:FC = () => {
 
-  const { register, handleSubmit } = useForm<FormValues>()
+const RecipeForm: FC = () => {
+  
+  const [data, setData] = useState()
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => console.log(data) // return object
+  const onSubmit = (event) => {
+    event.preventDefault(); 
+    const formData = new FormData(event.target)
+
+    const field = Object.fromEntries(formData)
+    console.dir(formData.get('name')); // выдаст данные поля 'name'
+
+    setData(field.name)
+
+    event.target.reset() // просто очищает поля формы
+  }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input {...register("firstName")} />
-      <input {...register("lastName")} />
-      <input type="email" {...register("email")} />
-
-      <input type="submit" />
+    <div>
+      <form onSubmit={onSubmit}>
+     <input type="text" name='name' placeholder='name'/>
+     <button type="submit">Search</button>
     </form>
-  )
+    <p>{data}</p>
+    </div>
+  );
 };
 
 export default RecipeForm;

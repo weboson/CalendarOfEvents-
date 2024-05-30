@@ -17,6 +17,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+
 code {
     font-family: source-code-pro;
 }
@@ -28,6 +29,11 @@ code {
     justify-content: center;
 }
 
+/* шрифт для страницы рецепта (/recipes)  */
+@font-face {
+    font-family: 'Raleway';
+    src: url("./assets/Raleway-Italic-VariableFont_wght.ttf") format('ttf');
+}
 
 /* menu (Header.tsx) - скрывается (скролл вниз) или появляется (скролл вверх)   */
 /* важное условие родитель (Home.tsx) должен иметь "min-height: 100%", НО НЕ просто height: 100% И НЕ 100vh*/

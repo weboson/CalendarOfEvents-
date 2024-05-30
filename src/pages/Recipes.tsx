@@ -1,4 +1,4 @@
-// страница /recipes (Рецепта) (используется в route.tsx)
+//! страница /recipes (Рецепта) (используется в route.tsx)
 import { FC } from 'react';
 import RecipePage from '../components/Recipe/RecipePage';
 import { useOutletContext } from 'react-router-dom';
@@ -9,7 +9,7 @@ import { Moment } from 'moment';
 interface ArrayContextType extends Array<Moment> {}
 
 const Recipes: FC = () => {
-  //! useOutletContext - это из (Outlet, Lauout.tsx) react-router-dom (чтобы передать пропсы)
+  // useOutletContext - это из (Outlet, Lauout.tsx) react-router-dom (чтобы передать пропсы)
   const [currentDate, prevHandler, todayHandler, nextHandler] =
     useOutletContext<ArrayContextType>();
 

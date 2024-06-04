@@ -2,6 +2,7 @@ import { FC } from 'react';
 import MyInput from './MyInput';
 import { FromWrappeer } from '../stylesRecipePage/sc_RecipePage';
 import { useForm } from 'react-hook-form'; // lib for forms
+import { DoubleScrollBar } from './DoubleScrollBar/DoubleScrollBar';
 
 const RecipeForm: FC = () => {
   // handleSubmit - wrapper обработчика
@@ -66,11 +67,7 @@ const RecipeForm: FC = () => {
 
         <h3>Количество приёмов</h3>
         <label>
-          <select
-            {...register('quantity')}
-            name="quantity"
-            id="quantity"
-          >
+          <select {...register('quantity')} name="quantity" id="quantity">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -109,8 +106,42 @@ const RecipeForm: FC = () => {
             <option value="month">месяц</option>
           </select>
         </label>
+        {/* Диапозон режима сна */}
+        <h3>Режим дня и питания</h3>
+        <span>
+          Советуем уделять время сну, не менее 8 часов. И принимать пищу не
+          менее 3 раз в день
+        </span>
 
-        <input type="range" min="1" max="24" step="1" multiple />
+        {/* В будни */}
+        
+        <div className="wrapper-1">
+        <h4>В будни:</h4><span id="display1"></span>
+        
+          <DoubleScrollBar
+            key={'range1'}
+            min={1}
+            max={24}
+            step={1}
+            forid="display1"
+            classElem="SB-1"
+          />
+        </div>
+
+        {/* В выходные */}
+        <h4>В выходные</h4>
+        <div className="wrapper-2">
+          <DoubleScrollBar
+            key={'range2'}
+            min={1}
+            max={24}
+            step={1}
+            forid="display2"
+            classElem="SB-2"
+          />
+          <div id="display2"></div>
+        </div>
+        {/* <input type="range" min="1" max="24" step="1" multiple /> */}
         {/* кнопка отправки */}
         <input type="submit" />
       </form>

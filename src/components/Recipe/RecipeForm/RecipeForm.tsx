@@ -40,28 +40,39 @@ const RecipeForm: FC = () => {
         <h3>Зависимость приёма</h3>
         <div>
           <label>
-            <span>Приём в зависимости от: </span>
+            <span>Принимать лекарство: </span>
+            <select
+              {...register('positionAction')}
+              name="positionAction"
+              id="positionAction"
+              disabled={watch('noDependencies')} // если галочка то не активна
+            >
+              <option value="before">перед</option>
+              <option value="while">вовремя</option>
+              <option value="after">после</option>
+            </select>
             <select
               {...register('dependingOn')}
               name="dependingOn"
               id="dependingOn"
-              disabled={watch('noDependencies')}
+              disabled={watch('noDependencies')} // если галочка то не активна
             >
-              <option value="eating">От еды</option>
-              <option value="firstBreakfast">От завтрака</option>
-              <option value="lastSupper">От ужина</option>
-              <option value="sleep">От сна</option>
-              <option value="firstBreakfast">Натощак</option>
+              <option value="eating">приёма пищи</option>
+              <option value="firstBreakfast">завтрака</option>
+              <option value="lastSupper">ужина</option>
+              <option value="sleep">сон</option>
+              <option value="firstBreakfast">*натощак</option>
             </select>
 
+<br />
             <input
               onClick={() => unregister('dependingOn')} // если выбрано, то не отправлять значение полей name="dependingOn"
               {...register('noDependencies')}
               type="checkbox"
               name="noDependencies"
               defaultChecked={false}
-            />
-            <span>Приём вне зависимости. </span>
+              />
+              <span>Приём вне зависимости. </span>
           </label>
         </div>
 
@@ -109,15 +120,16 @@ const RecipeForm: FC = () => {
         {/* Диапозон режима сна */}
         <h3>Режим дня и питания</h3>
         <span>
-          Советуем уделять время сну, не менее 8 часов. И принимать пищу не
+          *Советуем уделять время сну, не менее 8 часов. И принимать пищу не
           менее 3 раз в день
         </span>
 
         {/* В будни */}
-        
+
         <div className="wrapper-1">
-        <h4>В будни:</h4><span id="display1"></span>
-        
+          <h4>В будни:</h4>
+          <span id="display1"></span>
+
           <DoubleScrollBar
             key={'range1'}
             min={1}

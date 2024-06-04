@@ -36,9 +36,44 @@ const RecipeForm: FC = () => {
             required
           />
         </div>
-        {/* //! Количество приёмов */}
         <h3>Зависимость приёма</h3>
+      {/* //! вне зависимости */}
+    <div>
+    <input
+            onClick={() => unregister('dependingOn')} // если выбрано, то не отправлять значение полей name="dependingOn"
+            {...register('noDependencies')}
+            type="checkbox"
+            name="noDependencies"
+            defaultChecked={false}
+          />
+          <span>Приём вне зависимости. </span>
+    </div>
+
+        {/* //! Интервал времени */}
+        <div className="inerval">
+          <h4>Интервал времени</h4>
+          <small>*Например: принять за 30 минут (до еды)</small>
+          <br />
+          <label htmlFor="appt">Выберете время: </label>
+
+          <input
+            {...register('interval', {
+              disabled: watch('positionAction') == 'while' //! если в поле "positionAction" == 'while' (вовремя), то не активна (варинат от библиотеки)
+            })}
+            
+            type="time"
+            id="interval"
+            name="interval"
+            min={'00:00'}
+            max={'24:00'}
+            // step={"0:30"}
+            // required
+            defaultValue={'00:30'}
+          />
+        </div>
+        {/* //! До, вовремя, после */}
         <div>
+        <h4>Особенности приёма: </h4>
           <label>
             <span>Принимать лекарство: </span>
             <select
@@ -51,6 +86,7 @@ const RecipeForm: FC = () => {
               <option value="while">вовремя</option>
               <option value="after">после</option>
             </select>
+            {/* //! еда, завтрак, ужин... */}
             <select
               {...register('dependingOn')}
               name="dependingOn"
@@ -63,19 +99,10 @@ const RecipeForm: FC = () => {
               <option value="sleep">сон</option>
               <option value="firstBreakfast">*натощак</option>
             </select>
-
-<br />
-            <input
-              onClick={() => unregister('dependingOn')} // если выбрано, то не отправлять значение полей name="dependingOn"
-              {...register('noDependencies')}
-              type="checkbox"
-              name="noDependencies"
-              defaultChecked={false}
-              />
-              <span>Приём вне зависимости. </span>
           </label>
         </div>
 
+        {/* //! Количество приёмов */}
         <h3>Количество приёмов</h3>
         <label>
           <select {...register('quantity')} name="quantity" id="quantity">
@@ -91,18 +118,6 @@ const RecipeForm: FC = () => {
             <option value="10">10</option>
             <option value="11">11</option>
             <option value="12">12</option>
-            <option value="13">13</option>
-            <option value="14">14</option>
-            <option value="15">15</option>
-            <option value="16">16</option>
-            <option value="17">17</option>
-            <option value="18">18</option>
-            <option value="19">19</option>
-            <option value="20">20</option>
-            <option value="21">21</option>
-            <option value="22">22</option>
-            <option value="23">23</option>
-            <option value="24">24</option>
           </select>
           <span>раз/</span>
           <span>в </span>
@@ -119,30 +134,17 @@ const RecipeForm: FC = () => {
         </label>
         {/* Диапозон режима сна */}
         <h3>Режим дня и питания</h3>
-        <span>
+        <small>
           *Советуем уделять время сну, не менее 8 часов. И принимать пищу не
           менее 3 раз в день
-        </span>
+        </small>
 
         {/* В будни */}
 
-        <div className="wrapper-1">
-          <h4>В будни:</h4>
-          <span id="display1"></span>
-
-          <DoubleScrollBar
-            key={'range1'}
-            min={1}
-            max={24}
-            step={1}
-            forid="display1"
-            classElem="SB-1"
-          />
-        </div>
-
-        {/* В выходные */}
-        <h4>В выходные</h4>
         <div className="wrapper-2">
+          <h4>В будни:</h4>
+          <span id="display2"></span>
+
           <DoubleScrollBar
             key={'range2'}
             min={1}
@@ -151,7 +153,20 @@ const RecipeForm: FC = () => {
             forid="display2"
             classElem="SB-2"
           />
-          <div id="display2"></div>
+        </div>
+
+        {/* В выходные */}
+        <h4>В выходные</h4>
+        <div className="wrapper-3">
+          <DoubleScrollBar
+            key={'range3'}
+            min={1}
+            max={24}
+            step={1}
+            forid="display3"
+            classElem="SB-3"
+          />
+          <div id="display3"></div>
         </div>
         {/* <input type="range" min="1" max="24" step="1" multiple /> */}
         {/* кнопка отправки */}

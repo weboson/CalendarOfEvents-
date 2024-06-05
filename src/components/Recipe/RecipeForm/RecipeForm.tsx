@@ -15,164 +15,190 @@ const RecipeForm: FC = () => {
     unregister,
     handleSubmit,
     watch,
-    formState: { errors },
-  } = useForm();
+    formState: { errors }, // вывод ошибки на валидацию
+  } = useForm({
+    mode: 'onChange', //! режим реагирования на изменение
+  });
 
   const onSubmit = (data) => console.log(JSON.stringify(data));
 
   return (
-    <FromWrappeer>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        {/*  */}
-        <h2>Добавьте медикамент</h2>
-        {/* //! Название лекарства */}
-        <h3>Наименование медикамента</h3>
-        <div>
-          <input
-            {...register('title')}
-            type="text"
-            name="title"
-            placeholder="Введите название лекарства"
-            required
-          />
-        </div>
-        <h3>Зависимость приёма</h3>
-      {/* //! вне зависимости */}
-    <div>
-    <input
-            onClick={() => unregister('dependingOn')} // если выбрано, то не отправлять значение полей name="dependingOn"
-            {...register('noDependencies')}
-            type="checkbox"
-            name="noDependencies"
-            defaultChecked={false}
-          />
-          <span>Приём вне зависимости. </span>
-    </div>
+    <>
+      <FromWrappeer>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          {/*  */}
+          <h2>Добавьте медикамент</h2>
+          {/* //! Название лекарства */}
+          <h3>Наименование медикамента</h3>
+          <div>
+            <input
+              {...register('title')}
+              type="text"
+              name="title"
+              placeholder="Введите название лекарства"
+              required
+            />
+          </div>
+          <h3>Зависимость приёма</h3>
+          {/* //! вне зависимости */}
+          <div>
+            <input
+              onClick={() => unregister('dependingOn')} // если выбрано, то не отправлять значение полей name="dependingOn"
+              {...register('noDependencies')}
+              type="checkbox"
+              name="noDependencies"
+              defaultChecked={false}
+            />
+            <span>Приём вне зависимости. </span>
+          </div>
 
-        {/* //! Интервал времени */}
-        <div className="inerval">
-          <h4>Интервал времени</h4>
-          <small>*Например: принять за 30 минут (до еды)</small>
-          <br />
-          <label htmlFor="appt">Выберете время: </label>
+          {/* //! Интервал времени */}
+          <div className="interval">
+            <h4>Интервал времени</h4>
 
-          <input
-            {...register('interval', {
-              disabled: watch('positionAction') == 'while' //! если в поле "positionAction" == 'while' (вовремя), то не активна (варинат от библиотеки)
-            })}
-            
-            type="time"
-            id="interval"
-            name="interval"
-            min={'00:00'}
-            max={'24:00'}
-            // step={"0:30"}
-            // required
-            defaultValue={'00:30'}
-          />
-        </div>
-        {/* //! До, вовремя, после */}
-        <div>
-        <h4>Особенности приёма: </h4>
+            <br />
+            <span>Введите время: </span>
+            <small>*Например: принять за 30 минут (до еды)</small>
+            <br />
+            <label htmlFor="intervalHour">часы: </label>
+            <input
+              id="intervalHour"
+              type="number"
+              {...register('interval.hour', { min: 0, max: 24 })}
+              disabled={watch('noDependencies')} // если галочка то не активна
+              defaultValue="0"
+            />
+            {/* вывод ошибки */}
+            {errors?.interval && (
+              <div style={{ color: 'red' }}>Введите число от 0 до 24</div>
+            )}
+            <br />
+            <label htmlFor="intervalMinute">минуты: </label>
+            <input
+              id="intervalMinute"
+              type="number"
+              {...register('interval.minute', { min: 0, max: 59 })}
+              disabled={watch('noDependencies')} // если галочка то не активна
+              defaultValue="30"
+            />
+          </div>
+          {/* вывод ошибки */}
+          {errors?.interval && (
+            <div style={{ color: 'red' }}>Введите число от 0 до 59</div>
+          )}
+
+          {/* //! До, вовремя, после */}
+          <div>
+            <h4>Особенности приёма: </h4>
+            <label>
+              <span>Принимать лекарство: </span>
+              <select
+                {...register('positionAction')}
+                name="positionAction"
+                id="positionAction"
+                disabled={watch('noDependencies')} // если галочка то не активна
+              >
+                <option key={"before"} value="before">перед</option>
+                <option key={"while"} value="while">вовремя</option>
+                <option key={"after"} value="after">после</option>
+              </select>
+              {/* //! еда, завтрак, ужин... */}
+              <select
+                {...register('dependingOn')}
+                name="dependingOn"
+                id="dependingOn"
+                disabled={watch('noDependencies')} // если галочка то не активна
+              >
+                <option key={"eating"} value="eating">приёма пищи</option>
+                <option key={"firstBreakfast"} value="firstBreakfast">завтрака</option>
+                <option key={"lastSupper"} value="lastSupper">ужина</option>
+                <option key={"sleep"} value="sleep">сон</option>
+                <option key={"fasting"} value="fasting">*натощак</option>
+              </select>
+            </label>
+          </div>
+
+          {/* //! Количество приёмов */}
+          <h3>Количество приёмов</h3>
           <label>
-            <span>Принимать лекарство: </span>
-            <select
-              {...register('positionAction')}
-              name="positionAction"
-              id="positionAction"
-              disabled={watch('noDependencies')} // если галочка то не активна
-            >
-              <option value="before">перед</option>
-              <option value="while">вовремя</option>
-              <option value="after">после</option>
-            </select>
-            {/* //! еда, завтрак, ужин... */}
-            <select
-              {...register('dependingOn')}
-              name="dependingOn"
-              id="dependingOn"
-              disabled={watch('noDependencies')} // если галочка то не активна
-            >
-              <option value="eating">приёма пищи</option>
-              <option value="firstBreakfast">завтрака</option>
-              <option value="lastSupper">ужина</option>
-              <option value="sleep">сон</option>
-              <option value="firstBreakfast">*натощак</option>
+            <input
+              type="number"
+              {...register('quantity')}
+              name="quantity"
+              id="quantity"
+              defaultValue={'3'}
+            />
+            <span>раз[a]/</span>
+            <span>в </span>
+            <select {...register('unitTime')} name="unitTime" id="unitTime">
+              <option key={"day"} value="day">день</option>
+              <option key={"week"} value="week">неделю</option>
+              <option  key={"month"} value="month">месяц</option>
             </select>
           </label>
-        </div>
+          {/* Диапозон режима сна */}
+          <h3>Режим дня и питания</h3>
+          <small>
+            *Советуем уделять время сну, не менее 8 часов. И принимать пищу не
+            менее 3 раз в день
+          </small>
 
-        {/* //! Количество приёмов */}
-        <h3>Количество приёмов</h3>
-        <label>
-          <select {...register('quantity')} name="quantity" id="quantity">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-          </select>
-          <span>раз/</span>
-          <span>в </span>
-          <select
-            {...register('unitTime')}
-            name="unitTime"
-            id="unitTime"
-            // disabled={watch('noDependencies')}
-          >
-            <option value="day">день</option>
-            <option value="week">неделю</option>
-            <option value="month">месяц</option>
-          </select>
-        </label>
-        {/* Диапозон режима сна */}
-        <h3>Режим дня и питания</h3>
-        <small>
-          *Советуем уделять время сну, не менее 8 часов. И принимать пищу не
-          менее 3 раз в день
-        </small>
+          {/* В будни */}
 
-        {/* В будни */}
+          <div className="wrapper-2">
+            <h4>В будни:</h4>
+            <span id="display2"></span>
 
-        <div className="wrapper-2">
-          <h4>В будни:</h4>
-          <span id="display2"></span>
+            <DoubleScrollBar
+              key={'range2'}
+              min={1}
+              max={24}
+              step={1}
+              forid="display2"
+              classElem="SB-2"
+            />
+          </div>
 
-          <DoubleScrollBar
-            key={'range2'}
-            min={1}
-            max={24}
-            step={1}
-            forid="display2"
-            classElem="SB-2"
-          />
-        </div>
+          {/* В выходные */}
+          <h4>В выходные</h4>
+          <div className="wrapper-3">
+            <DoubleScrollBar
+              key={'range3'}
+              min={1}
+              max={24}
+              step={1}
+              forid="display3"
+              classElem="SB-3"
+            />
+            <div id="display3"></div>
+          </div>
 
-        {/* В выходные */}
-        <h4>В выходные</h4>
-        <div className="wrapper-3">
-          <DoubleScrollBar
-            key={'range3'}
-            min={1}
-            max={24}
-            step={1}
-            forid="display3"
-            classElem="SB-3"
-          />
-          <div id="display3"></div>
-        </div>
-        {/* <input type="range" min="1" max="24" step="1" multiple /> */}
-        {/* кнопка отправки */}
-        <input type="submit" />
-      </form>
-    </FromWrappeer>
+          {/* //! Курс приёма */}
+          <div>
+            <h4>Курс (продолжительноть приёма ЛС)</h4>
+            <input
+              type="text"
+              defaultValue={'1'}
+              {...register('duration.index')}
+            />
+            <select
+              id="duration"
+              {...register('duration.title')}
+              name="duration"
+              defaultValue={"months"}
+            >
+              <option key={"days"} value="days">день </option>
+              <option key={"weeks"} value="weeks" >неделя</option>
+              <option key={"months"} value="months">месяц</option>
+              <option key={"years"} value="years">год</option>
+            </select>
+          </div>
+
+          {/* //! кнопка отправки */}
+          <input type="submit" />
+        </form>
+      </FromWrappeer>
+    </>
   );
 };
 

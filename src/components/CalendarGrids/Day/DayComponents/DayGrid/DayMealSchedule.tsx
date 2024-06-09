@@ -78,7 +78,7 @@ const DayMealSchedule: FC<IProps> = memo(
       [diffIntervalMealWeekend, maxmealfood],
     );
 
-    if (maxmealfood.depending) {
+    if (!maxmealfood.independently) {
       // есть ли зависимость от еды?
       return (
         <>

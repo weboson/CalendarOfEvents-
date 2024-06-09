@@ -38,12 +38,12 @@ const RecipeWindow: FC<IProps> = ({currentDate}) => {
                     Способ приёма:&nbsp;
                     <br />
                     <p>
-                      {medicine?.depending
+                      {!medicine?.independently
                         ? medicine?.position == 'before'
-                          ? `За ${medicine.interval.hour} ${
+                          ? `За ${medicine.interval.hour}${
                               medicine.interval.minute == 0
                                 ? 'часов'
-                                : `: ${medicine.interval.minute}`
+                                : `:${medicine.interval.minute}`
                             } ` +
                             'до ' +
                             `${

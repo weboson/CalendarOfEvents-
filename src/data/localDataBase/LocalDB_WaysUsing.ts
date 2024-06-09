@@ -99,9 +99,9 @@ interface Iinterval {
 
 // ! пример композиции (на примере одного ЛС)
 export interface IRecipesMedication {
-    id: number
-    title: string
-    depending: boolean
+    id: number // id генерируется сервером Nest.js
+    title: string // название лекарство
+    independently: boolean // независимо от еды, сна, завтрака, ужина ?
     action: string
     quantity: number
     unitTime: string
@@ -127,7 +127,7 @@ const recipesMedications: IRecipesMedications = [
     {
         id: 1,
         title: 'Урсосан',
-        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        independently: false, //  не зависимо?
         action: waysUsing[0].type, // 'eating' - приём пищи
         quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
@@ -141,16 +141,16 @@ const recipesMedications: IRecipesMedications = [
             title: "days", // currenDate <= currenDate.set(3, 'months')
         }, // продолжительность курса до 3 месяца  
         // start: {day: 26, month: 3, year: 2024}, // вариант в виде объекта
-        start: '28.03.2024', // начало курса (по-умолчанию будет дата создания) - чтобы user сам мог котролировать начало
+        start: '08.06.2024', // начало курса (по-умолчанию будет дата создания) - чтобы user сам мог котролировать начало
         //! ВАЖНО!: в moment.js месяцы начинаются с 0 по 11
-        createDateRecipe: '28.03.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '28.03.2024', //  возможность изменить весь рецепт
+        createDateRecipe: '08.06.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '08.06.2024', //  возможность изменить весь рецепт
         
     },
     {
         id: 2,
         title: 'Бифидокс1 2 недели',
-        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        independently: false, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0].type, // 'eating' - приём пищи
         quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
@@ -160,15 +160,15 @@ const recipesMedications: IRecipesMedications = [
             index: 2,
             title: 'days', 
         },  
-        start: '25.04.2024',
-        createDateRecipe: '25.04.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '25.04.2024', //  возможность изменить весь рецепт
+        start: '03.06.2024',
+        createDateRecipe: '03.06.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '03.06.2024', //  возможность изменить весь рецепт
         
     },
     {
         id: 3,
         title: 'Бифидокс2',
-        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        independently: false, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0].type, // 'eating' - приём пищи
         quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
@@ -178,15 +178,15 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '25.04.2024',
-        createDateRecipe: '25.04.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '25.04.2024', //  возможность изменить весь рецепт
+        start: '03.06.2024',
+        createDateRecipe: '03.06.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '03.06.2024', //  возможность изменить весь рецепт
         
     },
     {
         id: 4,
         title: 'Бифидокс3',
-        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        independently: false, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0].type, // 'eating' - приём пищи
         quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
@@ -196,14 +196,14 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '25.04.2024',
-        createDateRecipe: '25.04.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '25.04.2024', //  возможность изменить весь рецепт   
+        start: '03.06.2024',
+        createDateRecipe: '03.06.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '03.06.2024', //  возможность изменить весь рецепт   
     },
     {
         id: 5,
         title: 'Бифидокс4',
-        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        independently: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0].type, // 'eating' - приём пищи
         quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
@@ -213,15 +213,15 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '25.04.2024',
-        createDateRecipe: '25.04.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '25.04.2024', //  возможность изменить весь рецепт
+        start: '03.06.2024',
+        createDateRecipe: '03.06.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '03.06.2024', //  возможность изменить весь рецепт
         
     },
     {
         id: 6,
         title: 'Бифидокс5',
-        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        independently: false, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0].type, // 'eating' - приём пищи
         quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
@@ -231,15 +231,15 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '25.04.2024',
-        createDateRecipe: '25.04.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '25.04.2024', //  возможность изменить весь рецепт
+        start: '03.06.2024',
+        createDateRecipe: '03.06.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '03.06.2024', //  возможность изменить весь рецепт
         
     },
     {
         id: 7,
         title: 'Бифидокс6',
-        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        independently: false, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0].type, // 'eating' - приём пищи
         quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
@@ -249,15 +249,15 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '25.04.2024',
-        createDateRecipe: '25.04.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '25.04.2024', //  возможность изменить весь рецепт
+        start: '03.06.2024',
+        createDateRecipe: '03.06.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '03.06.2024', //  возможность изменить весь рецепт
         
     },
     {
         id: 8,
         title: 'Бифидокс7',
-        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        independently: false, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0].type, // 'eating' - приём пищи
         quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
@@ -267,15 +267,15 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '25.04.2024',
-        createDateRecipe: '25.04.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '25.04.2024', //  возможность изменить весь рецепт
+        start: '03.06.2024',
+        createDateRecipe: '03.06.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '03.06.2024', //  возможность изменить весь рецепт
         
     },
     {
         id: 9,
         title: 'Бифидокс8',
-        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        independently: false, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0].type, // 'eating' - приём пищи
         quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
@@ -285,15 +285,15 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '25.04.2024',
-        createDateRecipe: '25.04.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '25.04.2024', //  возможность изменить весь рецепт 
+        start: '03.06.2024',
+        createDateRecipe: '03.06.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '03.06.2024', //  возможность изменить весь рецепт 
         
     },
     {
         id: 10,
         title: 'Пепсан-Р',
-        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        independently: false, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0].type, // 'eating' - приём пищи
         quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
@@ -303,14 +303,14 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '25.04.2024',
-        createDateRecipe: '25.04.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '25.04.2024', //  возможность изменить весь рецепт 
+        start: '03.06.2024',
+        createDateRecipe: '03.06.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '03.06.2024', //  возможность изменить весь рецепт 
     },
     {
         id: 11,
         title: 'Ибуприн',
-        depending: false, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        independently: false, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0].type, // 'eating' - приём пищи
         quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
@@ -320,14 +320,14 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '25.04.2024',
-        createDateRecipe: '25.04.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '25.04.2024', //  возможность изменить весь рецепт
+        start: '03.06.2024',
+        createDateRecipe: '03.06.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '03.06.2024', //  возможность изменить весь рецепт
     },
     {
         id: 12,
         title: 'Альфазокс',
-        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        independently: false, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0].type, // 'eating' - приём пищи
         quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
@@ -337,14 +337,14 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '25.04.2024',
-        createDateRecipe: '25.04.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '25.04.2024', //  возможность изменить весь рецепт
+        start: '03.06.2024',
+        createDateRecipe: '03.06.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '03.06.2024', //  возможность изменить весь рецепт
     },
     {
         id: 13,
         title: 'Параксетин',
-        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        independently: false, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[1].type, // 'first breakfast' - в зависимости от 1-го приёма пищи
         quantity: 1, // не изменно 1 раз
         unitTime: unitTime[0].type, // day -  в день
@@ -354,14 +354,14 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '25.04.2024',
-        createDateRecipe: '25.04.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '25.04.2024', //  возможность изменить весь рецепт
+        start: '03.06.2024',
+        createDateRecipe: '03.06.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '03.06.2024', //  возможность изменить весь рецепт
     },
     {
         id: 14,
         title: 'Параксетин222',
-        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        independently: false, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[1].type, // 'first breakfast' - в зависимости от 1-го приёма пищи
         quantity: 1, // не изменно 1 раз
         unitTime: unitTime[0].type, // day -  в день
@@ -371,14 +371,14 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '25.04.2024',
-        createDateRecipe: '25.04.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '25.04.2024', //  возможность изменить весь рецепт
+        start: '03.06.2024',
+        createDateRecipe: '03.06.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '03.06.2024', //  возможность изменить весь рецепт
     },
     {
         id: 15,
         title: 'Смекта',
-        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        independently: false, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[1].type, // 'first breakfast' - в зависимости от 1-го приёма пищи
         quantity: 1, // не активен (по-умолчанию 1 раз)
         unitTime: unitTime[0].type, // day -  в день
@@ -388,14 +388,14 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '25.04.2024',
-        createDateRecipe: '25.04.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '25.04.2024', //  возможность изменить весь рецепт
+        start: '03.06.2024',
+        createDateRecipe: '03.06.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '03.06.2024', //  возможность изменить весь рецепт
     },
     {
         id: 16,
         title: 'Анальгин2',
-        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        independently: false, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[1].type, // 'first breakfast' - в зависимости от 1-го приёма пищи
         quantity: 1, // не активен (по-умолчанию 1 раз)
         unitTime: unitTime[0].type, // day -  в день
@@ -405,14 +405,14 @@ const recipesMedications: IRecipesMedications = [
             index: 2,
             title: 'months', 
         },  
-        start: '10.04.2024',
-        createDateRecipe: '25.04.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '25.04.2024', //  возможность изменить весь рецепт
+        start: '10.05.2024',
+        createDateRecipe: '03.06.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '03.06.2024', //  возможность изменить весь рецепт
     },
     {
         id: 17,
         title: 'Эглонил',
-        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        independently: false, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[2].type, // 'last supper' - в зависимости от последнего приёма еды
         quantity: 1, // не активен (по-умолчанию 1 раз в день)
         unitTime: unitTime[0].type, // day -  в день
@@ -422,14 +422,14 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '25.04.2024',
-        createDateRecipe: '25.04.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '25.04.2024', //  возможность изменить весь рецепт
+        start: '03.06.2024',
+        createDateRecipe: '03.06.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '03.06.2024', //  возможность изменить весь рецепт
     },
     {
         id: 18,
         title: 'Ганатон',
-        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        independently: false, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[2].type, // 'last supper' - в зависимости от последнего приёма еды
         quantity: 1, // не активен (по-умолчанию 1 раз в день)
         unitTime: unitTime[0].type, // day -  в день
@@ -439,14 +439,14 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '25.04.2024',
-        createDateRecipe: '25.04.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '25.04.2024', //  возможность изменить весь рецепт
+        start: '03.06.2024',
+        createDateRecipe: '03.06.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '03.06.2024', //  возможность изменить весь рецепт
     },
     {
         id: 19,
         title: 'Тералиджин',
-        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        independently: false, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[2].type, // 'last supper' - в зависимости от последнего приёма еды
         quantity: 1, // не активен (по-умолчанию 1 раз в день)
         unitTime: unitTime[0].type, // day -  в день
@@ -456,14 +456,14 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '25.04.2024',
-        createDateRecipe: '25.04.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '25.04.2024', //  возможность изменить весь рецепт
+        start: '03.06.2024',
+        createDateRecipe: '03.06.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '03.06.2024', //  возможность изменить весь рецепт
     },
     {
         id: 20,
         title: 'Альфазокс',
-        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        independently: false, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0].type, // 'eating' - в зависимости от приёма еды
         quantity: 3, // не активен (по-умолчанию 1 раз в день)
         unitTime: unitTime[0].type, // day -  в день
@@ -473,14 +473,14 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '25.04.2024',
-        createDateRecipe: '25.04.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '25.04.2024', //  возможность изменить весь рецепт
+        start: '03.06.2024',
+        createDateRecipe: '03.06.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '03.06.2024', //  возможность изменить весь рецепт
     },
     {
         id: 21,
         title: 'Тералиджин',
-        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        independently: false, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0].type, // 'eating' - в зависимости от приёма еды
         quantity: 3, // не активен (по-умолчанию 1 раз в день)
         unitTime: unitTime[0].type, // day -  в день
@@ -490,14 +490,14 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '25.04.2024',
-        createDateRecipe: '25.04.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '25.04.2024', //  возможность изменить весь рецепт
+        start: '03.06.2024',
+        createDateRecipe: '03.06.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '03.06.2024', //  возможность изменить весь рецепт
     },
     {
         id: 22,
         title: 'Тералиджин',
-        depending: true, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
+        independently: false, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0].type, // 'eating' - в зависимости от приёма еды
         quantity: 3, // не активен (по-умолчанию 1 раз в день)
         unitTime: unitTime[0].type, // day -  в день
@@ -507,9 +507,9 @@ const recipesMedications: IRecipesMedications = [
             index: 1,
             title: 'months', 
         },  
-        start: '25.04.2024',
-        createDateRecipe: '25.04.2024',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '25.04.2024', //  возможность изменить весь рецепт
+        start: '03.06.2024',
+        createDateRecipe: '03.06.2024',//  дата создания рецепта одного ЛС
+        updateDateRecipe: '03.06.2024', //  возможность изменить весь рецепт
     },
 
     

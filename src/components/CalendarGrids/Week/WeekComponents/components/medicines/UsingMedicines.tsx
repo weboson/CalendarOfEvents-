@@ -118,7 +118,7 @@ const UsingMedicines: FC<IProps> = memo(
           }
     };
 
-    if (med.depending) {
+    if (!med.independently) {
       //==================================== есть ли зависимости от завтрака/ужина/еды/
       //* если есть, то какая (еда, завтрак, ужин)?
       switch (med.action) {

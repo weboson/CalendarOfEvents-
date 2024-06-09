@@ -42,10 +42,10 @@ const RecipeForm: FC = () => {
           {/* //! вне зависимости */}
           <div>
             <input
-              onClick={() => unregister('dependingOn')} // если выбрано, то не отправлять значение полей name="dependingOn"
-              {...register('noDependencies')}
+             // onClick={() => unregister('independently')} // если выбрано, то не отправлять (не регистрировать) значение полей name="dependingOn"
+              {...register('independently')}
               type="checkbox"
-              name="noDependencies"
+              name="independently"
               defaultChecked={false}
             />
             <span>Приём вне зависимости. </span>
@@ -66,7 +66,7 @@ const RecipeForm: FC = () => {
               {...register('interval.hour', 
               { min: 0, max: 24} // валидация
               )}
-              disabled={watch('noDependencies') || watch('positionAction') == 'while'} //! условия на активное или неактивное
+              disabled={watch('independently') || watch('positionAction') == 'while'} //! условия на активное или неактивное
               defaultValue="0"
             />
             {/* вывод ошибки */}
@@ -79,7 +79,7 @@ const RecipeForm: FC = () => {
               id="intervalMinute"
               type="number"
               {...register('interval.minute', { min: 0, max: 59 })}
-              disabled={watch('noDependencies') || watch('positionAction') == 'while'} //! условия на активное или неактивное
+              disabled={watch('independently') || watch('positionAction') == 'while'} //! условия на активное или неактивное
               defaultValue="30"
             />
           </div>
@@ -97,7 +97,7 @@ const RecipeForm: FC = () => {
                 {...register('positionAction')}
                 name="positionAction"
                 id="positionAction"
-                disabled={watch('noDependencies')} // если галочка то не активна
+                disabled={watch('independently')} // если галочка то не активна
               >
                 <option key={'before'} value="before">
                   перед
@@ -114,7 +114,7 @@ const RecipeForm: FC = () => {
                 {...register('dependingOn')}
                 name="dependingOn"
                 id="dependingOn"
-                disabled={watch('noDependencies')} // если галочка то не активна
+                disabled={watch('independently')} // если галочка то не активна
               >
                 <option key={'eating'} value="eating">
                   приёма пищи
@@ -184,8 +184,9 @@ const RecipeForm: FC = () => {
           </div>
 
           {/* В выходные */}
-          <h4>В выходные</h4>
           <div className="wrapper-3">
+          <h4>В выходные</h4>
+          <span id="display3"></span>
             <DoubleScrollBar
               register={register}
               key={'range3'}
@@ -195,7 +196,7 @@ const RecipeForm: FC = () => {
               forid="display3"
               classElem="weekend"
             />
-            <div id="display3"></div>
+            
           </div>
 
           {/* //! Курс приёма */}

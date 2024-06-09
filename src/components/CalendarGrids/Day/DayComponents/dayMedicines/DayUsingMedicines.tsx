@@ -92,7 +92,7 @@ const DayUsingMedicines: FC<IProps> = memo(
       dispatch(chosenMedicineID(med.id));
     }
 
-    if (med.depending) {
+    if (!med.independently) { // галочка в форме (приём лекарства независмо от еды и т.д.)
       //==================================== есть ли зависимости от завтрака/ужина/еды/
       //* если есть, то какая (еда, завтрак, ужин)?
       switch (med.action) {

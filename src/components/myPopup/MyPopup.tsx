@@ -29,7 +29,7 @@ const MyPopup: FC = () => {
           Способ приёма:&nbsp;
           <br />
           <p>
-            {medicine?.depending
+            {!medicine?.independently
               ? medicine?.position == 'before'
               ? `За ${medicine.interval.hour} ${(medicine.interval.minute == 0) ? 'часов' : `: ${medicine.interval.minute}`} ` + 
                   'до ' +
@@ -49,7 +49,7 @@ const MyPopup: FC = () => {
                       ? 'завтрака'
                       : 'ужина'
                   }`
-                : `Спустя ${medicine.interval.hour}:${medicine.interval.minute} ` +
+                : `Спустя ${medicine?.interval.hour}:${medicine?.interval.minute} ` +
                   'после ' +
                   `${
                     medicine?.action == 'eating'

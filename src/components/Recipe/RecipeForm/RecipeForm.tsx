@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import MyInput from './MyInput';
 import { FromWrappeer } from '../stylesRecipePage/sc_RecipePage';
 import { useForm } from 'react-hook-form'; // lib for forms
 import { DoubleScrollBar } from './DoubleScrollBar/DoubleScrollBar';
@@ -20,7 +19,7 @@ const RecipeForm: FC = () => {
     mode: 'onChange', //! режим реагирования на изменение
   });
 
-  const onSubmit = (data) => console.log(JSON.stringify(data));
+  const onSubmit = (data: any) => console.log(JSON.stringify(data));
 
   return (
     <>
@@ -64,8 +63,10 @@ const RecipeForm: FC = () => {
             <input
               id="intervalHour"
               type="number"
-              {...register('interval.hour', { min: 0, max: 24 })}
-              disabled={watch('noDependencies')} // если галочка то не активна
+              {...register('interval.hour', 
+              { min: 0, max: 24} // валидация
+              )}
+              disabled={watch('noDependencies') || watch('positionAction') == 'while'} //! условия на активное или неактивное
               defaultValue="0"
             />
             {/* вывод ошибки */}
@@ -78,7 +79,7 @@ const RecipeForm: FC = () => {
               id="intervalMinute"
               type="number"
               {...register('interval.minute', { min: 0, max: 59 })}
-              disabled={watch('noDependencies')} // если галочка то не активна
+              disabled={watch('noDependencies') || watch('positionAction') == 'while'} //! условия на активное или неактивное
               defaultValue="30"
             />
           </div>
@@ -98,9 +99,15 @@ const RecipeForm: FC = () => {
                 id="positionAction"
                 disabled={watch('noDependencies')} // если галочка то не активна
               >
-                <option key={"before"} value="before">перед</option>
-                <option key={"while"} value="while">вовремя</option>
-                <option key={"after"} value="after">после</option>
+                <option key={'before'} value="before">
+                  перед
+                </option>
+                <option key={'while'} value="while">
+                  вовремя
+                </option>
+                <option key={'after'} value="after">
+                  после
+                </option>
               </select>
               {/* //! еда, завтрак, ужин... */}
               <select
@@ -109,11 +116,21 @@ const RecipeForm: FC = () => {
                 id="dependingOn"
                 disabled={watch('noDependencies')} // если галочка то не активна
               >
-                <option key={"eating"} value="eating">приёма пищи</option>
-                <option key={"firstBreakfast"} value="firstBreakfast">завтрака</option>
-                <option key={"lastSupper"} value="lastSupper">ужина</option>
-                <option key={"sleep"} value="sleep">сон</option>
-                <option key={"fasting"} value="fasting">*натощак</option>
+                <option key={'eating'} value="eating">
+                  приёма пищи
+                </option>
+                <option key={'firstBreakfast'} value="firstBreakfast">
+                  завтрака
+                </option>
+                <option key={'lastSupper'} value="lastSupper">
+                  ужина
+                </option>
+                <option key={'sleep'} value="sleep">
+                  сон
+                </option>
+                <option key={'fasting'} value="fasting">
+                  *натощак
+                </option>
               </select>
             </label>
           </div>
@@ -131,9 +148,15 @@ const RecipeForm: FC = () => {
             <span>раз[a]/</span>
             <span>в </span>
             <select {...register('unitTime')} name="unitTime" id="unitTime">
-              <option key={"day"} value="day">день</option>
-              <option key={"week"} value="week">неделю</option>
-              <option  key={"month"} value="month">месяц</option>
+              <option key={'day'} value="day">
+                день
+              </option>
+              <option key={'week'} value="week">
+                неделю
+              </option>
+              <option key={'month'} value="month">
+                месяц
+              </option>
             </select>
           </label>
           {/* Диапозон режима сна */}
@@ -145,17 +168,18 @@ const RecipeForm: FC = () => {
 
           {/* В будни */}
 
-          <div className="wrapper-2">
+          <div className="wrapper-1">
             <h4>В будни:</h4>
-            <span id="display2"></span>
+            <span id="display1"></span>
 
             <DoubleScrollBar
-              key={'range2'}
+              register={register}
+              key={'range1'}
               min={1}
               max={24}
               step={1}
-              forid="display2"
-              classElem="SB-2"
+              forid="display1"
+              classElem="weekday"
             />
           </div>
 
@@ -163,12 +187,13 @@ const RecipeForm: FC = () => {
           <h4>В выходные</h4>
           <div className="wrapper-3">
             <DoubleScrollBar
+              register={register}
               key={'range3'}
               min={1}
               max={24}
               step={1}
               forid="display3"
-              classElem="SB-3"
+              classElem="weekend"
             />
             <div id="display3"></div>
           </div>
@@ -185,12 +210,20 @@ const RecipeForm: FC = () => {
               id="duration"
               {...register('duration.title')}
               name="duration"
-              defaultValue={"months"}
+              defaultValue={'months'}
             >
-              <option key={"days"} value="days">день </option>
-              <option key={"weeks"} value="weeks" >неделя</option>
-              <option key={"months"} value="months">месяц</option>
-              <option key={"years"} value="years">год</option>
+              <option key={'days'} value="days">
+                день{' '}
+              </option>
+              <option key={'weeks'} value="weeks">
+                неделя
+              </option>
+              <option key={'months'} value="months">
+                месяц
+              </option>
+              <option key={'years'} value="years">
+                год
+              </option>
             </select>
           </div>
 

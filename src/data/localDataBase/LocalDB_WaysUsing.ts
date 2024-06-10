@@ -131,7 +131,7 @@ const recipesMedications: IRecipesMedications = [
         action: waysUsing[0].type, // 'eating' - приём пищи
         quantity: 3, // 3 раза
         unitTime: unitTime[0].type, // day -  в день
-        position: positionAction[0].oftime, // Используется константа(потом будет в Form) в массива 
+        position: positionAction[0].oftime, // "'before'" Используется константа(потом будет в Form) в массива 
         interval: { // exm: спустя 30 минут после еды 
             hour: 0,
             minute: 30
@@ -140,7 +140,6 @@ const recipesMedications: IRecipesMedications = [
             index: 7,
             title: "days", // currenDate <= currenDate.set(3, 'months')
         }, // продолжительность курса до 3 месяца  
-        // start: {day: 26, month: 3, year: 2024}, // вариант в виде объекта
         start: '08.06.2024', // начало курса (по-умолчанию будет дата создания) - чтобы user сам мог котролировать начало
         //! ВАЖНО!: в moment.js месяцы начинаются с 0 по 11
         createDateRecipe: '08.06.2024',//  дата создания рецепта одного ЛС

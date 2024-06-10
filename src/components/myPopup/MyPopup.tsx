@@ -31,7 +31,7 @@ const MyPopup: FC = () => {
           <p>
             {!medicine?.independently
               ? medicine?.position == 'before'
-              ? `За ${medicine.interval.hour} ${(medicine.interval.minute == 0) ? 'часов' : `: ${medicine.interval.minute}`} ` + 
+              ? `За ${medicine.interval.hour}${(medicine.interval.minute == 0) ? 'часов' : `:${medicine.interval.minute}`} ` + 
                   'до ' +
                   `${
                     medicine?.action == 'eating'

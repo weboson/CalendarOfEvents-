@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { FromWrappeer } from '../stylesRecipePage/sc_RecipePage';
 import { useForm } from 'react-hook-form'; // lib for forms
 import { DoubleScrollBar } from './DoubleScrollBar/DoubleScrollBar';
@@ -18,6 +18,12 @@ const RecipeForm: FC = () => {
   } = useForm({
     mode: 'onChange', //! режим реагирования на изменение
   });
+
+  // решил прямо в атрибутах input выполнить этот код
+  // установка даты по-умолчанию через useEffect в input type="date"  
+  // useEffect(() => {
+  //   document.querySelector('#startDate')!.value = (new Date()).toJSON().slice(0,10)
+  // }, []);
 
   const onSubmit = (data: any) => console.log(JSON.stringify(data));
 
@@ -42,7 +48,7 @@ const RecipeForm: FC = () => {
           {/* //! вне зависимости */}
           <div>
             <input
-             // onClick={() => unregister('independently')} // если выбрано, то не отправлять (не регистрировать) значение полей name="dependingOn"
+              // onClick={() => unregister('independently')} // если выбрано, то не отправлять (не регистрировать) значение полей name="action"
               {...register('independently')}
               type="checkbox"
               name="independently"
@@ -55,7 +61,6 @@ const RecipeForm: FC = () => {
           <div className="interval">
             <h4>Интервал времени</h4>
 
-            <br />
             <span>Введите время: </span>
             <small>*Например: принять за 30 минут (до еды)</small>
             <br />
@@ -63,10 +68,11 @@ const RecipeForm: FC = () => {
             <input
               id="intervalHour"
               type="number"
-              {...register('interval.hour', 
-              { min: 0, max: 24} // валидация
+              {...register(
+                'interval.hour',
+                { min: 0, max: 24 }, // валидация
               )}
-              disabled={watch('independently') || watch('positionAction') == 'while'} //! условия на активное или неактивное
+              disabled={watch('independently') || watch('position') == 'while'} //! условия на активное или неактивное
               defaultValue="0"
             />
             {/* вывод ошибки */}
@@ -79,7 +85,7 @@ const RecipeForm: FC = () => {
               id="intervalMinute"
               type="number"
               {...register('interval.minute', { min: 0, max: 59 })}
-              disabled={watch('independently') || watch('positionAction') == 'while'} //! условия на активное или неактивное
+              disabled={watch('independently') || watch('position') == 'while'} //! условия на активное или неактивное
               defaultValue="30"
             />
           </div>
@@ -94,9 +100,9 @@ const RecipeForm: FC = () => {
             <label>
               <span>Принимать лекарство: </span>
               <select
-                {...register('positionAction')}
-                name="positionAction"
-                id="positionAction"
+                {...register('position')}
+                name="position"
+                id="position"
                 disabled={watch('independently')} // если галочка то не активна
               >
                 <option key={'before'} value="before">
@@ -111,25 +117,22 @@ const RecipeForm: FC = () => {
               </select>
               {/* //! еда, завтрак, ужин... */}
               <select
-                {...register('dependingOn')}
-                name="dependingOn"
-                id="dependingOn"
+                {...register('action')}
+                name="action"
+                id="action"
                 disabled={watch('independently')} // если галочка то не активна
               >
                 <option key={'eating'} value="eating">
-                  приёма пищи
+                  приём пищи
                 </option>
                 <option key={'firstBreakfast'} value="firstBreakfast">
-                  завтрака
+                  завтрак
                 </option>
                 <option key={'lastSupper'} value="lastSupper">
-                  ужина
+                  ужин
                 </option>
                 <option key={'sleep'} value="sleep">
                   сон
-                </option>
-                <option key={'fasting'} value="fasting">
-                  *натощак
                 </option>
               </select>
             </label>
@@ -185,8 +188,8 @@ const RecipeForm: FC = () => {
 
           {/* В выходные */}
           <div className="wrapper-3">
-          <h4>В выходные</h4>
-          <span id="display3"></span>
+            <h4>В выходные</h4>
+            <span id="display3"></span>
             <DoubleScrollBar
               register={register}
               key={'range3'}
@@ -196,7 +199,6 @@ const RecipeForm: FC = () => {
               forid="display3"
               classElem="weekend"
             />
-            
           </div>
 
           {/* //! Курс приёма */}
@@ -228,6 +230,19 @@ const RecipeForm: FC = () => {
             </select>
           </div>
 
+          {/* //! дата старта */}
+          <h4>Старт курса:</h4>
+          <div>
+            <label htmlFor="startDate"></label>
+            {/* дата по-умолчанию устанавливается JS в useEffect */}
+            <input
+              {...register('start')}
+              name="start"
+              type="date"
+              id="startDate"
+              value={(new Date()).toJSON().slice(0,10)} // '2024-06-10T15:42:33.895Z' -> slice(0,10) -> '2024-06-10'
+            />
+          </div>
           {/* //! кнопка отправки */}
           <input type="submit" />
         </form>

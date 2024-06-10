@@ -107,10 +107,10 @@ const ListDayHalfHours: FC<IProps> = ({ currentDate }) => {
       {recipesMedications.map(
         (medItem, index) =>
           // для расчета интервала курса (дни/месяцы/годы приёма), временной диапазон приёмов ЛС, epm: курс 1 месяц, то есть интервал с 23 марта по 23 апреля
-          moment(medItem.start, 'DD.MM.YYYY') <= currentDate &&
+          moment(medItem.start, 'YYYY-MM-DD') <= currentDate &&
           // < - чтобы не было так: 5 дней приёма, превратились в 7 (если <= и =>)
           currentDate <
-            moment(medItem.start, 'DD.MM.YYYY')
+            moment(medItem.start, 'YYYY-MM-DD')
               .clone()
               .add(medItem.duration.index, medItem.duration.title) && (
             <DayUsingMedicines

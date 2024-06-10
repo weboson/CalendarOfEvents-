@@ -101,20 +101,20 @@ const RecipeWindow: FC<IProps> = ({currentDate}) => {
                   <li>
                     Начало приёма: 
                     <br />
-                    <p>{moment(medicine.start, 'DD.MM.YYYY').format('DD.MM.YYYY')}</p>
+                    <p>{moment(medicine.start, 'YYYY-MM-DD').format('YYYY-MM-DD')}</p>
                   </li>
                   <li>
                     {/* сколько осталось принимать (diff - это разница) */}
                     Осталось принимать:{' '}
                     <br />
-                    <p>{(moment(medicine.start, 'DD.MM.YYYY').add(medicine.duration.index, `${medicine.duration.title}`) > moment()) ? // если старт + курс > текущего дня, то
-                    (moment(medicine.start, 'DD.MM.YYYY').add(medicine.duration.index, `${medicine.duration.title}`).diff(moment(), 'day')) + ' день/дней/дня' : // (стартовый день + длительность курса) - текущее время = сколько осталось принимать
-                    `завершение курса ${(moment(medicine.start, 'DD.MM.YYYY').add(medicine.duration.index, `${medicine.duration.title}`).format('DD.MM.YYYY'))} `} </p>
+                    <p>{(moment(medicine.start, 'YYYY-MM-DD').add(medicine.duration.index, `${medicine.duration.title}`) > moment()) ? // если старт + курс > текущего дня, то
+                    (moment(medicine.start, 'YYYY-MM-DD').add(medicine.duration.index, `${medicine.duration.title}`).diff(moment(), 'day')) + ' день/дней/дня' : // (стартовый день + длительность курса) - текущее время = сколько осталось принимать
+                    `завершение курса ${(moment(medicine.start, 'YYYY-MM-DD').add(medicine.duration.index, `${medicine.duration.title}`).format('YYYY-MM-DD'))} `} </p>
                   </li>
                   <li>
                     Завершение курса (до):{' '}
                     <br />
-                    <p>{moment(medicine.start, 'DD.MM.YYYY').add(medicine.duration.index, `${medicine.duration.title}`).format('DD.MM.YYYY')}</p>
+                    <p>{moment(medicine.start, 'YYYY-MM-DD').add(medicine.duration.index, `${medicine.duration.title}`).format('YYYY-MM-DD')}</p>
                   </li>
                 </ul>
         ) : (<p style={{fontSize: '3em'}}>Чтобы узнать подробности <br/> - кликните мышкой по любому лекарству</p>)}

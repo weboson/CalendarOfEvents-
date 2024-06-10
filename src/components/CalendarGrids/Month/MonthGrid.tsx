@@ -93,8 +93,8 @@ const MonthGrid: FC<IProps> = ({ firstDayOfWeek, currentDate }) => {
             <DayContent>
               {recipesMedications.map((medItem, index) => {
                 if (
-                  moment(medItem.start, 'DD.MM.YYYY') <= dayItem &&
-                  dayItem < moment(medItem.start, 'DD.MM.YYYY')
+                  moment(medItem.start, 'YYYY-MM-DD') <= dayItem &&
+                  dayItem < moment(medItem.start, 'YYYY-MM-DD')
                   .clone().add(medItem.duration.index, medItem.duration.title)
                 ) {
                   //* счетчик (all meds current day)  

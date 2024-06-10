@@ -101,9 +101,9 @@ const GridDayWithHours: FC<IProps> = memo(
       {/* //* for Using Medicines (расчет приёма лекарств) */}
       {recipesMedications.map((medItem, index) => (
         // для расчета интервала курса (дни/месяцы/годы приёма), временной диапазон приёмов ЛС, epm: курс 1 месяц, то есть интервал с 23 марта по 23 апреля       
-        (moment(medItem.start, 'DD.MM.YYYY') <= dayItem) &&
+        (moment(medItem.start, 'YYYY-MM-DD') <= dayItem) &&
         // < - чтобы не было так: 5 дней приёма, превратились в 7 (если <= и =>)
-        (dayItem < moment(medItem.start, 'DD.MM.YYYY').clone().add(medItem.duration.index, medItem.duration.title)) && 
+        (dayItem < moment(medItem.start, 'YYYY-MM-DD').clone().add(medItem.duration.index, medItem.duration.title)) && 
         
         <UsingMedicines key={index} dayItem={dayItem} halfHourItem={halfHourItem} med={medItem} currentDayForWirning={currentDayForWirning} currentDate={currentDate}/>
         )       

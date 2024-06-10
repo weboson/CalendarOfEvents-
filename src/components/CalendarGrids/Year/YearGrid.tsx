@@ -66,9 +66,9 @@ const YearGrid: FC<IProps> = ({ currentDate }) => {
                   
                   {recipesMedications.map((medItem, index) =>
                     // расчет интервала (курс приёма лекарств)
-                    moment(medItem.start, 'DD.MM.YYYY') <= iDay &&
+                    moment(medItem.start, 'YYYY-MM-DD') <= iDay &&
                     iDay <
-                      moment(medItem.start, 'DD.MM.YYYY')
+                      moment(medItem.start, 'YYYY-MM-DD')
                         .clone()
                         .add(medItem.duration.index, medItem.duration.title)
                       ? // если схоть одно лекарсвто находится в ячейке (в определенный день), то маркеруем true (далее ставим иконку)

@@ -59,7 +59,7 @@ export const DoubleScrollBar: FC<IDoubleScrollBarProps> = ({
       </div>
       <div className="range-input">
         <input
-        {...register(`${classElem}.start`)} //! например 'weekday.start'
+        {...register(`modeRegime.${classElem}.start`)} //! например "modeRegime":{"weekday":{"start":"9","end":"21"},"weekend":{"start":"9","end":"21"}}
           type="range"
           onChange={(e) => setInputFrom(parseFloat(e.target.value))} // чтобы дипазон часов не был слишком малым, можно сделать в обработчике (To - From >= 14 && To - From <= 16) для каждого класса инпута
           min={min} // 1
@@ -68,7 +68,7 @@ export const DoubleScrollBar: FC<IDoubleScrollBarProps> = ({
           defaultValue={9} // значение по-умолчанию для поинтов
         />
         <input
-          {...register(`${classElem}.end`)} //! например 'weekend.утв'
+          {...register(`modeRegime.${classElem}.end`)} //! например "modeRegime":{"weekday":{"start":"9","end":"21"},"weekend":{"start":"9","end":"21"}}
           type="range"
           onChange={(e) => setInputTo(parseFloat(e.target.value))}
           min={min}

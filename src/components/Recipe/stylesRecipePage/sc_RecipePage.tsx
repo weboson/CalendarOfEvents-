@@ -50,22 +50,30 @@ export const HeadlineWrapper = styled.div`
   }
 `;
 
-//! Form (Форма)
+//! сектора (левый и правый)
+export const RecipeSector = styled.div`
+  
+  
+`
+
+
+//! Form Wrapper (обертка для секотров формы)
 export const FromWrappeer = styled.div`
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
+  flex-direction: row; // элементы располагаются в строку, слева направо.
   flex-wrap: nowrap; // в строку горизонтально (for adaptive)
-  width: 33%;
+  width: 100%;
   height: 100%;
   background-color: #DCDDDD;
   form {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    width: 80%;
+    width: 100%;
   }
   h2 {
-    width: 100%;
+    /* width: 100%;
     font-family: 'Raleway', sans-serif;
     font-weight: 400;
     font-size: 2.2em;
@@ -74,7 +82,7 @@ export const FromWrappeer = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 8% 0 4% 6%;
+    margin: 8% 0 4% 6%; */
   }
 `;
 // Input + label
@@ -100,16 +108,19 @@ export const InputWrapper = styled.div`
     border: 1px solid #bdbdbd;
     border-radius: 0.35rem;
     font-style: italic;
-    width: 100%;
+    /* width: 100%; */
     /* border-radius: 10%; */
     &:focus {
-      color: #212529;
+      /* color: #212529;
       background-color: #fff;
       border-color: #bdbdbd;
       outline: 0;
-      box-shadow: 0 0 2rem 0.2rem rgba(158, 158, 158, 0.25);
+      box-shadow: 0 0 2rem 0.2rem rgba(158, 158, 158, 0.25); */
     }
     &::placeholder {
+      
+    }
+    button {
       
     }
 

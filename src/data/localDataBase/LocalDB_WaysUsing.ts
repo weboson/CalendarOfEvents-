@@ -125,7 +125,7 @@ export interface IRecipesMedications extends Array<IRecipesMedication>{}
 // разные лекарства
 const recipesMedications: IRecipesMedications = [
     {
-        id: 1,
+        id: 1, // генерируется на стороне сервера Nest js
         title: 'Урсосан',
         independently: false, //  не зависимо?
         action: waysUsing[0].type, // 'eating' - приём пищи
@@ -142,8 +142,8 @@ const recipesMedications: IRecipesMedications = [
         }, // продолжительность курса до 3 месяца  
         start: '2024-06-08', // начало курса (по-умолчанию будет дата создания) - чтобы user сам мог котролировать начало
         //! ВАЖНО!: в moment.js месяцы начинаются с 0 по 11
-        createDateRecipe: '2024-06-08',//  дата создания рецепта одного ЛС
-        updateDateRecipe: '2024-06-08', //  возможность изменить весь рецепт
+        createDateRecipe: '2024-06-08',//  дата создания рецепта одного ЛС (генерируется на стороне сервера Nest js)
+        updateDateRecipe: '2024-06-08', //  возможность изменить весь рецепт (генерируется на стороне сервера Nest js)
         
     },
     {
@@ -218,7 +218,7 @@ const recipesMedications: IRecipesMedications = [
         
     },
     {
-        id: 6,
+        id: 6, // генерируется на стороне сервера Nest js
         title: 'Бифидокс5',
         independently: false, //  в зависимости/вне зависимости от еды/сна... просто 3 раза в день
         action: waysUsing[0].type, // 'eating' - приём пищи

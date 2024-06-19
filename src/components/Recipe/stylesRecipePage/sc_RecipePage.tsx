@@ -1,3 +1,4 @@
+//! основные стили используются через Material-UI (RecipeForm.tsx) 
 // стили для страницы /resipes (рецепты)
 import styled from 'styled-components';
 
@@ -43,18 +44,12 @@ export const HeadlineWrapper = styled.div`
     font-family: 'Raleway', sans-serif;
     font-weight: 400;
     text-align: center;
-    margin: 0;
+    margin: 10px;
     font-size: 2.6em;
     color: #2a282d;
     height: 100%;
   }
 `;
-
-//! сектора (левый и правый)
-export const RecipeSector = styled.div`
-  
-  
-`
 
 
 //! Form Wrapper (обертка для секотров формы)
@@ -65,26 +60,34 @@ export const FromWrappeer = styled.div`
   flex-wrap: nowrap; // в строку горизонтально (for adaptive)
   width: 100%;
   height: 100%;
-  background-color: #DCDDDD;
+  background-color: #E6E6E6;
   form {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     width: 100%;
   }
-  h2 {
-    /* width: 100%;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 400;
-    font-size: 2.2em;
-    color: #1e1f21;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 8% 0 4% 6%; */
+  h2 { //! стили переопределены в MUI (RecipeForm.tsx)
+    /* color: #565759; */
+    /* font-weight: 400; */
+    /* box-sizing: border-box;
+    font-family: Roboto, Helvetica, Arial, sans-serif; */
+    /* margin: 2%; */
   }
 `;
+
+//! формы поделены на 4 шага (сектора) шириной по 25%
+export const FormStep = styled.div`
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #565759;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+  
+`
+
 // Input + label
 export const InputWrapper = styled.div`
     font-family: 'Raleway', sans-serif;
@@ -93,10 +96,10 @@ export const InputWrapper = styled.div`
     width: 100%;
     /* background-color: red; */
   input, label {
-    height: 100%;
+    /* height: 100%;
     color: #565759;
     font-size: 1.3rem;
-    line-height: 1.2;
+    line-height: 1.2; */
   }
   label {
     font-weight: 400;
@@ -104,10 +107,12 @@ export const InputWrapper = styled.div`
     margin-left: 2%;
   }
   input {
-    padding: 2%;
+  /* input[type=text] { */
+  /* font-size: 2em; */
+    /* padding: 2%;
     border: 1px solid #bdbdbd;
     border-radius: 0.35rem;
-    font-style: italic;
+    font-style: italic; */
     /* width: 100%; */
     /* border-radius: 10%; */
     &:focus {

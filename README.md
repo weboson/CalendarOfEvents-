@@ -20,7 +20,7 @@
 ![image](https://github.com/weboson/CalendarOfEvents-/assets/42917939/067703fd-4b17-436a-871a-13b78e7ec150)
 
 ### 2. Recipe Page
-![image](https://github.com/weboson/CalendarOfEvents-/assets/42917939/83a20046-92b0-4f33-aa1f-288167bc66aa)
+![image](https://github.com/weboson/CalendarOfEvents-/assets/42917939/f936888c-d3af-46e3-938e-6e1328012a94)
 
 
 # Stack--

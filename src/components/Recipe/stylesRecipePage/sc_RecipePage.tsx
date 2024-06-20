@@ -79,21 +79,24 @@ export const FromWrappeer = styled.div`
 //! формы поделены на 4 шага (сектора) шириной по 25%
 export const FormStep = styled.div`
   width: 25%;
-  display: flex;
+  display: flex; 
   flex-direction: column;
-  border: 1px solid #565759;
+  border: 1px solid #B1B1B1;
   border-radius: 5px;
   margin: 10px;
-  padding: 10px;
-  
+  padding: 9px 1px 15px 0;
+`
+//Step
+export const TearFrame = styled.div`
+  color: #B1B1B1;
 `
 
 // Input + label
 export const InputWrapper = styled.div`
-    font-family: 'Raleway', sans-serif;
+    /* font-family: 'Raleway', sans-serif;
     color: #1e1f21;
     margin-left: 8%;
-    width: 100%;
+    width: 100%; */
     /* background-color: red; */
   input, label {
     /* height: 100%;
@@ -102,9 +105,9 @@ export const InputWrapper = styled.div`
     line-height: 1.2; */
   }
   label {
-    font-weight: 400;
+    /* font-weight: 400;
     margin-bottom: 1%;
-    margin-left: 2%;
+    margin-left: 2%; */
   }
   input {
   /* input[type=text] { */

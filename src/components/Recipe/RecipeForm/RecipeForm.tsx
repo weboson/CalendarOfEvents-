@@ -1,8 +1,14 @@
 import { FC } from 'react';
-import { FormStep, FromWrappeer } from '../stylesRecipePage/sc_RecipePage';
+import {
+  FormStep,
+  FromWrappeer,
+  TearFrame,
+} from '../stylesRecipePage/sc_RecipePage';
 import { useForm } from 'react-hook-form'; // lib for forms
 import { Box, InputAdornment, TextField, Typography } from '@mui/material'; // material UI (CSS-фрейворк, ngf Bootstrap)
+// icons
 import { RiMedicineBottleLine } from 'react-icons/ri';
+import { LuStepForward } from "react-icons/lu";
 
 const RecipeForm: FC = () => {
   // handleSubmit - wrapper обработчика
@@ -36,46 +42,49 @@ const RecipeForm: FC = () => {
 
           <FormStep>
             <Box component="section">
+              <TearFrame>
               <Typography
-                variant="h5"
-                component="h2"
-                align="center"
+                id='stepTitle'
+                variant='h6'
+                component="h6"
+                // align="start"
                 sx={{
-                  fontSize: '1.8em',
-                  color: '#565759',
-                  fontWeight: '400',
+                  fontSize: '1.6em',
+                  color: '#B1B1B1',
                   margin: '2%',
                 }}
               >
-                Шаг #1: Добавьте лекарство
+                <LuStepForward style={{margin: "-0.5% 0"}}/>Добавьте лекарство
               </Typography>
+              </TearFrame>
               {/* //! Название лекарства */}
               <Typography
                 variant="h6"
                 component="h3"
                 sx={{
                   fontSize: '1.2em',
-                  color: '#565759',
+                  color: '#717273',
                   fontWeight: '400',
-                  margin: '2%',
+                  margin: '0 2%',
                 }}
               >
                 Наименование лекарства:{' '}
               </Typography>
               <div>
                 <TextField
-                 InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <RiMedicineBottleLine />
-                    </InputAdornment>
-                  ),
-                }}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <RiMedicineBottleLine />
+                      </InputAdornment>
+                    ),
+                  }}
                   color="success"
                   fullWidth // полный размер (эквивалентно width: 100%)
-                  sx={{ fontSize: '2px'}}
+                  sx={{ fontSize: '2px', padding: '0 2% 0 2%' }}
                   label={errors?.title && 'Только буквы'}
                   error={!!errors?.title}
+                  // от react-form-hook
                   {...register('title', {
                     pattern: /[a-zа-яё ]/, // только буквы (без цифр)
                   })}

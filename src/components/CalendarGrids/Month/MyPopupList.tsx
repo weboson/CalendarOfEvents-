@@ -27,9 +27,10 @@ const MyPopupList: FC<Iprops> = ({dayItem, index}) => {
       <div>
         {recipesMedications.map(
             (medItem, index) => 
-              moment(medItem.start, 'DD.MM.YYYY') <= dayItem &&
+            // '2024-06-03'
+              moment(medItem.start, 'YYYY-MM-DD') <= dayItem &&
               dayItem <
-                moment(medItem.start, 'DD.MM.YYYY')
+                moment(medItem.start, 'YYYY-MM-DD')
                   .clone()
                   .add(medItem.duration.index, medItem.duration.title) && (
                 <MyPopupListStyleLi

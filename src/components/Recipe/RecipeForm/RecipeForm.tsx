@@ -80,8 +80,8 @@ const RecipeForm: FC = () => {
                     ),
                   }}
                   color="success"
-                  fullWidth // полный размер (эквивалентно width: 100%)
-                  sx={{ fontSize: '2px', padding: '0 2% 0 2%' }}
+                  // fullWidth // полный размер (эквивалентно width: 100%)
+                  sx={{ fontSize: '2px', margin: '2%', width: '96.5%'}} // при 100% и padding: 2%  - "label" сдвигается.
                   label={errors?.title && 'Только буквы'}
                   error={!!errors?.title}
                   // от react-form-hook

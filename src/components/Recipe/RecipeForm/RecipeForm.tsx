@@ -2,13 +2,13 @@ import { FC } from 'react';
 import {
   FormStep,
   FromWrappeer,
-  TearFrame,
 } from '../stylesRecipePage/sc_RecipePage';
 import { useForm } from 'react-hook-form'; // lib for forms
 import { Box, InputAdornment, TextField, Typography } from '@mui/material'; // material UI (CSS-фрейворк, ngf Bootstrap)
 // icons
 import { RiMedicineBottleLine } from 'react-icons/ri';
 import { LuStepForward } from "react-icons/lu";
+import StepOne from './stepsForm/stepOne';
 
 const RecipeForm: FC = () => {
   // handleSubmit - wrapper обработчика
@@ -38,65 +38,8 @@ const RecipeForm: FC = () => {
     <>
       <FromWrappeer>
         <form onSubmit={handleSubmit(onSubmit)}>
-          {/*  */}
-
-          <FormStep>
-            <Box component="section">
-              <TearFrame>
-              <Typography
-                id='stepTitle'
-                variant='h6'
-                component="h6"
-                // align="start"
-                sx={{
-                  fontSize: '1.6em',
-                  color: '#B1B1B1',
-                  margin: '2%',
-                }}
-              >
-                <LuStepForward style={{margin: "-0.5% 0"}}/>Добавьте лекарство
-              </Typography>
-              </TearFrame>
-              {/* //! Название лекарства */}
-              <Typography
-                variant="h6"
-                component="h3"
-                sx={{
-                  fontSize: '1.2em',
-                  color: '#717273',
-                  fontWeight: '400',
-                  margin: '0 2%',
-                }}
-              >
-                Наименование лекарства:{' '}
-              </Typography>
-              <div>
-                <TextField
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <RiMedicineBottleLine />
-                      </InputAdornment>
-                    ),
-                  }}
-                  color="success"
-                  // fullWidth // полный размер (эквивалентно width: 100%)
-                  sx={{ fontSize: '2px', margin: '2%', width: '96.5%'}} // при 100% и padding: 2%  - "label" сдвигается.
-                  label={errors?.title && 'Только буквы'}
-                  error={!!errors?.title}
-                  // от react-form-hook
-                  {...register('title', {
-                    pattern: /[a-zа-яё ]/, // только буквы (без цифр)
-                  })}
-                  type="text"
-                  name="title"
-                  placeholder="Название лекарства"
-                  helperText="Введите название лекарства"
-                  required
-                />
-              </div>
-            </Box>
-          </FormStep>
+          {/* Step #1 (пропсы от 'react-hook-form')*/}
+          <StepOne register={register} errors={errors}/>
           <h3>Зависимость приёма</h3>
           {/* //! вне зависимости */}
           <div>

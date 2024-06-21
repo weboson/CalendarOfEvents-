@@ -52,10 +52,10 @@ export const HeadlineWrapper = styled.div`
 `;
 
 
-//! Form Wrapper (обертка для секотров формы)
+// Form Wrapper (обертка для секотров формы) 
 export const FromWrappeer = styled.div`
-  display: flex;
-  /* flex-direction: column; */
+   display: flex;
+  flex-direction: column; 
   flex-direction: row; // элементы располагаются в строку, слева направо.
   flex-wrap: nowrap; // в строку горизонтально (for adaptive)
   width: 100%;
@@ -73,7 +73,7 @@ export const FromWrappeer = styled.div`
     /* box-sizing: border-box;
     font-family: Roboto, Helvetica, Arial, sans-serif; */
     /* margin: 2%; */
-  }
+  } 
 `;
 
 //! формы поделены на 4 шага (сектора) шириной по 25%

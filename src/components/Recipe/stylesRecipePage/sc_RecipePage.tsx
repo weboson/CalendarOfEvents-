@@ -83,8 +83,8 @@ export const FormStep = styled.div`
   flex-direction: column;
   border: 1px solid #B1B1B1;
   border-radius: 5px;
-  margin: 10px;
-  padding: 9px 1px 15px 0;
+  margin: 10px 10px 0 10px; // внизу 0, чтобы не было двойного margin между блоками
+  padding: 10px;
 `
 //Step
 export const TearFrame = styled.div`
@@ -134,3 +134,5 @@ export const InputWrapper = styled.div`
 
   }
 `;
+
+

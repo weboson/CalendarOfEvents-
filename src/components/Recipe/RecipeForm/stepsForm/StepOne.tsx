@@ -5,22 +5,21 @@ import { Box, InputAdornment, TextField, Typography } from '@mui/material';
 import { RiMedicineBottleLine } from 'react-icons/ri';
 import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
 
-interface Iprops {
-    register: UseFormRegister<FieldValues>,
-    errors: FieldErrors<FieldValues>
+interface IProps {
+    register: UseFormRegister<FieldValues>, // от 'react-hook-form'
+    errors: FieldErrors<FieldValues> // от 'react-hook-form'
 }
 
 
-const StepOne:FC<Iprops> = ({register, errors}) => {
+const StepOne:FC<IProps> = ({register, errors}) => {
     return (
-        <>  
           <FormStep>
             <Box component="section">
               <Typography
                 id='stepTitle'
                 variant='h6'
                 component="h6"
-                // align="start"
+                margin="normal"
                 sx={{
                   fontSize: '1.6em',
                   color: '#6f6e6e',
@@ -55,7 +54,7 @@ const StepOne:FC<Iprops> = ({register, errors}) => {
                   color="success"
                   // fullWidth // полный размер (эквивалентно width: 100%)
                   sx={{ fontSize: '2px', margin: '2%', width: '96.5%'}} // при 100% и padding: 2%  - "label" сдвигается.
-                  label={errors?.title && 'Только буквы'}
+                  label={errors?.title ? 'Только буквы' : 'Название лекарства'}
                   error={!!errors?.title}
                   // от react-form-hook
                   {...register('title', {
@@ -63,14 +62,13 @@ const StepOne:FC<Iprops> = ({register, errors}) => {
                   })}
                   type="text"
                   name="title"
-                  placeholder="Название лекарства"
+                  placeholder="Асперин"
                   helperText="Введите название лекарства"
                   required
                 />
               </div>
             </Box>
           </FormStep>
-        </>
     );
 };
 

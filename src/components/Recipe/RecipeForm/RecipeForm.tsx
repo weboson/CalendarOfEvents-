@@ -5,10 +5,8 @@ import {
 } from '../stylesRecipePage/sc_RecipePage';
 import { useForm } from 'react-hook-form'; // lib for forms
 import { Box, InputAdornment, TextField, Typography } from '@mui/material'; // material UI (CSS-фрейворк, ngf Bootstrap)
-// icons
-import { RiMedicineBottleLine } from 'react-icons/ri';
-import { LuStepForward } from "react-icons/lu";
-import StepOne from './stepsForm/stepOne';
+import StepOne from './stepsForm/StepOne';
+import StepTwo from './stepsForm/StepTwo';
 
 const RecipeForm: FC = () => {
   // handleSubmit - wrapper обработчика
@@ -17,6 +15,7 @@ const RecipeForm: FC = () => {
   // register - регистрировать значение элемента (отпрвлять данные в объекте)
   // formState - состояние формы
   const {
+    control,
     register,
     unregister,
     handleSubmit,
@@ -38,57 +37,11 @@ const RecipeForm: FC = () => {
     <>
       <FromWrappeer>
         <form onSubmit={handleSubmit(onSubmit)}>
-          {/* Step #1 (пропсы от 'react-hook-form')*/}
+          {/* Step #1: Поле ввода названия лекарства (пропсы от 'react-hook-form')*/}
           <StepOne register={register} errors={errors}/>
-          <h3>Зависимость приёма</h3>
-          {/* //! вне зависимости */}
-          <div>
-            <input
-              // onClick={() => unregister('independently')} // если выбрано, то не отправлять (не регистрировать) значение полей name="action"
-              {...register('independently')}
-              type="checkbox"
-              name="independently"
-              defaultChecked={false}
-            />
-            <span>Приём вне зависимости. </span>
-          </div>
+          {/* Step #2 Поле ввода интервала времени приёма лекарства (пропсы от 'react-hook-form')*/}
+          <StepTwo register={register} errors={errors} watch={watch} control={control}/>
 
-          {/* //! Интервал времени */}
-          <div className="interval">
-            <h4>Интервал времени</h4>
-
-            <span>Введите время: </span>
-            <small>*Например: принять за 30 минут (до еды)</small>
-            <br />
-            <label htmlFor="intervalHour">часы: </label>
-            <input
-              id="intervalHour"
-              type="number"
-              {...register(
-                'interval.hour',
-                { min: 0, max: 24 }, // валидация
-              )}
-              disabled={watch('independently') || watch('position') == 'while'} //! условия на активное или неактивное
-              defaultValue="0"
-            />
-            {/* вывод ошибки */}
-            {errors?.interval && (
-              <div style={{ color: 'red' }}>Введите число от 0 до 24</div>
-            )}
-            <br />
-            <label htmlFor="intervalMinute">минуты: </label>
-            <input
-              id="intervalMinute"
-              type="number"
-              {...register('interval.minute', { min: 0, max: 59 })}
-              disabled={watch('independently') || watch('position') == 'while'} //! условия на активное или неактивное
-              defaultValue="30"
-            />
-          </div>
-          {/* вывод ошибки */}
-          {errors?.interval && (
-            <div style={{ color: 'red' }}>Введите число от 0 до 59</div>
-          )}
 
           {/* //! До, вовремя, после */}
           <div>

@@ -26,7 +26,6 @@ const NumberInput = React.forwardRef(function CustomNumberInput(
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   return (
-    // API "BaseNumberInput": https://mui.com/base-ui/react-number-input/hooks-api/#use-number-input
     <BaseNumberInput
       slots={{
         root: StyledInputRoot,
@@ -38,10 +37,12 @@ const NumberInput = React.forwardRef(function CustomNumberInput(
         incrementButton: {
           children: <FaPlus />, // использую иконку из react-icons
           className: 'increment',
+          type: 'button', //! чтобы не сабмитилась форма
         },
         decrementButton: {
           children: <FaMinus />, // использую иконку из react-icons
           className: 'decrement',
+          type: 'button', //! чтобы не сабмитилась форма
         },
       }}
       {...props}
@@ -50,7 +51,7 @@ const NumberInput = React.forwardRef(function CustomNumberInput(
   );
 });
 
-//! STYLES для Matrial UI INPUT type="Number" (used StepTwo.tsx): https://mui.com/base-ui/react-number-input/
+//! STYLES
 const blue = {
   100: '#daecff',
   200: '#b6daff',
@@ -124,7 +125,7 @@ const StyledInput = styled('input')(
 `,
 );
 
-const StyledButton = styled('span')(
+const StyledButton = styled('button')(
   ({ theme }) => `
   font-family: 'IBM Plex Sans', sans-serif;
   font-size: 0.875rem;
@@ -170,7 +171,7 @@ interface IProps {
   control: Control<FieldValues, any>;
 }
 
-const StepTwo: FC<IProps> = ({ register, errors, watch, control }) => {
+const StepTwo: FC<IProps> = ({ register, watch, control }) => {
   return (
     <FormStep>
       <Box component="section">
@@ -220,14 +221,17 @@ const StepTwo: FC<IProps> = ({ register, errors, watch, control }) => {
             name="interval.hour" //! имя поля
             defaultValue={0} // ? set defaultValue
             rules={{
-              required: (!watch('independently')), // если галочка нет на "вне зависимости", то поле обязательное
-              // условия "независимо" или приём вовремя еды - активное или неактивное 
-              disabled: (watch('independently') || watch('position') == 'while'), // "interval":{}}
+              required: !watch('independently'), // если галочка нет на "вне зависимости", то поле обязательное
+              //? условия "независимо" или приём вовремя еды - активное или неактивное
+              disabled: watch('independently') || watch('position') == 'while', //? отправляет пустой объект "interval":{}}
             }}
             render={({ field }) => (
               // Компонент от Material-UI в данном файле (выше)
               <>
                 <NumberInput
+                  disabled={
+                    watch('independently') || watch('position') == 'while'
+                  } //? кнопки не активны
                   placeholder="часы"
                   aria-label="Quantity Input"
                   min={0}
@@ -247,31 +251,34 @@ const StepTwo: FC<IProps> = ({ register, errors, watch, control }) => {
           <br />
           <Controller
             control={control} // передали через пропсы из RecipeForm
-            name='interval.minute'
-            defaultValue={30}
+            name="interval.minute"
+            defaultValue={0}
             rules={{
-              required: (!watch('independently')), // если галочка нет на "вне зависимости", то поле обязательное
-              disabled: (watch('independently') || watch('position') == 'while'), // условия "независимо" или приём вовремя еды - активное или неактивное
+              required: !watch('independently'), // если галочка нет на "вне зависимости", то поле обязательное
+              //? условия "независимо" или приём вовремя еды - активное или неактивное
+              disabled: watch('independently') || watch('position') == 'while', //? отправляет пустой объект "interval":{}}
             }}
             render={({ field }) => (
               // Компонент от Material-UI в данном файле (выше)
               <>
                 <NumberInput
+                  disabled={
+                    watch('independently') || watch('position') == 'while'
+                  } //? кнопки не активны
                   placeholder="минуты"
                   aria-label="Quantity Input"
-                  defaultValue={30}
+                  // defaultValue={0}
                   min={1}
                   max={59}
                   step={10}
                   id="intervalMinute"
-                  {...field} 
+                  {...field}
                   onChange={(_, value) => {
                     field.onChange(value);
                   }}
                 />
               </>
             )}
-            
           />
         </div>
       </Box>

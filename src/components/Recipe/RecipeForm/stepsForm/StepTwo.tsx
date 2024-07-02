@@ -1,4 +1,4 @@
-//! Поле ввода (input type="number") интервала времени приёма лекарства
+//! Step 2: Поле ввода (input type="number") интервала времени приёма лекарства
 // Численный input в Material-UI двольно сложно реализуется: https://mui.com/base-ui/react-number-input/
 import { FC } from 'react';
 import {
@@ -174,7 +174,6 @@ interface IProps {
 const StepTwo: FC<IProps> = ({ register, watch, control }) => {
   return (
     <FormStep>
-      <Box component="section">
         <Typography
           id="stepTitle"
           variant="h6"
@@ -268,8 +267,8 @@ const StepTwo: FC<IProps> = ({ register, watch, control }) => {
                   placeholder="минуты"
                   aria-label="Quantity Input"
                   // defaultValue={0}
-                  min={1}
-                  max={59}
+                  min={10}
+                  max={50}
                   step={10}
                   id="intervalMinute"
                   {...field}
@@ -281,7 +280,7 @@ const StepTwo: FC<IProps> = ({ register, watch, control }) => {
             )}
           />
         </div>
-      </Box>
+
     </FormStep>
   );
 };

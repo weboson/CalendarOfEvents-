@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form'; // lib for forms
 import { Box, InputAdornment, TextField, Typography } from '@mui/material'; // material UI (CSS-фрейворк, ngf Bootstrap)
 import StepOne from './stepsForm/StepOne';
 import StepTwo from './stepsForm/StepTwo';
+import StepThree from './stepsForm/StepThree';
 
 const RecipeForm: FC = () => {
   // handleSubmit - wrapper обработчика
@@ -41,51 +42,8 @@ const RecipeForm: FC = () => {
           <StepOne register={register} errors={errors}/>
           {/* Step #2 Поле ввода интервала времени приёма лекарства (пропсы от 'react-hook-form')*/}
           <StepTwo register={register} errors={errors} watch={watch} control={control}/>
-
-
-          {/* //! До, вовремя, после */}
-          <div>
-            <h4>Особенности приёма: </h4>
-            <label>
-              <span>Принимать лекарство: </span>
-              <select
-                {...register('position')}
-                name="position"
-                id="position"
-                disabled={watch('independently')} // если галочка то не активна
-              >
-                <option key={'before'} value="before">
-                  перед
-                </option>
-                <option key={'while'} value="while">
-                  вовремя
-                </option>
-                <option key={'after'} value="after">
-                  после
-                </option>
-              </select>
-              {/* //! еда, завтрак, ужин... */}
-              <select
-                {...register('action')}
-                name="action"
-                id="action"
-                disabled={watch('independently')} // если галочка то не активна
-              >
-                <option key={'eating'} value="eating">
-                  приём пищи
-                </option>
-                <option key={'firstBreakfast'} value="firstBreakfast">
-                  завтрак
-                </option>
-                <option key={'lastSupper'} value="lastSupper">
-                  ужин
-                </option>
-                <option key={'sleep'} value="sleep">
-                  сон
-                </option>
-              </select>
-            </label>
-          </div>
+          {/* Step #3 Поле ввода "Особенности приёма": До, вовремя, после И  еды/завтрака...(пропсы от 'react-hook-form')*/}
+          <StepThree register={register} errors={errors} watch={watch} control={control} />
 
           {/* //! Количество приёмов */}
           <h3>Количество приёмов</h3>

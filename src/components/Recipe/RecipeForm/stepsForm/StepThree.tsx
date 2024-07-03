@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { FormStep } from '../../stylesRecipePage/sc_RecipePage';
 import {
   Control,
+  Controller,
   FieldErrors,
   FieldValues,
   UseFormRegister,
@@ -26,7 +27,7 @@ interface IProps {
 const StepThree: FC<IProps> = ({ register, errors, watch, control }) => {
   return (
     <FormStep>
-      <FormControl fullWidth>
+      
         <Typography
           id="stepTitle"
           variant="h6"
@@ -53,38 +54,71 @@ const StepThree: FC<IProps> = ({ register, errors, watch, control }) => {
           Принимать лекарство:{' '}
         </Typography>
         {/* //! перед, вовремя, после */}
-        <Select
-          {...register('position')}
-          name="position"
-          id="position"
-          disabled={watch('independently')} // если галочка то не активна
-          defaultValue={'before'}
-          // label="Age"
-        >
-          <MenuItem value={'before'} selected>
-            перед
-          </MenuItem>
-          <MenuItem value={'while'}>вовремя</MenuItem>
-          <MenuItem value={'after'}>после</MenuItem>
-        </Select>
+        {/*//* Controller от "react-hook-form", чтобы значения при "disabled" не отправлялись данные из "defaultValue" */}
+        {/*// Обычный {...register()}  при "disabled" всё равно отправляет объекты со значениями (defaultValue) */}
+        <FormControl fullWidth>
+        <Controller
+          control={control} // передали через пропсы из RecipeForm
+          name="position" //! имя поля
+          defaultValue={'before'} // ? set defaultValue
+          rules={{
+            required: !watch('independently'), // если галочки нет на "вне зависимости", то поле обязательное
+            //? условия "независимо" или приём вовремя еды - активное или неактивное
+            disabled: watch('independently'), //? true = ничего отправляет
+          }}
+          render={({ field }) => (
+            // Select от Material-UI: https://mui.com/material-ui/react-select/
+            <>
+              <Select
+                // {...register('position')} // Обычный {...register()}  при "disabled" всё равно отправляет объекты со значениями (defaultValue)
+                name="position"
+                id="position"
+                disabled={watch('independently')} // если галочка то не активна
+                defaultValue={'before'}
+                // label="Age"
+              >
+                <MenuItem value={'before'} selected>
+                  перед
+                </MenuItem>
+                <MenuItem value={'while'}>вовремя</MenuItem>
+                <MenuItem value={'after'}>после</MenuItem>
+              </Select>
+            </>
+          )}
+        />
       </FormControl>
       {/* //! еда, завтрак, ужин... */}
       <FormControl fullWidth>
-        <Select
-          {...register('action')}
-          name="action"
-          id="action"
-          disabled={watch('independently')} // если галочка то не активна
-          defaultValue={'eating'}
-          // label="Age"
-        >
-          <MenuItem value={'eating'} selected>
-            приём пищи
-          </MenuItem>
-          <MenuItem value={'firstBreakfast'}>завтрак</MenuItem>
-          <MenuItem value={'lastSupper'}>ужин</MenuItem>
-          <MenuItem value={'sleep'}>сон</MenuItem>
-        </Select>
+        <Controller
+          control={control} // передали через пропсы из RecipeForm
+          name="action" //! имя поля
+          defaultValue={'eating'} // ? set defaultValue
+          rules={{
+            required: !watch('independently'), // если галочка нет на "вне зависимости", то поле обязательное
+            //? условия "независимо" или приём вовремя еды - активное или неактивное
+            disabled: watch('independently'), //? true = ничего отправляет
+          }}
+          render={({ field }) => (
+            // Select от Material-UI: https://mui.com/material-ui/react-select/
+            <>
+              <Select
+                // {...register('action')} // Обычный {...register()}  при "disabled" всё равно отправляет объекты со значениями (defaultValue)
+                name="action"
+                id="action"
+                disabled={watch('independently')} // если галочка то не активна
+                defaultValue={'eating'}
+                // label="Age"
+              >
+                <MenuItem value={'eating'} selected>
+                  приём пищи
+                </MenuItem>
+                <MenuItem value={'firstBreakfast'}>завтрак</MenuItem>
+                <MenuItem value={'lastSupper'}>ужин</MenuItem>
+                <MenuItem value={'sleep'}>сон</MenuItem>
+              </Select>
+            </>
+          )}
+        />
       </FormControl>
     </FormStep>
   );

@@ -8,6 +8,7 @@ import { Box, InputAdornment, TextField, Typography } from '@mui/material'; // m
 import StepOne from './stepsForm/StepOne';
 import StepTwo from './stepsForm/StepTwo';
 import StepThree from './stepsForm/StepThree';
+import StepFour from './stepsForm/StepFour';
 
 const RecipeForm: FC = () => {
   // handleSubmit - wrapper обработчика
@@ -43,32 +44,9 @@ const RecipeForm: FC = () => {
           {/* Step #2 Поле ввода интервала времени приёма лекарства (пропсы от 'react-hook-form')*/}
           <StepTwo register={register} errors={errors} watch={watch} control={control}/>
           {/* Step #3 Поле ввода "Особенности приёма": До, вовремя, после И  еды/завтрака...(пропсы от 'react-hook-form')*/}
-          <StepThree register={register} errors={errors} watch={watch} control={control} />
-
-          {/* //! Количество приёмов */}
-          <h3>Количество приёмов</h3>
-          <label>
-            <input
-              type="number"
-              {...register('quantity')}
-              name="quantity"
-              id="quantity"
-              defaultValue={'3'}
-            />
-            <span>раз[a]/</span>
-            <span>в </span>
-            <select {...register('unitTime')} name="unitTime" id="unitTime">
-              <option key={'day'} value="day">
-                день
-              </option>
-              <option key={'week'} value="week">
-                неделю
-              </option>
-              <option key={'month'} value="month">
-                месяц
-              </option>
-            </select>
-          </label>
+          <StepThree register={register} watch={watch} control={control} />
+          {/* Step #4 Поле ввода "Количество приёмов": например: 3 раза в день...(пропсы от 'react-hook-form')*/}
+          <StepFour register={register} watch={watch} control={control} />
 
           {/* //! Курс приёма */}
           <div>

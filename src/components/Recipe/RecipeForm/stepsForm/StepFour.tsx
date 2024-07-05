@@ -74,25 +74,23 @@ const StepFour: FC<IProps> = ({ register, watch, control }) => {
       <FormControl fullWidth>
         <Controller
           control={control} // передали через пропсы из RecipeForm
-          name="unitTime" //! имя поля
+          name="unitTime" // имя поля
           defaultValue={'day'} // ? set defaultValue
           rules={{
-            required: true, // обязательное поле
+            required: true, // обязательное к заполнению поле
           }}
           render={({ field }) => (
             // Select от Material-UI: https://mui.com/material-ui/react-select/
             <>
               <FormHelperText>раз[a]/в</FormHelperText>
               <Select
+                {...register('unitTime')}
                 name="unitTime"
                 id="unitTime"
                 required={true}
                 defaultValue={'day'}
-                // label="раз[a]/в"
               >
-                <MenuItem value={'day'}>
-                  день
-                </MenuItem>
+                <MenuItem value={'day'}>день</MenuItem>
                 <MenuItem value={'week'}>неделю</MenuItem>
                 <MenuItem value={'month'}>месяц</MenuItem>
               </Select>

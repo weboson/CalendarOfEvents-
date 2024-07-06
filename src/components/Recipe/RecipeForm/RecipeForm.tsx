@@ -9,6 +9,7 @@ import StepOne from './stepsForm/StepOne';
 import StepTwo from './stepsForm/StepTwo';
 import StepThree from './stepsForm/StepThree';
 import StepFour from './stepsForm/StepFour';
+import StepFive from './stepsForm/StepFive';
 
 const RecipeForm: FC = () => {
   // handleSubmit - wrapper обработчика
@@ -47,35 +48,9 @@ const RecipeForm: FC = () => {
           <StepThree register={register} watch={watch} control={control} />
           {/* Step #4 Поле ввода "Количество приёмов": например: 3 раза в день...(пропсы от 'react-hook-form')*/}
           <StepFour register={register} watch={watch} control={control} />
+          {/* Step #5 Поле ввода "Курс приёма" (продолжительность приёма ЛС): (пропсы от 'react-hook-form')*/}
+          <StepFive register={register} watch={watch} control={control} />
 
-          {/* //! Курс приёма */}
-          <div>
-            <h4>Курс (продолжительноть приёма ЛС)</h4>
-            <input
-              type="text"
-              defaultValue={'1'}
-              {...register('duration.index')}
-            />
-            <select
-              id="duration"
-              {...register('duration.title')}
-              name="duration"
-              defaultValue={'months'}
-            >
-              <option key={'days'} value="days">
-                день{' '}
-              </option>
-              <option key={'weeks'} value="weeks">
-                неделя
-              </option>
-              <option key={'months'} value="months">
-                месяц
-              </option>
-              <option key={'years'} value="years">
-                год
-              </option>
-            </select>
-          </div>
 
           {/* //! дата старта */}
           <h4>Старт курса:</h4>

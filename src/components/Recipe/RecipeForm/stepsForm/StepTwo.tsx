@@ -10,7 +10,7 @@ import {
   UseFormWatch,
 } from 'react-hook-form';
 import { FormStep } from '../../stylesRecipePage/sc_RecipePage';
-import { Checkbox, FormControlLabel, Typography } from '@mui/material';
+import { Checkbox, FormControlLabel, FormHelperText, Typography } from '@mui/material';
 import NumberInputMUI from './NumberInputMUI';
 
 
@@ -62,6 +62,7 @@ const StepTwo: FC<IProps> = ({ register, watch, control }) => {
         >
           Интервал времени: введите время{' '}
         </Typography>
+        <FormHelperText>*Пример: приём за "1 час" и "0 мин" перед приёмом пищи </FormHelperText>
         <label htmlFor="intervalMinute">часы: </label>
         {/*//* Controller от "react-hook-form", чтобы взять данные с нестандартного поля MUI */}
         {/*// Обычный {...register()}  не ловит измененное значение*/}

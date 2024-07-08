@@ -10,6 +10,7 @@ import StepTwo from './stepsForm/StepTwo';
 import StepThree from './stepsForm/StepThree';
 import StepFour from './stepsForm/StepFour';
 import StepFive from './stepsForm/StepFive';
+import StepSix from './stepsForm/StepSix';
 
 const RecipeForm: FC = () => {
   // handleSubmit - wrapper обработчика
@@ -49,22 +50,12 @@ const RecipeForm: FC = () => {
           {/* Step #4 Поле ввода "Количество приёмов": например: 3 раза в день...(пропсы от 'react-hook-form')*/}
           <StepFour register={register} watch={watch} control={control} />
           {/* Step #5 Поле ввода "Курс приёма" (продолжительность приёма ЛС): (пропсы от 'react-hook-form')*/}
-          <StepFive register={register} watch={watch} control={control} />
+          <StepFive register={register} control={control} />
+          {/* Step #6 Поле ввода "Дата старта курса" (дата начала приёма ЛС): (пропсы от 'react-hook-form')*/}
+          <StepSix register={register} control={control} />
 
 
-          {/* //! дата старта */}
-          <h4>Старт курса:</h4>
-          <div>
-            <label htmlFor="startDate"></label>
-            {/* дата по-умолчанию устанавливается JS в useEffect */}
-            <input
-              {...register('start')}
-              name="start"
-              type="date"
-              id="startDate"
-              value={new Date().toJSON().slice(0, 10)} // '2024-06-10T15:42:33.895Z' -> slice(0,10) -> '2024-06-10'
-            />
-          </div>
+
           {/* //! кнопка отправки */}
           {/* <input type="submit" /> */}
           <button type="submit">Отправить</button>

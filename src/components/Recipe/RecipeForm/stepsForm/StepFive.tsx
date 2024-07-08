@@ -13,7 +13,6 @@ import NumberInputMUI from './NumberInputMUI';
 
 interface IProps {
   register: UseFormRegister<FieldValues>; // от 'react-hook-form'
-  watch: UseFormWatch<FieldValues>;
   control: Control<FieldValues, any>;
 }
 
@@ -55,6 +54,7 @@ const StepFive: FC<IProps> = ({ control, register }) => {
               onChange={(_, value) => {
                 // событие изменение
                 field.onChange(value); // присваивает значение
+                console.log(value)
               }}
             />
           </>

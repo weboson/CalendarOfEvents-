@@ -34,6 +34,8 @@
 7. Styled-components: "^6.1.1"
 8. React-hook-form: "^7.51.5"
 9. Mui/material": "^5.15.20"
+10. @mui/x-date-pickers: "^7.9.0"
+11. dayjs: "^1.11.11"
 
 ## Backend: 
 1. Typescript": "^5.0.2",

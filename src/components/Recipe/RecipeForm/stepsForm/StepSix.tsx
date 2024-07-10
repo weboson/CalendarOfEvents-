@@ -1,32 +1,19 @@
 //! Step 6: Поле ввода "Дата старта курса" (дата начала приёма ЛС): input type="date"
-// от дополнительной библиотеке "x-date-pickers" (AdapterDayjs идет от "dayjs")
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'; // для DatePicker
 import 'dayjs/locale/ru'; // для формата даты
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
-import { FC, useState } from 'react';
-import {
-  Control,
-  Controller,
-  FieldValues,
-  UseFormRegister,
-} from 'react-hook-form';
-import dayjs from 'dayjs';
-import moment from 'moment';
+import { FC } from 'react';
+import { Control, Controller, FieldValues } from 'react-hook-form';
 import { FormStep } from '../../stylesRecipePage/sc_RecipePage';
 import { Typography } from '@mui/material';
-import { DateTimePicker } from '@mui/x-date-pickers';
+import moment from 'moment';
 
 interface IProps {
-  register: UseFormRegister<FieldValues>; // от 'react-hook-form'
-  control: Control<FieldValues, any>;
+  control: Control<FieldValues, any>; // от 'react-hook-form'
 }
 
-const StepSix: FC<IProps> = ({ control, register }) => {
-
-  const [val, setValue] = useState()
-  console.log(val)  
+const StepSix: FC<IProps> = ({ control }) => {
   return (
     //! дата старта
     <FormStep>
@@ -44,45 +31,37 @@ const StepSix: FC<IProps> = ({ control, register }) => {
         Шаг #6: Дата начала курса:
       </Typography>
 
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <LocalizationProvider dateAdapter={AdapterMoment}>
         {/* воспользуюсь moment() для текущего дня */}
         {/* по обычному захватить значение не получится, нужно "...fieldProps"*/}
-        {/* проблема: возращаемый формат не нравится ("2024-07-07T19:00:00.000Z"), придется при отправке на сервер: JSON.stringify(data.start).slice(0,11) */}
+        {/* проблема: возращаемый формат не нравится ("2024-07-07T19:00:00.000Z") (от defaultValue не зависит), придется при отправке на сервер: JSON.stringify(data.start).slice(0,11) */}
+        {/* // onChange={(e) => onChange(e.target.value.slice(0, 11))} // также => "2024-07-07T19:00:00.000Z" */}
+        {/* // defaultValue={moment('DD.MM.YYYY')} и 'moment('2022-04-17')' // также => "2024-07-07T19:00:00.000Z" + сообщение об устаривании*/}
         <Controller
           control={control}
           name="start"
-          defaultValue={dayjs(moment().format('YYYY-MM-DD'))} // ? set defaultValue
-          rules={{ 
-            required: true
+          defaultValue={moment()}
+          rules={{
+            required: true,
           }}
           render={({ field: { onChange, ...fieldProps } }) => {
             return (
               <>
                 <DatePicker
-                  {...fieldProps}
+                  setLocaleToValue
+                  {...fieldProps.value.typeof}
                   onChange={onChange}
-                  // onChange={onChange}
-                  defaultValue={dayjs(moment().format('YYYY-MM-DD'))}
+                  defaultValue={moment()}
                   format={'DD.MM.YYYY'} // формат показываемой даты
                   name="start"
+                  //minDate={moment()} // помогает отключить прошлые даты
+                  disablePast // или так, также помогает отключить прошлые даты
                 />
               </>
             );
           }}
         />
-
-        {/* Или так: "new Date()"*/}
-        {/* <DatePicker defaultValue={dayjs(new Date().toJSON().slice(0, 10))}/> 
-        // '2024-06-10T15:42:33.895Z' -> slice(0,10) -> '2024-06-10' */}
       </LocalizationProvider>
-
-      {/* <input
-              {...register('start2')}
-              name="start"
-              type="date"
-              id="startDate"
-              value={new Date().toJSON().slice(0, 10)} // '2024-06-10T15:42:33.895Z' -> slice(0,10) -> '2024-06-10'
-            /> */}
     </FormStep>
   );
 };

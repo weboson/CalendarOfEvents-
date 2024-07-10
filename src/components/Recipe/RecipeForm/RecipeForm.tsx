@@ -1,16 +1,15 @@
 import { FC } from 'react';
 import {
-  FormStep,
   FromWrappeer,
 } from '../stylesRecipePage/sc_RecipePage';
 import { useForm } from 'react-hook-form'; // lib for forms
-import { Box, InputAdornment, TextField, Typography } from '@mui/material'; // material UI (CSS-фрейворк, ngf Bootstrap)
 import StepOne from './stepsForm/StepOne';
 import StepTwo from './stepsForm/StepTwo';
 import StepThree from './stepsForm/StepThree';
 import StepFour from './stepsForm/StepFour';
 import StepFive from './stepsForm/StepFive';
 import StepSix from './stepsForm/StepSix';
+import { Button } from '@mui/material';
 
 const RecipeForm: FC = () => {
   // handleSubmit - wrapper обработчика
@@ -21,19 +20,12 @@ const RecipeForm: FC = () => {
   const {
     control,
     register,
-    unregister,
     handleSubmit,
     watch,
     formState: { errors }, // вывод ошибки на валидацию
   } = useForm({
     mode: 'onChange', //! режим реагирования на изменение
   });
-
-  // решил прямо в атрибутах input выполнить этот код
-  // установка даты по-умолчанию через useEffect в input type="date"
-  // useEffect(() => {
-  //   document.querySelector('#startDate')!.value = (new Date()).toJSON().slice(0,10)
-  // }, []);
 
   const onSubmit = (data: any) => console.log(JSON.stringify(data)); // data возращает handleSubmit от 'react-hook-form'
 
@@ -52,13 +44,13 @@ const RecipeForm: FC = () => {
           {/* Step #5 Поле ввода "Курс приёма" (продолжительность приёма ЛС): (пропсы от 'react-hook-form')*/}
           <StepFive register={register} control={control} />
           {/* Step #6 Поле ввода "Дата старта курса" (дата начала приёма ЛС): (пропсы от 'react-hook-form')*/}
-          <StepSix register={register} control={control} />
+          <StepSix control={control} />
 
 
 
           {/* //! кнопка отправки */}
-          {/* <input type="submit" /> */}
-          <button type="submit">Отправить</button>
+          {/* <button type="submit">Отправить</button> */}
+          <Button variant="contained" type="submit">Отправить</Button>
         </form>
       </FromWrappeer>
     </>

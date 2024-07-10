@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 //! main wrapper
 export const WrapperRecipes = styled.div`
-  height: 89vh; /* index.css(100vh), cs_calendarHeader.tsx(4vh), sc_Monitor.tsx(7vh), sc_DayGrid.tsx(89vh)/ */
+  height: 100%; /* index.css(100vh), cs_calendarHeader.tsx(4vh), sc_Monitor.tsx(7vh), sc_DayGrid.tsx(89vh)/ */
   display: flex;
   flex-direction: column;
   overflow-x: auto;
@@ -54,13 +54,16 @@ export const HeadlineWrapper = styled.div`
 
 // Form Wrapper (обертка для секотров формы) 
 export const FromWrappeer = styled.div`
-   display: flex;
-  flex-direction: column; 
+  display: flex;
+  /* flex-direction: column;  */
   flex-direction: row; // элементы располагаются в строку, слева направо.
   flex-wrap: nowrap; // в строку горизонтально (for adaptive)
   width: 100%;
   height: 100%;
   background-color: #E6E6E6;
+  @media (min-width: 768px) {
+    flex-wrap: wrap; // в столбик вертикально  https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap
+  }
   form {
     display: flex;
     flex-wrap: wrap;
@@ -76,63 +79,28 @@ export const FromWrappeer = styled.div`
   } 
 `;
 
-//! формы поделены на 4 шага (сектора) шириной по 25%
+//! общие стили для всех шагов
 export const FormStep = styled.div`
-  width: 25%;
+  width: 35%;
   display: flex; 
   flex-direction: column;
   border: 1px solid #B1B1B1;
   border-radius: 5px;
   margin: 10px 10px 0 10px; // внизу 0, чтобы не было двойного margin между блоками
   padding: 10px;
+  @media (min-width: 768px) {
+    flex-wrap: wrap; // в столбик вертикально
+    width: 100%;
+  }
 `
 //Step
 export const TearFrame = styled.div`
   color: #B1B1B1;
 `
 
-// Input + label
-export const InputWrapper = styled.div`
-    /* font-family: 'Raleway', sans-serif;
-    color: #1e1f21;
-    margin-left: 8%;
-    width: 100%; */
-    /* background-color: red; */
-  input, label {
-    /* height: 100%;
-    color: #565759;
-    font-size: 1.3rem;
-    line-height: 1.2; */
-  }
-  label {
-    /* font-weight: 400;
-    margin-bottom: 1%;
-    margin-left: 2%; */
-  }
-  input {
-  /* input[type=text] { */
-  /* font-size: 2em; */
-    /* padding: 2%;
-    border: 1px solid #bdbdbd;
-    border-radius: 0.35rem;
-    font-style: italic; */
-    /* width: 100%; */
-    /* border-radius: 10%; */
-    &:focus {
-      /* color: #212529;
-      background-color: #fff;
-      border-color: #bdbdbd;
-      outline: 0;
-      box-shadow: 0 0 2rem 0.2rem rgba(158, 158, 158, 0.25); */
-    }
-    &::placeholder {
-      
-    }
-    button {
-      
-    }
-
-  }
-`;
+// Step #1
+export const FormStepOne = styled.div`
+  height: 50%;
+`
 
 

@@ -404,7 +404,7 @@ const recipesMedications: IRecipesMedications = [
             index: 2,
             title: 'months', 
         },  
-        start: '2024-06-10',
+        start: '2024-06-10', 
         createDateRecipe: '2024-06-03',//  дата создания рецепта одного ЛС
         updateDateRecipe: '2024-06-03', //  возможность изменить весь рецепт
     },

@@ -9,6 +9,12 @@ export const DivWrapper = styled('div')`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-direction: row; // в строку
+  @media (max-width: 834px) { // при max-width: 834px и меньше
+    flex-direction: column; // в столбик
+    height: 100%;
+    padding: 1% 0;
+  }
   a { // убрать с Link (которая в верстке <a> ) подчеркивание
     text-decoration: none;
   }
@@ -35,6 +41,11 @@ text-decoration: none;
 export const ButtonsWrapper = styled('div')`
   display: flex;
   justify-content: center;
+  @media (max-width: 374px) {
+    flex-direction: column; // в столбик вертикально
+    justify-content: center;
+    width: 100%;
+  }
 `;
 
 interface IModeDateButtonProps {
@@ -50,6 +61,9 @@ export const ModeDateButton = styled('button')<IModeDateButtonProps>`
   padding-left: 16px;
   font-weight: bold;
   cursor: pointer;
+  @media (max-width: 834px) { // при max-width: 834px и меньше
+    margin: 3% 0;
+  }  
   /* закругление углов крайних кнопок */
   ${(props) =>
     props.$extremeButtonLeft ? 'border-radius: 4px 0 0 4px ;' : null}

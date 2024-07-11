@@ -53,7 +53,7 @@ const Headers: FC = () => {
           if (index < 4) {
             return (
               // ссылка домашняя
-              <Link to={'/'}>
+              <Link to={'/'} key={index+1}>
                 <ModeDateButton
                   key={index}
                   // active button/mode
@@ -73,9 +73,9 @@ const Headers: FC = () => {
             // кнопка Recipes со ссылкой на '<Link to={'/recipes'}>'
           } else if (index >= 4) {
             return (
-              <Link to={'/recipes'}>
+              <Link to={'/recipes'} key={index+2}>
                 <ModeDateButton
-                  key={index}
+                  key={4}
                   // active button/mode
                   onClick={() => handleClick(index)}
                   $isCurrentModeDate={activeMenu == index ? true : false}

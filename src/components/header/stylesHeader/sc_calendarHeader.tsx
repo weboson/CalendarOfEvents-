@@ -64,6 +64,11 @@ export const ModeDateButton = styled('button')<IModeDateButtonProps>`
   @media (max-width: 834px) { // при max-width: 834px и меньше
     margin: 3% 0;
   }  
+  @media (max-width: 375px) { // при max-width: 834px и меньше
+    display: flex;
+    margin: auto;
+  }  
+
   /* закругление углов крайних кнопок */
   ${(props) =>
     props.$extremeButtonLeft ? 'border-radius: 4px 0 0 4px ;' : null}

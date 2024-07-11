@@ -6,7 +6,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { FC } from 'react';
 import { Control, Controller, FieldValues } from 'react-hook-form';
 import { FormStep } from '../../stylesRecipePage/sc_RecipePage';
-import { Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import moment from 'moment';
 
 interface IProps {
@@ -62,6 +62,8 @@ const StepSix: FC<IProps> = ({ control }) => {
           }}
         />
       </LocalizationProvider>
+      
+      <Button style={{margin: '3px 0'}} variant="contained" type="submit">Отправить</Button>
     </FormStep>
   );
 };

@@ -1,4 +1,4 @@
-//! основные стили используются через Material-UI (RecipeForm.tsx) 
+//! основные стили используются через Material-UI (RecipeForm.tsx)
 // стили для страницы /resipes (рецепты)
 import styled from 'styled-components';
 
@@ -8,8 +8,6 @@ export const WrapperRecipes = styled.div`
   display: flex;
   flex-direction: column;
   overflow-x: auto;
-  /* justify-content:space-between; */
-  /* background-color: #1e1f21; */
   background-color: #2a282d;
   @media (max-width: 1210px) {
     flex-wrap: nowrap; // столбик вертикальный  https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap
@@ -51,56 +49,38 @@ export const HeadlineWrapper = styled.div`
   }
 `;
 
-
-// Form Wrapper (обертка для секотров формы) 
+// Form Wrapper (обертка для секотров формы)
 export const FromWrappeer = styled.div`
-  display: flex;
-  /* flex-direction: column;  */
-  flex-direction: row; // элементы располагаются в строку, слева направо.
-  flex-wrap: nowrap; // в строку горизонтально (for adaptive)
-  width: 100%;
-  height: 100%;
-  background-color: #E6E6E6;
-  @media (min-width: 768px) {
-    flex-wrap: wrap; // в столбик вертикально  https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap
-  }
+  height: 81vh;
+  background-color: #e6e6e6;
+
   form {
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    width: 100%;
+    flex-wrap: wrap; // при сжатии переходят на новую строку
   }
-  h2 { //! стили переопределены в MUI (RecipeForm.tsx)
-    /* color: #565759; */
-    /* font-weight: 400; */
-    /* box-sizing: border-box;
-    font-family: Roboto, Helvetica, Arial, sans-serif; */
-    /* margin: 2%; */
-  } 
+  h2 {
+    //! стили переопределены в MUI (RecipeForm.tsx)
+  }
 `;
 
 //! общие стили для всех шагов
 export const FormStep = styled.div`
-  width: 35%;
-  display: flex; 
+  display: flex;
+  flex: 600px;
+  justify-content:space-between;
+  min-height: 100%;
   flex-direction: column;
-  border: 1px solid #B1B1B1;
+  border: 1px solid #b1b1b1;
   border-radius: 5px;
   margin: 10px 10px 0 10px; // внизу 0, чтобы не было двойного margin между блоками
   padding: 10px;
-  @media (min-width: 768px) {
-    flex-wrap: wrap; // в столбик вертикально
-    width: 100%;
-  }
-`
+`;
 //Step
 export const TearFrame = styled.div`
-  color: #B1B1B1;
-`
+  color: #b1b1b1;
+`;
 
 // Step #1
 export const FormStepOne = styled.div`
   height: 50%;
-`
-
-
+`;

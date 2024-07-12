@@ -3,10 +3,16 @@ import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) {} // private, readonly это от TypeScript 
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  // http://localhost:3000/
+  @Get() // Get-запрос по адресу в скобках, например: @Get('/rishat')
+  getHello(): string { // метод, который отработает при get-запросе
+    return this.appService.getHello(); // запустить метод класса
   }
 }
+
+// пример конструкции:
+// const appService = new AppService()
+// const a = new AppController(appService).getHello()
+

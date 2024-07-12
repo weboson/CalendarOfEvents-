@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 
 @Module({
   imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController], // типа роуты
+  providers: [AppService], // логика
 })
 export class AppModule {}

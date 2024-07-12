@@ -1,4 +1,5 @@
 //! Step 6: Поле ввода "Дата старта курса" (дата начала приёма ЛС): input type="date"
+//! + Button
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'; // для DatePicker
 import 'dayjs/locale/ru'; // для формата даты
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -62,7 +63,7 @@ const StepSix: FC<IProps> = ({ control }) => {
           }}
         />
       </LocalizationProvider>
-      
+      {/* //! кнопка "отправить" */}
       <Button style={{margin: '3px 0'}} variant="contained" type="submit">Отправить</Button>
     </FormStep>
   );

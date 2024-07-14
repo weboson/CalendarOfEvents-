@@ -40,7 +40,11 @@
 ## Backend: 
 1. Typescript": "^5.0.2",
 2. Nestjs: "^10.0.0",
+3. Typeorm: "^0.3.20",
+4. Pg: "^8.12.0",
 
+## DataBase:
+- PostgreSQL
 
 
 

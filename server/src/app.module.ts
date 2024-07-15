@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { ConfigModule, ConfigService } from '@nestjs/config'; // доп lib для работы с .env - файлами 
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { RecipeModule } from './recipe/recipe.module';
 
 @Module({
   imports: [UserModule, ConfigModule.forRoot({
@@ -20,7 +21,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       entities: [__dirname + '/**/*.entity{.js, .ts}'], // подключим наши схемы БД (какие поля и types есть таблицах (user, auth etc.) БД). __dirname - это от глобальная переменная в Nodejs
     }),
     inject: [ConfigService], // подключить
-  })],
+  }), RecipeModule],
   controllers: [AppController], // типа роуты
   providers: [AppService], // логика
 })

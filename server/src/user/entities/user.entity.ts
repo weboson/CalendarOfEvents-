@@ -1,3 +1,4 @@
+//! User
 //  для схемы (какие поля есть в БД) в БД
 // TypeORM Entity: https://typeorm.io/entity-inheritance 
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"; // объявление сущности

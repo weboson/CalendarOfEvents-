@@ -1,11 +1,12 @@
 //! Recipe
 //  для схемы (какие поля есть в БД) в БД
+import { Mealschedule } from "src/mealschedule/entities/mealschedule.entity";
 import { User } from "src/user/entities/user.entity";
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity() // для объявление (создания) сущности
 export class Recipe {
-    @PrimaryGeneratedColumn({name: 'recipe_id'}) // автоматически генерирует значение для id для указанную колонку с именем "recipe_id", и указанным типом
+    @PrimaryGeneratedColumn({ name: 'recipe_id' }) // автоматически генерирует значение для id для указанную колонку с именем "recipe_id", и указанным типом
     id: number
     // https://typeorm.io/entities#column-types
     @Column("varchar", { length: 200 }) // 'Урсосан', 'Ибупрофенэ etc.
@@ -18,13 +19,13 @@ export class Recipe {
     @Column({ type: "varchar", nullable: true }) // 'eating', 'first breakfast' etc.
     action: string
 
-    @Column({ type: "int", nullable: true  }) // exmple: 3 раза 
-    quantity: number 
+    @Column({ type: "int", nullable: true }) // exmple: 3 раза 
+    quantity: number
 
-    @Column({ type: "varchar", nullable: true  }) // 'day','week', 'month' etc.
+    @Column({ type: "varchar", nullable: true }) // 'day','week', 'month' etc.
     unitTime: string
 
-    @Column({ type: "varchar", nullable: true  }) // 'before','after', 'while'etc.
+    @Column({ type: "varchar", nullable: true }) // 'before','after', 'while'etc.
     position: string
 
     @Column("simple-json", { nullable: true }) //! 'simple-json' - повзоляет сохранить объект в виде json: https://typeorm.io/entities#simple-json-column-type
@@ -32,7 +33,7 @@ export class Recipe {
 
     @Column("simple-json") // 'simple-json' - позволяет сохранить объект в виде json: https://typeorm.io/entities#simple-json-column-type
     duration: { index: number; title: string } // продолжительность курса до 3 месяца - currenDate <= currenDate.set(3, 'months')
- 
+
     @Column({ type: "date" })
     start: Date // начало курса (по-умолчанию будет дата создания) - чтобы user сам мог контролировать  начало
 
@@ -45,7 +46,11 @@ export class Recipe {
 
     //* для связи к таблице user: https://typeorm.io/many-to-one-one-to-many-relations 
     @ManyToOne(() => User, (user) => user.recipes)
-    @JoinColumn({name: 'user_id'}) // колона "user_id" будет иметь связь с user.id
-    // описание связи с типом (это не поле)
+    @JoinColumn({ name: 'user_id' }) // колонка "user_id" будет иметь связь с user.id
     user: User
+
+    //* для связи к таблице mealschedule (график приёма пищи определенного User)
+    @ManyToOne(() => Mealschedule, (mealschedule) => mealschedule.recipes)
+    @JoinColumn({ name: 'mealschedule_id' }) // колонка "mealschedule_id" будет иметь связь с mealschedule.id
+    mealschedule: Mealschedule
 }

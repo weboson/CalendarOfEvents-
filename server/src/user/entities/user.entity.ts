@@ -1,12 +1,13 @@
 //! User
 //  для схемы (какие поля есть в БД) в БД
 // это таблица - TypeORM Entity: https://typeorm.io/entity-inheritance 
+import { Mealschedule } from "src/mealschedule/entities/mealschedule.entity";
 import { Recipe } from "src/recipe/entities/recipe.entity";
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"; // объявление сущности
+import { Column, CreateDateColumn, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"; // объявление сущности
 
 @Entity() // для объявление (создания) сущности
 export class User {
-    @PrimaryGeneratedColumn() // автоматически генерирует указанную колонку, указанным типом
+    @PrimaryGeneratedColumn({name: 'user_id'}) // автоматически генерирует указанную колонку, указанным типом
     id: number
 
     @Column({ type: "varchar" }) // https://typeorm.io/entities#column-types
@@ -27,5 +28,10 @@ export class User {
     @OneToMany(() => Recipe, (recipe) => recipe.user, { onDelete: 'CASCADE' }) 
     // описание связи с типом (это не поле)
     recipes: Recipe[]
+
+    //* связь с графиком приёма пищи
+    @OneToOne(() => Mealschedule, (mealschedule) => mealschedule.user, { onDelete: 'CASCADE' }) 
+    // описание связи с типом (это не поле)
+    mealschedule: Mealschedule
 
 }

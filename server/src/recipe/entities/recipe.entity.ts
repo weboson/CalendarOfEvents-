@@ -1,6 +1,7 @@
 //! Recipe
 //  для схемы (какие поля есть в БД) в БД
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { User } from "src/user/entities/user.entity";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity() // для объявление (создания) сущности
 export class Recipe {
@@ -13,19 +14,20 @@ export class Recipe {
     @Column({ type: "boolean" }) // в зависимости/вне зависимости
     independently: boolean
 
-    @Column({ type: "varchar" }) // 'eating', 'first breakfast' etc.
+    //* nullable: true - допускается значение null
+    @Column({ type: "varchar", nullable: true }) // 'eating', 'first breakfast' etc.
     action: string
 
-    @Column({ type: "int" }) // exmple: 3 раза 
+    @Column({ type: "int", nullable: true  }) // exmple: 3 раза 
     quantity: number 
 
-    @Column({ type: "varchar" }) // 'day','week', 'month' etc.
+    @Column({ type: "varchar", nullable: true  }) // 'day','week', 'month' etc.
     unitTime: string
 
-    @Column({ type: "varchar" }) // 'before','after', 'while'etc.
+    @Column({ type: "varchar", nullable: true  }) // 'before','after', 'while'etc.
     position: string
 
-    @Column("simple-json") //! 'simple-json' - повзоляет сохранить объект в виде json: https://typeorm.io/entities#simple-json-column-type
+    @Column("simple-json", { nullable: true }) //! 'simple-json' - повзоляет сохранить объект в виде json: https://typeorm.io/entities#simple-json-column-type
     interval: { hour: number; minute: number } // exm: спустя 30 минут после еды 
 
     @Column("simple-json") // 'simple-json' - позволяет сохранить объект в виде json: https://typeorm.io/entities#simple-json-column-type
@@ -40,4 +42,10 @@ export class Recipe {
 
     @UpdateDateColumn() // автоматически создает дату ОБНОВЛЕНИЯ
     updateDateRecipe: Date //  возможность изменить весь рецепт 
+
+    //* для связи к таблице user: https://typeorm.io/many-to-one-one-to-many-relations 
+    @ManyToOne(() => User, (user) => user.recipes)
+    @JoinColumn({name: 'user_id'}) // колона "user_id" будет иметь связь с user.id
+    // описание связи с типом (это не поле)
+    user: User
 }

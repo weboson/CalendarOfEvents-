@@ -16,10 +16,10 @@ export class User {
     password: string
 
     @CreateDateColumn() // автоматически создает дату создания каждого объекта
-    createdAt: Date // создан такой даты
+    createdAtUser: Date // создан такой даты
 
     @UpdateDateColumn()
-    updateAt: Date // дата обновления определенного объекта
+    updateAtUser: Date // дата обновления определенного объекта
 
     //* связь с рецептами: один user имеет связь с нексолькими Recipes (recipe.entity.ts): https://typeorm.io/many-to-one-one-to-many-relations
     // привязываемся к схеме Recipe и именно к полю id

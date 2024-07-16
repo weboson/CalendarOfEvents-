@@ -5,7 +5,7 @@ import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGenerat
 
 @Entity() // для объявление (создания) сущности
 export class Recipe {
-    @PrimaryGeneratedColumn({name: 'recipe_id'}) // автоматически генерирует указанную колонку с именем "recipe_id", и указанным типом
+    @PrimaryGeneratedColumn({name: 'recipe_id'}) // автоматически генерирует значение для id для указанную колонку с именем "recipe_id", и указанным типом
     id: number
     // https://typeorm.io/entities#column-types
     @Column("varchar", { length: 200 }) // 'Урсосан', 'Ибупрофенэ etc.

@@ -35,13 +35,16 @@
 8. React-hook-form: "^7.51.5"
 9. Mui/material": "^5.15.20"
 10. @mui/x-date-pickers: "^7.9.0"
-11. dayjs: "^1.11.11"
+11. dayjs: "^1.11.11" (unistalled)
 
 ## Backend: 
 1. Typescript": "^5.0.2",
 2. Nestjs: "^10.0.0",
 3. Typeorm: "^0.3.20",
 4. Pg: "^8.12.0",
+5. Class-transformer: "^0.5.1",
+6. Class-validator: "^0.14.1",
+7. Argon2: "^0.40.3",
 
 ## DataBase:
 - PostgreSQL

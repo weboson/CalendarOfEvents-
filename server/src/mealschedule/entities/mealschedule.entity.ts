@@ -1,4 +1,4 @@
-//! Meal schedule - таблица графика приёма пищи
+//! Meal schedule - таблица графика приёма пищи - один график у одного user
 //  для схемы (какие поля есть в БД) в БД
 // это таблица - TypeORM Entity: https://typeorm.io/entity-inheritance 
 import { Recipe } from "src/recipe/entities/recipe.entity";
@@ -33,6 +33,7 @@ export class Mealschedule {
 
     //* для связи с таблицей user: https://typeorm.io/many-to-one-one-to-many-relations 
     @OneToOne(() => User, (user) => user.recipes)
+    // объеденим в одну колонку 'user_id' - хотя зачем? пусть пока будет
     @JoinColumn({ name: 'user_id' }) // колонка "user_id" будет иметь связь с user.id
     // описание связи с типом (это не поле)
     user: User

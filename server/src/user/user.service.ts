@@ -15,7 +15,7 @@ export class UserService {
 
   async create(createUserDto: CreateUserDto) {
     // существует ли уже такой user - проверка по email? https://youtu.be/PWWz47GtGKo?list=PLkUJHNMBzmtQj5qvTCqn0uMXFDG4ENiwf&t=1138 
-    // find == это вместо SQL-запросов: WHERE ..., SELECT table ...etc
+    // findOne (от TypeORM wrapper Repository<сущность>) == это вместо SQL-запросов: WHERE ..., SELECT table ...etc
     const existUser = await this.userRepository.findOne({
       where: {
         email: createUserDto.email
@@ -27,11 +27,12 @@ export class UserService {
       email: createUserDto.email,
       password: await argon2.hash(createUserDto.password) // зашифровали пароль
     })
-    
-    return {user};
+
+    return { user }; // для отладки
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(email: string) {
+    // findOne (от TypeORM wrapper Repository<сущность>)
+    return await this.userRepository.findOne({ where: { email, } }); // найти по email { email: email } - сокращенно {email} 
   }
 }

@@ -6,6 +6,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config'; // доп lib дл
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RecipeModule } from './recipe/recipe.module';
 import { MealscheduleModule } from './mealschedule/mealschedule.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [UserModule, ConfigModule.forRoot({
@@ -22,7 +23,7 @@ import { MealscheduleModule } from './mealschedule/mealschedule.module';
       entities: [__dirname + '/**/*.entity{.js, .ts}'], // подключим наши схемы БД (какие поля и types есть таблицах (user, auth etc.) БД). __dirname - это от глобальная переменная в Nodejs
     }),
     inject: [ConfigService], // подключить
-  }), RecipeModule, MealscheduleModule],
+  }), RecipeModule, MealscheduleModule, AuthModule],
   controllers: [AppController], // типа роуты
   providers: [AppService], // логика
 })

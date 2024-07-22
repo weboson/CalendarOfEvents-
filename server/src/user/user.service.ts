@@ -1,3 +1,4 @@
+//! логика поиска и сохранения нового пользователя в БД
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -22,7 +23,7 @@ export class UserService {
       }
     })
     if (existUser) throw new BadRequestException('Такой email уже существует')
-    // если такого user нет в БД, то сохраняем его в БД, как новый
+    //! если такого user нет в БД, то сохраняем его в БД, как новый
     const user = await this.userRepository.save({
       email: createUserDto.email,
       password: await argon2.hash(createUserDto.password) // зашифровали пароль

@@ -1,3 +1,4 @@
+import { JwtService } from '@nestjs/jwt';
 //! логика поиска и сохранения нового пользователя в БД
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -10,7 +11,8 @@ import * as argon2 from "argon2"; // хэширование пароля (шиф
 export class UserService {
   // заинжектим (внедрим) нашу таблицу
   constructor(
-    @InjectRepository(User) private userRepository: Repository<User>
+    @InjectRepository(User) private userRepository: Repository<User>,
+    private readonly JwtService: JwtService
   ) { }
 
 
@@ -29,7 +31,10 @@ export class UserService {
       password: await argon2.hash(createUserDto.password) // зашифровали пароль
     })
 
-    return { user }; // для отладки
+    // создадим при регистрации jwt-токен на основе поля email
+    const token = this.JwtService.sign({email: createUserDto.email })
+
+    return { user, token }; 
   }
 
   async findOne(email: string) {

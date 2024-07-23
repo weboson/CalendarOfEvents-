@@ -12,7 +12,7 @@ export class AppController {
   }
 }
 
-// пример конструкции:
+// пример конструкции класса:
 // const appService = new AppService()
 // const a = new AppController(appService).getHello()
 

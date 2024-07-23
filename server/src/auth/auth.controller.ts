@@ -20,7 +20,8 @@ export class AuthController {
     return this.authService.login(req.user); // id, email, JWT токен (ключ) 
   }
 
-
+  //! из фронта будем обращатся к роуту (http://localhost:3000/api/auth/profile) 
+  //! и  проверять в системе ли пользователь (и вообще есть у него действующий JWT-ключ)
   @UseGuards(JwtAuthGuard) // JWT-guard (охранник) - при авторизации (быть в системе) нужно передать действующий токен
   @Get('profile')
   getProfile(@Request() req) {

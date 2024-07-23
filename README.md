@@ -46,6 +46,7 @@
 6. Class-validator: "^0.14.1",
 7. Argon2: "^0.40.3",
 8. Passport: "^0.7.0",
+9. Passport-JWT": "^4.0.1",
 
 ## DataBase:
 - PostgreSQL

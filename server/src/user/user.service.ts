@@ -2,9 +2,10 @@ import { JwtService } from '@nestjs/jwt';
 //! логика поиска и сохранения нового пользователя в БД
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
-import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
-import { Repository } from 'typeorm';
+
+import { InjectRepository } from '@nestjs/typeorm'; // Модуль TypeORM для платформы Nest: https://docs.nestjs.com/techniques/database 
+import { Repository } from 'typeorm'; // либа для связи сервера с БД (PostgreSQL)
 import * as argon2 from "argon2"; // хэширование пароля (шифрование)
 
 @Injectable()

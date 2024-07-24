@@ -1,6 +1,7 @@
 //! Схема входящих данных
 // какие поля ожидаются при создании рецепта
 import { IsNotEmpty, IsOptional } from "class-validator"
+import { User } from "src/user/entities/user.entity";
 
 export class CreateRecipeDto {
     //* Шаг #1: Добавьте лекарство
@@ -36,4 +37,7 @@ export class CreateRecipeDto {
     @IsNotEmpty()
     start: Date // начало курса (по-умолчанию будет дата создания) - чтобы user сам мог контролировать  начало
 
+    // не знаю зачем, но видео это есть и оно используется в service в create(): https://youtu.be/p3iSpCvDAsI?list=PLkUJHNMBzmtQj5qvTCqn0uMXFDG4ENiwf&t=392
+    @IsOptional()
+    user?: User
 }

@@ -16,19 +16,21 @@ export class RecipeController {
     return this.recipeService.create(createRecipeDto, +req.user.id);
   }
 
-  @UseGuards(JwtAuthGuard) // проверка на JWT-токен
+  @UseGuards(JwtAuthGuard) // проверка на JWT-токен (авторизация)
   @Get()
   findAll(@Req() req) {
     return this.recipeService.findAll(+req.user.id); // все рецепты, которые создал текущий user
   }
 
+  @UseGuards(JwtAuthGuard) // проверка на JWT-токен (авторизация)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.recipeService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRecipeDto: UpdateRecipeDto) {
+  @UseGuards(JwtAuthGuard) // проверка на JWT-токен (авторизация)
+  update(@Param('id') id: string, @Body() updateRecipeDto: UpdateRecipeDto) { //UpdateRecipeDto extends CreateRecipeDto
     return this.recipeService.update(+id, updateRecipeDto);
   }
 

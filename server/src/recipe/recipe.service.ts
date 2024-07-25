@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateRecipeDto } from './dto/create-recipe.dto';
 import { UpdateRecipeDto } from './dto/update-recipe.dto';
 
@@ -45,7 +45,7 @@ export class RecipeService {
   async findAll(id: number) { // все рецепты, которые имеют связь с текущим user (с его id)
     return await this.recipeRepository.find({
       where: {
-        user: {id: id}, // где столбец связи user.id == id
+        user: { id: id }, // где столбец связи user.id == id
       },
       relations: { // и где есть связь с таблицей mealschedule (график приёма пищи)
         mealschedule: true,
@@ -53,10 +53,21 @@ export class RecipeService {
     })
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} recipe`;
+  //! Get(id)
+  // exemle: http://localhost:3000/api/recipes/2
+  async findOne(id: number) {
+    const recipeOne = await this.recipeRepository.findOne({
+      where: { id: id }, // Искать по id, т.е. где id в БД == api/recipes/:id
+      relations: { // связь с user и mealschedule
+        user: true,
+        mealschedule: true,
+      },
+    })
+    if (!recipeOne) throw new NotFoundException('Рецепт не найден')
+    return recipeOne; // если найден, то =>
   }
 
+  //! PATCH(id)
   update(id: number, updateRecipeDto: UpdateRecipeDto) {
     return `This action updates a #${id} recipe`;
   }

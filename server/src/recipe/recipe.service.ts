@@ -68,8 +68,14 @@ export class RecipeService {
   }
 
   //! PATCH(id)
-  update(id: number, updateRecipeDto: UpdateRecipeDto) {
-    return `This action updates a #${id} recipe`;
+  async update(id: number, updateRecipeDto: UpdateRecipeDto) {
+    const recipeOne = await this.recipeRepository.findOne({
+      where: { id: id },
+    })
+
+    if (!recipeOne) throw new NotFoundException('Рецепт не найден')
+
+    return await this.recipeRepository.update(id, updateRecipeDto); //update(id, поля которые принимаем)
   }
 
   remove(id: number) {

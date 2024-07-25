@@ -1,10 +1,10 @@
-//! Recipe (рецепт) - таблица
-//  для схемы (какие поля есть и связи) в БД
+//! Recipe (рецепт) - таблица 
+//  Этими декораторами потипу "@Entity()" or "@Column" СОЗДАЮТСЯ (буквально в реальном времени) таблицы в БД
 import { Mealschedule } from "src/mealschedule/entities/mealschedule.entity";
 import { User } from "src/user/entities/user.entity";
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
-@Entity() // для объявление (создания) сущности
+@Entity() // для объявление (создания) сущности (таблицы в бд)
 export class Recipe {
     //* Шаг #1: Добавьте лекарство -----------------------------
     @PrimaryGeneratedColumn({ name: 'recipe_id' }) // автоматически генерирует значение для id для указанную колонку с именем "recipe_id", и указанным типом

@@ -1,5 +1,5 @@
 //! User
-//  для схемы (какие поля есть в БД) в БД
+// Этими декораторами потипу "@Entity()" or "@Column" СОЗДАЮТСЯ (буквально в реальном времени) таблицы в БД
 // это таблица - TypeORM Entity: https://typeorm.io/entity-inheritance 
 import { Mealschedule } from "src/mealschedule/entities/mealschedule.entity";
 import { Recipe } from "src/recipe/entities/recipe.entity";

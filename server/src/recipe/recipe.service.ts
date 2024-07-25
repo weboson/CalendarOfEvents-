@@ -12,6 +12,7 @@ export class RecipeService {
     @InjectRepository(Recipe) // внедрить схему, для работы TypeORM с ней
     private recipeRepository: Repository<Recipe>) { }
 
+  //! POST (new recipe)
   async create(createRecipeDto: CreateRecipeDto, id: number) { // id - чтобы проверить, существует ли такой рецепт с таким id в БД (чтобы не дублировать - несколько нажатий на кнопку "отправить"): https://youtu.be/p3iSpCvDAsI?list=PLkUJHNMBzmtQj5qvTCqn0uMXFDG4ENiwf&t=251 
 
     const isExist = await this.recipeRepository.findBy({
@@ -40,8 +41,16 @@ export class RecipeService {
     return await this.recipeRepository.save(newRecipe); // сохранить в БД
   }
 
-  findAll() {
-    return `This action returns all recipe`;
+  //! Getll
+  async findAll(id: number) { // все рецепты, которые имеют связь с текущим user (с его id)
+    return await this.recipeRepository.find({
+      where: {
+        user: {id: id}, // где столбец связи user.id == id
+      },
+      relations: { // и где есть связь с таблицей mealschedule (график приёма пищи)
+        mealschedule: true,
+      }
+    })
   }
 
   findOne(id: number) {

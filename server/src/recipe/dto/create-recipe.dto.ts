@@ -5,7 +5,7 @@ import { User } from "src/user/entities/user.entity";
 
 export class CreateRecipeDto {
     //* Шаг #1: Добавьте лекарство
-    @IsNotEmpty() // class-validator: Проверяет, не является ли заданное значение пустым - не должно быть пустым
+    @IsNotEmpty() // class-validator (в controller он задействован @UsePipes(new ValidationPipe())): Проверяет, не является ли заданное значение пустым - не должно быть пустым
     title: string // 'Урсосан', 'Ибупрофенэ etc.
     
     //* Шаг #2: Зависимость приёма

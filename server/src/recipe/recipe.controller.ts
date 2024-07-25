@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Req, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { RecipeService } from './recipe.service';
 import { CreateRecipeDto } from './dto/create-recipe.dto';
 import { UpdateRecipeDto } from './dto/update-recipe.dto';
@@ -11,13 +11,15 @@ export class RecipeController {
   @Post()
   // сторож - если не пройти проверку, то дальше код не пойдет
   @UseGuards(JwtAuthGuard) // проверка на JWT-токен, есть ли он и действителен, т.е. авторизован ли user (в системе ли)
+  @UsePipes(new ValidationPipe()) // class-validator - проверят на соответсвтие условие полей в create-recipe.dto.ts
   create(@Body() createRecipeDto: CreateRecipeDto, @Req() req) { // @Req() - это ответ сервера (поля id и email user-а ) на входящий валидный JWT-токен 
     return this.recipeService.create(createRecipeDto, +req.user.id);
   }
 
+  @UseGuards(JwtAuthGuard) // проверка на JWT-токен
   @Get()
-  findAll() {
-    return this.recipeService.findAll();
+  findAll(@Req() req) {
+    return this.recipeService.findAll(+req.user.id); // все рецепты, которые создал текущий user
   }
 
   @Get(':id')

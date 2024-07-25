@@ -1,5 +1,5 @@
 //! Meal schedule - таблица графика приёма пищи - один график у одного user
-//  для схемы (какие поля есть в БД) в БД
+//  Этими декораторами потипу "@Entity()" or "@Column" СОЗДАЮТСЯ (буквально в реальном времени) таблицы в БД
 // это таблица - TypeORM Entity: https://typeorm.io/entity-inheritance 
 import { Recipe } from "src/recipe/entities/recipe.entity";
 import { User } from "src/user/entities/user.entity";

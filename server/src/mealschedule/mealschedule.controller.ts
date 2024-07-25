@@ -18,8 +18,8 @@ export class MealscheduleController {
   //* будет только ОДИН график у каждого пользователя: комментить не стану
   @Get()
   @UseGuards(JwtAuthGuard)
-  findAll() {
-    return this.mealscheduleService.findAll();
+  findAll(@Req() req) {
+    return this.mealscheduleService.findAll(+req.user.id);
   }
 
   @Get(':id')

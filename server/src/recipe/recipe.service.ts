@@ -42,7 +42,7 @@ export class RecipeService {
     return await this.recipeRepository.save(newRecipe); // сохранить в БД
   }
 
-  //! Getll
+  //! GetAll
   async findAll(id: number) { // все рецепты, которые имеют связь с текущим user (с его id)
     return await this.recipeRepository.find({
       where: {

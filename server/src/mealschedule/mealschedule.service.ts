@@ -35,8 +35,13 @@ export class MealscheduleService {
     return await this.mealscheduleRepository.save(newMealschedule); // сохранить в БД
   }
 
-  findAll() {
-    return `This action returns all mealschedule`;
+  //! GetAll
+  async findAll(id: number) { // все графики, которые имеют связь с текущим user (с его id)
+    return await this.mealscheduleRepository.find({
+      where: {
+        user: { id: id }, // где столбец связи user.id == id
+      }
+    })
   }
 
   findOne(id: number) {

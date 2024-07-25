@@ -1,3 +1,4 @@
+// логика GET,POST и т.д для рецептов
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateRecipeDto } from './dto/create-recipe.dto';
 import { UpdateRecipeDto } from './dto/update-recipe.dto';
@@ -78,7 +79,13 @@ export class RecipeService {
     return await this.recipeRepository.update(id, updateRecipeDto); //update(id, поля которые принимаем)
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} recipe`;
+  async remove(id: number) {
+    const recipeOne = await this.recipeRepository.findOne({
+      where: { id: id },
+    })
+
+    if (!recipeOne) throw new NotFoundException('Рецепт не найден')
+
+    return await this.recipeRepository.delete(id); //update(id, поля которые принимаем)
   }
 }

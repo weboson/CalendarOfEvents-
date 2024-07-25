@@ -22,19 +22,20 @@ export class RecipeController {
     return this.recipeService.findAll(+req.user.id); // все рецепты, которые создал текущий user
   }
 
-  @UseGuards(JwtAuthGuard) // проверка на JWT-токен (авторизация)
+  @UseGuards(JwtAuthGuard) 
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.recipeService.findOne(+id);
   }
 
   @Patch(':id')
-  @UseGuards(JwtAuthGuard) // проверка на JWT-токен (авторизация)
+  @UseGuards(JwtAuthGuard) 
   update(@Param('id') id: string, @Body() updateRecipeDto: UpdateRecipeDto) { //UpdateRecipeDto extends CreateRecipeDto
     return this.recipeService.update(+id, updateRecipeDto);
   }
 
   @Delete(':id')
+  @UseGuards(JwtAuthGuard)
   remove(@Param('id') id: string) {
     return this.recipeService.remove(+id);
   }

@@ -1,11 +1,38 @@
-import { Injectable } from '@nestjs/common';
+// логика GET,POST и т.д для графика приёма пищи
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateMealscheduleDto } from './dto/create-mealschedule.dto';
 import { UpdateMealscheduleDto } from './dto/update-mealschedule.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Mealschedule } from './entities/mealschedule.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class MealscheduleService {
-  create(createMealscheduleDto: CreateMealscheduleDto) {
-    return 'This action adds a new mealschedule';
+  constructor(
+    @InjectRepository(Mealschedule) // внедрить схему, для работы TypeORM с ней
+    private mealscheduleRepository: Repository<Mealschedule>) { }
+
+  //! POST (new Mealschedule)
+  async create(createMealscheduleDto: CreateMealscheduleDto, id: number) {
+    const isExist = await this.mealscheduleRepository.findBy({
+      user: { id: id }, // есть ли такой график у текущего user (чтобы не дублировать)
+      title: createMealscheduleDto.title // чтобы название не дублировались
+    })
+
+    if (isExist.length) throw new BadRequestException('Измените название графика приёма пищи - такое название уже есть')
+
+    // если принятый график и его title уникален, то сохранить его со всеми полями :
+    // createMealscheduleDto - уточнение входящих полей.
+    const newMealschedule = {
+      title: createMealscheduleDto.title,
+      type: createMealscheduleDto.type,
+      firstMeal: createMealscheduleDto.firstMeal,
+      lastMeal: createMealscheduleDto.lastMeal,
+      user: {
+        id: id // id из аргументов (create())
+      }
+    }
+    return await this.mealscheduleRepository.save(newMealschedule); // сохранить в БД
   }
 
   findAll() {

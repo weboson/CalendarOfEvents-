@@ -1,5 +1,5 @@
 // логика GET,POST и т.д для графика приёма пищи
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateMealscheduleDto } from './dto/create-mealschedule.dto';
 import { UpdateMealscheduleDto } from './dto/update-mealschedule.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -15,11 +15,12 @@ export class MealscheduleService {
   //! POST (new Mealschedule)
   async create(createMealscheduleDto: CreateMealscheduleDto, id: number) {
     const isExist = await this.mealscheduleRepository.findBy({
-      user: { id: id }, // есть ли такой график у текущего user (чтобы не дублировать)
-      title: createMealscheduleDto.title // чтобы название не дублировались
+      // title: createMealscheduleDto.title, // чтобы название не дублировались
+      user: { id: id }, // есть ли такой рецепт у текущего user (чтобы не дублировать)
+      type: createMealscheduleDto.type // чтобы графики weekend и weekday были по ОДНОМУ
     })
-
-    if (isExist.length) throw new BadRequestException('Измените название графика приёма пищи - такое название уже есть')
+    //! ОСТАНОВИЛСЯ НА ТОМ, ЧТО ХОЧУ ЧТОБЫ БЫЛО ТОЛЬКО ПО ОДНОМУ ГРАФИКУ С WEEKEND 
+    if (isExist.length) throw new BadRequestException(`У вас уже есть график на ${createMealscheduleDto.type}`)
 
     // если принятый график и его title уникален, то сохранить его со всеми полями :
     // createMealscheduleDto - уточнение входящих полей.
@@ -28,9 +29,10 @@ export class MealscheduleService {
       type: createMealscheduleDto.type,
       firstMeal: createMealscheduleDto.firstMeal,
       lastMeal: createMealscheduleDto.lastMeal,
-      user: {
-        id: id // id из аргументов (create())
-      }
+      user: {id},// присвоить в колонку user == текущего user
+      relations: { // связь с user
+        user: true,
+      },
     }
     return await this.mealscheduleRepository.save(newMealschedule); // сохранить в БД
   }
@@ -44,12 +46,30 @@ export class MealscheduleService {
     })
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} mealschedule`;
+  //! Get(id)
+  // exemle: http://localhost:3000/api/mealschedules/1
+  async findOne(id: number) {
+    const mealscheduleOne = await this.mealscheduleRepository.findOne({
+      where: { id: id }, // Искать по id, т.е. где id в БД == api/mealschedules/:id
+      relations: { // связь с user и recipes
+        user: true,
+        recipes: true,
+      },
+    })
+    if (!mealscheduleOne) throw new NotFoundException('График питания не найден')
+    return mealscheduleOne; // если найден, то =>
   }
 
-  update(id: number, updateMealscheduleDto: UpdateMealscheduleDto) {
-    return `This action updates a #${id} mealschedule`;
+  //! PATCH(id)
+  // exemle: http://localhost:3000/api/mealschedules/1
+  async update(id: number, updateMealscheduleDto: UpdateMealscheduleDto) {
+    const mealscheduleOne = await this.mealscheduleRepository.findOne({
+      where: { id: id },
+    })
+
+    if (!mealscheduleOne) throw new NotFoundException('График питания не найден')
+
+    return await this.mealscheduleRepository.update(id, updateMealscheduleDto); //update(id, поля которые принимаем)
   }
 
   remove(id: number) {

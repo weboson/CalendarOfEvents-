@@ -3,7 +3,7 @@
 // это таблица - TypeORM Entity: https://typeorm.io/entity-inheritance 
 import { Recipe } from "src/recipe/entities/recipe.entity";
 import { User } from "src/user/entities/user.entity";
-import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity() // для объявление (создания) сущности
 export class Mealschedule {
@@ -11,7 +11,7 @@ export class Mealschedule {
     @PrimaryGeneratedColumn({ name: 'mealschedule_id' }) // автоматически генерирует значение для id для указанную колонку с именем "recipe_id", и указанным типом
     id: number
 
-    @Column("varchar", { length: 200, nullable: true }) // 'приём пищи', может быть null
+    @Column("varchar", { length: 200}) // 'приём пищи', может быть null
     title: string
 
     @Column("varchar", { length: 200 }) // weekend or weekday
@@ -32,7 +32,7 @@ export class Mealschedule {
     updateDateMeal: Date //  возможность изменить весь рецепт 
 
     //* для связи с таблицей user: https://typeorm.io/many-to-one-one-to-many-relations 
-    @OneToOne(() => User, (user) => user.recipes)
+    @ManyToOne(() => User, (user) => user.mealschedule)
     // объеденим в одну колонку 'user_id' - хотя зачем? пусть пока будет
     @JoinColumn({ name: 'user_id' }) // колонка "user_id" будет иметь связь с user.id
     // описание связи с типом (это не поле)

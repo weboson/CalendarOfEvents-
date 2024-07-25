@@ -30,7 +30,7 @@ export class User {
     recipes: Recipe[]
 
     //* связь с графиком приёма пищи
-    @OneToOne(() => Mealschedule, (mealschedule) => mealschedule.user, { onDelete: 'CASCADE' }) 
+    @OneToMany(() => Mealschedule, (mealschedule) => mealschedule.user, { onDelete: 'CASCADE' }) 
     // описание связи с типом (это не поле)
     mealschedule: Mealschedule
 

@@ -4,7 +4,7 @@
 import { IsNotEmpty } from "class-validator";
 
 export class CreateMealscheduleDto {
-    
+
     @IsNotEmpty() // class-validator (в controller он задействован @UsePipes(new ValidationPipe())): Проверяет, не является ли заданное значение пустым - не должно быть пустым
     title: string // exemple: 'Мой режим питания' или 'Мой график приёма пищи'
 

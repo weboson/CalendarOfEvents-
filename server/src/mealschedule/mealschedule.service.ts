@@ -29,7 +29,7 @@ export class MealscheduleService {
       type: createMealscheduleDto.type,
       firstMeal: createMealscheduleDto.firstMeal,
       lastMeal: createMealscheduleDto.lastMeal,
-      user: {id},// присвоить в колонку user == текущего user
+      user: { id },// присвоить в колонку user == текущего user
       relations: { // связь с user
         user: true,
       },
@@ -42,7 +42,10 @@ export class MealscheduleService {
     return await this.mealscheduleRepository.find({
       where: {
         user: { id: id }, // где столбец связи user.id == id
-      }
+      },
+      relations: { // связь с user (принадлежит текущему user)
+        user: true,
+      },
     })
   }
 

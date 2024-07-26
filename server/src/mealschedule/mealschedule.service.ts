@@ -19,7 +19,7 @@ export class MealscheduleService {
       user: { id: id }, // есть ли такой рецепт у текущего user (чтобы не дублировать)
       type: createMealscheduleDto.type // чтобы графики weekend и weekday были по ОДНОМУ
     })
-    //! ОСТАНОВИЛСЯ НА ТОМ, ЧТО ХОЧУ ЧТОБЫ БЫЛО ТОЛЬКО ПО ОДНОМУ ГРАФИКУ С WEEKEND 
+
     if (isExist.length) throw new BadRequestException(`У вас уже есть график на ${createMealscheduleDto.type}`)
 
     // если принятый график и его title уникален, то сохранить его со всеми полями :
@@ -64,7 +64,7 @@ export class MealscheduleService {
   }
 
   //! PATCH(id)
-  // exemle: http://localhost:3000/api/mealschedules/1
+  // exemle: http://localhost:3000/api/mealschedules/mealschedule/1
   async update(id: number, updateMealscheduleDto: UpdateMealscheduleDto) {
     const mealscheduleOne = await this.mealscheduleRepository.findOne({
       where: { id: id },
@@ -81,7 +81,7 @@ export class MealscheduleService {
       where: { id: id },
     })
 
-    if (!mealscheduleOne) throw new NotFoundException('Рецепт не найден')
+    if (!mealscheduleOne) throw new NotFoundException('График питания не найден')
 
     return await this.mealscheduleRepository.delete(id); 
   }

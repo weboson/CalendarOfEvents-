@@ -57,7 +57,7 @@ export class Recipe {
     //* СВЯЗИ-----------------------------
     //* для связи к таблице user: https://typeorm.io/many-to-one-one-to-many-relations 
     @ManyToOne(() => User, (user) => user.recipes)
-    @JoinColumn({ name: 'user_id' }) // колонка "user_id" будет иметь связь с user.id
+    @JoinColumn({ name: 'user_id' }) // колонка "user_id" будет иметь связь с user.id - просто чтобы user.id был виден в колонке
     user: User
 
     //* для связи к таблице mealschedule (график приёма пищи определенного User)

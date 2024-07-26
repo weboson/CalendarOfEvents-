@@ -3,6 +3,7 @@ import { RecipeService } from './recipe.service';
 import { CreateRecipeDto } from './dto/create-recipe.dto';
 import { UpdateRecipeDto } from './dto/update-recipe.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { AuthorGuard } from 'src/guard/author.guard'; // наш гуард проверки авторство (сверка Mealschedule.user.id c текущим User.id)
 
 @Controller('recipes') // http://localhost:3000/api/recipes
 export class RecipeController {
@@ -22,20 +23,21 @@ export class RecipeController {
     return this.recipeService.findAll(+req.user.id); // все рецепты, которые создал текущий user
   }
 
-  @UseGuards(JwtAuthGuard) 
-  @Get(':id')
+  // url/recipes/recipe/1
+  @Get(':type/:id') // type = может быть любым словом (это как переменная) - просто в AuthorGuard есть switch на 'recipe' или 'mealschedule'
+  @UseGuards(JwtAuthGuard, AuthorGuard) 
   findOne(@Param('id') id: string) {
     return this.recipeService.findOne(+id);
   }
-
-  @Patch(':id')
-  @UseGuards(JwtAuthGuard) 
+  // url/recipes/recipe/1
+  @Patch(':type/:id')
+  @UseGuards(JwtAuthGuard, AuthorGuard) 
   update(@Param('id') id: string, @Body() updateRecipeDto: UpdateRecipeDto) { //UpdateRecipeDto extends CreateRecipeDto
     return this.recipeService.update(+id, updateRecipeDto);
   }
-
-  @Delete(':id')
-  @UseGuards(JwtAuthGuard)
+  // url/recipes/recipe/1
+  @Delete(':type/:id') 
+  @UseGuards(JwtAuthGuard, AuthorGuard)
   remove(@Param('id') id: string) {
     return this.recipeService.remove(+id);
   }

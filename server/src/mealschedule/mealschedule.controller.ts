@@ -3,6 +3,7 @@ import { MealscheduleService } from './mealschedule.service';
 import { CreateMealscheduleDto } from './dto/create-mealschedule.dto';
 import { UpdateMealscheduleDto } from './dto/update-mealschedule.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { AuthorGuard } from 'src/guard/author.guard'; // наш гуард проверки авторство (сверка Mealschedule.user.id c текущим User.id)
 
 @Controller('mealschedules') // http://localhost:3000/api/mealschedules
 export class MealscheduleController {
@@ -22,21 +23,20 @@ export class MealscheduleController {
     return this.mealscheduleService.findAll(+req.user.id);
   }
 
-  @Get(':id')
-  @UseGuards(JwtAuthGuard)
+  @Get(':type/:id') // type = может быть любым словом (это как переменная) - просто в AuthorGuard есть switch на 'recipe' или 'mealschedule'
+  @UseGuards(JwtAuthGuard, AuthorGuard)
   findOne(@Param('id') id: string) {
     return this.mealscheduleService.findOne(+id);
   }
 
-  @Patch(':id')
-  @UseGuards(JwtAuthGuard)
+  @Patch(':type/:id')
+  @UseGuards(JwtAuthGuard, AuthorGuard)
   update(@Param('id') id: string, @Body() updateMealscheduleDto: UpdateMealscheduleDto) {
     return this.mealscheduleService.update(+id, updateMealscheduleDto);
   }
 
-  //* удалять уже созданный график приёма пищи - не буду, иначе в календаре всё исчезнет или будет ошибка (будет по-умолчанию) - только обновление
-  // комментить не стану
-  @Delete(':id')
+  @Delete(':type/:id')
+  @UseGuards(JwtAuthGuard, AuthorGuard)
   remove(@Param('id') id: string) {
     return this.mealscheduleService.remove(+id);
   }

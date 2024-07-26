@@ -75,7 +75,14 @@ export class MealscheduleService {
     return await this.mealscheduleRepository.update(id, updateMealscheduleDto); //update(id, поля которые принимаем)
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} mealschedule`;
+  //! DELETE
+  async remove(id: number) {
+    const mealscheduleOne = await this.mealscheduleRepository.findOne({
+      where: { id: id },
+    })
+
+    if (!mealscheduleOne) throw new NotFoundException('Рецепт не найден')
+
+    return await this.mealscheduleRepository.delete(id); 
   }
 }

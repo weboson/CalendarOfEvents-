@@ -86,6 +86,6 @@ export class RecipeService {
 
     if (!recipeOne) throw new NotFoundException('Рецепт не найден')
 
-    return await this.recipeRepository.delete(id); //update(id, поля которые принимаем)
+    return await this.recipeRepository.delete(id);
   }
 }

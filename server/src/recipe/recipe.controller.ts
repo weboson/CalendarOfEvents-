@@ -11,7 +11,7 @@ export class RecipeController {
 
   @Post()
   // сторож - если не пройти проверку, то дальше код не пойдет
-  @UseGuards(JwtAuthGuard, AuthorGuard) // проверка на JWT-токен, есть ли он и действителен, т.е. авторизован ли user (в системе ли)
+  @UseGuards(JwtAuthGuard) // проверка на JWT-токен, есть ли он и действителен, т.е. авторизован ли user (в системе ли)
   @UsePipes(new ValidationPipe()) // class-validator - проверят на соответсвтие условие полей в create-recipe.dto.ts
   create(@Body() createRecipeDto: CreateRecipeDto, @Req() req) { // @Req() - это ответ сервера (поля id и email user-а ) на входящий валидный JWT-токен 
     return this.recipeService.create(createRecipeDto, +req.user.id);

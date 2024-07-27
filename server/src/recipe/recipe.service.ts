@@ -44,14 +44,19 @@ export class RecipeService {
 
   //! GetAll
   async findAll(id: number) { // все рецепты, которые имеют связь с текущим user (с его id)
-    return await this.recipeRepository.find({
+    const recipes = await this.recipeRepository.find({
       where: {
         user: { id: id }, // где столбец связи user.id == id
       },
+      order: {
+        createDateRecipe: 'DESC', // сортировать по полю "createDateRecipe" (дата создания) - по дате создания - новее выше по списку
+      },
       relations: { // и где есть связь с таблицей mealschedule (график приёма пищи)
         mealschedule: true,
-      }
+      },
     })
+
+    return recipes;
   }
 
   //! Get(id)
@@ -79,6 +84,7 @@ export class RecipeService {
     return await this.recipeRepository.update(id, updateRecipeDto); //update(id, поля которые принимаем)
   }
 
+  //! DELETE 
   async remove(id: number) {
     const recipeOne = await this.recipeRepository.findOne({
       where: { id: id },
@@ -87,4 +93,24 @@ export class RecipeService {
     if (!recipeOne) throw new NotFoundException('Рецепт не найден')
     return await this.recipeRepository.delete(id);
   }
+
+  //! Pagination (постраничник) 
+  async findAllWithPagination(id: number, page: number, limit: number) {
+    const recipes = await this.recipeRepository.find({
+      where: {
+        user: {id:id},
+      },
+      relations: {
+        mealschedule: true,
+        user: true,
+      },
+      order: {
+        createDateRecipe: 'DESC',
+      },
+      take: limit, // взять определенное число рецептов (например 10 шт)
+      skip: (page - 1) * limit, // пропустить столько-то (3страница - 1 * 10 = 20 шт пропустить для 3-й страницы)
+    })
+
+    return recipes;
+  } 
 }

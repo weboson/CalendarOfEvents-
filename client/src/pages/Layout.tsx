@@ -1,4 +1,4 @@
-//! Главный шаблон "Lauout" (из react-router-dom):
+//! Главный шаблон "Layout" (из react-router-dom):
 // в нем header, monitor + уникальный контент (Outlet) + footer(которого у меня нет)
 // видео с поясением: https://www.youtube.com/watch?v=ApftxkYnXdo&ab_channel=%D0%9C%D0%B8%D1%85%D0%B0%D0%B8%D0%BB%D0%9D%D0%B5%D0%BF%D0%BE%D0%BC%D0%BD%D1%8F%D1%89%D0%B8%D0%B9
 import { FC, useEffect, useState } from 'react';
@@ -17,7 +17,7 @@ const ShadowWrapper = styled('div')`
   width: 100%;
 `;
 
-const Lauout: FC = () => {
+const Layout: FC = () => {
   //! текущее время currentDate 
   const [currentDate, setToday] = useState<Moment>(currentMoment || ''); // currentDate в currentDate.ts
 
@@ -48,7 +48,7 @@ const Lauout: FC = () => {
     <>
       <ShadowWrapper>
         <Header />
-        {/*//! Outlet - это уникальный контент (Home.tsx, Recipes.tsx etc.) */}
+        {/*//! Outlet - это уникальный контент (Home.tsx, Recipes.tsx etc.) от 'react-router-dom'*/}
         <Outlet
           context={[currentDate, prevHandler, todayHandler, nextHandler]}
         />
@@ -57,4 +57,4 @@ const Lauout: FC = () => {
   );
 };
 
-export default Lauout;
+export default Layout;

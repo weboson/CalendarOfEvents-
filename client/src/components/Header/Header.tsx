@@ -59,10 +59,9 @@ const Headers: FC = () => {
           >
             <ModeDateButton
               // закругление углов левого края (кнопки Day)
-              
-              $isCurrentModeDate={activeMenu == index ? true : false}
-              $extremeButtonLeft={index == 0 ? true : false}
-              $extremeButtonRight={index == array.length - 1 ? true : false}
+              $isActiveModeDate={activeMenu == index ? true : false}
+              $borderRadiusLeft={index == 0 ? true : false}
+              $borderRadiusRight={index == array.length - 1 ? true : false}
             >
               {item.title}
             </ModeDateButton>

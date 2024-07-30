@@ -49,14 +49,14 @@ export const ButtonsWrapper = styled('nav')`
   }
   a {
     text-decoration-line: none;
-    color: ${(props) => (props.$isCurrentModeDate ? '#565759' : '#E6E6E6;')};
+    color: ${(props) => (props.$isActiveModeDate ? '#565759' : '#E6E6E6;')};
   }
 `;
 
 interface IModeDateButtonProps {
-  $extremeButtonLeft: boolean;
-  $extremeButtonRight: boolean;
-  $isCurrentModeDate?: boolean;
+  $borderRadiusLeft: boolean;
+  $borderRadiusRight: boolean;
+  $isActiveModeDate?: boolean;
 }
 
 export const ModeDateButton = styled('button')<IModeDateButtonProps>`
@@ -78,13 +78,13 @@ export const ModeDateButton = styled('button')<IModeDateButtonProps>`
 
   /* закругление углов крайних кнопок */
   ${(props) =>
-    props.$extremeButtonLeft ? 'border-radius: 4px 0 0 4px ;' : null}
+    props.$borderRadiusLeft ? 'border-radius: 4px 0 0 4px ;' : null}
   ${(props) =>
-    props.$extremeButtonRight ? 'border-radius: 0 4px 4px 0;' : null}
+    props.$borderRadiusRight ? 'border-radius: 0 4px 4px 0;' : null}
     /* активная кнопка меню */
     background-color: ${(props) =>
-    props.$isCurrentModeDate ? '#E6E6E6;' : '#565759'};
-    color: ${(props) => (props.$isCurrentModeDate ? '#565759' : '#E6E6E6;')};
+    props.$isActiveModeDate ? '#E6E6E6;' : '#565759'};
+    color: ${(props) => (props.$isActiveModeDate ? '#565759' : '#E6E6E6;')};
 `;
 
 // кнопка "Login"

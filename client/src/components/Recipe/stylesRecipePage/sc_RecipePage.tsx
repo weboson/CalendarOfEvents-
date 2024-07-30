@@ -14,6 +14,44 @@ export const WrapperRecipes = styled.div`
   }
 `;
 
+//! Menu: 'Add new' & 'Recipes'
+export const RecipeMenuWrapper = styled.div`
+  height: 4v;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  background-color: #2a282d;
+`;
+
+interface IRecipeMenuUlProps {
+  $isActiveModeDate: boolean;
+  $borderRadiusLeft: boolean;
+  $borderRadiusRight: boolean;
+}
+
+export const RecipeMenuUl = styled.ul<IRecipeMenuUlProps>`
+  list-style: none;
+  display: flex;
+  flex-direction: row; // в строку
+  height: 20px;
+  padding: 0; // убрать отступ слева у ul
+  font-weight: 700; // bold = 700
+  cursor: pointer;
+  ${(props) =>
+    props.$isActiveModeDate
+      ? 'background-color: #e6e6e6; color: #565759;'
+      : 'background-color: #565759; color: #e6e6e6;'}
+  ${(props) => (props.$borderRadiusLeft ? 'border-radius: 4px 0 0 4px;' : null)}
+      ${(props) =>
+    props.$borderRadiusRight ? 'border-radius: 0 4px 4px 0;' : null}
+  li {
+    padding-right: 16px;
+    padding-left: 16px;
+    font-size: 1em;
+  }
+`;
+
 //! Headline block  / Wrapper
 export const HeadlineBlock = styled.div`
   display: flex;
@@ -51,7 +89,7 @@ export const HeadlineWrapper = styled.div`
 
 // Form Wrapper (обертка для секотров формы)
 export const FromWrappeer = styled.div`
-  height: 81vh;
+  height: 77.5vh;
   background-color: #e6e6e6;
 
   form {
@@ -67,7 +105,7 @@ export const FromWrappeer = styled.div`
 export const FormStep = styled.div`
   display: flex;
   flex: 600px;
-  justify-content:space-between;
+  justify-content: space-between;
   min-height: 100%;
   flex-direction: column;
   border: 1px solid #b1b1b1;

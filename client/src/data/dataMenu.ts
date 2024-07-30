@@ -1,4 +1,4 @@
-//* массив пунктов меню 
+//* массив пунктов меню главное страницы (/)
 // used CalendarGrid.tsx
 interface IModeDate {
     id: number;

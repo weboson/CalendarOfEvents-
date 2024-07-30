@@ -2,7 +2,6 @@
 import { Form } from 'react-router-dom';
 import styled from 'styled-components';
 
-
 export const DivWrapper = styled('div')`
   background-color: #2a282d;
   height: 4vh; /* index.css(100vh), cs_calendarHeader.tsx(4vh), sc_Monitor.tsx(7vh), sc_DayGrid.tsx(89vh)/ */
@@ -10,12 +9,14 @@ export const DivWrapper = styled('div')`
   justify-content: space-between;
   align-items: center;
   flex-direction: row; // в строку
-  @media (max-width: 834px) { // при max-width: 834px и меньше
+  @media (max-width: 834px) {
+    // при max-width: 834px и меньше
     flex-direction: column; // в столбик
     height: 100%;
     padding: 1% 0;
   }
-  a { // убрать с Link (которая в верстке <a> ) подчеркивание
+  a {
+    // убрать с Link (которая в верстке <a> ) подчеркивание
     text-decoration: none;
   }
 `;
@@ -33,18 +34,22 @@ export const StyleIconPlus = styled.div`
   padding-left: 4px;
 `;
 export const TitleCalendarWrapper = styled.div`
-text-decoration: none;
+  text-decoration: none;
   display: flex;
 `;
 
 //Buttons
-export const ButtonsWrapper = styled('div')`
+export const ButtonsWrapper = styled('nav')`
   display: flex;
   justify-content: center;
   @media (max-width: 374px) {
     flex-direction: column; // в столбик вертикально
     justify-content: center;
     width: 100%;
+  }
+  a {
+    text-decoration-line: none;
+    color: ${(props) => (props.$isCurrentModeDate ? '#565759' : '#E6E6E6;')};
   }
 `;
 
@@ -61,13 +66,15 @@ export const ModeDateButton = styled('button')<IModeDateButtonProps>`
   padding-left: 16px;
   font-weight: bold;
   cursor: pointer;
-  @media (max-width: 834px) { // при max-width: 834px и меньше
+  @media (max-width: 834px) {
+    // при max-width: 834px и меньше
     margin: 3% 0;
-  }  
-  @media (max-width: 375px) { // при max-width: 834px и меньше
+  }
+  @media (max-width: 375px) {
+    // при max-width: 834px и меньше
     display: flex;
     margin: auto;
-  }  
+  }
 
   /* закругление углов крайних кнопок */
   ${(props) =>
@@ -77,40 +84,39 @@ export const ModeDateButton = styled('button')<IModeDateButtonProps>`
     /* активная кнопка меню */
     background-color: ${(props) =>
     props.$isCurrentModeDate ? '#E6E6E6;' : '#565759'};
-  color: ${(props) => (props.$isCurrentModeDate ? '#565759' : '#E6E6E6;')};
+    color: ${(props) => (props.$isCurrentModeDate ? '#565759' : '#E6E6E6;')};
 `;
 
 // кнопка "Login"
 export const LoginWrapper = styled.div`
   display: flex;
-`
+`;
 
 export const ButtonLogin = styled('button')`
   border: unset;
   height: 20px;
   background-color: #565759;
-  color: #E6E6E6;
+  color: #e6e6e6;
   padding-right: 16px;
   padding-left: 16px;
   font-weight: bold;
   cursor: pointer;
   border-radius: 4px;
   margin-right: 7px;
-`
-
+`;
 
 // unput "search" через Form от react-router-dom
 export const SearchWrapper = styled.div`
   display: flex;
   flex-direction: row;
-`
+`;
 
 export const FormRouterSearch = styled(Form)`
   background: #565759;
   margin-right: 7px;
   border-radius: 4px;
   display: flex;
-`
+`;
 
 export const InputSearch = styled('input')`
   border: none;
@@ -118,11 +124,11 @@ export const InputSearch = styled('input')`
   background: transparent;
   max-width: 200px;
   height: 20px;
-  color: #E6E6E6;
-  &::placeholder { 
-   align-items: center;
-}
-`
+  color: #e6e6e6;
+  &::placeholder {
+    align-items: center;
+  }
+`;
 
 export const InputButtonSearch = styled('button')`
   display: flex;
@@ -131,7 +137,6 @@ export const InputButtonSearch = styled('button')`
   border: none;
   outline: none;
   background: transparent;
-  color: #E6E6E6;
+  color: #e6e6e6;
   cursor: pointer;
-`
-
+`;

@@ -1,5 +1,6 @@
+//! Режим отображения зависит от кнопки
 // redux-toolkit - Slice (шаблон кода из документации)
-// выбранная кнопка режима отомбражения календаря: month, year, week...
+// Активная (выбранная) кнопка режима отомбражения календаря: month, year, week...
 import { createSlice } from '@reduxjs/toolkit'
 import type { RootState } from '../store'
 
@@ -8,8 +9,8 @@ import type { RootState } from '../store'
 // если страница /recipes, то активная кнопка (белая) будет 4-я, то есть "recipes", если '/' (home) то 0 ("Day")
 // или если user уже нажимал кнопку меню, то она запомнится (в sessionStorage) и воссоздатся.
 // Способ react-router-dom: let location = useLocation(); location.pathname, подробнее: https://reactrouter.com/en/main/hooks/use-location#locationkey
-const initialState: number = (window.location.pathname == '/recipes') ? 4 : +sessionStorage.getItem('IndexMenu')
-
+//* по-умолчанию 0(mode day), если кликнуть по меню, то запониматся sessionStorag (связь: Home.tsx,modesDateClice.ts, Header.tsx, dataMenu) 
+const initialState: number = (+sessionStorage.getItem('IndexMenu') >= 0 ) ? +sessionStorage.getItem('IndexMenu') : 0;
 
 
 

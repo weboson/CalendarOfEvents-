@@ -3,8 +3,8 @@ import Layout from '../pages/Layout';
 import Home from '../pages/Home';
 import ErrorPage from '../pages/ErrorPage';
 import Recipes from '../pages/Recipes';
-import Mealschedules from '../components/Mealschedules/Mealschedules';
 import Auth from '../pages/Auth';
+import Mealschedules from '../pages/Mealschedules';
 
 export const router = createBrowserRouter([
   {

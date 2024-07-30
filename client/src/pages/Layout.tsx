@@ -23,7 +23,7 @@ const Layout: FC = () => {
 
   // redux-toolkit
   const index = useAppSelector((state) => state.menu);
-  const mode = modesMonitor[index].title; // 'month' (режим отображения заголовка в Monitor: по-умолчанию (Day))
+  const mode = modesMonitor[index].title; // 'day','week','month','year' (режим отображения контента в '/'(home))
   // обработчики для кнопок <, today и >
   const prevHandler = () => setToday((prev) => prev.clone().subtract(1, mode));
   const todayHandler = () => setToday(moment());

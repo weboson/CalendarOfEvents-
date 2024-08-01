@@ -5,6 +5,9 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { RootState } from '../store'
 
 //! index active menu (по-умолчанию)
+// сохраняется только цифра 0 или 1 (ведь 2 пункта в меню recipeMenu)
+// если user не нажал кнопку в меню в /recipes, то будет 0, если нажал, то сохранится в sessionStorage и восстановится после обновления страницы
+// сохраняется в обработчике onClick в src\components\Recipe\RecipeMenu.tsx
 const initialState: number = (+sessionStorage.getItem('modeRecipeMenu') >= 0 ) ? +sessionStorage.getItem('modeRecipeMenu') : 0;
 
 

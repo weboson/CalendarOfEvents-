@@ -16,7 +16,7 @@ export const WrapperRecipes = styled.div`
 
 //! Menu: 'Add new' & 'Recipes'
 export const RecipeMenuWrapper = styled.div`
-  height: 4v;
+  height: 4vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -33,10 +33,11 @@ interface IRecipeMenuUlProps {
 export const RecipeMenuUl = styled.ul<IRecipeMenuUlProps>`
   list-style: none;
   display: flex;
+  align-items: center; // текст по центру по вертикали
   flex-direction: row; // в строку
   height: 20px;
   padding: 0; // убрать отступ слева у ul
-  font-weight: 700; // bold = 700
+  font-weight: 500; // bold = 500
   cursor: pointer;
   ${(props) =>
     props.$isActiveModeDate
@@ -77,6 +78,8 @@ export const HeadlineWrapper = styled.div`
   display: inline;
   /* заголовок */
   h1 {
+    display: flex;
+    align-items: center; // текс по центру по вертикали
     font-family: 'Raleway', sans-serif;
     font-weight: 400;
     text-align: center;

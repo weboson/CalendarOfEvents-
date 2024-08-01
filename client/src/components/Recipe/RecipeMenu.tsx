@@ -13,7 +13,7 @@ const activeMenu = useAppSelector((state) => state.recipeMenu); // src\store\fea
 const dispatch = useAppDispatch();
 const handleClick = (index: number) => {
     //* записал активную кнопку меню в хранилище, используется в modesDateSlice.ts
-    sessionStorage.setItem('modeRecipeMenu', index.toString()); // например, если нажать на кнопку "Recipes", то после обновления страницы, будет режим "Recipes"
+    sessionStorage.setItem('modeRecipeMenu', index.toString()); // например, если нажать на кнопку "New Add", то после обновления страницы, будет режим "RecipesForm.tsx"
     // redux-toolkit
     dispatch(readingRecipeMenu(index));
   };
@@ -27,7 +27,7 @@ const handleClick = (index: number) => {
             $borderRadiusLeft={index == 0 ? true : false}
             $borderRadiusRight={index == array.length - 1 ? true : false}
           >
-            <li onClick={() => handleClick(index)}>{item.title}</li>
+            <li onClick={() => handleClick(index)} key={index+2}>{item.title}</li>
           </RecipeMenuUl>
         </div>
       ))}

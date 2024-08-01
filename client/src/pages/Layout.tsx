@@ -9,8 +9,7 @@ import { Moment } from 'moment';
 import moment from 'moment';
 import currentMoment from '../data/currentMoment';
 import { useAppSelector } from '../store/hooks';
-import { modesMonitor } from '../data/modesMonitor';// МАССИВ режимов отображения в Monitor
-
+import { modesMonitor } from '../data/modesMonitor'; // МАССИВ режимов отображения в Monitor
 
 // sc-style
 const ShadowWrapper = styled('div')`
@@ -18,16 +17,12 @@ const ShadowWrapper = styled('div')`
 `;
 
 const Layout: FC = () => {
-  //! текущее время currentDate 
+  //! текущее время currentDate
   const [currentDate, setToday] = useState<Moment>(currentMoment || ''); // currentDate в currentDate.ts
 
   // redux-toolkit
   const index = useAppSelector((state) => state.menu);
-  const mode = modesMonitor[index].title; // 'day','week','month','year' (режим отображения контента в '/'(home))
-  // обработчики для кнопок <, today и >
-  const prevHandler = () => setToday((prev) => prev.clone().subtract(1, mode));
-  const todayHandler = () => setToday(moment());
-  const nextHandler = () => setToday((next) => next.clone().add(1, mode));
+  const mode = modesMonitor[index].mode; // 'day','week','month','year' (режим отображения контента в '/'(home))
 
   //  For dinamic (update) time (чтобы не нужно было обновлять каждый раз, когда время изменилось и обновлялись компоненты)
   useEffect(() => {
@@ -43,6 +38,11 @@ const Layout: FC = () => {
       clearInterval(timer);
     };
   }); // без массива зависимости, чтобы currentDate постоянно обновлялся (был актулаьных), он запоминается в setInterval
+
+  // обработчики для кнопок <, today и >
+  const prevHandler = () => setToday((prev) => prev.clone().subtract(1, mode));
+  const todayHandler = () => setToday(moment());
+  const nextHandler = () => setToday((next) => next.clone().add(1, mode));
 
   return (
     <>

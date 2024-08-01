@@ -91,7 +91,7 @@ export const HeadlineWrapper = styled.div`
 `;
 
 // Form Wrapper (обертка для секотров формы)
-export const FromWrappeer = styled.div`
+export const FormWrappeer = styled.div`
   height: 77.5vh;
   background-color: #e6e6e6;
 
@@ -116,12 +116,13 @@ export const FormStep = styled.div`
   margin: 10px 10px 0 10px; // внизу 0, чтобы не было двойного margin между блоками
   padding: 10px;
 `;
-//Step
+//Steps
 export const TearFrame = styled.div`
   color: #b1b1b1;
 `;
 
-// Step #1
-export const FormStepOne = styled.div`
-  height: 50%;
+// Для списка рецептов
+export const ListWrappeer = styled.div`
+  height: 77.5vh;
+  background-color: #e6e6e6;
 `;

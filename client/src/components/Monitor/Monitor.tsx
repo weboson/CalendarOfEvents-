@@ -31,7 +31,7 @@ const Monitor: FC<IMonitorProps> = ({
   // для режима отображения: November 2023 (Month) или 2023 (Year)
   const index = useAppSelector((state) => state.menu);
 
-  const mode = modesMonitor[index].title; // 'month' (режим отображения заголовка в Monitor: Month)
+  const mode = modesMonitor[index].mode; // 'month' (режим отображения заголовка в Monitor: Month)
   // console.log(modesMonitor[index].title)
 
   // active button (mode): "<", "Today" or ">"

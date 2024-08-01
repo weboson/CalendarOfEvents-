@@ -15,7 +15,6 @@ const Recipes: FC = () => {
 
   return (
     <>
-    {/* Отображается тот вид монитора (Day, Week, Month or Year), на котором был остановлен на странице Home */}
     {/* Не стал отдельный Monitor для Recipes делать, чтобы не запутать читающего прогера, ведь уже есть Monitor.tsx */}
       <Monitor
         currentDate={currentDate}

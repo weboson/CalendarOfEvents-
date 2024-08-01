@@ -13,7 +13,6 @@ interface IProps {
 const StepOne: FC<IProps> = ({ register, errors }) => {
   return (
     <FormStep>
-      <FormStepOne>
         <Box component="section">
           <Typography
             id="stepTitle"
@@ -68,7 +67,6 @@ const StepOne: FC<IProps> = ({ register, errors }) => {
             />
           </div>
         </Box>
-      </FormStepOne>
     </FormStep>
   );
 };

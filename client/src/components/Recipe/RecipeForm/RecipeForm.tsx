@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { FromWrappeer } from '../stylesRecipePage/sc_RecipePage';
+import { FormWrappeer } from '../stylesRecipePage/sc_RecipePage';
 import { useForm } from 'react-hook-form'; // lib for forms
 import StepOne from './stepsForm/StepOne';
 import StepTwo from './stepsForm/StepTwo';
@@ -7,7 +7,6 @@ import StepThree from './stepsForm/StepThree';
 import StepFour from './stepsForm/StepFour';
 import StepFive from './stepsForm/StepFive';
 import StepSix from './stepsForm/StepSix';
-import { Button } from '@mui/material';
 
 const RecipeForm: FC = () => {
   // handleSubmit - wrapper обработчика
@@ -44,7 +43,7 @@ const RecipeForm: FC = () => {
 
   return (
     <>
-      <FromWrappeer>
+      <FormWrappeer>
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* Step #1: Поле ввода названия лекарства (пропсы от 'react-hook-form')*/}
           <StepOne register={register} errors={errors} />
@@ -65,7 +64,7 @@ const RecipeForm: FC = () => {
           <StepSix control={control} />
           {/* //! кнопка отправки в StepSix*/}
         </form>
-      </FromWrappeer>
+      </FormWrappeer>
     </>
   );
 };

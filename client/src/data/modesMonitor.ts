@@ -3,17 +3,19 @@
 interface IModesMonitorObj {
     id: number;
     title: 'days' | 'weeks' | 'months' | 'years' | 'recipes' | 'mealschedules' ; // for .subtract(1, 'days' | 'weeks' | etc)
+    mode: string
   }
   
   interface IModesMonitor extends Array<IModesMonitorObj>{}
   
   // в данном проекте, значения менять не будем - толькот чтение по меняющемуся (active button) index. 
   // Просто учимся Rudax Toolkit)
+  // mode используется в обработчиках кнопок (<, today, >) в Monitor.tsx
 export const modesMonitor: IModesMonitor = [
-    {id: 1, title: 'days'}, 
-    {id: 2, title: 'weeks'}, 
-    {id: 3, title: 'months'}, 
-    {id: 4, title: 'years'},
-    {id: 5, title: 'recipes'}, // для RecipePage
-    {id: 6, title: 'mealschedules'}, // для Mealschedules
+    {id: 1, mode: 'days',title: 'days'}, 
+    {id: 2,  mode: 'weeks',title: 'weeks'}, 
+    {id: 3,  mode: 'months',title: 'months'}, 
+    {id: 4,  mode: 'years',title: 'years'},
+    {id: 5,  mode: 'days',title: 'recipes'}, // для RecipePage
+    {id: 6,  mode: 'days',title: 'mealschedules'}, // для Mealschedules
   ]

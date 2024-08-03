@@ -1,9 +1,9 @@
 //! страница /recipes (Рецепта) (используется в route.tsx)
 import { FC } from 'react';
-import RecipePage from '../components/Recipe/RecipePage';
 import { useOutletContext } from 'react-router-dom';
 import Monitor from '../components/Monitor/Monitor';
 import { Moment } from 'moment';
+import Recipe from '../components/Recipe/Recipe';
 
 //type для констант context-а
 interface ArrayContextType extends Array<Moment> {}
@@ -15,14 +15,13 @@ const Recipes: FC = () => {
 
   return (
     <>
-    {/* Не стал отдельный Monitor для Recipes делать, чтобы не запутать читающего прогера, ведь уже есть Monitor.tsx */}
       <Monitor
         currentDate={currentDate}
         prevHandler={prevHandler}
         todayHandler={todayHandler}
         nextHandler={nextHandler}
       />
-      <RecipePage />
+      <Recipe />
     </>
   );
 };

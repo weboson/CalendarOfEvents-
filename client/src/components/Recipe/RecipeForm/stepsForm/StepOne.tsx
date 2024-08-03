@@ -1,6 +1,6 @@
 //! Step 1: поле для названия лекарства
 import { FC } from 'react';
-import { FormStep, FormStepOne } from '../../stylesRecipePage/sc_RecipePage';
+import { FormStep } from '../../stylesRecipePage/sc_RecipePage';
 import { Box, InputAdornment, TextField, Typography } from '@mui/material';
 import { RiMedicineBottleLine } from 'react-icons/ri';
 import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';

@@ -22,7 +22,7 @@ const Layout: FC = () => {
 
   // redux-toolkit
   const index = useAppSelector((state) => state.menu);
-  const mode = modesMonitor[index].mode; // 'day','week','month','year' (режим отображения контента в '/'(home))
+  const mode:string = modesMonitor[index].mode; // 'day','week','month','year' (режим отображения контента в '/'(home))
 
   //  For dinamic (update) time (чтобы не нужно было обновлять каждый раз, когда время изменилось и обновлялись компоненты)
   useEffect(() => {
@@ -40,6 +40,7 @@ const Layout: FC = () => {
   }); // без массива зависимости, чтобы currentDate постоянно обновлялся (был актулаьных), он запоминается в setInterval
 
   // обработчики для кнопок <, today и >
+  // (prev) => prev - это конструкция от useState
   const prevHandler = () => setToday((prev) => prev.clone().subtract(1, mode));
   const todayHandler = () => setToday(moment());
   const nextHandler = () => setToday((next) => next.clone().add(1, mode));
@@ -48,7 +49,7 @@ const Layout: FC = () => {
     <>
       <ShadowWrapper>
         <Header />
-        {/*//! Outlet - это уникальный контент (Home.tsx, Recipes.tsx etc.) от 'react-router-dom'*/}
+        {/*//! Outlet - это уникальный контент (Home.tsx, Recipes.tsx etc. but not ErrorPage.tsx) от 'react-router-dom'*/}
         <Outlet
           context={[currentDate, prevHandler, todayHandler, nextHandler]}
         />

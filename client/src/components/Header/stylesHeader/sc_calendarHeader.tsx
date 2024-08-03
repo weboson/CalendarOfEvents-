@@ -87,11 +87,12 @@ export const ModeDateButton = styled('button')<IModeDateButtonProps>`
     color: ${(props) => (props.$isActiveModeDate ? '#565759' : '#E6E6E6;')};
 `;
 
-// кнопка "Login"
+// Обёртка для кнопки авторизации
 export const LoginWrapper = styled.div`
   display: flex;
 `;
 
+// кнопка "Log in / Sing in"
 export const ButtonLogin = styled('button')`
   border: unset;
   height: 20px;
@@ -104,6 +105,21 @@ export const ButtonLogin = styled('button')`
   border-radius: 4px;
   margin-right: 7px;
 `;
+
+// кнопка "Log Out"
+export const ButtonLogout = styled('button')`
+  border: unset;
+  height: 20px;
+  background-color: #565759;
+  color: #e6e6e6;
+  padding-right: 16px;
+  padding-left: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-right: 7px;
+`;
+
 
 // unput "search" через Form от react-router-dom
 export const SearchWrapper = styled.div`

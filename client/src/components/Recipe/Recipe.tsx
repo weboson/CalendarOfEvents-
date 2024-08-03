@@ -1,27 +1,28 @@
 import { FC } from 'react';
 import { WrapperRecipes } from './stylesRecipePage/sc_RecipePage';
 import RecipeForm from './RecipeForm/RecipeForm';
-import RecipeHeadline from './RecipeHeadline';
-import RecipeMenu from './RecipeMenu';
 import { useAppSelector } from '../../store/hooks';
-import { ArrayRecipeMenu } from '../../data/recipeMenu';
 import RecipeList from './RecipeList';
+import ColorHeader from '../ColorHeader/ColorHeader';
+import SubMenu from '../SubMenu/SubMenu';
+import { ArrSubMenu } from '../../data/arrSubMenu';
 
-const RecipePage: FC = () => {
-  const indexRecipeMenu = useAppSelector((state) => state.recipeMenu);
+const Recipe: FC = () => {
+  const activeMenu = useAppSelector((state) => state.indexSubMenu);
   return (
     <WrapperRecipes>
+      {/* id - это 2 элемента до 2-х в ArrSubMenu.tsx */}
       {/* подменю: 'Add new', 'Recipes' */}
-      <RecipeMenu />
+      <SubMenu indexItem={2}/> 
 
       {/* Если array['Add new'], то отобразится 'RecipeForm' иначе ''
       // ArrayRecipeMenu в src\data\recipeMenu.ts, а indexRecipeMenu хранится в src\store\features\modesRecipeSlice.ts и меняется в обработчике в RecipeMenu.tsx] */}
-      {ArrayRecipeMenu[indexRecipeMenu].title == 'Add new' ? (
+      {ArrSubMenu[activeMenu].title == 'Add new' ? (
         <>
-          {/* заголовок страницы*/}
-          <RecipeHeadline
-            RecipeHeadlineTitle={
-              ArrayRecipeMenu[indexRecipeMenu].RecipeHeadlineTitle
+          {/* цветной заголовок страницы для RecipeForm (Add new)*/}
+          <ColorHeader
+            title={
+              ArrSubMenu[activeMenu].colorHeader
             }
             iconName={'SlNote'}
           />
@@ -29,10 +30,10 @@ const RecipePage: FC = () => {
         </>
       ) : (
         <>
-          {/* заголовок страницы*/}
-          <RecipeHeadline
-            RecipeHeadlineTitle={
-              ArrayRecipeMenu[indexRecipeMenu].RecipeHeadlineTitle
+          {/* цветной заголовок страницы для RecipeList (recipes)*/}
+          <ColorHeader
+            title={
+              ArrSubMenu[activeMenu].colorHeader
             }
             iconName={'FaRegListAlt'}
           />
@@ -44,4 +45,4 @@ const RecipePage: FC = () => {
   );
 };
 
-export default RecipePage;
+export default Recipe;

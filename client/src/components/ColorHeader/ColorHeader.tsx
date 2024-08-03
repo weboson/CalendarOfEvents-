@@ -1,27 +1,24 @@
 import { FC } from 'react';
-import {
-  HeadlineBlock,
-  HeadlineWrapper,
-} from './stylesRecipePage/sc_RecipePage';
 import { SlNote } from 'react-icons/sl';
 import { FaRegListAlt } from 'react-icons/fa';
+import { HeadlineBlock, HeadlineWrapper } from './sc_ColorHeader';
 
-interface IRecipeHeadline {
-  RecipeHeadlineTitle: string;
+interface IColorHeader {
+  title: string;
   iconName: string
 }
 
-const RecipeHeadline: FC<IRecipeHeadline> = ({ RecipeHeadlineTitle, iconName }) => {
+const ColorHeader: FC<IColorHeader> = ({ title, iconName }) => {
   return (
     <HeadlineBlock>
       <HeadlineWrapper>
         <h1>
           {(iconName == 'SlNote') ? (<SlNote />) : (<FaRegListAlt />)}
-          {RecipeHeadlineTitle}
+          {title}
         </h1>
       </HeadlineWrapper>
     </HeadlineBlock>
   );
 };
 
-export default RecipeHeadline;
+export default ColorHeader;

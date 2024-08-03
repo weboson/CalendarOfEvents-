@@ -1,4 +1,4 @@
-// show from above: current date (exemple: November 30 (from Month), 2023 (from Year))
+// show from above: current date (exemple: November 30 (from Month), 2023 (from Year)) + < tody >
 // 
 import { FC } from 'react';
 import {
@@ -32,8 +32,8 @@ const Monitor: FC<IMonitorProps> = ({
   const index = useAppSelector((state) => state.menu);
 
   const mode = modesMonitor[index].mode; // 'month' (режим отображения заголовка в Monitor: Month)
-  // console.log(modesMonitor[index].title)
-
+  // console.log(typeof(modesMonitor[0].mode))
+  
   // active button (mode): "<", "Today" or ">"
   // const [modeDate, setModeDate] = useState(false)
   // setModeDate(true); // active mode Date

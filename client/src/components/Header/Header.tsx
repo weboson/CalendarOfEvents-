@@ -13,6 +13,7 @@ import {
   InputButtonSearch,
   LoginWrapper,
   ButtonLogin,
+  ButtonLogout,
 } from './stylesHeader/sc_calendarHeader';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { readingMenu } from '../../store/features/modesDateSlice';
@@ -23,7 +24,7 @@ import { Link, NavLink } from 'react-router-dom';
 
 const Headers: FC = () => {
   // залогинены или нет, будет отображен "Log in" и "Log out"
-  const isAuth = true;
+  const isAuth = false;
 
   const activeMenu = useAppSelector((state) => state.menu);
 
@@ -72,14 +73,22 @@ const Headers: FC = () => {
 
       <SearchWrapper>
         <LoginWrapper>
-          {/* //! login */}
-          <Link to={'/login'}>
-            <ButtonLogin
+          {/* //! auth */}
+          {isAuth ? (
+            <ButtonLogout
             // $isActiveButtonLogin = {}
             >
-              login
-            </ButtonLogin>
-          </Link>
+              Log Out
+            </ButtonLogout>
+          ) : (
+            <Link to={'/auth'}>
+              <ButtonLogin
+              // $isActiveButtonLogin = {}
+              >
+                Log in / Sing in
+              </ButtonLogin>
+            </Link>
+          )}
         </LoginWrapper>
 
         <FormRouterSearch>

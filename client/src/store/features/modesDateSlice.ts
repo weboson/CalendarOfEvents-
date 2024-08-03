@@ -10,7 +10,7 @@ import type { RootState } from '../store'
 // или если user уже нажимал кнопку меню, то она запомнится (в sessionStorage) и воссоздатся.
 // Способ react-router-dom: let location = useLocation(); location.pathname, подробнее: https://reactrouter.com/en/main/hooks/use-location#locationkey
 //* по-умолчанию 0(mode day), если кликнуть по меню, то запониматся sessionStorag (связь: Home.tsx,modesDateClice.ts, Header.tsx, dataMenu) 
-const initialState: number = (+sessionStorage.getItem('IndexMenu') >= 0 ) ? +sessionStorage.getItem('IndexMenu') : 0;
+const initialState: number = (+sessionStorage.getItem('IndexMenu') > 0 ) ? +sessionStorage.getItem('IndexMenu') : 0;
 
 
 

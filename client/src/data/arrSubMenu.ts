@@ -16,5 +16,5 @@ export const ArrSubMenu: IArrSubMenu = [
   { id: 2, title: 'Recipes', UrlParams: '/recipes', colorHeader: ' Список рецептов' }, // страница рецептов
   // for Mealschedules Sub Menu
   { id: 3, title: 'Add new', UrlParams: '/mealschedules', colorHeader: 'Укажите свой график питания' }, // страница графиков питания
-  { id: 4, title: 'Mealschedules', UrlParams: '/mealschedules', colorHeader: ' Список графиков' }, // страница графиков питания
+  { id: 4, title: 'Mealschedules', UrlParams: '/mealschedules', colorHeader: ' Список графиков питания' }, // страница графиков питания
 ]

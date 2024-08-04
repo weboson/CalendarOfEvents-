@@ -11,15 +11,13 @@ const Recipe: FC = () => {
   const activeMenu = useAppSelector((state) => state.indexSubMenu);
   return (
     <WrapperRecipes>
-      {/* id - это 2 элемента до 2-х в ArrSubMenu.tsx */}
+      {/* indexItem - это для [1,2,3,4].slice(indexItem-2, indexItem) => [1,2] or [3,4] в ArrSubMenu.tsx */}
       {/* подменю: 'Add new', 'Recipes' */}
       <SubMenu indexItem={2}/> 
 
-      {/* Если array['Add new'], то отобразится 'RecipeForm' иначе ''
-      // ArrayRecipeMenu в src\data\recipeMenu.ts, а indexRecipeMenu хранится в src\store\features\modesRecipeSlice.ts и меняется в обработчике в RecipeMenu.tsx] */}
-      {ArrSubMenu[activeMenu].title == 'Add new' ? (
+      {activeMenu == 0 ? (
         <>
-          {/* цветной заголовок страницы для RecipeForm (Add new)*/}
+          {/* цветной заголовок страниц для Recipes и Mealschedule)*/}
           <ColorHeader
             title={
               ArrSubMenu[activeMenu].colorHeader
@@ -30,7 +28,7 @@ const Recipe: FC = () => {
         </>
       ) : (
         <>
-          {/* цветной заголовок страницы для RecipeList (recipes)*/}
+          {/* цветной заголовок страниц для Recipes и Mealschedule)*/}
           <ColorHeader
             title={
               ArrSubMenu[activeMenu].colorHeader

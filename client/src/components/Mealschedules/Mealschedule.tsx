@@ -13,7 +13,7 @@ const Mealschedule: FC = () => {
     <>
       {/* indexItem - это для [1,2,3,4].slice(indexItem-2, indexItem) => [1,2] or [3,4] в ArrSubMenu.tsx */}
       {/* подменю: 'Add new', 'Recipes' */}
-      <SubMenu indexItem={2} />
+      <SubMenu indexItem={4} />
       {activeMenu == 0 ? (
         <>
           {/* цветной заголовок страниц для Recipes и Mealschedule)*/}

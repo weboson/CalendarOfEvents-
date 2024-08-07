@@ -3,7 +3,6 @@
 import { Moment } from 'moment';
 import { FC, memo, useMemo } from 'react';
 // данные графика питания: first and last eating
-import mealSchedule from '../../../../../data/localDataBase/localDB_MealSchedule';
 import { IRecipesMedication } from '../../../../../data/localDataBase/LocalDB_WaysUsing';
 import DayDependingEating from './dayMedComponents/DayDependingEating';
 import DayDependingBreakfast from './dayMedComponents/DayDependingBreakfast';
@@ -11,6 +10,7 @@ import DayDependingSupper from './dayMedComponents/DayDependingSupper';
 import DayInDependently from './dayMedComponents/DayInDependently';
 import { useAppDispatch } from '../../../../../store/hooks';
 import { chosenMedicineID } from '../../../../../store/features/chosenMedicineDaySlice';
+import { mealSchedule } from '../../../../../data/localDataBase/localDB_MealSchedule';
 
 interface IProps {
   halfHourItem: Moment;
@@ -26,8 +26,7 @@ const DayUsingMedicines: FC<IProps> = memo(
       () =>
         currentDate
           .set({
-            hour: mealSchedule[0].modeRegime.weekdays.firstMeal.hour,
-            minute: mealSchedule[0].modeRegime.weekdays.firstMeal.minute,
+            hour: mealSchedule.weekday[0],
           })
           .clone(), // обз clone() иначе изменим исходник
       [currentDate],
@@ -37,8 +36,7 @@ const DayUsingMedicines: FC<IProps> = memo(
       () =>
         currentDate
           .set({
-            hour: mealSchedule[0].modeRegime.weekdays.lastMeal.hour,
-            minute: mealSchedule[0].modeRegime.weekdays.lastMeal.minute,
+            hour: mealSchedule.weekday[1],
           })
           .clone(),
       [currentDate],
@@ -59,8 +57,7 @@ const DayUsingMedicines: FC<IProps> = memo(
       () =>
         currentDate
           .set({
-            hour: mealSchedule[0].modeRegime.weekend.firstMeal.hour,
-            minute: mealSchedule[0].modeRegime.weekend.firstMeal.minute,
+            hour: mealSchedule.weekend[0],
           })
           .clone(),
       [currentDate],
@@ -70,8 +67,7 @@ const DayUsingMedicines: FC<IProps> = memo(
       () =>
         currentDate
           .set({
-            hour: mealSchedule[0].modeRegime.weekend.lastMeal.hour,
-            minute: mealSchedule[0].modeRegime.weekend.lastMeal.minute,
+            hour: mealSchedule.weekend[0],
           })
           .clone(),
       [currentDate],

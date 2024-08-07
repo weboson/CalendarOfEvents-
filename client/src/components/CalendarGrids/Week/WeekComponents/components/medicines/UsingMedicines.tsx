@@ -3,7 +3,6 @@
 import { Moment } from 'moment';
 import { FC, memo, useMemo } from 'react';
 // данные графика питания: first and last eating
-import mealSchedule from '../../../../../../data/localDataBase/localDB_MealSchedule';
 import { IRecipesMedication } from '../../../../../../data/localDataBase/LocalDB_WaysUsing';
 import DependingEating from './medComponents/DependingEating';
 import DependingBreakfast from './medComponents/DependingBreakfast';
@@ -11,6 +10,7 @@ import DependingSupper from './medComponents/DependingSupper';
 import InDependently from './medComponents/InDependently';
 import { useAppDispatch } from '../../../../../../store/hooks';
 import { readingPopupData } from '../../../../../../store/features/popupDataSlice';
+import { mealSchedule } from '../../../../../../data/localDataBase/localDB_MealSchedule';
 
 interface IProps {
   dayItem: Moment;
@@ -27,8 +27,7 @@ const UsingMedicines: FC<IProps> = memo(
       () =>
         currentDate
           .set({
-            hour: mealSchedule[0].modeRegime.weekdays.firstMeal.hour,
-            minute: mealSchedule[0].modeRegime.weekdays.firstMeal.minute,
+            hour: mealSchedule.weekday[0],
           })
           .clone(), // обз clone() иначе изменим исходник
       [currentDate],
@@ -38,8 +37,7 @@ const UsingMedicines: FC<IProps> = memo(
       () =>
         currentDate
           .set({
-            hour: mealSchedule[0].modeRegime.weekdays.lastMeal.hour,
-            minute: mealSchedule[0].modeRegime.weekdays.lastMeal.minute,
+            hour: mealSchedule.weekday[1],
           })
           .clone(),
       [currentDate],
@@ -60,8 +58,7 @@ const UsingMedicines: FC<IProps> = memo(
       () =>
         currentDate
           .set({
-            hour: mealSchedule[0].modeRegime.weekend.firstMeal.hour,
-            minute: mealSchedule[0].modeRegime.weekend.firstMeal.minute,
+            hour: mealSchedule.weekend[0],
           })
           .clone(),
       [currentDate],
@@ -71,8 +68,7 @@ const UsingMedicines: FC<IProps> = memo(
       () =>
         currentDate
           .set({
-            hour: mealSchedule[0].modeRegime.weekend.lastMeal.hour,
-            minute: mealSchedule[0].modeRegime.weekend.lastMeal.minute,
+            hour: mealSchedule.weekend[0],
           })
           .clone(),
       [currentDate],

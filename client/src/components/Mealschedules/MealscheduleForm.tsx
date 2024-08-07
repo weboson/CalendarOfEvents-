@@ -3,6 +3,16 @@ import { Controller, useForm } from 'react-hook-form';
 import { FormWrappeer } from './sc_Mealschedule';
 import { Box, Button, Slider, Typography } from '@mui/material';
 
+// метки (резки на линии) с цифрами
+let count = 0;
+const marks = [...new Array(24)].map((_item, index) => {
+  return {
+    value: count++,
+    label: `${index++}`,
+  };
+});
+// console.log(marks) // [1,2,3,...]
+
 const MealscheduleForm: FC = () => {
   // handleSubmit - wrapper обработчика
   // watch - получать нужное значение, чтобы его использовать в форме
@@ -211,7 +221,7 @@ const MealscheduleForm: FC = () => {
                     getAriaLabel={() => 'Minimum distance shift'}
                     valueLabelDisplay="on"
                     step={1}
-                    marks
+                    marks={marks}
                     min={1}
                     max={24}
                   />
@@ -317,7 +327,7 @@ const MealscheduleForm: FC = () => {
                     valueLabelDisplay="on"
                     shiftStep={30}
                     step={1}
-                    marks
+                    marks={marks}
                     min={1}
                     max={24}
                   />
@@ -327,10 +337,7 @@ const MealscheduleForm: FC = () => {
           />
         </Box>
         {/* // кнопка "отправить" */}
-        <Button
-          variant="contained"
-          type="submit"
-        >
+        <Button variant="contained" type="submit">
           Отправить
         </Button>
       </form>

@@ -1,4 +1,4 @@
-// логика GET,POST и т.д для графика приёма пищи
+// логика GET,POST и т.д для графика приёма пищи, пример: {"weekday":[8,22],"weekend":[9,22]}
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateMealscheduleDto } from './dto/create-mealschedule.dto';
 import { UpdateMealscheduleDto } from './dto/update-mealschedule.dto';
@@ -15,20 +15,16 @@ export class MealscheduleService {
   //! POST (new Mealschedule)
   async create(createMealscheduleDto: CreateMealscheduleDto, id: number) {
     const isExist = await this.mealscheduleRepository.findBy({
-      // title: createMealscheduleDto.title, // чтобы название не дублировались
       user: { id: id }, // есть ли такой рецепт у текущего user (чтобы не дублировать)
-      type: createMealscheduleDto.type // чтобы графики weekend и weekday были по ОДНОМУ
     })
 
-    if (isExist.length) throw new BadRequestException(`У вас уже есть график на ${createMealscheduleDto.type}`)
+    if (isExist.length) throw new BadRequestException('У вас уже есть график, вы можете его удалить или изменить')
 
     // если принятый график и его title уникален, то сохранить его со всеми полями :
     // createMealscheduleDto - уточнение входящих полей.
     const newMealschedule = {
-      title: createMealscheduleDto.title,
-      type: createMealscheduleDto.type,
-      firstMeal: createMealscheduleDto.firstMeal,
-      lastMeal: createMealscheduleDto.lastMeal,
+      weekday: createMealscheduleDto.weekday,
+      weekend: createMealscheduleDto.weekend,
       user: { id },// присвоить в колонку user == текущего user
       relations: { // связь с user
         user: true,
@@ -50,17 +46,18 @@ export class MealscheduleService {
   }
 
   //! Get(id)
-  // exemle: http://localhost:3000/api/mealschedules/1
+  // exemle: http://localhost:3000/api/mealschedules/mealschedule/80
   async findOne(id: number) {
-    const mealscheduleOne = await this.mealscheduleRepository.findOne({
+    const mealscheduleOne = await this.mealscheduleRepository.findOne({    
       where: { id: id }, // Искать по id, т.е. где id в БД == api/mealschedules/:id
       relations: { // связь с user и recipes
         user: true,
         recipes: true,
       },
     })
+    // если найден, то =>
     if (!mealscheduleOne) throw new NotFoundException('График питания не найден')
-    return mealscheduleOne; // если найден, то =>
+    return mealscheduleOne; 
   }
 
   //! PATCH(id)

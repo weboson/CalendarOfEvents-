@@ -23,6 +23,7 @@ export class MealscheduleController {
     return this.mealscheduleService.findAll(+req.user.id);
   }
 
+  // http://localhost:3000/api/mealschedules/mealschedule/80
   @Get(':type/:id') // type = может быть любым словом (это как переменная) - просто в AuthorGuard есть switch на 'recipe' или 'mealschedule'
   @UseGuards(JwtAuthGuard, AuthorGuard)
   findOne(@Param('id') id: string) {

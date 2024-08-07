@@ -1,3 +1,5 @@
+//! Это двойной почти нативный input type=range с регитсрацией полей для react-hook-form
+//! НЕ задействован, используется Material UI версия Range Slider: https://mui.com/material-ui/react-slider/#range-slider
 import { FC, useState, useEffect } from 'react';
 import './DoubleScrollBar.css';
 import { FieldValues, UseFormRegister } from 'react-hook-form';

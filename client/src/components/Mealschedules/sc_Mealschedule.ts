@@ -21,3 +21,9 @@ export const FormWrappeer = styled.div`
   }
 `;
 
+
+// Для списка графиков питания
+export const ListWrappeer = styled.div`
+  height: 77.5vh;
+  background-color: #e6e6e6;
+`;

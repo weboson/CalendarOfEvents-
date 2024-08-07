@@ -5,6 +5,7 @@ import { ArrSubMenu } from '../../data/arrSubMenu';
 import RecipeList from '../Recipe/RecipeList';
 import SubMenu from '../SubMenu/SubMenu';
 import MealscheduleForm from './MealscheduleForm';
+import MealscheduleList from './MealscheduleList';
 
 const Mealschedule: FC = () => {
   const activeMenu = useAppSelector((state) => state.indexSubMenu);
@@ -30,7 +31,7 @@ const Mealschedule: FC = () => {
             title={ArrSubMenu[activeMenu + 2].colorHeader}
             iconName={'FaRegListAlt'}
           />
-          <RecipeList />
+          <MealscheduleList />
         </>
       )}
     </>

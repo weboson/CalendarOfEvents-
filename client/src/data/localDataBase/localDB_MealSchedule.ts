@@ -9,8 +9,8 @@ interface IMealSchedule {
 }
 
 export const mealSchedule: IMealSchedule = {
-  "weekday": [8, 22], 
-  "weekend": [9, 22]
+  weekday: [8, 22], 
+  weekend: [9, 22]
 }
 
 

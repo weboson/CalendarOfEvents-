@@ -107,7 +107,7 @@ const DependingEating: FC<IProps> = memo(
                   0 && // 22:30 - 22:21 >= 0  and < 30
                 firstMealWeekend.clone().minute() - halfHourItem.minute() <
                   30 && (
-                  <div>
+                  <>
                     {currentDayForWirning && (
                       <HelperWarningMarker
                         halfHourItem={halfHourItem}
@@ -118,7 +118,7 @@ const DependingEating: FC<IProps> = memo(
                     <WrapperSpanWeek
                       className={`medElemUnic${med.id}`}
                     >{`${med.title}`}</WrapperSpanWeek>
-                  </div>
+                  </>
                 )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
                 [...new Array(med.quantity - 1)].map(
                   (_, index) =>

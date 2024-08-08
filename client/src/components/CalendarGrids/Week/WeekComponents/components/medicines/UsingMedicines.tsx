@@ -68,7 +68,7 @@ const UsingMedicines: FC<IProps> = memo(
       () =>
         currentDate
           .set({
-            hour: mealSchedule.weekend[0],
+            hour: mealSchedule.weekend[1],
           })
           .clone(),
       [currentDate],

@@ -5,15 +5,15 @@ import {
   TitleCalendar,
   StyleIconPlus,
   TitleCalendarWrapper,
-  ButtonsWrapper,
   ModeDateButton,
-  SearchWrapper,
   FormRouterSearch,
   InputSearch,
   InputButtonSearch,
-  LoginWrapper,
-  ButtonLogin,
-  ButtonLogout,
+  ModeDateButtonAuth,
+  ButtonsWrapperMenu,
+  ButtonWrapperAuth,
+  RightNavMenu,
+  CenterNavMenu,
 } from './stylesHeader/sc_calendarHeader';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { readingMenu } from '../../store/features/modesDateSlice';
@@ -23,7 +23,7 @@ import { menuModesDate } from '../../data/dataMenu';
 import { Link, NavLink } from 'react-router-dom';
 
 const Headers: FC = () => {
-  // залогинены или нет, будет отображен "Log in" и "Log out"
+  //! залогинены или нет, будет отображен "Log in" и "Log out"
   const isAuth = false;
 
   const activeMenu = useAppSelector((state) => state.menu);
@@ -33,13 +33,15 @@ const Headers: FC = () => {
   const handleClick = (index: number) => {
     //* записал активную кнопку меню в хранилище, используется в modesDateSlice.ts
     sessionStorage.setItem('IndexMenu', index.toString()); // например, если нажать на кнопку "Recipes", то после обновления страницы, будет режим "Recipes"
+    // console.log(sessionStorage.getItem('IndexMenu'));
     // redux-toolkit
     dispatch(readingMenu(index));
   };
   console.log('rememo');
   return (
     <DivWrapper>
-      {/* Заголовок */}
+      {/* //! Левый сектор */}
+      {/*//* Logo */}
       <Link to={'/'}>
         <TitleCalendarWrapper>
           <TitleCalendar>MedСalendar</TitleCalendar>
@@ -48,56 +50,59 @@ const Headers: FC = () => {
           </StyleIconPlus>
         </TitleCalendarWrapper>
       </Link>
-      {/*//! Menu */}
-      <ButtonsWrapper>
+
+      {/* //! Центральный сектор */}
+      {/*//* Menu Center */}
+      <CenterNavMenu>
         {/* // NavLink от react-router-dom*/}
-        {/*// кнопки из массива: Day,Week,Month,Year или Recipe и Mealschedules */}
-        {menuModesDate.map((item, index, array) => (
+        {/*// кнопки из массива: Day,Week,Month,Year,Recipe,Mealschedules и крайний особенный Login/Logout: client\src\data\dataMenu.ts */}
+        {menuModesDate.map(
+          (item, index, array) =>
+            index <= 5 && ( // Day,Week,Month,Year, Recipe, Mealschedules
+              <ButtonsWrapperMenu key={index}>
+                <NavLink
+                  to={`${item.UrlParams}`}
+                  onClick={() => handleClick(index)}
+                >
+                  <ModeDateButton
+                    $isActiveModeDate={activeMenu == index ? true : false}
+                    // закругление углов левого края (кнопки Day)
+                    $borderRadiusLeft={index == 0 ? true : false}
+                    $borderRadiusRight={
+                      index == array.length - 2 ? true : false
+                    }
+                  >
+                    {item.title}
+                  </ModeDateButton>
+                </NavLink>
+              </ButtonsWrapperMenu>
+            ),
+        )}
+      </CenterNavMenu>
+      {/* //! Правый сектор */}
+      <RightNavMenu>
+        {/* //* Login / Logout */}
+        <ButtonWrapperAuth key={6}>
           <NavLink
-            to={`${item.UrlParams}`}
-            key={index}
-            onClick={() => handleClick(index)}
+            to={`${menuModesDate[6].UrlParams}`} //
+            onClick={() => handleClick(6)}
           >
-            <ModeDateButton
-              // закругление углов левого края (кнопки Day)
-              $isActiveModeDate={activeMenu == index ? true : false}
-              $borderRadiusLeft={index == 0 ? true : false}
-              $borderRadiusRight={index == array.length - 1 ? true : false}
+            <ModeDateButtonAuth
+              $isActiveModeDate={activeMenu == 6 ? true : false}
             >
-              {item.title}
-            </ModeDateButton>
+              {isAuth ? menuModesDate[6].title : menuModesDate[6].subTitle}
+            </ModeDateButtonAuth>
           </NavLink>
-        ))}
-      </ButtonsWrapper>
-      {/* Поиск */}
+        </ButtonWrapperAuth>
 
-      <SearchWrapper>
-        <LoginWrapper>
-          {/* //! auth */}
-          {isAuth ? (
-            <ButtonLogout
-            // $isActiveButtonLogin = {}
-            >
-              Log Out
-            </ButtonLogout>
-          ) : (
-            <Link to={'/auth'}>
-              <ButtonLogin
-              // $isActiveButtonLogin = {}
-              >
-                Log in / Sing in
-              </ButtonLogin>
-            </Link>
-          )}
-        </LoginWrapper>
-
+        {/*//! Поиск */}
         <FormRouterSearch>
           <InputButtonSearch>
             <FaSearch />
           </InputButtonSearch>
           <InputSearch placeholder="Search" />
         </FormRouterSearch>
-      </SearchWrapper>
+      </RightNavMenu>
     </DivWrapper>
   );
 };

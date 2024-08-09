@@ -2,7 +2,7 @@
 // used CalendarGrid
 interface IModesMonitorObj {
     id: number;
-    title: 'days' | 'weeks' | 'months' | 'years' | 'recipes' | 'mealschedules' ; // for .subtract(1, 'days' | 'weeks' | etc)
+    title: 'days' | 'weeks' | 'months' | 'years' | 'recipes' | 'mealschedules' | 'auth'; // for .subtract(1, 'days' | 'weeks' | etc)
     mode: string
   }
   
@@ -18,4 +18,5 @@ export const modesMonitor: IModesMonitor = [
     {id: 4,  mode: 'years',title: 'years'},
     {id: 5,  mode: 'days',title: 'recipes'}, // для RecipePage
     {id: 6,  mode: 'days',title: 'mealschedules'}, // для Mealschedules
+    {id: 7,  mode: 'days',title: 'auth'}, // для AuthPage
   ]

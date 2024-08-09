@@ -38,8 +38,13 @@ export const TitleCalendarWrapper = styled.div`
   display: flex;
 `;
 
-//Buttons
-export const ButtonsWrapper = styled('nav')`
+//! Menu center
+export const CenterNavMenu = styled.nav`
+  display: flex;
+`;
+
+//* 0-5 из arr dataMenu: Day,Week,Month,Year, Recipe, Mealschedules
+export const ButtonsWrapperMenu = styled('div')`
   display: flex;
   justify-content: center;
   @media (max-width: 374px) {
@@ -59,6 +64,7 @@ interface IModeDateButtonProps {
   $isActiveModeDate?: boolean;
 }
 
+// стиль каждой кнопки
 export const ModeDateButton = styled('button')<IModeDateButtonProps>`
   border: unset;
   height: 20px;
@@ -84,52 +90,56 @@ export const ModeDateButton = styled('button')<IModeDateButtonProps>`
     /* активная кнопка меню */
     background-color: ${(props) =>
     props.$isActiveModeDate ? '#E6E6E6;' : '#565759'};
-    color: ${(props) => (props.$isActiveModeDate ? '#565759' : '#E6E6E6;')};
+  color: ${(props) => (props.$isActiveModeDate ? '#565759' : '#E6E6E6;')};
 `;
 
-// Обёртка для кнопки авторизации
-export const LoginWrapper = styled.div`
+//! Menu right
+// кнопка Login/Logout
+//* 6 из arr dataMenu: Login/Logout
+// обертка кнопки
+// Правый сектор (login/logout)
+export const RightNavMenu = styled.div`
   display: flex;
+  align-items: center;
 `;
 
-// кнопка "Log in / Sing in"
-export const ButtonLogin = styled('button')`
-  border: unset;
-  height: 20px;
-  background-color: #565759;
-  color: #e6e6e6;
-  padding-right: 16px;
-  padding-left: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  border-radius: 4px;
-  margin-right: 7px;
-`;
-
-// кнопка "Log Out"
-export const ButtonLogout = styled('button')`
-  border: unset;
-  height: 20px;
-  background-color: #565759;
-  color: #e6e6e6;
-  padding-right: 16px;
-  padding-left: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  border-radius: 4px;
-  margin-right: 7px;
-`;
-
-
-// unput "search" через Form от react-router-dom
-export const SearchWrapper = styled.div`
+export const ButtonWrapperAuth = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
+  text-align: right;
+`;
+
+interface IModeDateButtonAuthProps {
+  $isActiveModeDate?: boolean;
+}
+// кнопка
+export const ModeDateButtonAuth = styled.button<IModeDateButtonAuthProps>`
+  border: unset;
+  height: 20px;
+  padding-right: 16px;
+  padding-left: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  @media (max-width: 834px) {
+    // при max-width: 834px и меньше
+    margin: 3% 0;
+  }
+  @media (max-width: 375px) {
+    // при max-width: 834px и меньше
+    display: flex;
+  }
+  border-radius: 4px;
+  background-color: ${(props) =>
+    props.$isActiveModeDate ? '#E6E6E6;' : '#565759'};
+  color: ${(props) => (props.$isActiveModeDate ? '#565759' : '#E6E6E6;')};
 `;
 
 export const FormRouterSearch = styled(Form)`
   background: #565759;
+  height: 20px;
   margin-right: 7px;
+  margin-left: 7px;
   border-radius: 4px;
   display: flex;
 `;
@@ -139,7 +149,6 @@ export const InputSearch = styled('input')`
   outline: none;
   background: transparent;
   max-width: 200px;
-  height: 20px;
   color: #e6e6e6;
   &::placeholder {
     align-items: center;

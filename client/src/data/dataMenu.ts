@@ -5,6 +5,7 @@ interface IModeDate {
     title: string;
     format: string;
     UrlParams: string
+    subTitle?: string | undefined
   }
   
   interface IMenuModesDate extends Array<IModeDate>{}
@@ -18,4 +19,6 @@ export const menuModesDate: IMenuModesDate = [
     {id: 4, title: 'Year', format: 'YYYY', UrlParams: '/'},
     {id: 5, title: 'Recipes', format: '', UrlParams: '/recipes'}, // страница рецептов
     {id: 6, title: 'Mealschedules', format: '', UrlParams: '/mealschedules'}, // страница графика приёма пищи
+    // страница авторизации и регистрации, в зависимости от авторизирован ли user или нет - надпись разная (Login или Logout)
+    {id: 7, title: 'Login', subTitle: 'Logout',format: '', UrlParams: '/auth'}, // страница авторизации и регистрации
   ]

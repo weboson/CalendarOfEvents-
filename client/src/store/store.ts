@@ -6,7 +6,8 @@ import popupDataReducer from './features/popupDataSlice'
 import readingMarkerWarning from './features/markerWarningSlice'
 import arrWarningReducer from './features/arrWarningSlice'
 import chosenMedicineReducer from './features/chosenMedicineDaySlice' // for Day (recipte window)
-import indexSubMenuSliceReducer from './features/indexSubMenuSlice' // for Day (recipte window)
+import indexSubMenuReducer from './features/indexSubMenuSlice' // for Day (recipte window)
+import isAuthReducer from './features/isAuthSlice' 
 
 
 
@@ -16,12 +17,13 @@ export const store = configureStore({
     menu: menuReducer, // режим меню
     // for Monitor
     selectedModeMonitor: selectedModeMonitorReducer, // режим отображения заголовка (месяц, неделя и т.д.) шапки (Monitor) 
-    indexSubMenu: indexSubMenuSliceReducer, // для подменю на страницах: /resipes и /mealschedules
+    indexSubMenu: indexSubMenuReducer, // для подменю на страницах: /resipes и /mealschedules
     // for WeekGrid
     popupData: popupDataReducer, // содержание MyPopup.tsx
     markerWarning: readingMarkerWarning, // Warning part 1: push array, exemple: [true, false, fasle]. Rendering each: HelperWarningMarker.tsx
     arrWarning: arrWarningReducer, // Warning part 2: indicator (true/false or on/off). Rendering: WeekGrid.tsx
     chosenMedicine: chosenMedicineReducer, // содержание Recipte окна для Day (обработчик в DayUsingMedicines.tsx)
+    isAuth: isAuthReducer, // авторизирован ли user или нет
   },
 })
 

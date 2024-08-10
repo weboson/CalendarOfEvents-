@@ -23,7 +23,7 @@ export const indexSubMenuSlice = createSlice({
 })
 
 export const { readingIndexSubMenu } = indexSubMenuSlice.actions
-
+// тип RootState идёт из store.tx - нужно добавить в store.ts - чтобы indexSubMenu не был ошибкой
 export const selectCount = (state: RootState) => state.indexSubMenu
 
 export default indexSubMenuSlice.reducer

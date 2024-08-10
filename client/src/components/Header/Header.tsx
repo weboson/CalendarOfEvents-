@@ -23,9 +23,10 @@ import { menuModesDate } from '../../data/dataMenu';
 import { Link, NavLink } from 'react-router-dom';
 
 const Headers: FC = () => {
-  //! залогинены или нет, будет отображен "Log in" и "Log out"
-  const isAuth = false;
-
+  // залогинены или нет, будет отображен "Log in" и "Log out"
+  // получить состояние авторизации из ReduxTLK (файл: client\src\store\features\isAuthSlice.ts)
+  const isAuth = useAppSelector((state) => state.isAuth);
+  // получить состояние авторизации из ReduxTLK
   const activeMenu = useAppSelector((state) => state.menu);
 
   const dispatch = useAppDispatch();

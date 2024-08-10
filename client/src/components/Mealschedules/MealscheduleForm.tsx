@@ -127,7 +127,7 @@ const MealscheduleForm: FC = () => {
         {/* Weekday */}
         <Box component="section">
           <Typography
-            id="stepTitle"
+            id="titleWeekday"
             variant="h2"
             component="h2"
             margin="normal"
@@ -233,7 +233,7 @@ const MealscheduleForm: FC = () => {
         {/* Weekend */}
         <Box component="section">
           <Typography
-            id="stepTitle"
+            id="titleWeekend"
             variant="h2"
             component="h2"
             margin="normal"

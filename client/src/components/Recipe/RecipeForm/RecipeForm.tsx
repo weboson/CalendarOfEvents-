@@ -61,7 +61,7 @@ const RecipeForm: FC = () => {
           {/* Step #5 Поле ввода "Курс приёма" (продолжительность приёма ЛС): (пропсы от 'react-hook-form')*/}
           <StepFive register={register} control={control} />
           {/* Step #6 Поле ввода "Дата старта курса" (дата начала приёма ЛС): (пропсы от 'react-hook-form')*/}
-          {/* // + кнопка отправки в StepSix*/}
+          {/* // + button отправки в StepSix*/}
           <StepSix control={control} />
         </form>
       </FormWrappeer>

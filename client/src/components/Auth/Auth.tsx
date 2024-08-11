@@ -7,11 +7,10 @@ const Auth: FC = () => {
     // получить состояние авторизации из ReduxTLK (файл: client\src\store\features\isAuthSlice.ts)
     const isAuth = useAppSelector((state) => state.isAuth) 
 
-
   return (
     <>
       <ColorHeader
-        title={(isAuth) ? 'Выйти из системы' : 'Войти в систему'}
+        title={(isAuth) ? 'Выйти из системы' : 'Регистрация / Войти в систему'}
         iconName={(isAuth) ? 'MdOutlineLogin' : 'MdOutlineLogout'}
       />
 

@@ -7,7 +7,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { RootState } from '../store'
 // Чтобы получить состояние данных: => const isAuth = useAppSelector((state) => state.isAuth) 
-// Чтобы изменить состояние данных: => const dispatch = useAppDispatch(); dispatch(readingisAuth(new data))
+// Чтобы изменить состояние данных: => const dispatch = useAppDispatch(); dispatch(readingIsAuth(new data))
 const initialState: boolean = false // по-умолчанию НЕ "авторизирован"
 
 
@@ -15,13 +15,13 @@ export const isAuthSlice = createSlice({
     name: 'isAuth',
     initialState,
     reducers: {
-      readingisAuth: (state, action) => (
+      readingIsAuth: (state, action) => (
           state = action.payload // exemple: false = true
       )
     },
   })
   
-  export const { readingisAuth } = isAuthSlice.actions
+  export const { readingIsAuth } = isAuthSlice.actions
   // тип RootState идёт из store.tx - нужно добавить в store.ts - чтобы isAuth не был ошибкой
   export const selectCount = (state: RootState) => state.isAuth
   

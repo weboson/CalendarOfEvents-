@@ -56,6 +56,7 @@
 9. Mui/material": "^5.15.20"
 10. @mui/x-date-pickers: "^7.9.0"
 11. dayjs: "^1.11.11" (unistalled)
+12. react-toastify: "^10.0.5",
 
 ## Backend: 
 1. Typescript": "^5.0.2",

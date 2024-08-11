@@ -5,7 +5,7 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) {} // private, readonly это от TypeScript 
 
-  // http://localhost:3000/ + [global prefix - api]
+  // http://localhost:3000/ + [global prefix - api в server\src\main.ts]
   @Get() // Get-запрос по адресу в скобках, например: @Get('/rishat')
   getHello(): string { // метод, который отработает при get-запросе
     return this.appService.getHello(); // запустить метод класса

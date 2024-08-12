@@ -8,7 +8,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { RootState } from '../store'
 // Чтобы получить состояние данных: => const isAuth = useAppSelector((state) => state.isAuth) 
 // Чтобы изменить состояние данных: => const dispatch = useAppDispatch(); dispatch(readingIsAuth(new data))
-const initialState: boolean = false // по-умолчанию НЕ "авторизирован"
+const initialState: boolean = false  // по-умолчанию НЕ "авторизирован"
 
 
 export const isAuthSlice = createSlice({

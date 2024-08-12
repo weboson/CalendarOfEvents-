@@ -29,13 +29,13 @@ export class UserService {
     //! если такого user нет в БД, то сохраняем его в БД, как новый
     const user = await this.userRepository.save({
       email: createUserDto.email,
-      password: await argon2.hash(createUserDto.password) // зашифровали пароль
+      password: await argon2.hash(createUserDto.password) // зашифровали пароль - не сатну возврощать на
     })
 
     // создадим при регистрации jwt-токен на основе поля email
-    const token = this.JwtService.sign({email: createUserDto.email })
-
-    return { user, token }; 
+    const token = this.JwtService.sign({ email: createUserDto.email })
+    // не стану возращать весь user, его id и тем более, хоть и хэшированный argon2, password
+    return { user: user.email, token };
   }
 
   async findOne(email: string) {

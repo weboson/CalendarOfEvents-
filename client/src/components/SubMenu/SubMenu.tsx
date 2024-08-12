@@ -1,4 +1,4 @@
-//! подменю (используется в RecipePage, Mealschedules)
+//! подменю (используется в RecipePage, Mealschedules и Auth (login/logout))
 import { FC } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { SubMenuUl, SubMenuWrapper } from './sc_SubMenu';
@@ -11,13 +11,14 @@ interface Isubmenu {
 
 const Submenu: FC<Isubmenu> = ({indexItem}) => { // id - это 2 элемента до id в ArrSubMenu.tsx 
 
-const activeMenu = useAppSelector((state) => state.indexSubMenu); // src\store\features\modesRecipeSlice.ts
+const activeSubMenu = useAppSelector((state) => state.indexSubMenu); // src\store\features\modesRecipeSlice.ts
 const dispatch = useAppDispatch();
 const handleClick = (index: number) => {
     //* записал активную кнопку меню в хранилище, используется в modesDateSlice.ts
     sessionStorage.setItem('indexSubMenu', index.toString()); // например, если нажать на кнопку "New Add", то после обновления страницы, будет режим "RecipesForm.tsx"
     // redux-toolkit
     dispatch(readingIndexSubMenu(index));
+    // console.log()
   };
   return (
     <SubMenuWrapper>
@@ -27,7 +28,7 @@ const handleClick = (index: number) => {
           <div key={index}>
           {/* Menu */}
           <SubMenuUl
-            $isActiveModeDate={activeMenu == index ? true : false}
+            $isActiveModeDate={activeSubMenu == index ? true : false}
             $borderRadiusLeft={index == 0 ? true : false}
             $borderRadiusRight={index == 1 ? true : false}
           >

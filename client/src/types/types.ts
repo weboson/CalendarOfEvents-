@@ -4,13 +4,16 @@ export interface IUserData { // for client\src\serviсes\auth.service.ts
     password: string
 }
 
+export interface IResponseUse {
+    id: string
+    email: string
+    password: string
+    createdAtUser: string
+    updateAtUser: string
+}
+
 // ожидается отклик от сервера при регистрации
 export interface IResponseUserData {
-    email: string | undefined
-    password: string | undefined
-    createdAtUser: string | undefined
-    updateAtUser: string | undefined
-    __v?: number | undefined // хз
-    _id?: string | undefined
-    message: string | undefined
+    token: string
+    user: IResponseUse
 }

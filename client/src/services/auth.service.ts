@@ -13,8 +13,14 @@ export const AuthService = {
     // войти уже существуещему user (server\src\auth\auth.service.ts)
     async login(userData: IUserData): Promise<IUser | undefined> {  // id, email, token
         // response: id, email и token (server\src\auth\auth.service.ts)
-        const { data } = await instance.post<IUser>('auth/login', userData); 
+        const { data } = await instance.post<IUser>('auth/login', userData);
         return data
-     },
-    async getMe() {  },
+    },
+
+    // чтобы в приложении было актуальное состояние авторизации user 
+    // (то есть, при обновлении страницы - авторизация не слетала)
+    async getProfile(): Promise<IUser | undefined> { // используется в client\src\App.tsx
+        const { data } = await instance.get<IUser>('auth/profile')
+        if (data) return data
+    },
 }

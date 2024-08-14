@@ -17,7 +17,7 @@ import { IUserData } from '../../types/types';
 import { toast } from 'react-toastify';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { readingIndexSubMenu } from '../../store/features/indexSubMenuSlice';
-import { setTokenToLocalStorage } from '../../helpers/localStorage.helper';
+import { removeTokenFromLocalStorage, setTokenToLocalStorage } from '../../helpers/localStorage.helper';
 import { login, logout } from '../../store/features/userSlice';
 
 const AuthForm: FC = () => {
@@ -57,7 +57,9 @@ const AuthForm: FC = () => {
       if (response) {
         // не стану сохранять токен при регистрации - пусть user в ворме ВОЙТИ войдет и сохраним уже токен в localstorage
         // setTokenToLocalStorage('token', response.token) // сохраним токен от server в localstorge, после регистрации
+        switchForm(0) // после успешной регистрации - переход на subMenu = 'Войти'
         toast.success('Регистрация прошла успешно!');
+        
       }
       // после регистрации: меняем isAuthSlice.ts на true, и в colorHeader изменится заголовок на 'Войти в систему' и потом вводим зарегистрируемые данные (email,pass)
       SetIsLogin(!isLogin); 
@@ -86,6 +88,9 @@ const AuthForm: FC = () => {
   //* выйти
   const logoutHandler = async () => {
     dispatch(logout()); 
+    // удалим токен, иначе приложение не выходит из системы
+    removeTokenFromLocalStorage('token')
+    toast.success('Вы вышли из системы!')
   };
 
   return (

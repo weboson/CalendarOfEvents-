@@ -7,7 +7,7 @@ import readingMarkerWarning from './features/markerWarningSlice'
 import arrWarningReducer from './features/arrWarningSlice'
 import chosenMedicineReducer from './features/chosenMedicineDaySlice' // for Day (recipte window)
 import indexSubMenuReducer from './features/indexSubMenuSlice' // for Day (recipte window)
-import isAuthReducer from './features/isAuthSlice' 
+import userReducer from './features/userSlice' // авторизирован или нет
 
 
 
@@ -23,7 +23,7 @@ export const store = configureStore({
     markerWarning: readingMarkerWarning, // Warning part 1: push array, exemple: [true, false, fasle]. Rendering each: HelperWarningMarker.tsx
     arrWarning: arrWarningReducer, // Warning part 2: indicator (true/false or on/off). Rendering: WeekGrid.tsx
     chosenMedicine: chosenMedicineReducer, // содержание Recipte окна для Day (обработчик в DayUsingMedicines.tsx)
-    isAuth: isAuthReducer, // авторизирован ли user или нет
+    user: userReducer, // авторизирован ли user или нет
   },
 })
 

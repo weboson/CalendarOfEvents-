@@ -1,6 +1,6 @@
 //! Обработчики запросов (post, get, patch etc. от axios) для auth
 import { instance } from '../api/axios.api'; // базовые настройки запроса
-import { IResponseLoginData, IResponseUserData, IUserData } from '../types/types';
+import { IResponseUserData, IUser, IUserData } from '../types/types';
 // Видео помощник: https://youtu.be/-zQrK0mfZFY?list=PLkUJHNMBzmtQj5qvTCqn0uMXFDG4ENiwf&t=1376 
 export const AuthService = {
     // метод для регистрации
@@ -11,10 +11,10 @@ export const AuthService = {
     },
 
     // войти уже существуещему user (server\src\auth\auth.service.ts)
-    async login(userData: IUserData): Promise<IResponseLoginData | undefined> {  // id, email, token
+    async login(userData: IUserData): Promise<IUser | undefined> {  // id, email, token
         // response: id, email и token (server\src\auth\auth.service.ts)
-        const { data } = await instance.post<IResponseLoginData>('auth/login', userData); 
+        const { data } = await instance.post<IUser>('auth/login', userData); 
         return data
      },
-    async getMe() { },
+    async getMe() {  },
 }

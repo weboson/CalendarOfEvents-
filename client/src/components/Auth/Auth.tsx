@@ -5,8 +5,8 @@ import AuthForm from './AuthForm';
 import Submenu from '../SubMenu/SubMenu';
 
 const Auth: FC = () => {
-    // получить состояние авторизации из ReduxTLK (файл: client\src\store\features\isAuthSlice.ts)
-    const isAuth = useAppSelector((state) => state.isAuth) 
+    // получить состояние авторизации из ReduxTLK (файл: client\src\store\features\userSlice.ts)
+    const isAuth = useAppSelector((state) => state.user.isAuth) 
 
   return (
     <>

@@ -8,7 +8,7 @@ import { JwtAuthGuard } from './guards/jwt-auth.guard';
 export class AuthController {
   constructor(private readonly authService: AuthService) { }
 
-  // ! для ВОЙТИ существуещему user
+  // ! для ВОЙТИ существуещему user (регистарция в server\src\user\user.service.ts)
   // код из https://docs.nestjs.com/recipes/passport#login-route
   // локальная стратегия Passport имеет имя по умолчанию «local». 
   // Мы ссылаемся на это имя в декораторе @UseGuards(AuthGuard('local')), чтобы связать его с кодом, предоставленным пакетом passport-local. 

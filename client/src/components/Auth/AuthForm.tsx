@@ -1,6 +1,6 @@
 // Форма для ввода Email и Password (как для регистрации, так и для авторизации)
 // Для проверки работоспособности необходимо запустить server командой npm run start:dev
-import { FC} from 'react';
+import { FC, useState} from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FormWrappeer } from './sc_Auth';
 import {
@@ -16,9 +16,9 @@ import { AuthService } from '../../services/auth.service';
 import { IUserData } from '../../types/types';
 import { toast } from 'react-toastify';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { readingIsAuth } from '../../store/features/isAuthSlice';
 import { readingIndexSubMenu } from '../../store/features/indexSubMenuSlice';
 import { setTokenToLocalStorage } from '../../helpers/localStorage.helper';
+import { login, logout } from '../../store/features/userSlice';
 
 const AuthForm: FC = () => {
   //* react-hook-form
@@ -31,6 +31,8 @@ const AuthForm: FC = () => {
     mode: 'onChange', // режим реагирования на изменение
   });
 
+  const [isLogin, SetIsLogin] = useState<boolean>(false)
+
   //* переключатель формы с 'регистрация' на 'войти' в зависимости от submenu ('Зарегистрироватся' на 'войти')
   const activeSubMenu = useAppSelector((state) => state.indexSubMenu); // src\store\features\modesRecipeSlice.ts
   // обработчик ссылки "Зарегистрироватся"
@@ -41,8 +43,8 @@ const AuthForm: FC = () => {
 
   // ReduxTK
   const dispatch = useAppDispatch();
-  // получить состояние авторизации из ReduxTLK (файл: client\src\store\features\isAuthSlice.ts)
-  const isAuth = useAppSelector((state) => state.isAuth); //* авторизирован ли user
+  // получить состояние авторизации из ReduxTLK (файл: client\src\store\features\userSlice.ts)
+  const isAuth = useAppSelector((state) => state.user.isAuth); //* авторизирован ли user
 
   //* обработчик для регистрации (логика в client\src\serviсes\auth.service.ts)
   const registrationHandler: SubmitHandler<IUserData> = async (
@@ -58,7 +60,7 @@ const AuthForm: FC = () => {
         toast.success('Регистрация прошла успешно!');
       }
       // после регистрации: меняем isAuthSlice.ts на true, и в colorHeader изменится заголовок на 'Войти в систему' и потом вводим зарегистрируемые данные (email,pass)
-      dispatch(readingIsAuth(!isAuth)); // isAuth = true или false
+      SetIsLogin(!isLogin); 
     } catch (err: any) {
       const error = await err.response?.data.message; // если есть response то ...
       toast.error(error?.toString());
@@ -71,10 +73,10 @@ const AuthForm: FC = () => {
       const response = await AuthService.login(data);
       if (response) {
         setTokenToLocalStorage('token', response.token) // сохраним токен от server в localstorge, при входе существующего user
+        dispatch(login(response)); // isAuth = true
         toast.success('Вы вошли в систему!');
       }
       // после регистрации: меняем isAuthSlice.ts на true, и в colorHeader изменится заголовок на 'Войти в систему' и потом вводим зарегистрируемые данные (email,pass)
-      dispatch(readingIsAuth(true)); // isAuth = true
     } catch (err: any) {
       const error = err.response?.data.message; // если есть response то ...
       toast.error(error.toString());
@@ -83,7 +85,7 @@ const AuthForm: FC = () => {
 
   //* выйти
   const logoutHandler = async () => {
-    dispatch(readingIsAuth(!isAuth)); // isAuth = true или false
+    dispatch(logout()); 
   };
 
   return (

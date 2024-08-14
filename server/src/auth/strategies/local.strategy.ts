@@ -1,4 +1,4 @@
-// стратегия проверки входных данных при авторизации (валидация)
+// стратегия проверки входных данных при авторизации (валидация): из гайда: https://docs.nestjs.com/recipes/passport#implementing-passport-local
 import { Strategy } from 'passport-local';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable, UnauthorizedException } from '@nestjs/common';

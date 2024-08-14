@@ -1,4 +1,4 @@
-//! поиск на схожесть входящих email и password с полями в БД (сущесвтует ли данный user, который вводится в форму)
+//! для ВОЙТИ: поиск на схожесть входящих email и password с полями в БД (сущесвтует ли данный user, который вводится в форму)
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UserService } from 'src/user/user.service';
 import * as argon2 from 'argon2' // для расшифровки пароля (ведь мы его зашифровали в user.service)
@@ -12,7 +12,7 @@ export class AuthService {
     private userService: UserService,
     private jwtService: JwtService) { }
 
-  async validateUser(email: string, password: string): Promise<any> {
+  async validateUser(email: string, password: string): Promise<any> { // используется в Guard "@UseGuards(LocalAuthGuard)" (server\src\auth\guards\local-auth.guard.ts) и сама логика (server\src\auth\strategies\local.strategy.ts)
     const user = await this.userService.findOne(email);
     // verify - расшифровывет и сравнивает на схожесть входящего проверяемого пароля с имеющимся в БД
     const passwordIsMatch = await argon2.verify(user.password, password)

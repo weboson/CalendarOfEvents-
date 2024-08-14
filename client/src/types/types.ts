@@ -7,7 +7,7 @@ export interface IUserData { // for client\src\serviсes\auth.service.ts
 export interface IResponseUse {
     id: string
     email: string
-    password: string
+    // password: string // убрал и отклика в server\src\user\user.service.ts
     createdAtUser: string
     updateAtUser: string
 }
@@ -15,5 +15,13 @@ export interface IResponseUse {
 // ожидается отклик от сервера при регистрации
 export interface IResponseUserData {
     token: string
-    user: IResponseUse
+    userData: IResponseUse
+}
+
+// тип ответа при "войти" существующего user (client\src\services\auth.service.ts)
+// response: id, email и token (server\src\auth\auth.service.ts)
+export interface IResponseLoginData {
+    id: string
+    email: string
+    token: string 
 }

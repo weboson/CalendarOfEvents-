@@ -1,6 +1,6 @@
 // Форма для ввода Email и Password (как для регистрации, так и для авторизации)
 // Для проверки работоспособности необходимо запустить server командой npm run start:dev
-import { FC, useState } from 'react';
+import { FC} from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FormWrappeer } from './sc_Auth';
 import {
@@ -18,18 +18,13 @@ import { toast } from 'react-toastify';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { readingIsAuth } from '../../store/features/isAuthSlice';
 import { readingIndexSubMenu } from '../../store/features/indexSubMenuSlice';
+import { setTokenToLocalStorage } from '../../helpers/localStorage.helper';
 
 const AuthForm: FC = () => {
-  // handleSubmit - wrapper обработчика
-  // watch - получать нужное значение, чтобы его использовать  форме
-  // unregister - не регистрировать значение элемента (не отпрвлять данные в объекте)
-  // register - регистрировать значение элемента (отпрвлять данные в объекте)
-  // formState - состояние формы
+  //* react-hook-form
   const {
-    control,
     register,
     handleSubmit,
-    watch,
     formState: { errors }, // вывод ошибки на валидацию
   } = useForm<IUserData>({
     // <IUserData> - как в примере: https://react-hook-form.com/docs/useform/handlesubmit
@@ -39,7 +34,7 @@ const AuthForm: FC = () => {
   //* переключатель формы с 'регистрация' на 'войти' в зависимости от submenu ('Зарегистрироватся' на 'войти')
   const activeSubMenu = useAppSelector((state) => state.indexSubMenu); // src\store\features\modesRecipeSlice.ts
   // обработчик ссылки "Зарегистрироватся"
-  const switchForm = (index) => {
+  const switchForm = (index: number) => {
     dispatch(readingIndexSubMenu(index)); // пункт sub menu [0, 1] (Submenu.tsx, arrSubMenu.ts, indexSubMenuSlice.ts)
     // console.log(activeSubMenu)
   };
@@ -49,7 +44,7 @@ const AuthForm: FC = () => {
   // получить состояние авторизации из ReduxTLK (файл: client\src\store\features\isAuthSlice.ts)
   const isAuth = useAppSelector((state) => state.isAuth); //* авторизирован ли user
 
-  // обработчик для регистрации (логика в client\src\serviсes\auth.service.ts)
+  //* обработчик для регистрации (логика в client\src\serviсes\auth.service.ts)
   const registrationHandler: SubmitHandler<IUserData> = async (
     data: IUserData,
   ) => {
@@ -58,6 +53,8 @@ const AuthForm: FC = () => {
       const response = await AuthService.registration(data);
 
       if (response) {
+        // не стану сохранять токен при регистрации - пусть user в ворме ВОЙТИ войдет и сохраним уже токен в localstorage
+        // setTokenToLocalStorage('token', response.token) // сохраним токен от server в localstorge, после регистрации
         toast.success('Регистрация прошла успешно!');
       }
       // после регистрации: меняем isAuthSlice.ts на true, и в colorHeader изменится заголовок на 'Войти в систему' и потом вводим зарегистрируемые данные (email,pass)
@@ -68,40 +65,26 @@ const AuthForm: FC = () => {
     }
   };
 
-  // обработчик для login
+  //* обработчик для login
   const loginHandler: SubmitHandler<IUserData> = async (data: IUserData) => {
-    // try {
-    //   e.preventDefault; // сброс настроек браузера по-умолчанию при отправке формы
-    //   const response = await AuthService.registration(data);
-    //   if (response) {
-    //     toast.success('Регистрация прошла успешно!');
-    //   }
-    //   // после регистрации: меняем isAuthSlice.ts на true, и в colorHeader изменится заголовок на 'Войти в систему' и потом вводим зарегистрируемые данные (email,pass)
-    //   dispatch(readingIsAuth(true)); // isAuth = true
-    // } catch (err: any) {
-    //   const error = err.response?.data.message; // если есть response то ...
-    //   toast.error(error.toString());
-    // }
+    try {
+      const response = await AuthService.login(data);
+      if (response) {
+        setTokenToLocalStorage('token', response.token) // сохраним токен от server в localstorge, при входе существующего user
+        toast.success('Вы вошли в систему!');
+      }
+      // после регистрации: меняем isAuthSlice.ts на true, и в colorHeader изменится заголовок на 'Войти в систему' и потом вводим зарегистрируемые данные (email,pass)
+      dispatch(readingIsAuth(true)); // isAuth = true
+    } catch (err: any) {
+      const error = err.response?.data.message; // если есть response то ...
+      toast.error(error.toString());
+    }
   };
 
-  // выйти
+  //* выйти
   const logoutHandler = async () => {
     dispatch(readingIsAuth(!isAuth)); // isAuth = true или false
   };
-
-  const onSubmit = async (data: any) => {
-    console.log(JSON.stringify(data));
-    // let response = await fetch('http://localhost:3000/api/auth', {
-    //   method: 'POST',
-    //   headers: {
-    //     Authorization:
-    //       `Bearer ` +
-    //       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBtYWlsLmNvbSIsImlhdCI6MTcyMTczMTc3NywiZXhwIjoxNzI0MzIzNzc3fQ.4L6kQUNJJtaVHtE__eekqjSqvbNwqBO44-QDNmQk_L0',
-    //     'Content-Type': 'application/json;charset=utf-8',
-    //   },
-    //   body: JSON.stringify(data),
-    // });
-  }; // data возращает handleSubmit от 'react-hook-form'
 
   return (
     <FormWrappeer>
@@ -390,20 +373,32 @@ const AuthForm: FC = () => {
               Зарегистрироватся
             </Button>
             {/*//! преход на "РЕГИСТАРИЦИЮ" */}
-            <p>Уже зарегистрированны?</p>
-            <Link
-              onClick={() => switchForm(0)}
-              variant="h6"
+
+            <Typography
+              variant="h3"
               component="h3"
               sx={{
-                fontSize: '1.6em',
+                display: 'flex',
+                flexWrap: 'nowrap',
+                fontSize: '1.2em',
                 fontWeight: '400',
-                margin: '0 2%',
-                cursor: 'pointer',
               }}
             >
-              Войти
-            </Link>
+              Уже зарегистрированны?{' '}
+              <Link
+                onClick={() => switchForm(0)}
+                variant="h3"
+                component="h3"
+                sx={{
+                  fontSize: '1.2em',
+                  fontWeight: '400',
+                  margin: '0 4px',
+                  cursor: 'pointer',
+                }}
+              >
+                Войти
+              </Link>
+            </Typography>
           </Box>
         </form>
       )}

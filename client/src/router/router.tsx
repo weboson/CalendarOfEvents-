@@ -5,6 +5,7 @@ import ErrorPage from '../pages/ErrorPage';
 import Recipes from '../pages/Recipes';
 import Mealschedules from '../pages/Mealschedules';
 import AuthPage from '../pages/AuthPage';
+import ProtectedRoute from '../components/ProtectedRoute/ProtectedRoute'; // условие: если авторизованы то показываем страницы, если нет - то показывает сообщение, чтобы вошли
 
 export const router = createBrowserRouter([
   {
@@ -18,15 +19,23 @@ export const router = createBrowserRouter([
       },
       {
         path: '/recipes',
-        element: <Recipes />,
+        element: (
+          <ProtectedRoute>
+            <Recipes />
+          </ProtectedRoute>
+        ),
       },
       {
         path: '/mealschedules',
-        element: <Mealschedules />
+        element: (
+          <ProtectedRoute>
+            <Mealschedules />
+          </ProtectedRoute>
+        ),
       },
       {
         path: '/auth',
-        element: <AuthPage />
+        element: <AuthPage />,
       },
     ],
   },

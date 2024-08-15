@@ -1,6 +1,6 @@
 // Форма для ввода Email и Password (как для регистрации, так и для авторизации)
 // Для проверки работоспособности необходимо запустить server командой npm run start:dev
-import { FC, useState} from 'react';
+import { FC, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FormWrappeer } from './sc_Auth';
 import {
@@ -17,10 +17,16 @@ import { IUserData } from '../../types/types';
 import { toast } from 'react-toastify';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { readingIndexSubMenu } from '../../store/features/indexSubMenuSlice';
-import { removeTokenFromLocalStorage, setTokenToLocalStorage } from '../../helpers/localStorage.helper';
+import {
+  removeTokenFromLocalStorage,
+  setTokenToLocalStorage,
+} from '../../helpers/localStorage.helper';
 import { login, logout } from '../../store/features/userSlice';
+import { useNavigate } from 'react-router-dom';
 
 const AuthForm: FC = () => {
+  // после входа в систему, идет переадесация на страницу (/mealschedules)
+  const navigate = useNavigate();
   //* react-hook-form
   const {
     register,
@@ -31,7 +37,7 @@ const AuthForm: FC = () => {
     mode: 'onChange', // режим реагирования на изменение
   });
 
-  const [isLogin, SetIsLogin] = useState<boolean>(false)
+  const [isLogin, SetIsLogin] = useState<boolean>(false);
 
   //* переключатель формы с 'регистрация' на 'войти' в зависимости от submenu ('Зарегистрироватся' на 'войти')
   const activeSubMenu = useAppSelector((state) => state.indexSubMenu); // src\store\features\modesRecipeSlice.ts
@@ -57,12 +63,11 @@ const AuthForm: FC = () => {
       if (response) {
         // не стану сохранять токен при регистрации - пусть user в ворме ВОЙТИ войдет и сохраним уже токен в localstorage
         // setTokenToLocalStorage('token', response.token) // сохраним токен от server в localstorge, после регистрации
-        switchForm(0) // после успешной регистрации - переход на subMenu = 'Войти'
+        switchForm(0); // после успешной регистрации - переход на subMenu = 'Войти'
         toast.success('Регистрация прошла успешно!');
-        
       }
       // после регистрации: меняем isAuthSlice.ts на true, и в colorHeader изменится заголовок на 'Войти в систему' и потом вводим зарегистрируемые данные (email,pass)
-      SetIsLogin(!isLogin); 
+      SetIsLogin(!isLogin);
     } catch (err: any) {
       const error = await err.response?.data.message; // если есть response то ...
       toast.error(error?.toString());
@@ -74,9 +79,10 @@ const AuthForm: FC = () => {
     try {
       const response = await AuthService.login(data);
       if (response) {
-        setTokenToLocalStorage('token', response.token) // сохраним токен от server в localstorge, при входе существующего user
+        setTokenToLocalStorage('token', response.token); // сохраним токен от server в localstorge, при входе существующего user
         dispatch(login(response)); // isAuth = true
         toast.success('Вы вошли в систему!');
+        navigate('/mealschedules');
       }
       // после регистрации: меняем isAuthSlice.ts на true, и в colorHeader изменится заголовок на 'Войти в систему' и потом вводим зарегистрируемые данные (email,pass)
     } catch (err: any) {
@@ -87,10 +93,10 @@ const AuthForm: FC = () => {
 
   //* выйти
   const logoutHandler = async () => {
-    dispatch(logout()); 
+    dispatch(logout());
     // удалим токен, иначе приложение не выходит из системы
-    removeTokenFromLocalStorage('token')
-    toast.success('Вы вышли из системы!')
+    removeTokenFromLocalStorage('token');
+    toast.success('Вы вышли из системы!');
   };
 
   return (
@@ -155,6 +161,7 @@ const AuthForm: FC = () => {
               Введите Email:
             </Typography>
             <TextField
+              defaultValue={'demo@mail.ru'} //! для демо
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -199,6 +206,7 @@ const AuthForm: FC = () => {
             </Typography>
 
             <TextField
+              defaultValue={'demo12345A$'} //! для демо
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">

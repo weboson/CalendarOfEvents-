@@ -1,9 +1,14 @@
 import { FC } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { FormWrappeer } from './sc_Mealschedule';
 import { Box, Button, Slider, Typography } from '@mui/material';
+import { IMealSchedule } from '../../types/types';
+import { MealScheduleService } from '../../services/mealschedule.service';
+import { toast } from 'react-toastify';
+import { readingIndexSubMenu } from '../../store/features/indexSubMenuSlice';
+import { useAppDispatch } from '../../store/hooks';
 
-// метки (резки на линии) с цифрами
+//Для верстки: метки (резки на линии) с цифрами 
 let count = 0;
 const marks = [...new Array(24)].map((_item, index) => {
   return {
@@ -11,38 +16,47 @@ const marks = [...new Array(24)].map((_item, index) => {
     label: `${index++}`,
   };
 });
-// console.log(marks) // [1,2,3,...]
 
 const MealscheduleForm: FC = () => {
-  // handleSubmit - wrapper обработчика
-  // watch - получать нужное значение, чтобы его использовать в форме
-  // unregister - не регистрировать значение элемента (не отпрвлять данные в объекте)
-  // register - регистрировать значение элемента (отпрвлять данные в объекте)
-  // formState - состояние формы
   const {
     control,
-    register,
     handleSubmit,
     watch,
-    getValues,
     setValue, // устнавить значение
     formState: { errors }, // вывод ошибки на валидацию
-  } = useForm({
+  } = useForm<IMealSchedule>({
     mode: 'onChange', //! режим реагирования на изменение
   });
 
-  // const onChange = async () => {
-  //   const watchAllFields = await watch(); // если в качестве аргумента ничего не передается, вы наблюдаете за всем
-  //   console.log('watchAllFields', watchAllFields);
-  //   const elem = document.querySelector('.po');
-  //   elem.innerHTML = `${watchAllFields.weekday[0]}`;
-  // };
-  const onSubmit = async (data: any) => {
-    console.log(JSON.stringify(data));
-  }; // data возращает handleSubmit от 'react-hook-form'
+// метод переключения на пункт в submenu
+  const dispatch = useAppDispatch();  
+  const switchHandler = (index: number) => {
+    dispatch(readingIndexSubMenu(index)); // пункт sub menu [0, 1] (Submenu.tsx, arrSubMenu.ts, indexSubMenuSlice.ts)
+  };
+
+
+  //* обработчик для создания (client\src\services\mealschedule.service.ts)
+  const createHandler: SubmitHandler<IMealSchedule> = async (
+    data: IMealSchedule,
+  ) => {
+    try {
+      const response = await MealScheduleService.create(data);
+
+      if (response) {
+        toast.success('Вы успешно создали Ваш график питания.');
+        switchHandler(1); // переход на submenu: 'mealschedules' (списко графиков)
+      }
+    } catch (err: any) {
+      const error = await err.response?.data.message; // если есть response то ...
+      toast.error(error?.toString());
+    }
+  };; // data возращает handleSubmit от 'react-hook-form'
+
+
+
   // наблюдение за значениями полей (как useState())
   const watchAllFields = watch(); // если в качестве аргумента ничего не передается, вы наблюдаете за всем
-  // минимальное и максимальное время бодроствования
+  // минимальное и максимальное время бодроствования для handleChange1 и handleChange2
   const minDistance = 12;
   const maxDistance = 16;
 
@@ -123,7 +137,7 @@ const MealscheduleForm: FC = () => {
 
   return (
     <FormWrappeer>
-      <form onSubmit={handleSubmit(onSubmit)} action="/api">
+      <form onSubmit={handleSubmit(createHandler)} action="">
         {/* Weekday */}
         <Box component="section">
           <Typography
@@ -169,7 +183,7 @@ const MealscheduleForm: FC = () => {
             <span style={{ fontWeight: 'bold' }}>
               {watchAllFields.weekday
                 ? `${
-                    watchAllFields.weekday[1] - watchAllFields.weekday[0]
+                    +watchAllFields.weekday[1] - +watchAllFields.weekday[0]
                   } часов`
                 : '14 часов'}
             </span>
@@ -189,8 +203,8 @@ const MealscheduleForm: FC = () => {
                     style={{
                       color:
                         (watchAllFields.weekday &&
-                          watchAllFields.weekday[1] -
-                            watchAllFields.weekday[0] ==
+                          +watchAllFields.weekday[1] -
+                            +watchAllFields.weekday[0] ==
                             16 &&
                           'red') ||
                         '#1565c0',
@@ -206,8 +220,8 @@ const MealscheduleForm: FC = () => {
                     sx={
                       // если границы нарушены (сон должен быть <8)
                       watchAllFields.weekday
-                        ? watchAllFields.weekday[1] -
-                            watchAllFields.weekday[0] ==
+                        ? +watchAllFields.weekday[1] -
+                            +watchAllFields.weekday[0] ==
                           16
                           ? { color: 'red' }
                           : null
@@ -275,7 +289,7 @@ const MealscheduleForm: FC = () => {
             <span style={{ fontWeight: 'bold' }}>
               {watchAllFields.weekend
                 ? `${
-                    watchAllFields.weekend[1] - watchAllFields.weekend[0]
+                    +watchAllFields.weekend[1] - +watchAllFields.weekend[0]
                   } часов`
                 : '14 часов'}
             </span>
@@ -294,8 +308,8 @@ const MealscheduleForm: FC = () => {
                     style={{
                       color:
                         (watchAllFields.weekend &&
-                          watchAllFields.weekend[1] -
-                            watchAllFields.weekend[0] ==
+                          +watchAllFields.weekend[1] -
+                            +watchAllFields.weekend[0] ==
                             16 &&
                           'red') ||
                         '#1565c0',
@@ -311,8 +325,8 @@ const MealscheduleForm: FC = () => {
                     sx={
                       // если границы нарушены (сон должен быть <8)
                       watchAllFields.weekend
-                        ? watchAllFields.weekend[1] -
-                            watchAllFields.weekend[0] ==
+                        ? +watchAllFields.weekend[1] -
+                            +watchAllFields.weekend[0] ==
                           16
                           ? { color: 'red' }
                           : null
@@ -338,7 +352,7 @@ const MealscheduleForm: FC = () => {
         </Box>
         {/* // кнопка "отправить" */}
         <Button variant="contained" type="submit">
-          Отправить
+          Создать
         </Button>
       </form>
     </FormWrappeer>
@@ -346,3 +360,4 @@ const MealscheduleForm: FC = () => {
 };
 
 export default MealscheduleForm;
+

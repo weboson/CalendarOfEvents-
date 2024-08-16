@@ -9,6 +9,7 @@ import MealscheduleList from './MealscheduleList';
 const Mealschedule: FC = () => {
   const activeSubMenu = useAppSelector((state) => state.indexSubMenu);
 
+
   return (
     <>
       {/* indexItem - это для [1,2,3,4].slice(indexItem-2, indexItem) => [1,2] or [3,4] в ArrSubMenu.tsx */}
@@ -38,3 +39,7 @@ const Mealschedule: FC = () => {
 };
 
 export default Mealschedule;
+function dispatch(arg0: any) {
+  throw new Error('Function not implemented.');
+}
+

@@ -21,9 +21,19 @@ export const FormWrappeer = styled.div`
   }
 `;
 
-
+// СПИСОК
 // Для списка графиков питания
 export const ListWrappeer = styled.div`
   height: 77.5vh;
   background-color: #e6e6e6;
+  h1 {
+    color: #2a282d;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    text-align: left;
+    margin: 0;
+    font-size: 1.6em;
+    color: #2a282d;
+    padding: 2%;
+  }
 `;

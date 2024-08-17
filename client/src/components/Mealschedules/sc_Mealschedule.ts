@@ -26,14 +26,22 @@ export const FormWrappeer = styled.div`
 export const ListWrappeer = styled.div`
   height: 77.5vh;
   background-color: #e6e6e6;
-  h1 {
-    color: #2a282d;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 400;
+  h1, h2, h3 {
+    color: #2a282d;  
     text-align: left;
     margin: 0;
-    font-size: 1.6em;
     color: #2a282d;
     padding: 2%;
+  }
+  h1 {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    font-size: 1.6em;
+    }
+  h2 {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    font-size: 1.6em;
+    text-align: center;
   }
 `;

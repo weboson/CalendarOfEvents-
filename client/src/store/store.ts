@@ -8,6 +8,7 @@ import arrWarningReducer from './features/arrWarningSlice'
 import chosenMedicineReducer from './features/chosenMedicineDaySlice' // for Day (recipte window)
 import indexSubMenuReducer from './features/indexSubMenuSlice' // for Day (recipte window)
 import userReducer from './features/userSlice' // авторизирован или нет
+import idMealschedulesReducer from './features/idMealschedulesSilce'
 
 
 
@@ -24,6 +25,8 @@ export const store = configureStore({
     arrWarning: arrWarningReducer, // Warning part 2: indicator (true/false or on/off). Rendering: WeekGrid.tsx
     chosenMedicine: chosenMedicineReducer, // содержание Recipte окна для Day (обработчик в DayUsingMedicines.tsx)
     user: userReducer, // авторизирован ли user или нет
+    // response server
+    idMealschedules: idMealschedulesReducer,
   },
 })
 

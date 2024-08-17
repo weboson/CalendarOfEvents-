@@ -7,6 +7,7 @@ import { MealScheduleService } from '../../services/mealschedule.service';
 import { toast } from 'react-toastify';
 import { readingIndexSubMenu } from '../../store/features/indexSubMenuSlice';
 import { useAppDispatch } from '../../store/hooks';
+import { readingIdMealschedules } from '../../store/features/idMealschedulesSilce';
 
 //Для верстки: метки (резки на линии) с цифрами 
 let count = 0;
@@ -35,6 +36,7 @@ const MealscheduleForm: FC = () => {
   };
 
 
+  
   //* обработчик для создания (client\src\services\mealschedule.service.ts)
   const createHandler: SubmitHandler<IMealSchedule> = async (
     data: IMealSchedule,
@@ -43,14 +45,17 @@ const MealscheduleForm: FC = () => {
       const response = await MealScheduleService.create(data);
 
       if (response) {
+        dispatch(readingIdMealschedules(response.id)) // изменил id графика (idMealschedulesSilce.ts), чтобы использовать при получении (в MealscheduleList, и в календаре: Day, Week)
+        localStorage.setItem('idMealschedules', JSON.stringify(response.id)) //! сохранить в localStorage, чтобы при обновлении id в списке не сбрасывался на по-умолчанию (0)
         toast.success('Вы успешно создали Ваш график питания.');
         switchHandler(1); // переход на submenu: 'mealschedules' (списко графиков)
+
       }
     } catch (err: any) {
       const error = await err.response?.data.message; // если есть response то ...
       toast.error(error?.toString());
     }
-  };; // data возращает handleSubmit от 'react-hook-form'
+  }; // data возращает handleSubmit от 'react-hook-form'
 
 
 

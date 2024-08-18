@@ -1,19 +1,43 @@
 //! Наименования (список) имеющегося у user графика (MealscheduleList)
 import { FC, useEffect, useState } from 'react';
-import { ListWrappeer } from './sc_Mealschedule';
+import {
+  Curve,
+  IconsWrapper,
+  ListWrappeer,
+  NotFoundWrapper,
+  Section,
+  SectionsWrapper,
+  stylesMoon,
+  stylesSun,
+} from './sc_Mealschedule';
 import { MealScheduleService } from '../../services/mealschedule.service';
-import { useAppSelector } from '../../store/hooks';
+import { useAppDispatch } from '../../store/hooks';
+import { readingIndexSubMenu } from '../../store/features/indexSubMenuSlice';
+import { Button } from '@mui/material';
+import { GoSun } from 'react-icons/go';
+import { BsMoon } from 'react-icons/bs';
+import { MdOutlineDinnerDining, MdOutlineFreeBreakfast } from 'react-icons/md';
 
 const MealscheduleList: FC = () => {
+  // если нет графика, будет кнопка для перехода на 'Add new'
+  const dispatch = useAppDispatch();
+  const handleClick = (index: number) => {
+    //* записал активную кнопку меню в хранилище, используется в modesDateSlice.ts
+    sessionStorage.setItem('indexSubMenu', index.toString()); // например, если нажать на кнопку "New Add", то после обновления страницы, будет режим "RecipesForm.tsx"
+    // redux-toolkit
+    dispatch(readingIndexSubMenu(index));
+    // console.log()
+  };
   // получим созданную в форме id графика
   const id = localStorage.getItem('idMealschedules');
   // console.log(id)
-  // пустые данные
+  //! пустые данные
   const [data, setData] = useState({});
 
   const getMealSchedule = async () => {
     const response = await MealScheduleService.getOne(id);
     // console.log(data);
+    //! присавивание данных полученных с сервера 
     setData(response);
     return data;
   };
@@ -24,39 +48,76 @@ const MealscheduleList: FC = () => {
   return (
     <ListWrappeer>
       {data.id ? (
-        <div>
-          <h1>Список Ваших графиков приёма пищи: {data.id}</h1>
-          <ul>
-            <li>
-              <h2>В будни:</h2>
+        //! если нет графиков
+        <>
+        <h1>Список Ваших графиков приёма пищи: id: {data.id}</h1>
+        <SectionsWrapper>
+          <Section>
+            <>
+              <h2>
+                <ruby>
+                  В будни:<rt>weekday</rt>
+                </ruby>
+              </h2>
+              <IconsWrapper>
+                <GoSun size="40px" style={stylesSun} />
+                <MdOutlineFreeBreakfast size="40px" style={stylesSun}/>
+                <Curve /> 
+                <MdOutlineDinnerDining  size="40px" style={stylesMoon} />
+                <BsMoon size="40px" style={stylesMoon} />
+              </IconsWrapper>
+              <IconsWrapper>
+                <span>{data.weekday[0]}:00</span>
+                <span>{data.weekday[1]}:00</span>
+              </IconsWrapper>
 
-              {data ? (
-                <>
-                  <p>Первый приём пищи в: {data.weekday[0]}:00 часов</p>
-                  <p>Последний приём пищи в: {data.weekday[1]}:00 часов</p>
-                </>
-              ) : (
-                'У Вас пока, нет графиков. Создайте их.'
-              )}
-            </li>
-            <li>
-              <h2>В выходные:</h2>
+              <IconsWrapper>
+                <p>Первый <br/>приём пищи</p>
+                <p>Последний <br/>приём пищи</p>
+              </IconsWrapper>
+            </>
+          </Section>
 
-              {data ? (
-                <>
-                  <p>Первый приём пищи в: {data.weekend[0]}:00 часов</p>
-                  <p>Последний приём пищи в: {data.weekend[1]}:00 часов</p>
-                </>
-              ) : (
-                'У Вас пока, нет графиков. Создайте их.'
-              )}
-            </li>
-          </ul>
-        </div>
+          <Section>
+            <>
+              <h2>
+                <ruby>
+                  В выходные:<rt>weekend</rt>
+                </ruby>
+              </h2>
+              <IconsWrapper>
+                <GoSun size="40px" style={stylesSun} />
+                <MdOutlineFreeBreakfast size="40px" style={stylesSun}/>
+                <Curve /> 
+                <MdOutlineDinnerDining  size="40px" style={stylesMoon} />
+                <BsMoon size="40px" style={stylesMoon} />
+              </IconsWrapper>
+              <IconsWrapper>
+                <span>{data.weekend[0]}:00</span>
+                <span>{data.weekend[1]}:00</span>
+              </IconsWrapper>
+
+              <IconsWrapper>
+                <p>Первый <br/>приём пищи</p>
+                <p>Последний <br/>приём пищи</p>
+              </IconsWrapper>
+            </>
+          </Section>
+        </SectionsWrapper>
+        </>
+        
       ) : (
-        <div>
-          <h1>Создайте свой график питания.</h1>
-        </div>
+        <NotFoundWrapper>
+          <h1>У Вас пока, нет графиков. Создайте их.</h1>
+          <img src="/public/images/undefuned_data.jpg" alt="" />
+          <Button
+            sx={{ margin: '30px' }}
+            variant="contained"
+            onClick={() => handleClick(0)}
+          >
+            Создать график
+          </Button>
+        </NotFoundWrapper>
       )}
     </ListWrappeer>
   );

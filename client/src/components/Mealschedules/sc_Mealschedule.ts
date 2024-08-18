@@ -21,10 +21,13 @@ export const FormWrappeer = styled.div`
   }
 `;
 
-// СПИСОК
+//! СПИСОК
 // Для списка графиков питания
 export const ListWrappeer = styled.div`
-  height: 77.5vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 77.8vh;
   background-color: #e6e6e6;
   h1, h2, h3 {
     color: #2a282d;  
@@ -38,10 +41,78 @@ export const ListWrappeer = styled.div`
     font-weight: 400;
     font-size: 1.6em;
     }
+`;
+
+// сексии 
+export const SectionsWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+    width: 100%;
+    height: 40%;
+  }
+  ruby rt {
+    font-weight: 600;
+  }
+`
+// сексия - рамка
+export const Section = styled.div`
+  border: 1px solid #b1b1b1;
+  border-radius: 5px;
+  width: 50%;
+  height: 100%;
+  margin: 1%;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
   h2 {
+    margin: 2%;
     font-family: 'Raleway', sans-serif;
     font-weight: 400;
-    font-size: 1.6em;
+    font-size: 1.8em;
     text-align: center;
   }
-`;
+`
+// контент
+// icons line
+export const IconsWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin: 0 4%;
+  span {
+    font-weight: 600;
+    font-size: 1.6em;
+  }
+`
+
+
+//icons
+export const stylesSun = {
+  color: 'yellow',
+  margin: '1px 1px 0 0',
+}
+
+export const stylesMoon = {
+  color: '#323280',
+  margin: '1px 1px 0 0',
+}
+
+// кривая линия (дуга)
+export const Curve = styled.div`
+  height: 20px;
+  width: 87%;
+  border-bottom: dashed 1px #1e1f21;;
+`
+
+
+// ОШИБКА:не найдено графиков
+export const NotFoundWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  img {
+    width: 50%;
+  }
+`

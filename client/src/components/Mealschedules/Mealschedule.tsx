@@ -17,7 +17,7 @@ const Mealschedule: FC = () => {
       <SubMenu indexItem={4} />
       {activeSubMenu == 0 ? (
         <>
-          {/* цветной заголовок страниц для Recipes и Mealschedule)*/}
+          {/* цветной заголовок страниц для Recipes, Mealschedule и auth)*/}
           <ColorHeader
             title={ArrSubMenu[activeSubMenu + 2].colorHeader}
             iconName={'SlNote'}
@@ -26,7 +26,7 @@ const Mealschedule: FC = () => {
         </>
       ) : (
         <>
-          {/* цветной заголовок страниц для Recipes и Mealschedule)*/}
+          {/* цветной заголовок страниц для Recipes, Mealschedule и auth)*/}
           <ColorHeader
             title={ArrSubMenu[activeSubMenu + 2].colorHeader}
             iconName={'FaRegListAlt'}

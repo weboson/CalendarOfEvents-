@@ -13,4 +13,10 @@ export const MealScheduleService = {
         const { data } = await instance.get<IMealscheduleRepository>(`mealschedules/mealschedule/${+id}`)
         if (data) return data
     },
+
+    //удалить по id 
+    async removeOne(id: string): Promise<IMealscheduleRepository | undefined> {
+        const { data } = await instance.delete<IMealscheduleRepository>(`mealschedules/mealschedule/${+id}`)
+        if (data) return data
+    }
 }

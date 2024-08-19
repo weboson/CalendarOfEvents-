@@ -43,7 +43,7 @@ export const ListWrappeer = styled.div`
     }
 `;
 
-// сексии 
+// секции 
 export const SectionsWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -57,7 +57,7 @@ export const SectionsWrapper = styled.div`
     font-weight: 600;
   }
 `
-// сексия - рамка
+// секция + рамка
 export const Section = styled.div`
   border: 1px solid #b1b1b1;
   border-radius: 5px;
@@ -86,14 +86,11 @@ export const IconsWrapper = styled.div`
     font-size: 1.6em;
   }
 `
-
-
 //icons
 export const stylesSun = {
   color: 'yellow',
   margin: '1px 1px 0 0',
 }
-
 export const stylesMoon = {
   color: '#323280',
   margin: '1px 1px 0 0',
@@ -105,7 +102,19 @@ export const Curve = styled.div`
   width: 87%;
   border-bottom: dashed 1px #1e1f21;;
 `
+// кнопки 'удалить' и 'изменить'
+export const ButtonsWrapper = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: center;
+width: 100vw;
+margin: 1%;
+  button {
+    margin: 1%;
+    width: 15%;
+  }
 
+`
 
 // ОШИБКА:не найдено графиков
 export const NotFoundWrapper = styled.div`

@@ -43,6 +43,8 @@ const DayGrid: FC<IProps> = ({ currentDate }) => {
   // вызывается в DependingEating.tsx, DependingBreakfast и т.д, а использую в HelperWarningMarker.tsx;
   const dispatch = useAppDispatch();
   const arrWarning = useAppSelector((state) => state.arrWarning);
+   // перключатель (реагирующий <, today, >) для подгрузки новых данных для DayGrid, Week
+  const toggle = useAppSelector((state) => state.toggle)
   useEffect(() => {
     if (arrWarning.arr.indexOf(true) != -1) {
       // arr.indexOf(item, from) ищет item начиная с индекса from и возвращает номер индекса, на котором был найден искомый элемент, в противном случае -1.
@@ -140,10 +142,10 @@ const DayGrid: FC<IProps> = ({ currentDate }) => {
       toast.error('Создайте график питания');
     }
   };
-
+ // toggle- перключатель (реагирующий <, today, >) для подгрузки новых данных для DayGrid, Week
   useEffect(() => {
     getMealSchedule(idMeal);
-  }, [currentDate]);
+  }, [toggle]);
 
   return (
     <WrapperGridDay id="saveScrollDay">

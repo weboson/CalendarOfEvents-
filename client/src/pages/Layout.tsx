@@ -8,8 +8,9 @@ import { Header } from '../components/Header/Header';
 import { Moment } from 'moment';
 import moment from 'moment';
 import currentMoment from '../data/currentMoment';
-import { useAppSelector } from '../store/hooks';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { modesMonitor } from '../data/modesMonitor'; // МАССИВ режимов отображения в Monitor
+import { readingToggle } from '../store/features/toggleButtonsMonitorSlice';
 
 // sc-style
 const ShadowWrapper = styled('div')`
@@ -17,6 +18,8 @@ const ShadowWrapper = styled('div')`
 `;
 
 const Layout: FC = () => {
+  const dispatch = useAppDispatch();
+  const toggle = useAppSelector((state) => state.toggle)
   //! текущее время currentDate
   const [currentDate, setToday] = useState<Moment>(currentMoment || ''); // currentDate в currentDate.ts
 
@@ -41,9 +44,18 @@ const Layout: FC = () => {
 
   // обработчики для кнопок <, today и >
   // (prev) => prev - это конструкция от useState
-  const prevHandler = () => setToday((prev) => prev.clone().subtract(1, mode));
-  const todayHandler = () => setToday(moment());
-  const nextHandler = () => setToday((next) => next.clone().add(1, mode));
+  const prevHandler = () => {
+    setToday((prev) => prev.clone().subtract(1, mode))
+    dispatch(readingToggle(!toggle)) // датчик для подгрузку актулаьных данных (Mealschedules) для DayGrid, Week
+  };
+  const todayHandler = () => {
+    setToday(moment())
+    dispatch(readingToggle(!toggle))
+  };
+  const nextHandler = () => {
+    setToday((next) => next.clone().add(1, mode))
+     dispatch(readingToggle(!toggle)) 
+  };
 
   return (
     <>

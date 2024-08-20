@@ -1,4 +1,5 @@
-//! График питания - Промежуток времени между 1-м и последним приёмом пищи: 2 вида режима: в будни и в выходные
+//! Icons: Moon и Sun
+// График питания - Промежуток времени между 1-м и последним приёмом пищи: 2 вида режима: в будни и в выходные
 // (как в Week () только вместо dayItem меняющийся (в меню < ToDay >) currentDate)
 import { FC } from 'react';
 import { Moment } from 'moment';
@@ -16,7 +17,7 @@ interface IMeal {
 interface IProps {
   halfHourItem: Moment;
   currentDate: Moment;
-  meal: IMeal;
+  meal: IMeal | Object;
 }
 
 const DaySpaceBetweenMeals: FC<IProps> = ({
@@ -24,7 +25,7 @@ const DaySpaceBetweenMeals: FC<IProps> = ({
   currentDate,
   meal,
 }) => {
-  console.log(meal);
+  // console.log(meal); //{firstMealWeekdays: Moment, lastMealWeekdays: Moment, firstMealWeekend: Moment, lastMealWeekend: Moment}
 
   // meal = это расчеты первые и последние приёмы пищи для weekday и weekend
   // meal = {firstMealWeekdays: Moment, lastMealWeekdays: Moment, firstMealWeekend: Moment, lastMealWeekend: Moment}

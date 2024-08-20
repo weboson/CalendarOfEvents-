@@ -2,8 +2,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import type { RootState } from '../store'
 import { IUser } from '../../types/types'
-// Чтобы получить состояние данных: => const isAuth = useAppSelector((state) => state.isAuth) 
-// Чтобы изменить состояние данных: => const dispatch = useAppDispatch(); dispatch(readingIsAuth(new data))
+// Чтобы получить состояние данных: => const isAuth = useAppSelector((state) => state.user.isAuth) 
+// Чтобы изменить состояние данных: => const dispatch = useAppDispatch(); dispatch(login(new data))
 
 interface IUserState {
   user: IUser | null

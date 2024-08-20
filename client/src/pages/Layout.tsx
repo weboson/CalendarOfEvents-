@@ -19,13 +19,14 @@ const ShadowWrapper = styled('div')`
 
 const Layout: FC = () => {
   const dispatch = useAppDispatch();
-  const toggle = useAppSelector((state) => state.toggle)
+  const toggle = useAppSelector((state) => state.toggle);
+
   //! текущее время currentDate
   const [currentDate, setToday] = useState<Moment>(currentMoment || ''); // currentDate в currentDate.ts
 
   // redux-toolkit
   const index = useAppSelector((state) => state.menu);
-  const mode:string = modesMonitor[index].mode; // 'day','week','month','year' (режим отображения контента в '/'(home))
+  const mode: string = modesMonitor[index].mode; // 'day','week','month','year' (режим отображения контента в '/'(home))
 
   //  For dinamic (update) time (чтобы не нужно было обновлять каждый раз, когда время изменилось и обновлялись компоненты)
   useEffect(() => {
@@ -40,21 +41,21 @@ const Layout: FC = () => {
     return () => {
       clearInterval(timer);
     };
-  }); // без массива зависимости, чтобы currentDate постоянно обновлялся (был актулаьных), он запоминается в setInterval
+  });
 
   // обработчики для кнопок <, today и >
   // (prev) => prev - это конструкция от useState
   const prevHandler = () => {
-    setToday((prev) => prev.clone().subtract(1, mode))
-    dispatch(readingToggle(!toggle)) // датчик для подгрузку актулаьных данных (Mealschedules) для DayGrid, Week
+    setToday((prev) => prev.clone().subtract(1, mode));
+    dispatch(readingToggle(!toggle)); // датчик для подгрузку актулаьных данных (Mealschedules) для DayGrid, Week
   };
   const todayHandler = () => {
-    setToday(moment())
-    dispatch(readingToggle(!toggle))
+    setToday(moment());
+    dispatch(readingToggle(!toggle));
   };
   const nextHandler = () => {
-    setToday((next) => next.clone().add(1, mode))
-     dispatch(readingToggle(!toggle)) 
+    setToday((next) => next.clone().add(1, mode));
+    dispatch(readingToggle(!toggle));
   };
 
   return (

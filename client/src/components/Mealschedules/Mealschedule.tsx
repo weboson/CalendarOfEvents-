@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useAppSelector } from '../../store/hooks';
 import ColorHeader from '../ColorHeader/ColorHeader';
 import { ArrSubMenu } from '../../data/arrSubMenu';
@@ -8,7 +8,6 @@ import MealscheduleList from './MealscheduleList';
 
 const Mealschedule: FC = () => {
   const activeSubMenu = useAppSelector((state) => state.indexSubMenu);
-  // const IdMealschedule;
 
   return (
     <>
@@ -39,7 +38,4 @@ const Mealschedule: FC = () => {
 };
 
 export default Mealschedule;
-function dispatch(arg0: any) {
-  throw new Error('Function not implemented.');
-}
 

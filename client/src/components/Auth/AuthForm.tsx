@@ -25,6 +25,8 @@ import { login, logout } from '../../store/features/userSlice';
 import { useNavigate } from 'react-router-dom';
 
 const AuthForm: FC = () => {
+  // ReduxTK
+  const dispatch = useAppDispatch();
   // после входа в систему, идет переадесация на страницу (/mealschedules)
   const navigate = useNavigate();
   //* react-hook-form
@@ -47,8 +49,6 @@ const AuthForm: FC = () => {
     // console.log(activeSubMenu)
   };
 
-  // ReduxTK
-  const dispatch = useAppDispatch();
   // получить состояние авторизации из ReduxTLK (файл: client\src\store\features\userSlice.ts)
   const isAuth = useAppSelector((state) => state.user.isAuth); //* авторизирован ли user
 
@@ -79,10 +79,11 @@ const AuthForm: FC = () => {
     try {
       const response = await AuthService.login(data);
       if (response) {
+        dispatch(login(response));  // isAuth = true
         setTokenToLocalStorage('token', response.token); // сохраним токен от server в localstorge, при входе существующего user
-        dispatch(login(response)); // isAuth = true
-        toast.success('Вы вошли в систему!');
         navigate('/mealschedules');
+        window.location.reload(); //! обновляю страницу, так как ошибка "Unauthorized" описан в доке "Нерешенный БАГ “unauthorized”"
+        toast.success('Вы вошли в систему!');
       }
       // после регистрации: меняем isAuthSlice.ts на true, и в colorHeader изменится заголовок на 'Войти в систему' и потом вводим зарегистрируемые данные (email,pass)
     } catch (err: any) {
@@ -422,3 +423,7 @@ const AuthForm: FC = () => {
 };
 
 export default AuthForm;
+function readingIsAuth(arg0: any): any {
+  throw new Error('Function not implemented.');
+}
+

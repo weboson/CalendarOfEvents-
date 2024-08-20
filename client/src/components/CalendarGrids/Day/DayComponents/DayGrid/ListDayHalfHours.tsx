@@ -13,20 +13,22 @@ import DayMealSchedule from './DayMealSchedule';
 import recipesMedications from '../../../../../data/localDataBase/LocalDB_WaysUsing';
 import DayUsingMedicines from '../dayMedicines/DayUsingMedicines';
 import { useAppSelector } from '../../../../../store/hooks';
+import { IMealscheduleRepository } from '../../../../../types/types';
 
 interface IMeal {
-  firstMealWeekdays: Moment
-  lastMealWeekdays: Moment
-  firstMealWeekend: Moment
-  lastMealWeekend: Moment
+  firstMealWeekdays: Moment;
+  lastMealWeekdays: Moment;
+  firstMealWeekend: Moment;
+  lastMealWeekend: Moment;
 }
 
 interface IProps {
   currentDate: Moment;
   meal: Promise<IMeal> | Object;
+  dataMealSchedule: IMealscheduleRepository | Object
 }
 
-const ListDayHalfHours: FC<IProps> = ({ currentDate, meal }) => {
+const ListDayHalfHours: FC<IProps> = ({ currentDate, meal, dataMealSchedule }) => {
   // 48 Half Hours  (content), exemple: 0:00, 0:30, 1:00
   const ArrayHalfHoursContent = useMemo(
     () =>
@@ -40,9 +42,9 @@ const ListDayHalfHours: FC<IProps> = ({ currentDate, meal }) => {
   );
 
   // для icons Food
-  // выбираем самый большое (количество приёмов еды из рецептов) число из всех элементов массива "takingMedications" у свойства "quantity"(количество приёмом ЛС): 7 раз/день: еда
+  // выбираем самое большое количество приёмов Лекарств (из рецептов), например: 7 раз/день > 6 раз/день = 7: еда
   const maxMealFood = useMemo(
-    // для дочернего MealSchedule.tsx
+    // для дочернего DayMealSchedule.tsx
     () =>
       recipesMedications.reduce(function (prev, current) {
         if (+current.quantity > +prev.quantity) {
@@ -102,17 +104,20 @@ const ListDayHalfHours: FC<IProps> = ({ currentDate, meal }) => {
 
       {/* //* icons Sun & Moon (space between firs и last eating)*/}
       {/* data: localDB_MealSchedule.ts */}
-        <DaySpaceBetweenMeals
-          meal={meal}
-          halfHourItem={halfHourItem}
-          currentDate={currentDate}
-        />
-
-      <DayMealSchedule
+      <DaySpaceBetweenMeals
+        meal={meal}
         halfHourItem={halfHourItem}
         currentDate={currentDate}
-        maxmealfood={maxMealFood}
       />
+
+      {dataMealSchedule.id ? ( // если user создал график питания
+        <DayMealSchedule
+          halfHourItem={halfHourItem}
+          currentDate={currentDate}
+          maxmealfood={maxMealFood}
+          dataMealSchedule={dataMealSchedule}
+        />
+      ) : null}
 
       {/* //* for Using Medicines (расчет приёма лекарств) */}
       <WrapperFlexMedicines>

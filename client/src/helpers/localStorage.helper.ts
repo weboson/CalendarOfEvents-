@@ -10,7 +10,8 @@ export function getTokenFromLocalStorage(): string {
 
 // сохранить storage
 export function setTokenToLocalStorage(key: string, token: string): void {
-    localStorage.setItem(key, JSON.stringify(token))
+        localStorage.setItem(key, JSON.stringify(token))
+    
 }
 
 // удаление токена в storage

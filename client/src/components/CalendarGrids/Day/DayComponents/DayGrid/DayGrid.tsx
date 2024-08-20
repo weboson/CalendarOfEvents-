@@ -1,4 +1,3 @@
-//! Icons: Moon и Sun
 // Установка промежуток - между первым и поcледним приёмом пищи полученных с БД - далее установка в них иконок
 // Пример данных: {id: 127, weekday: [7,21], weekend: [9:23], createDateMeal: '2024-08-20T01:44:11.291Z', updateDateMeal: '2024-08-20T01:44:11.291Z', …}
 import { FC, useEffect, useMemo, useState } from 'react';
@@ -79,6 +78,9 @@ const DayGrid: FC<IProps> = ({ currentDate }) => {
   // если пустой массива, то при 1-й загрузке
 
   // состояние данных
+  const [dataMealSchedule, setDataMealSchedule] = useState<IMealscheduleRepository | Object>(
+    {},
+  );
   const [spaceBetweenMeals, setSpaceBetweenMeals] = useState<IMeal | Object>(
     {},
   );
@@ -130,16 +132,17 @@ const DayGrid: FC<IProps> = ({ currentDate }) => {
     try {
       const response = await MealScheduleService.getOne(id);
       if (response) {
-        console.log(response)
+        // console.log(response)
         //* устанавливаем полученные с БД данные в: первые и последние питания на weekday/weekend
-        getSpaceBetweenMeals(response);
-        toast.success('График питания - получен удачно');
+        getSpaceBetweenMeals(response); // для расчетов
+        setDataMealSchedule(response); // исходные данные
+        toast.success('График питания: загружено');
         return response;
       }
     } catch (err: any) {
       const error = await err.response?.data.message; // если есть response то ...
       console.log(error?.toString()); // для отладки
-      toast.error('Создайте график питания');
+      toast.error('Создайте график питания, либо войдите в систему');
     }
   };
  // toggle- перключатель (реагирующий <, today, >) для подгрузки новых данных для DayGrid, Week
@@ -168,7 +171,7 @@ const DayGrid: FC<IProps> = ({ currentDate }) => {
       {/* Days of Week (Top Panel) */}
       <WrapperList>
         {/* Grid Day with Hours (Content) */}
-        <ListDayHalfHours currentDate={currentDate} meal={spaceBetweenMeals} />
+        <ListDayHalfHours currentDate={currentDate} meal={spaceBetweenMeals} dataMealSchedule={dataMealSchedule}/>
       </WrapperList>
     </WrapperGridDay>
   );

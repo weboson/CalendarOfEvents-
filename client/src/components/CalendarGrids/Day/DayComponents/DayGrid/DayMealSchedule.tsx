@@ -1,4 +1,4 @@
-//! Режим питания:  Маркировка (icon food) моментов приёма пищи в таблице времени и днеq недели (weekday, weekend)
+//! Режим питания:  Маркировка (icon food) моментов приёма пищи в таблице времени и дней недели (weekday, weekend)
 //! 2 вида: в будни и выходные (также как и режимы дня (Moon, Sun))
 // как в Week
 import { Moment } from 'moment';
@@ -7,32 +7,35 @@ import { IRecipesMedication } from '../../../../../data/localDataBase/LocalDB_Wa
 // local DataBase
 import { MdOutlineFastfood } from 'react-icons/md';
 import { FoodTooltip, StyleIconFood } from '../../stylesDayGrid/sc_DayGrid';
-import { mealSchedule } from '../../../../../data/localDataBase/localDB_MealSchedule';
+import { IMealscheduleRepository } from '../../../../../types/types';
+
 
 interface IProps {
-  halfHourItem: Moment;
-  maxmealfood: IRecipesMedication;
-  currentDate: Moment;
+  halfHourItem: Moment
+  maxmealfood: IRecipesMedication
+  currentDate: Moment
+  dataMealSchedule: IMealscheduleRepository | Object
 }
 
-const DayMealSchedule: FC<IProps> = memo(
-  ({ halfHourItem, currentDate, maxmealfood }) => {
+const DaydataMealSchedule: FC<IProps> = memo(
+  ({ halfHourItem, currentDate, maxmealfood, dataMealSchedule }) => {
     // приёмы пищи (для дочерних компонентов):
     // входящий тип данных {hour: 8, minute: 0}
     // установка времени относительно динамичному currentDate,
     // exem: moment().set({'year': 2024, 'month': 3, 'date': 1})
+  //! Тут данные изменяются, поэтому я передал Исходные данные и не стал делать общими с DaySpaceBetweenMeals.tsx, иначе они будут изменятся и отражатся на DaySpaceBetweenMeals
     //* weekday
     // 1-й приём пищи.
     const firstMealWeekdays = currentDate
       .set({
-        hour: mealSchedule.weekday[0],
+        hour: dataMealSchedule.weekday[0],
       })
       .clone(); // обз clone() иначе изменим исходник
 
     // последний приём пищи
     const lastMealWeekdays = currentDate
       .set({
-        hour: mealSchedule.weekday[1],
+        hour: dataMealSchedule.weekday[1],
       })
       .clone();
 
@@ -55,13 +58,13 @@ const DayMealSchedule: FC<IProps> = memo(
     // тоже самое только weekend
     const firstMealWeekend = currentDate
       .set({
-        hour: mealSchedule.weekend[0],
+        hour: dataMealSchedule.weekend[0],
       })
       .clone();
 
     const lastMealWeekend = currentDate
       .set({
-        hour: mealSchedule.weekend[1],
+        hour: dataMealSchedule.weekend[1],
       })
       .clone();
 
@@ -79,7 +82,7 @@ const DayMealSchedule: FC<IProps> = memo(
       return (
         <>
           {
-            // Оптимальный код(где важен порядок и сравнения), иначе при изменении минут в localDB_MealSchedule - могут пропасть приёмы пищи
+            // Оптимальный код(где важен порядок и сравнения), иначе при изменении минут в localDB_dataMealSchedule - могут пропасть приёмы пищи
             //weekday
             currentDate.day() !== 6 && currentDate.day() !== 0
               ? (halfHourItem.isSame(firstMealWeekdays, 'hour') &&
@@ -158,4 +161,4 @@ const DayMealSchedule: FC<IProps> = memo(
   },
 );
 
-export default DayMealSchedule;
+export default DaydataMealSchedule;

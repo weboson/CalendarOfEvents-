@@ -1,4 +1,7 @@
-import { FC, useEffect, useMemo } from 'react';
+//! Icons: Moon и Sun
+// Установка промежуток - между первым и поcледним приёмом пищи полученных с БД - далее установка в них иконок
+// Пример данных: {id: 127, weekday: [7,21], weekend: [9:23], createDateMeal: '2024-08-20T01:44:11.291Z', updateDateMeal: '2024-08-20T01:44:11.291Z', …}
+import { FC, useEffect, useMemo, useState } from 'react';
 import {
   WrapperListHalfHours,
   WrapperList,
@@ -13,6 +16,16 @@ import { arrayColors } from '../../../../../data/colors';
 import { useAppDispatch, useAppSelector } from '../../../../../store/hooks';
 import { readingMarkerWarning } from '../../../../../store/features/markerWarningSlice';
 import { arrWarningCleare } from '../../../../../store/features/arrWarningSlice';
+import { MealScheduleService } from '../../../../../services/mealschedule.service';
+import { toast } from 'react-toastify';
+import { IMealscheduleRepository } from '../../../../../types/types';
+
+interface IMeal {
+  firstMealWeekdays: Moment;
+  lastMealWeekdays: Moment;
+  firstMealWeekend: Moment;
+  lastMealWeekend: Moment;
+}
 
 interface IProps {
   currentDate: Moment;
@@ -31,7 +44,8 @@ const DayGrid: FC<IProps> = ({ currentDate }) => {
   const dispatch = useAppDispatch();
   const arrWarning = useAppSelector((state) => state.arrWarning);
   useEffect(() => {
-    if (arrWarning.arr.indexOf(true) != -1) { // arr.indexOf(item, from) ищет item начиная с индекса from и возвращает номер индекса, на котором был найден искомый элемент, в противном случае -1.
+    if (arrWarning.arr.indexOf(true) != -1) {
+      // arr.indexOf(item, from) ищет item начиная с индекса from и возвращает номер индекса, на котором был найден искомый элемент, в противном случае -1.
       dispatch(readingMarkerWarning(true)); // [false,fasle,true]
       dispatch(arrWarningCleare()); // очищаем массив
       return;
@@ -41,7 +55,6 @@ const DayGrid: FC<IProps> = ({ currentDate }) => {
     }
   }); // если в useEffect - нет зависимостей, то рендеринг будет при любом изменении компонента,
   // а именно каждые 60 сек - из-за currentDate
-
 
   //! цветные лекарства:
   // массив цветов (arrayColors) генерируется в Colors.ts - в отдельном файле, т.к. генерируется 1 раз (для решения бага: если ЛС исчезнет, и если он снова появится, то уже без цвета )
@@ -59,9 +72,78 @@ const DayGrid: FC<IProps> = ({ currentDate }) => {
       }
     });
   });
-  // если без массива зависимостей, то будет при каждом измененеии менятся цвет.
+  // если без массива зависимостей, то будет при каждом изменении менятся цвет.
   // С currenDate также будет себя вести, как без массива,
   // если пустой массива, то при 1-й загрузке
+
+  // состояние данных
+  const [spaceBetweenMeals, setSpaceBetweenMeals] = useState<IMeal | Object>(
+    {},
+  );
+  //! метод для преоброзования данных с сервера в первый / псоледний приём пищи на weekday и weekend
+  const getSpaceBetweenMeals = (data: IMealscheduleRepository) => {
+    if (data.id) {
+      // console.log('прошло');
+      const firstMealWeekdays = currentDate
+        .set({
+          hour: +data.weekday[0],
+        })
+        .clone();
+
+      const lastMealWeekdays = currentDate
+        .set({
+          hour: +data.weekday[1],
+        })
+        .clone();
+      //weekend
+      const firstMealWeekend = currentDate
+        .set({
+          hour: +data.weekend[0],
+        })
+        .clone();
+
+      const lastMealWeekend = currentDate
+        .set({
+          hour: +data.weekend[1],
+        })
+        .clone();
+
+      //! установим в state новые данные
+      setSpaceBetweenMeals({
+        firstMealWeekdays,
+        lastMealWeekdays,
+        firstMealWeekend,
+        lastMealWeekend,
+      });
+    } else {
+      toast.error('setSpaceBetweenMeals');
+    }
+  };
+
+  //! получим созданную в форме id графика (в MealscheduleForm.tsx и изменненую в ReduxTK)
+  const idMeal = '' + localStorage.getItem('idMealschedules');
+  // console.log(idMeal);
+  // получаем данные с сервера
+  const getMealSchedule = async (id: string) => {
+    try {
+      const response = await MealScheduleService.getOne(id);
+      if (response) {
+        console.log(response)
+        //* устанавливаем полученные с БД данные в: первые и последние питания на weekday/weekend
+        getSpaceBetweenMeals(response);
+        toast.success('График питания - получен удачно');
+        return response;
+      }
+    } catch (err: any) {
+      const error = await err.response?.data.message; // если есть response то ...
+      console.log(error?.toString()); // для отладки
+      toast.error('Создайте график питания');
+    }
+  };
+
+  useEffect(() => {
+    getMealSchedule(idMeal);
+  }, [currentDate]);
 
   return (
     <WrapperGridDay id="saveScrollDay">
@@ -84,7 +166,7 @@ const DayGrid: FC<IProps> = ({ currentDate }) => {
       {/* Days of Week (Top Panel) */}
       <WrapperList>
         {/* Grid Day with Hours (Content) */}
-        <ListDayHalfHours currentDate={currentDate} />
+        <ListDayHalfHours currentDate={currentDate} meal={spaceBetweenMeals} />
       </WrapperList>
     </WrapperGridDay>
   );

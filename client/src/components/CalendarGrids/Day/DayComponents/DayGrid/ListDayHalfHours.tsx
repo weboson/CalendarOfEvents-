@@ -1,6 +1,9 @@
 import { Moment } from 'moment';
 import { FC, useMemo } from 'react';
-import { HalfHoursContent, WrapperFlexMedicines } from '../../stylesDayGrid/sc_DayGrid';
+import {
+  HalfHoursContent,
+  WrapperFlexMedicines,
+} from '../../stylesDayGrid/sc_DayGrid';
 import moment from 'moment';
 import TimeLine from './TimeLine';
 // расчет режима дня (для Moon, Sun) - for DataBase
@@ -11,11 +14,19 @@ import recipesMedications from '../../../../../data/localDataBase/LocalDB_WaysUs
 import DayUsingMedicines from '../dayMedicines/DayUsingMedicines';
 import { useAppSelector } from '../../../../../store/hooks';
 
-interface IProps {
-  currentDate: Moment;
+interface IMeal {
+  firstMealWeekdays: Moment
+  lastMealWeekdays: Moment
+  firstMealWeekend: Moment
+  lastMealWeekend: Moment
 }
 
-const ListDayHalfHours: FC<IProps> = ({ currentDate }) => {
+interface IProps {
+  currentDate: Moment;
+  meal: Promise<IMeal> | Object;
+}
+
+const ListDayHalfHours: FC<IProps> = ({ currentDate, meal }) => {
   // 48 Half Hours  (content), exemple: 0:00, 0:30, 1:00
   const ArrayHalfHoursContent = useMemo(
     () =>
@@ -43,7 +54,7 @@ const ListDayHalfHours: FC<IProps> = ({ currentDate }) => {
     [],
   );
 
-    //! WarnigMarker: маркер ячейки, если текущее время совпадает со временем приёма лекарств:
+  //! WarnigMarker: маркер ячейки, если текущее время совпадает со временем приёма лекарств:
   // учавствуют: WeekGrid.tsx, DependingBreakfast, DependingEating etc ... , HelperWarningMarker.tsx
   const warningMarker = useAppSelector((state) => state.markerWarning); // общий индикатор
   // текущий день, для Warning
@@ -70,7 +81,6 @@ const ListDayHalfHours: FC<IProps> = ({ currentDate }) => {
           ? 'autoScroll'
           : ''
       } // scrolling in Home.tsx
-
       $currentWarning={
         //! маркировка (пульсация) Warning
         halfHourItem.isSame(moment(), 'hour') && // проверить на текущий час
@@ -92,10 +102,12 @@ const ListDayHalfHours: FC<IProps> = ({ currentDate }) => {
 
       {/* //* icons Sun & Moon (space between firs и last eating)*/}
       {/* data: localDB_MealSchedule.ts */}
-      <DaySpaceBetweenMeals
-        halfHourItem={halfHourItem}
-        currentDate={currentDate}
-      />
+        <DaySpaceBetweenMeals
+          meal={meal}
+          halfHourItem={halfHourItem}
+          currentDate={currentDate}
+        />
+
       <DayMealSchedule
         halfHourItem={halfHourItem}
         currentDate={currentDate}
@@ -104,26 +116,25 @@ const ListDayHalfHours: FC<IProps> = ({ currentDate }) => {
 
       {/* //* for Using Medicines (расчет приёма лекарств) */}
       <WrapperFlexMedicines>
-      {recipesMedications.map(
-        (medItem, index) =>
-          // для расчета интервала курса (дни/месяцы/годы приёма), временной диапазон приёмов ЛС, epm: курс 1 месяц, то есть интервал с 23 марта по 23 апреля
-          moment(medItem.start, 'YYYY-MM-DD') <= currentDate &&
-          // < - чтобы не было так: 5 дней приёма, превратились в 7 (если <= и =>)
-          currentDate <
-            moment(medItem.start, 'YYYY-MM-DD')
-              .clone()
-              .add(medItem.duration.index, medItem.duration.title) && (
-            <DayUsingMedicines
-              key={index}
-              halfHourItem={halfHourItem}
-              med={medItem}
-              currentDate={currentDate}
-              currentDayForWirning={currentDayForWirning}
-            />
-          ),
-      )}
+        {recipesMedications.map(
+          (medItem, index) =>
+            // для расчета интервала курса (дни/месяцы/годы приёма), временной диапазон приёмов ЛС, epm: курс 1 месяц, то есть интервал с 23 марта по 23 апреля
+            moment(medItem.start, 'YYYY-MM-DD') <= currentDate &&
+            // < - чтобы не было так: 5 дней приёма, превратились в 7 (если <= и =>)
+            currentDate <
+              moment(medItem.start, 'YYYY-MM-DD')
+                .clone()
+                .add(medItem.duration.index, medItem.duration.title) && (
+              <DayUsingMedicines
+                key={index}
+                halfHourItem={halfHourItem}
+                med={medItem}
+                currentDate={currentDate}
+                currentDayForWirning={currentDayForWirning}
+              />
+            ),
+        )}
       </WrapperFlexMedicines>
-
     </HalfHoursContent>
   ));
 };

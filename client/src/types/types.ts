@@ -47,3 +47,4 @@ export interface IMealscheduleRepository {
     createDateMeal: string
     updateDateMeal: string
 }
+

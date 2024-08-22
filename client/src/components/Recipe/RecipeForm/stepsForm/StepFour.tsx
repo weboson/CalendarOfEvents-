@@ -3,7 +3,6 @@ import { FC } from 'react';
 import {
   Control,
   Controller,
-  FieldValues,
   UseFormRegister,
   UseFormWatch,
 } from 'react-hook-form';
@@ -16,11 +15,12 @@ import {
   Typography,
 } from '@mui/material';
 import NumberInputMUI from './NumberInputMUI';
+import { IRecipe } from '../../../../types/types';
 
 interface IProps {
-  register: UseFormRegister<FieldValues>; // от 'react-hook-form'
-  watch: UseFormWatch<FieldValues>;
-  control: Control<FieldValues, any>;
+  register: UseFormRegister<IRecipe>; // от 'react-hook-form'
+  watch: UseFormWatch<IRecipe>;
+  control: Control<IRecipe, any>;
 }
 
 const StepFour: FC<IProps> = ({ register, watch, control }) => {

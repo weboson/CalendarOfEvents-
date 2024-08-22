@@ -1,4 +1,5 @@
-//! пришлось в методах create, getOne и removeOne отправлять отдельно заголовки токена: { headers: {Authorization: `Bearer ` + getTokenFromLocalStorage() || ''}}
+//! запросы на сервер
+//* пришлось в методах create, getOne и removeOne отправлять отдельно заголовки токена: { headers: {Authorization: `Bearer ` + getTokenFromLocalStorage() || ''}}
 // так как был маленький баг: описанный в доке "Pet проект 2023-2024"(Нерешенный БАГ “unauthorized”)
 import { IMealSchedule, IMealscheduleRepository } from "../types/types";
 import { getTokenFromLocalStorage } from "../helpers/localStorage.helper";

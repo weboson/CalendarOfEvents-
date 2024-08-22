@@ -12,13 +12,14 @@ import {
 import { FormStep } from '../../stylesRecipePage/sc_RecipePage';
 import { Checkbox, FormControlLabel, FormHelperText, Typography } from '@mui/material';
 import NumberInputMUI from './NumberInputMUI';
+import { IRecipe } from '../../../../types/types';
 
 
 interface IProps {
-  register: UseFormRegister<FieldValues>; // от 'react-hook-form'
+  register: UseFormRegister<IRecipe>; // от 'react-hook-form'
   errors: FieldErrors<FieldValues>; // от 'react-hook-form'
-  watch: UseFormWatch<FieldValues>;
-  control: Control<FieldValues, any>;
+  watch: UseFormWatch<IRecipe>;
+  control: Control<IRecipe, any>;
 }
 
 const StepTwo: FC<IProps> = ({ register, watch, control }) => {

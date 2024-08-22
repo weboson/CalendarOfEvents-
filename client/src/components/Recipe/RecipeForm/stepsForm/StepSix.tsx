@@ -5,13 +5,14 @@ import 'dayjs/locale/ru'; // для формата даты
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { FC } from 'react';
-import { Control, Controller, FieldValues } from 'react-hook-form';
+import { Control, Controller } from 'react-hook-form';
 import { FormStep } from '../../stylesRecipePage/sc_RecipePage';
 import { Button, Typography } from '@mui/material';
 import moment from 'moment';
+import { IRecipe } from '../../../../types/types';
 
 interface IProps {
-  control: Control<FieldValues, any>; // от 'react-hook-form'
+  control: Control<IRecipe, any>; // от 'react-hook-form'
 }
 
 const StepSix: FC<IProps> = ({ control }) => {

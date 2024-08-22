@@ -48,3 +48,52 @@ export interface IMealscheduleRepository {
     updateDateMeal: string
 }
 
+//! Recipe (рецепты)
+//Exmle: {"title":"урсосан ","independently":false,
+// "interval":{"hour":0,"minute":0},
+// "position":"before","action":"eating","quantity":3,"unitTime":"day",
+// "duration":{"index":1,"title":"months"},
+// "start":"2024-08-22T10:59:20.844Z"} 
+export interface IInterval {
+    hour: number
+    minute: number
+}
+
+export interface IDuration {
+    index: number
+    title: string
+}
+
+export interface Iuser {
+    id: number
+}
+
+// ввод в форму
+export interface IRecipe {
+    title: string
+    independently: boolean
+    interval: IInterval
+    position: string
+    action: string
+    quantity: number
+    unitTime: string
+    duration: IDuration
+    start: string
+}
+
+// ответ с сервера
+export interface IRecipeRepository {
+    title: string
+    independently: boolean
+    interval: IInterval
+    position: string
+    action: string
+    quantity: number
+    unitTime: string
+    duration: IDuration
+    start: string
+    user: Iuser
+    id: number
+    createDateRecipe: string
+    updateDateRecipe: string
+}

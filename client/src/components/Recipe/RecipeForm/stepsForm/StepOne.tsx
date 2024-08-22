@@ -4,9 +4,10 @@ import { FormStep } from '../../stylesRecipePage/sc_RecipePage';
 import { Box, InputAdornment, TextField, Typography } from '@mui/material';
 import { RiMedicineBottleLine } from 'react-icons/ri';
 import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
+import { IRecipe } from '../../../../types/types';
 
 interface IProps {
-  register: UseFormRegister<FieldValues>; // от 'react-hook-form'
+  register: UseFormRegister<IRecipe>; // от 'react-hook-form'
   errors: FieldErrors<FieldValues>; // от 'react-hook-form'
 }
 

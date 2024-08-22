@@ -3,17 +3,16 @@ import { FC } from 'react';
 import {
   Control,
   Controller,
-  FieldValues,
   UseFormRegister,
-  UseFormWatch,
 } from 'react-hook-form';
 import { FormStep } from '../../stylesRecipePage/sc_RecipePage';
 import { FormControl, FormHelperText, MenuItem, Select, Typography } from '@mui/material';
 import NumberInputMUI from './NumberInputMUI';
+import { IRecipe } from '../../../../types/types';
 
 interface IProps {
-  register: UseFormRegister<FieldValues>; // от 'react-hook-form'
-  control: Control<FieldValues, any>;
+  register: UseFormRegister<IRecipe>; // от 'react-hook-form'
+  control: Control<IRecipe, any>;
 }
 
 const StepFive: FC<IProps> = ({ control, register }) => {

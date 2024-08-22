@@ -5,13 +5,14 @@ import { IRecipesMedication } from '../../../../../data/localDataBase/LocalDB_Wa
 import { MdOutlineFastfood } from 'react-icons/md';
 import { Moment } from 'moment';
 import { FoodTooltip, StyleIconFood } from '../../stylesWeekGrid/sc_WeekGrid';
-import { mealSchedule } from '../../../../../data/localDataBase/localDB_MealSchedule';
+import { IMealscheduleRepository } from '../../../../../types/types';
 
 interface IProps {
   dayItem: Moment;
   halfHourItem: Moment;
   maxmealfood: IRecipesMedication;
   currentDate: Moment;
+  dataMealSchedule: IMealscheduleRepository | Object
 }
 
 const MealSchedule: FC<IProps> = memo(({
@@ -19,6 +20,7 @@ const MealSchedule: FC<IProps> = memo(({
   dayItem,
   currentDate,
   maxmealfood,
+  dataMealSchedule,
 }) => {
   // приёмы пищи (для дочерних компонентов):
   // входящий тип данных {hour: 8, minute: 0}
@@ -29,7 +31,7 @@ const MealSchedule: FC<IProps> = memo(({
   const firstMealWeekdays = 
     currentDate
     .set({
-      hour: mealSchedule.weekday[0],
+      hour: dataMealSchedule.weekday[0],
     })
     .clone() // обз clone() иначе изменим исходник
   
@@ -38,7 +40,7 @@ const MealSchedule: FC<IProps> = memo(({
   const lastMealWeekdays = 
     currentDate
     .set({
-      hour: mealSchedule.weekday[1],
+      hour: dataMealSchedule.weekday[1],
     })
     .clone();
 
@@ -62,14 +64,14 @@ const MealSchedule: FC<IProps> = memo(({
   const firstMealWeekend = 
       currentDate
         .set({
-          hour: mealSchedule.weekend[0],
+          hour: dataMealSchedule.weekend[0],
         })
         .clone();
 
   const lastMealWeekend = 
       currentDate
         .set({
-          hour: mealSchedule.weekend[1],
+          hour: dataMealSchedule.weekend[1],
         })
         .clone();
 

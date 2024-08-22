@@ -127,7 +127,7 @@ const DayGrid: FC<IProps> = ({ currentDate }) => {
   //! получим созданную в форме id графика (в MealscheduleForm.tsx и изменненую в ReduxTK)
   const idMeal = '' + localStorage.getItem('idMealschedules');
   // console.log(idMeal);
-  // получаем данные с сервера
+  //! получаем данные с сервера
   const getMealSchedule = async (id: string) => {
     try {
       const response = await MealScheduleService.getOne(id);

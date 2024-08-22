@@ -1,4 +1,4 @@
-import { FC, useEffect, useMemo} from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import {
   GridWrapper,
   DaySidePanel,
@@ -17,6 +17,9 @@ import { arrWarningCleare } from '../../../store/features/arrWarningSlice';
 // data
 import recipesMedications from '../../../data/localDataBase/LocalDB_WaysUsing';
 import { arrayColors } from '../../../data/colors';
+import { IMealscheduleRepository } from '../../../types/types';
+import { toast } from 'react-toastify';
+import { MealScheduleService } from '../../../services/mealschedule.service';
 
 interface IProps {
   currentDate: Moment;
@@ -24,8 +27,13 @@ interface IProps {
 
 const WeekGrid: FC<IProps> = ({ currentDate }) => {
   // currentDate - это текущее время, которое автоматически обновляется (useEffect в Home.tsx) каждую минуту (60000 ms)
-  // Days of week (top panel)
 
+  const dispatch = useAppDispatch();
+  //! состояние исходных данных
+  const [dataMealSchedule, setDataMealSchedule] = useState<
+    IMealscheduleRepository | Object
+  >({});
+  // Days of week (top panel)
   const ArrayDays = useMemo(
     () =>
       // useMemo, чтобы расчет проводился один раз, остальное из памяти кеша
@@ -64,10 +72,10 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
 
   // WarnigMarker: маркер ячейки, если текущее время совпадает со временем приёма лекарств:
   // вызывается в DependingEating.tsx, DependingBreakfast и т.д, а использую в HelperWarningMarker.tsx;
-  const dispatch = useAppDispatch();
   const arrWarning = useAppSelector((state) => state.arrWarning);
   useEffect(() => {
-    if (arrWarning.arr.indexOf(true) != -1) { // arr.indexOf(item, from) ищет item начиная с индекса from и возвращает номер индекса, на котором был найден искомый элемент, в противном случае -1.
+    if (arrWarning.arr.indexOf(true) != -1) {
+      // arr.indexOf(item, from) ищет item начиная с индекса from и возвращает номер индекса, на котором был найден искомый элемент, в противном случае -1.
       dispatch(readingMarkerWarning(true)); // [false,fasle,true]
       dispatch(arrWarningCleare()); // очищаем массив
       return;
@@ -79,8 +87,8 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
   // а именно каждые 60 сек - из-за currentDate
 
   // console.log(arrWarning.arr)
-  //! цветные лекарства:
- // массив цветов (arrayColors) генерируется в Colors.ts - в отдельном файле, т.к. генерируется 1 раз (для решения бага: если ЛС исчезнет, и если он снова появится, то уже без цвета )
+  //* цветные лекарства:
+  // массив цветов (arrayColors) генерируется в Colors.ts - в отдельном файле, т.к. генерируется 1 раз (для решения бага: если ЛС исчезнет, и если он снова появится, то уже без цвета )
   // назначение стилей
   useEffect(() => {
     recipesMedications.map((itemMed, index) => {
@@ -88,15 +96,44 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
       for (const elem of document.querySelectorAll(
         `.medElemUnic${itemMed.id}`, // пример классов: medElemUnic6, medElemUnic7, medElemUnic12 etc - (таким же методом назанченные в InDependently.tsx и тд.)
       )) {
-        elem.style.cssText += 
-        `background-color: ${arrayColors[index] || 'white'};
+        elem.style.cssText += `background-color: ${
+          arrayColors[index] || 'white'
+        };
           padding: 0 8px`;
       }
     });
-  }); 
+  });
   // если без массива зависимостей, то будет при каждом измененеии менятся цвет.
   // С currenDate также будет себя вести, как без массива,
   // если пустой массива, то при 1-й загрузке
+
+  //! Получение данных для MealSchedule (график питания: moon/son & icon food)
+  // переключатель (реагирующий <, today, >) для подгрузки новых данных для Week и DayGrid
+  const toggle = useAppSelector((state) => state.toggle);
+  // получим созданную в форме id графика (в MealscheduleForm.tsx и изменненую в ReduxTK)
+  const idMeal = '' + localStorage.getItem('idMealschedules');
+  // console.log(idMeal);
+  //* метод получения данных
+  const getMealSchedule = async (id: string) => {
+    try {
+      const response = await MealScheduleService.getOne(id);
+      if (response) {
+        // console.log(response)
+        //* устанавливаем полученные с БД данные в: первые и последние питания на weekday/weekend
+        setDataMealSchedule(response); // исходные данные
+        toast.success('График питания: загружен');
+        return response;
+      }
+    } catch (err: any) {
+      const error = await err.response?.data.message; // если есть response то ...
+      console.log(error?.toString()); // для отладки
+      toast.error('Создайте график питания, либо войдите в систему');
+    }
+  };
+  // toggle- перключатель (реагирующий <, today, >) для подгрузки новых данных для DayGrid, Week
+  useEffect(() => {
+    getMealSchedule(idMeal);
+  }, [toggle]);
 
   return (
     <GridWrapper id="saveScrollWeek">
@@ -123,9 +160,7 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
 
       <WrapperTopPanelAndContent>
         {ArrayDays.map((dayItem, index) => (
-          <WrapperColumn
-            key={index + 1}
-          >
+          <WrapperColumn key={index + 1}>
             <DayOfWeek
               key={index + 2}
               $currentDay={dayItem.isSame(moment(), 'day')}
@@ -134,7 +169,7 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
             </DayOfWeek>
 
             {/* Grid Day with Hours (Content) */}
-            <GridDayWithHours currentDate={currentDate} dayItem={dayItem} />
+            <GridDayWithHours currentDate={currentDate} dayItem={dayItem} dataMealSchedule={dataMealSchedule} />
           </WrapperColumn>
         ))}
         {/* При наведении на лекарство - появляется Popup-окно с подробным описанием ЛС */}

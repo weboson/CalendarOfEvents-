@@ -81,8 +81,8 @@ const AuthForm: FC = () => {
       if (response) {
         dispatch(login(response));  // isAuth = true
         setTokenToLocalStorage('token', response.token); // сохраним токен от server в localstorge, при входе существующего user
-        navigate('/mealschedules');
-        window.location.reload(); //! обновляю страницу, так как ошибка "Unauthorized" описан в доке "Нерешенный БАГ “unauthorized”"
+        // navigate('/mealschedules');
+        //window.location.reload(); // кастыльное решение: обновляю страницу, так как ошибка "Unauthorized" описан в доке "Нерешенный БАГ “unauthorized”"
         toast.success('Вы вошли в систему!');
       }
       // после регистрации: меняем isAuthSlice.ts на true, и в colorHeader изменится заголовок на 'Войти в систему' и потом вводим зарегистрируемые данные (email,pass)

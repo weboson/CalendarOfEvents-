@@ -3,7 +3,7 @@
 // Получить токен из storage
 export function getTokenFromLocalStorage(): string {
     const data = localStorage.getItem('token')
-    const token:string = data ? JSON.parse(data) : '' // parse т.к. из сервера придет JSON
+    const token:string = data ? JSON.parse(data) : ''
     
     return token;
 }

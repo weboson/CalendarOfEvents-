@@ -13,7 +13,7 @@ export class MealscheduleController {
   @UseGuards(JwtAuthGuard) // проверка на JWT-токен, есть ли он и действителен, т.е. авторизован ли user (в системе ли)
   @UsePipes(new ValidationPipe()) // class-validator
   create(@Body() createMealscheduleDto: CreateMealscheduleDto, @Req() req) { // @Req() - это ответ сервера (поля id и email user-а ) на входящий валидный JWT-токен
-    return this.mealscheduleService.create(createMealscheduleDto, +46); // user.id - нужен для проверки связи с текущим user
+    return this.mealscheduleService.create(createMealscheduleDto, +req.user.id ); // user.id - нужен для проверки связи с текущим user
   }
 
   //* будет только ОДИН график у каждого пользователя: комментить не стану

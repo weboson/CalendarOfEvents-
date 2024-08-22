@@ -10,7 +10,6 @@ import Auth from '../components/Auth/Auth';
 interface ArrayContextType extends Array<Moment> {}
 
 const AuthPage: FC = () => {
-  const [isLogin, setIsLogin] = useState<boolean>(false);
 
   // useOutletContext - это из (Outlet, Lauout.tsx) react-router-dom (чтобы передать пропсы)
   const [currentDate, prevHandler, todayHandler, nextHandler] =

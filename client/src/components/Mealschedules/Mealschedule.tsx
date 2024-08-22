@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { useAppSelector } from '../../store/hooks';
 import ColorHeader from '../ColorHeader/ColorHeader';
 import { ArrSubMenu } from '../../data/arrSubMenu';

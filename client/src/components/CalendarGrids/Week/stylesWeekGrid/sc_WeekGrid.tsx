@@ -59,7 +59,9 @@ export const HourSidePanel = styled.div<IHourSidePanel>`
 export const WrapperTopPanelAndContent = styled.div`
   display: grid;
   //flex-wrap: wrap; // хз - и без него робит
-  grid-template-columns: repeat(7, 1fr);
+  /* grid-template-columns: repeat(7, 1fr); */
+  /* для адаптива: https://youtu.be/Wq5tzAaYfxA?list=PLe90t_Ab7ztPn7mXL0TyM5VKWhEBw-BSL&t=238 */
+  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
 `;
 // Day of Week + Date + Column
 export const WrapperColumn = styled.div`

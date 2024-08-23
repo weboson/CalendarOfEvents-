@@ -35,7 +35,7 @@ const RecipeForm: FC = () => {
     dispatch(readingIndexSubMenu(index)); // пункт sub menu [0, 1] (Submenu.tsx, arrSubMenu.ts, indexSubMenuSlice.ts)
   };
 
-  //* обработчик для создания (client\src\services\mealschedule.service.ts)
+  //* обработчик для создания (client\src\services\recipe.service.ts)
   const createHandler: SubmitHandler<IRecipe> = async (data: IRecipe) => {
     try {
       const response = await RecipeService.create(data);
@@ -43,7 +43,7 @@ const RecipeForm: FC = () => {
       if (response) {
         // localStorage.setItem('idMealschedules', JSON.stringify(response.id)); //! сохранить в localStorage, чтобы при обновлении id в списке не сбрасывался на по-умолчанию (0)
         //! dispatch(readingIdMealschedules(response.id)) // изменил id графика (idMealschedulesSilce.ts), чтобы использовать при получении (в MealscheduleList, и в календаре: Day, Week)
-        toast.success('Вы успешно создали Ваш график питания.');
+        toast.success('Рецепт успешно создан');
         switchHandler(1); // переход на submenu: 'recipes' (список рецептов)
       }
     } catch (err: any) {

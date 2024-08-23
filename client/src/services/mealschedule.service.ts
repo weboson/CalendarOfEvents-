@@ -29,6 +29,17 @@ export const MealScheduleService = {
         if (data) return data
     },
 
+
+    // не используется - проще удалять и создавать. (просто оставил для справки)
+    async updateOne(id: string, mealschedule: IMealSchedule): Promise<IMealscheduleRepository | undefined> { 
+        const { data } = await instance.patch<IMealscheduleRepository>(`mealschedules/mealschedule/${+id}`, mealschedule, {
+            headers: {
+                Authorization: `Bearer ` + getTokenFromLocalStorage() || '' // при любом (кроме регистрации) обращении к server достаем из отправляем токен (так требует @UseGuards(JwtAuthGuard) в server\src\auth\auth.controller.ts)
+            }
+        }); // http://localhost:3000/api/mealschedules/mealschedule/id
+        return data
+    },
+
     //удалить по id 
     async removeOne(id: string): Promise<IMealscheduleRepository | undefined> {
         const { data } = await instance.delete<IMealscheduleRepository>(`mealschedules/mealschedule/${+id}`, {

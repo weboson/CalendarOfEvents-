@@ -81,6 +81,22 @@ const MealscheduleList: FC = () => {
     }
   }
 
+  // update
+  // const updateMealSchedule = async (data: IMealSchedule) => {
+  //   try {
+  //     const response = await MealScheduleService.updateOne(id, data);
+  //     if (response) {
+  //       dispatch(readingIndexSubMenu(0)); // перенаправление на 'Add new'
+  //       toast.success('Пересоздайте график');
+  //       return response;
+  //     }
+  //   } catch (err: any) {
+  //     const error = await err.response?.data.message; // если есть response то ...
+  //     toast.error(error?.toString());
+  //   }
+  // }
+
+
   return (
     <ListWrappeer>
       {data.id ? (

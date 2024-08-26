@@ -45,8 +45,63 @@ export const TearFrame = styled.div`
   color: #b1b1b1;
 `;
 
-// Для списка рецептов
-export const ListWrappeer = styled.div`
-  height: 77.5vh;
+//! Для списка рецептов
+export const Background = styled.div`
+  display: flex;
+  justify-content: center;
+  min-height: 77.9vh;
   background-color: #e6e6e6;
+`;
+
+// цвет за сеткой (для рамок)
+export const GapBackground = styled.div`
+  width: 90%;
+  height: 90%;
+  background-color: #565759;
+`;
+//* заголовки
+export const GridTitle = styled.div`
+  display: grid;
+  grid-gap: 1px; // промежутки между ячейками
+  /* для адаптива: https://youtu.be/Wq5tzAaYfxA?list=PLe90t_Ab7ztPn7mXL0TyM5VKWhEBw-BSL&t=238 */
+  /* grid-template-columns: repeat(auto-fill, minmax(200px, 8fr)); */
+  grid-template-columns: 3% 15% 7% 30% repeat(3, 1fr) 5%; // размеры колонок шапки таблицы
+  @media (max-width: 1200px) {
+    display: none;
+  }
+`;
+export const CellColumn = styled.div`
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: 500;
+  color: #2a282d;
+  background-color: #e6e6e6;
+  padding: 2% 0;
+`;
+
+//* рецепты
+// обертка для адптации (разбивает блоки на 2 и 1 ряда)
+export const GridWrapperRecipes = styled.div`
+  grid-template-columns: repeat(1, 1fr);
+`;
+// горизонтальные ряды рецептов
+export const GridRecipes = styled.div`
+  display: grid;
+  grid-gap: 1px;
+  margin: 1px 0; // горизональные рамки */
+  grid-template-columns: 3% 15% 7% 30% repeat(3, 1fr) 5%; // размеры колонок контента таблицы
+`;
+
+// ячейка
+export const CellRecipe = styled.div`
+  font-family: 'Raleway', sans-serif;
+  /* text-align: center; */
+  color: #2a282d;
+  background-color: #e6e6e6;
+  padding: 2%;
+  white-space: wrap;
+  font-size: 1.4em;
+  button {
+    font-size: 1.2em;
+  }
 `;

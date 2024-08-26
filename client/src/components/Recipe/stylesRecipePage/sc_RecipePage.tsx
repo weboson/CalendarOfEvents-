@@ -66,7 +66,7 @@ export const GridTitle = styled.div`
   /* для адаптива: https://youtu.be/Wq5tzAaYfxA?list=PLe90t_Ab7ztPn7mXL0TyM5VKWhEBw-BSL&t=238 */
   /* grid-template-columns: repeat(auto-fill, minmax(200px, 8fr)); */
   grid-template-columns: 3% 15% 7% 30% repeat(3, 1fr) 5%; // размеры колонок шапки таблицы
-  @media (max-width: 1200px) {
+  @media (max-width: 1300px) {
     display: none;
   }
 `;
@@ -82,7 +82,27 @@ export const CellColumn = styled.div`
 //* рецепты
 // обертка для адптации (разбивает блоки на 2 и 1 ряда)
 export const GridWrapperRecipes = styled.div`
+  display: grid;
   grid-template-columns: repeat(1, 1fr);
+  @media (max-width: 1300px) and (min-width: 1148px) {
+    grid-template-columns: repeat(3, 1fr); // размеры колонок контента таблицы
+    grid-gap: 1px;
+  }
+  @media (max-width: 1148px) and (min-width: 624px) {
+    grid-template-columns: repeat(2, 1fr); // размеры колонок контента таблицы
+    grid-gap: 1px;
+  }
+  @media (max-width: 624px) {
+    grid-template-columns: repeat(1, 1fr); // размеры колонок контента таблицы
+    grid-gap: 1px;
+  }
+  /*//* for hover */
+  :hover > div {
+    // > div -все дочерние блоки
+    /* background-color: #d9d7d7; */
+    background-color: #f7f6f6;
+    font-size: 1.6em;
+  }
 `;
 // горизонтальные ряды рецептов
 export const GridRecipes = styled.div`
@@ -90,6 +110,9 @@ export const GridRecipes = styled.div`
   grid-gap: 1px;
   margin: 1px 0; // горизональные рамки */
   grid-template-columns: 3% 15% 7% 30% repeat(3, 1fr) 5%; // размеры колонок контента таблицы
+  @media (max-width: 1300px) {
+    grid-template-columns: repeat(1, 1fr); // размеры колонок контента таблицы
+  }
 `;
 
 // ячейка
@@ -100,8 +123,8 @@ export const CellRecipe = styled.div`
   background-color: #e6e6e6;
   padding: 2%;
   white-space: wrap;
-  font-size: 1.4em;
+  font-size: 1.2em;
   button {
-    font-size: 1.2em;
+    font-size: 1em;
   }
 `;

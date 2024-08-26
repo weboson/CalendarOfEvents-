@@ -2,7 +2,7 @@
 // used client\src\components\Recipe\RecipeList.tsx
 import { FC } from 'react';
 import { IRecipeRepository } from '../../types/types';
-import { CellRecipe } from './stylesRecipePage/sc_RecipePage';
+import { CellRecipe, Row } from './stylesRecipePage/sc_RecipePage';
 import { FaRegTrashAlt } from 'react-icons/fa';
 import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
 import { MdOutlineDoNotDisturb } from 'react-icons/md';
@@ -16,19 +16,19 @@ interface IProps {
 const RecipeOne: FC<IProps> = ({ recipe, index }) => {
   return (
     <>
-      <CellRecipe style={{textAlign: 'center'}}>{index}</CellRecipe>
+      <CellRecipe style={{ textAlign: 'center' }}>{index}</CellRecipe>
       <CellRecipe>{recipe.title}</CellRecipe>
-      <CellRecipe style={{textAlign: 'center'}}>
+      <CellRecipe style={{ textAlign: 'center' }}>
         {recipe.independently ? (
-          <IoMdCheckmarkCircleOutline color={'#1acc1a'}/>
+          <IoMdCheckmarkCircleOutline color={'#1acc1a'} />
         ) : (
-          <MdOutlineDoNotDisturb/>
+          <MdOutlineDoNotDisturb />
         )}
       </CellRecipe>
       {!recipe.independently ? (
         <CellRecipe>
           {`${
-            recipe.interval.hour>=0 || recipe.interval.minute>=0
+            recipe.interval.hour >= 0 || recipe.interval.minute >= 0
               ? `[${recipe.interval.hour}:${recipe.interval.minute}]`
               : ''
           } ${
@@ -57,8 +57,10 @@ const RecipeOne: FC<IProps> = ({ recipe, index }) => {
       <CellRecipe>{`${recipe.quantity} раз/раза`}</CellRecipe>
       <CellRecipe>{`${recipe.duration.index} ${recipe.duration.title}`}</CellRecipe>
       <CellRecipe>{recipe.start}</CellRecipe>
-      <CellRecipe style={{textAlign: 'center'}}>
-          <IconButton aria-label="delete" color="primary"><FaRegTrashAlt/></IconButton>
+      <CellRecipe style={{ textAlign: 'center' }}>
+        <IconButton aria-label="delete" color="primary">
+          <FaRegTrashAlt />
+        </IconButton>
       </CellRecipe>
     </>
   );

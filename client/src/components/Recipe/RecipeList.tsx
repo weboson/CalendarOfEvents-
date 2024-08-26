@@ -42,7 +42,7 @@ const RecipeList: FC = () => {
     'Количество приёмов',
     'Курс приёма ЛС',
     'Дата начала курса',
-    'action',
+    'Удалить',
   ];
 
   if (data.length) {
@@ -53,21 +53,19 @@ const RecipeList: FC = () => {
           {/* адаптация: Заголовки исчезают при сжатии >8 колонок */}
           <GridTitle>
             {columnArr.map((item, index, array) => (
-                <CellColumn key={index+1}>
-                  <p>{item}</p>
-                </CellColumn>
+              <CellColumn key={index + 1}>
+                <p>{item}</p>
+              </CellColumn>
             ))}
-            
           </GridTitle>
           {/* //! Рецепты */}
-        <GridWrapperRecipes>
-        {data.map((id, index, arr) => (
-            <GridRecipes key={index+2}>
-              <RecipeOne recipe={id} index={index+1}/>
-            </GridRecipes>
-          ))}
-        </GridWrapperRecipes>
-
+          <GridWrapperRecipes>
+              {data.map((id, index, arr) => (
+                <GridRecipes key={index + 2}>
+                  <RecipeOne recipe={id} index={index + 1} />
+                </GridRecipes>
+              ))}
+          </GridWrapperRecipes>
         </GapBackground>
       </Background>
     );

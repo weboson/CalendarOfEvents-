@@ -9,11 +9,12 @@ import { MdOutlineDoNotDisturb } from 'react-icons/md';
 import { IconButton } from '@mui/material';
 
 interface IProps {
-  recipe: IRecipeRepository;
-  index: number;
+  recipe: IRecipeRepository
+  index: number
+  removeRecipe: (id: any) => Promise<void>
 }
 
-const RecipeOne: FC<IProps> = ({ recipe, index}) => {
+const RecipeOne: FC<IProps> = ({ recipe, index, removeRecipe}) => {
 
   return (
     <>
@@ -59,7 +60,7 @@ const RecipeOne: FC<IProps> = ({ recipe, index}) => {
       <CellRecipe>{`${recipe.duration.index} ${recipe.duration.title}`}</CellRecipe>
       <CellRecipe>{recipe.start}</CellRecipe>
       <CellRecipe style={{ textAlign: 'center' }}>
-        <IconButton aria-label="delete" color="primary">
+        <IconButton aria-label="delete" color="primary" onClick={() => {removeRecipe(recipe.id)}}>
           <FaRegTrashAlt />
         </IconButton>
       </CellRecipe>

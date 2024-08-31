@@ -25,8 +25,8 @@
 #### 2.1 Recipe Form
 ![image](https://github.com/user-attachments/assets/eaafe989-8719-4d20-9e92-5286c167bf18)
 
-#### 2.2 Recipe List
-![image](https://github.com/user-attachments/assets/71e8d1b5-fccd-48bb-b3b5-0f66f2a143f1)
+#### 2.2 Recipe Table
+![image](https://github.com/user-attachments/assets/b70b37ce-797a-46b0-8c42-e3b78f6de9e3)
 
 ### 3. Mealschedules Page:
 

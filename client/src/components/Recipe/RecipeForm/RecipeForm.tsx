@@ -42,7 +42,7 @@ const RecipeForm: FC = () => {
 
       if (response) {
         // localStorage.setItem('idMealschedules', JSON.stringify(response.id)); //! сохранить в localStorage, чтобы при обновлении id в списке не сбрасывался на по-умолчанию (0)
-        //! dispatch(readingIdMealschedules(response.id)) // изменил id графика (idMealschedulesSilce.ts), чтобы использовать при получении (в MealscheduleList, и в календаре: Day, Week)
+        // dispatch(readingIdMealschedules(response.id)) // изменил id графика (idMealschedulesSilce.ts), чтобы использовать при получении (в MealscheduleList, и в календаре: Day, Week)
         toast.success('Рецепт успешно создан');
         switchHandler(1); // переход на submenu: 'recipes' (список рецептов)
       }

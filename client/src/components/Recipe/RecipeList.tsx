@@ -14,6 +14,7 @@ import { IRecipeRepository } from '../../types/types';
 import RecipeOne from './RecipeOne';
 import { Pagination } from '@mui/material';
 import { instance } from '../../api/axios.api';
+import { toast } from 'react-toastify';
 
 interface IProps {
   limit: number;
@@ -63,6 +64,13 @@ const RecipeList: FC<IProps> = ({ limit = 3 }) => {
     fetchRecipes(currentPage);
   }, [currentPage]); // изменении страницы - производится запрос порции
 
+  //! удаление
+  const removeRecipe  = async (id: number): Promise<void> => {
+    const response = await RecipeService.removeOne(id);
+    fetchRecipes(currentPage); // снова делаем новый запрос на порцию данных
+    toast.success('Рецепт удален');
+  };
+
   const columnArr = [
     '№',
     'Наименование лекарства',
@@ -92,7 +100,7 @@ const RecipeList: FC<IProps> = ({ limit = 3 }) => {
             <GridWrapperRecipes>
               {recipes.map((id, index, arr) => (
                 <GridRecipes key={index + 2}>
-                  <RecipeOne recipe={id} index={index++} />
+                  <RecipeOne recipe={id} index={++index} removeRecipe={removeRecipe}/>
                 </GridRecipes>
               ))}
             </GridWrapperRecipes>

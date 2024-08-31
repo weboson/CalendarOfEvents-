@@ -9,6 +9,7 @@ import { ArrSubMenu } from '../../data/arrSubMenu';
 
 const Recipe: FC = () => {
   const activeMenu = useAppSelector((state) => state.indexSubMenu);
+  
   return (
     <WrapperRecipes>
       {/* indexItem - это для [1,2,3,4].slice(indexItem-2, indexItem) => [1,2] or [3,4] в ArrSubMenu.tsx */}
@@ -35,7 +36,7 @@ const Recipe: FC = () => {
             }
             iconName={'FaRegListAlt'}
           />
-          <RecipeList />
+          <RecipeList limit={10} />
         </>
       )}
       {/* форма */}

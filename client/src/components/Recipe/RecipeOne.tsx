@@ -2,18 +2,19 @@
 // used client\src\components\Recipe\RecipeList.tsx
 import { FC } from 'react';
 import { IRecipeRepository } from '../../types/types';
-import { CellRecipe, Row } from './stylesRecipePage/sc_RecipePage';
+import { CellRecipe } from './stylesRecipePage/sc_RecipePage';
 import { FaRegTrashAlt } from 'react-icons/fa';
 import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
 import { MdOutlineDoNotDisturb } from 'react-icons/md';
-import { Button, IconButton } from '@mui/material';
+import { IconButton } from '@mui/material';
 
 interface IProps {
   recipe: IRecipeRepository;
   index: number;
 }
 
-const RecipeOne: FC<IProps> = ({ recipe, index }) => {
+const RecipeOne: FC<IProps> = ({ recipe, index}) => {
+
   return (
     <>
       <CellRecipe style={{ textAlign: 'center' }}>{index}</CellRecipe>

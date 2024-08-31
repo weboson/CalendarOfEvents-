@@ -47,10 +47,16 @@ export const TearFrame = styled.div`
 
 //! Для списка рецептов
 export const Background = styled.div`
-  display: flex;
-  justify-content: center;
   min-height: 77.9vh;
   background-color: #e6e6e6;
+`;
+
+// таблица
+export const TableWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 // цвет за сеткой (для рамок)
@@ -101,7 +107,7 @@ export const GridWrapperRecipes = styled.div`
     // > div -все дочерние блоки
     /* background-color: #d9d7d7; */
     background-color: #f7f6f6;
-    font-size: 1.6em;
+    /* font-size: 1.6em; */
   }
 `;
 // горизонтальные ряды рецептов
@@ -127,4 +133,15 @@ export const CellRecipe = styled.div`
   button {
     font-size: 1em;
   }
+`;
+
+//* Пагинация
+// обёртка
+export const PaginationWrapper = styled.div`
+  position: absolute;
+  left: 50%;
+  text-align: center;
+  bottom: 5%;
+  height: 80px;
+  padding: 3% 0;
 `;

@@ -1,17 +1,18 @@
-import { FC, memo, useEffect, useState } from 'react';
-import recipesMedications, { IRecipesMedications } from '../../../data/localDataBase/LocalDB_WaysUsing';
+import { FC, useState } from 'react';
+// import recipesMedications, { IRecipesMedications } from '../../../data/localDataBase/LocalDB_WaysUsing';
 import { Moment } from 'moment';
-import { MyPopupListStyle, MyPopupListStyleLi, WrapperIcon } from './stylesMonthGrid/sc_MonthGrid';
+import { MyPopupListStyle, MyPopupListStyleLi } from './stylesMonthGrid/sc_MonthGrid';
 import moment from 'moment';
 import { RiMedicineBottleLine } from 'react-icons/ri';
-import { useAppDispatch } from '../../../store/hooks';
+import { IRecipeRepository } from '../../../types/types';
 
 interface Iprops {
-  dayItem: Moment;
-  index: number;
+  dayItem: Moment
+  index: number
+  recipes: Array<IRecipeRepository>
 }
 
-const MyPopupList: FC<Iprops> = ({dayItem, index}) => {
+const MyPopupList: FC<Iprops> = ({dayItem, index, recipes}) => {
   // если навести на счетчик, то MyPopupList display: block, если убрать то noneя (но фактически их несколько, с уник id)
   // при наведении на сам Popup - Popup отображается 
   const [popup, setPopup] = useState(false);
@@ -25,7 +26,7 @@ const MyPopupList: FC<Iprops> = ({dayItem, index}) => {
     >
       <h6 style={{lineHeight: '0',}}>Список лекарств:</h6>
       <div>
-        {recipesMedications.map(
+        {recipes.map(
             (medItem, index) => 
             // '2024-06-03'
               moment(medItem.start, 'YYYY-MM-DD') <= dayItem &&

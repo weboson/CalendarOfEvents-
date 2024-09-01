@@ -10,7 +10,6 @@ import {
 import { Moment } from 'moment';
 import moment from 'moment';
 import { RecipeService } from '../../../../../services/recipe.service';
-import { toast } from 'react-toastify';
 import { IRecipeRepository } from '../../../../../types/types';
 
 interface IProps {
@@ -23,6 +22,7 @@ const RecipeWindow: FC<IProps> = ({ currentDate }) => {
   const idMed = useAppSelector((state) => state.chosenMedicine); // изменение состояния (useAppDispatch) в DayUsingrecipes.tsx
   // получить рецепт по id, на который клинули
   const [recipe, setRecipe] = useState<IRecipeRepository | Object>({});
+  //! GetAll 
   const getOneRecipe = async (id: string) => {
     const response = await RecipeService.getOne(id);
     // console.log(response);
@@ -31,9 +31,8 @@ const RecipeWindow: FC<IProps> = ({ currentDate }) => {
   };
 
   useEffect(() => {
-    getOneRecipe(idMed);
+    getOneRecipe(`${idMed}`);
   }, [idMed]);
-  // const recipe = takingMedications.find((item) => item.id == idMed);
 
   if (recipe.id) {
     return (

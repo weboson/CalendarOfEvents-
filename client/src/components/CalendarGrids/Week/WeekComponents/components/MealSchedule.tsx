@@ -1,16 +1,15 @@
 //! Режим питания:  Маркировка (icon food) моментов приёма пищи в таблице времени и днеq недели (weekday, weekend)
 //! 2 вида: в будни и выходные (также как и режимы дня (Moon, Sun))
 import { FC, memo, useMemo } from 'react';
-import { IRecipesMedication } from '../../../../../data/localDataBase/LocalDB_WaysUsing';
 import { MdOutlineFastfood } from 'react-icons/md';
 import { Moment } from 'moment';
 import { FoodTooltip, StyleIconFood } from '../../stylesWeekGrid/sc_WeekGrid';
-import { IMealscheduleRepository } from '../../../../../types/types';
+import { IMealscheduleRepository, IRecipeRepository } from '../../../../../types/types';
 
 interface IProps {
   dayItem: Moment;
   halfHourItem: Moment;
-  maxmealfood: IRecipesMedication;
+  maxmealfood: IRecipeRepository | Object
   currentDate: Moment;
   dataMealSchedule: IMealscheduleRepository | Object
 }

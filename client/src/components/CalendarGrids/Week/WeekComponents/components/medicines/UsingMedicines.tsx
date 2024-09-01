@@ -85,7 +85,9 @@ const UsingMedicines: FC<IProps> = memo(
     const dispatch = useAppDispatch();
     // Обработчик onMouseOver и onMouseOut: при наведении мышью на ячейку с ЛС, появляется Popup - окно с подробным списком лекарств
     // (еще в самом myPopup.tsx есть событие - чтобы popup не исчезал при наведение на самого popup)
-    const hoverMouseOnMedicine = (event: React.MouseEvent<HTMLElement>): void => {
+    const hoverMouseOnMedicine = (
+      event: React.MouseEvent<HTMLElement>,
+    ): void => {
       // тип атрибута https://habr.com/ru/articles/783858/
       // вариант с положение Popup относительно курсора
       // const top = event.clientY;
@@ -102,16 +104,20 @@ const UsingMedicines: FC<IProps> = memo(
         // если мышь наведена на элемент
         // меняем данные (redux-toolkit)
         dispatch(readingPopupData(med.id)); // передаю только id лекарства, в popup буду find()
-        line!.style.cssText += `
+        if (line) {
+          line.style.cssText += `
           display: flex;
           top: ${box.top + window.scrollY - 350}px;
-          left: ${box.left + window.scrollX + ((dayItem.day() !== 0) ? 100 : -350)}px; 
+          left: ${
+            box.left + window.scrollX + (dayItem.day() !== 0 ? 100 : -350)
+          }px; 
           animation: show 1s forwards;`; // сама анимация "show" описана myPopup -> sc_MyPopup.tsx/ в воскрсенье Popup left: 100px
-          } else if (event.type == 'mouseout'){
-            // если мышь ушла с элемента (mouseout)
-            line!.style.cssText += `
+        } else if (event.type == 'mouseout') {
+          // если мышь ушла с элемента (mouseout)
+          line.style.cssText += `
               animation: hidden 3s forwards;`; // сама анимация "hidden" описана myPopup -> sc_MyPopup.tsx
-          }
+        }
+      }
     };
 
     if (!med.independently) {

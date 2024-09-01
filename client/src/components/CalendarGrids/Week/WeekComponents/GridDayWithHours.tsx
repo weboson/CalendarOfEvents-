@@ -8,20 +8,23 @@ import SpaceBetweenMeals from './components/SpaceBetweenMeals'; // график 
 // import UsingMedicines from './components/medicines/UsingMedicines';
 import MealSchedule from './components/MealSchedule';
 import UsingMedicines from './components/medicines/UsingMedicines';
-// DataBase array
-import recipesMedications from '../../../../data/localDataBase/LocalDB_WaysUsing';
 // Redux-Toolkit для получения данных состояния (идникатор для WarnigMarker)
 import { useAppSelector } from '../../../../store/hooks';
-import { IMealscheduleRepository } from '../../../../types/types';
+import {
+  IMealscheduleRepository,
+  IRecipeRepository,
+} from '../../../../types/types';
 
 interface IProps {
   currentDate: Moment;
   dayItem: Moment;
   dataMealSchedule: IMealscheduleRepository | Object;
+  recipes: Array<IRecipeRepository>; // рецепты их базы данных (WeekGrid.tsx)
+  maxMealFood: IRecipeRepository | Object;
 }
 
 const GridDayWithHours: FC<IProps> = memo(
-  ({ currentDate, dayItem, dataMealSchedule }) => {
+  ({ currentDate, dayItem, dataMealSchedule, recipes, maxMealFood }) => {
     // 48 Half Hours  (content), exemple: 0:00, 0:30, 1:00
     const ArrayHalfHoursContent = useMemo(
       () =>
@@ -32,24 +35,6 @@ const GridDayWithHours: FC<IProps> = memo(
             .add(i * 30, 'm'),
         ),
       [currentDate],
-    );
-
-    //* Пример логики: чтобы искать нужный объект режима дня, по его id
-    // let arr = dailyRegimes.find((item, index) => item.id == 2)
-    // console.log(arr)
-
-    // выбираем самый большое (количество приёмов еды из рецептов) число из всех элементов массива "takingMedications" у свойства "quantity"(количество приёмом ЛС): 7 раз/день: еда
-    const maxMealFood = useMemo(
-      // для дочернего MealSchedule.tsx
-      () =>
-        recipesMedications.reduce(function (prev, current) {
-          if (+current.quantity > +prev.quantity) {
-            return current;
-          } else {
-            return prev;
-          }
-        }),
-      [],
     );
 
     //! WarnigMarker: маркер ячейки, если текущее время совпадает со временем приёма лекарств:
@@ -112,7 +97,7 @@ const GridDayWithHours: FC<IProps> = memo(
         ) : null}
 
         {/* //* for Using Medicines (расчет приёма лекарств) */}
-        {recipesMedications.map(
+        {recipes.map(
           (medItem, index) =>
             // для расчета интервала курса (дни/месяцы/годы приёма), временной диапазон приёмов ЛС, epm: курс 1 месяц, то есть интервал с 23 марта по 23 апреля
             moment(medItem.start, 'YYYY-MM-DD') <= dayItem &&

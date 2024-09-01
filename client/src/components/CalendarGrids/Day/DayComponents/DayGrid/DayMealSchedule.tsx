@@ -75,7 +75,7 @@ const DaydataMealSchedule: FC<IProps> = memo(
       [diffIntervalMealWeekend, maxmealfood],
     );
 
-    if (!maxmealfood.independently) {
+    if (!maxmealfood.independently) { // (!maxmealfood.independently) - БАГ: если независимо, и количество приёмов бюольше всех, то food исчезает 
       // есть ли зависимость от еды?
       return (
         <>

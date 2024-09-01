@@ -14,12 +14,14 @@ import MyPopup from '../../myPopup/MyPopup';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { readingMarkerWarning } from '../../../store/features/markerWarningSlice';
 import { arrWarningCleare } from '../../../store/features/arrWarningSlice';
-// data
-import recipesMedications from '../../../data/localDataBase/LocalDB_WaysUsing';
 import { arrayColors } from '../../../data/colors';
-import { IMealscheduleRepository } from '../../../types/types';
+import {
+  IMealscheduleRepository,
+  IRecipeRepository,
+} from '../../../types/types';
 import { toast } from 'react-toastify';
 import { MealScheduleService } from '../../../services/mealschedule.service';
+import { RecipeService } from '../../../services/recipe.service';
 
 interface IProps {
   currentDate: Moment;
@@ -27,9 +29,44 @@ interface IProps {
 
 const WeekGrid: FC<IProps> = ({ currentDate }) => {
   // currentDate - это текущее время, которое автоматически обновляется (useEffect в Home.tsx) каждую минуту (60000 ms)
+  // ! GetAll рецепты
+  const [data, setData] = useState<IRecipeRepository[]>([]); // все рецепты из БД
+
+  // для icons Food
+  // выбираем самое большое количество приёмов Лекарств (из рецептов), например: 7 раз/день > 6 раз/день = 7: еда
+  // для дочернего DayMealSchedule.tsx
+  const [maxMealFood, setMaxMealFood] = useState({});
+
+  //* метод определения максимального количества приёма ЛС среди всех рецептов
+  const calcMaxMealFood = (recipes: Array<IRecipeRepository>) => {
+    if (recipes.length > 0) {
+      const result = recipes.reduce(function (prev, current) {
+        if (+current.quantity > +prev.quantity) {
+          return current;
+        } else {
+          return prev;
+        }
+      });
+      setMaxMealFood(result);
+    }
+  };
+
+  //! метод: получить весь список рецептов
+  const getAllRecipes = async () => {
+    const response = await RecipeService.getAll();
+    // console.log(response);
+    // установить полученные данные
+    setData(response);
+    calcMaxMealFood(response);
+    toast.success('Рецепты: загружены');
+  };
+
+  useEffect(() => {
+    getAllRecipes();
+  }, []);
 
   const dispatch = useAppDispatch();
-  //! состояние исходных данных
+  // состояние исходных данных
   const [dataMealSchedule, setDataMealSchedule] = useState<
     IMealscheduleRepository | Object
   >({});
@@ -91,7 +128,7 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
   // массив цветов (arrayColors) генерируется в Colors.ts - в отдельном файле, т.к. генерируется 1 раз (для решения бага: если ЛС исчезнет, и если он снова появится, то уже без цвета )
   // назначение стилей
   useEffect(() => {
-    recipesMedications.map((itemMed, index) => {
+    data.map((itemMed, index) => {
       // const color = getRandomColor();
       for (const elem of document.querySelectorAll(
         `.medElemUnic${itemMed.id}`, // пример классов: medElemUnic6, medElemUnic7, medElemUnic12 etc - (таким же методом назанченные в InDependently.tsx и тд.)
@@ -133,7 +170,7 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
   // toggle- перключатель (реагирующий <, today, >) для подгрузки новых данных для DayGrid, Week
   useEffect(() => {
     getMealSchedule(idMeal);
-  }, [toggle]);
+  }, []);
 
   return (
     <GridWrapper id="saveScrollWeek">
@@ -169,7 +206,13 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
             </DayOfWeek>
 
             {/* Grid Day with Hours (Content) */}
-            <GridDayWithHours currentDate={currentDate} dayItem={dayItem} dataMealSchedule={dataMealSchedule} />
+            <GridDayWithHours
+              currentDate={currentDate}
+              dayItem={dayItem}
+              dataMealSchedule={dataMealSchedule}
+              recipes={data}
+              maxMealFood={maxMealFood}
+            />
           </WrapperColumn>
         ))}
         {/* При наведении на лекарство - появляется Popup-окно с подробным описанием ЛС */}

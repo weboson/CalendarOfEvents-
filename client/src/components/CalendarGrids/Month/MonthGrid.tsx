@@ -1,5 +1,5 @@
 // вывод сетки ячеек (42 штуки)
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect} from 'react';
 import { Moment } from 'moment'; // Moment - это специальный тип для TS
 import {
   GridWrapper,

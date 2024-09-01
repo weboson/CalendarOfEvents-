@@ -2,31 +2,31 @@
 // 7 столбов * 48 получасов в день * 22 элментов в массиве рецептов = 1056
 import { Moment } from 'moment';
 import { FC, memo, useMemo } from 'react';
-// данные графика питания: first and last eating
-import { IRecipesMedication } from '../../../../../data/localDataBase/LocalDB_WaysUsing';
 import DayDependingEating from './dayMedComponents/DayDependingEating';
 import DayDependingBreakfast from './dayMedComponents/DayDependingBreakfast';
 import DayDependingSupper from './dayMedComponents/DayDependingSupper';
 import DayInDependently from './dayMedComponents/DayInDependently';
 import { useAppDispatch } from '../../../../../store/hooks';
 import { chosenMedicineID } from '../../../../../store/features/chosenMedicineDaySlice';
-import { mealSchedule } from '../../../../../data/localDataBase/localDB_MealSchedule';
+// import { mealSchedule } from '../../../../../data/localDataBase/localDB_MealSchedule';
+import { IMealscheduleRepository, IRecipeRepository } from '../../../../../types/types';
 
 interface IProps {
   halfHourItem: Moment;
-  med: IRecipesMedication;
+  med: IRecipeRepository;
   currentDate: Moment;
   currentDayForWirning: boolean
+  dataMealSchedule: IMealscheduleRepository | Object
 }
 
 const DayUsingMedicines: FC<IProps> = memo(
-  ({ halfHourItem, med, currentDate, currentDayForWirning }) => {
+  ({ halfHourItem, med, currentDate, currentDayForWirning, dataMealSchedule }) => {
     // weekday: интервал между первым и последней едой
     const firstMealWeekdays = useMemo(
       () =>
         currentDate
           .set({
-            hour: mealSchedule.weekday[0],
+            hour: dataMealSchedule.weekday[0],
           })
           .clone(), // обз clone() иначе изменим исходник
       [currentDate],
@@ -36,7 +36,7 @@ const DayUsingMedicines: FC<IProps> = memo(
       () =>
         currentDate
           .set({
-            hour: mealSchedule.weekday[1],
+            hour: dataMealSchedule.weekday[1],
           })
           .clone(),
       [currentDate],
@@ -57,7 +57,7 @@ const DayUsingMedicines: FC<IProps> = memo(
       () =>
         currentDate
           .set({
-            hour: mealSchedule.weekend[0],
+            hour: dataMealSchedule.weekend[0],
           })
           .clone(),
       [currentDate],
@@ -67,7 +67,7 @@ const DayUsingMedicines: FC<IProps> = memo(
       () =>
         currentDate
           .set({
-            hour: mealSchedule.weekend[1],
+            hour: dataMealSchedule.weekend[1],
           })
           .clone(),
       [currentDate],
@@ -83,6 +83,7 @@ const DayUsingMedicines: FC<IProps> = memo(
     //Redux-toolkit - из hooks.tsx - для изменения данных
     const dispatch = useAppDispatch();
     const ClickOnMedicine = (): void => {
+      // alert(med.id)
       // передаем данные (id лекарства)
       // метод как readingPopupData в Week
       dispatch(chosenMedicineID(med.id));

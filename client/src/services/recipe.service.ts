@@ -17,8 +17,8 @@ export const RecipeService = {
     },
 
     // GetAll
-    async getAll() {
-        const { data } = await instance.get('recipes', {
+    async getAll(): Promise<IRecipeRepository[]> {
+        const { data } = await instance.get<IRecipeRepository[]>('recipes', {
             headers: {
                 Authorization: `Bearer ` + getTokenFromLocalStorage() || '' // при любом (кроме регистрации) обращении к server достаем из отправляем токен (так требует @UseGuards(JwtAuthGuard) в server\src\auth\auth.controller.ts)
             }
@@ -26,15 +26,16 @@ export const RecipeService = {
         return data;
     },
 
-    // // получить (по id) созданный график (относящиеся к текущему авторизированному user)
-    // async getOne(id: string): Promise<IMealscheduleRepository | undefined> { // используется в client\src\App.tsx
-    //     const { data } = await instance.get<IMealscheduleRepository>(`mealschedules/mealschedule/${+id}`, {
-    //         headers: {
-    //             Authorization: `Bearer ` + getTokenFromLocalStorage() || '' // при любом (кроме регистрации) обращении к server достаем из отправляем токен (так требует @UseGuards(JwtAuthGuard) в server\src\auth\auth.controller.ts)
-    //         }
-    //     })
-    //     if (data) return data
-    // },
+    // используется в client\src\components\CalendarGrids\Day\DayComponents\RecipeWindow\RecipeWindow.tsx
+    // получить (по id) созданный рецепт (относящиеся к текущему авторизированному user)
+    async getOne(id: string): Promise<IRecipeRepository | undefined> { 
+        const { data } = await instance.get<IRecipeRepository>(`recipes/recipe/${+id}`, {
+            headers: {
+                Authorization: `Bearer ` + getTokenFromLocalStorage() || '' // при любом (кроме регистрации) обращении к server достаем из отправляем токен (так требует @UseGuards(JwtAuthGuard) в server\src\auth\auth.controller.ts)
+            }
+        })
+        if (data) return data
+    },
 
     //удалить по id 
     async removeOne(id: number): Promise<IRecipeRepository | undefined> {

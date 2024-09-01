@@ -1,8 +1,6 @@
 //! Окно рецепта для Day - при наведении на ячейку с приёмом ЛС - поляляется развернутая информация
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useAppSelector } from '../../../../../store/hooks';
-// DataBase array
-import takingMedications from '../../../../../data/localDataBase/LocalDB_WaysUsing';
 import {
   MyButton,
   WrapperMyButton,
@@ -11,119 +9,161 @@ import {
 } from '../../stylesDayGrid/sc_DayGrid';
 import { Moment } from 'moment';
 import moment from 'moment';
+import { RecipeService } from '../../../../../services/recipe.service';
+import { toast } from 'react-toastify';
+import { IRecipeRepository } from '../../../../../types/types';
 
 interface IProps {
   currentDate: Moment;
 }
 
-const RecipeWindow: FC<IProps> = ({currentDate}) => {
+const RecipeWindow: FC<IProps> = ({ currentDate }) => {
   //Redux-toolkit - из hooks.tsx -
   // получили id лекарства
-  const idMed = useAppSelector((state) => state.chosenMedicine); // изменение состояния (useAppDispatch) в DayUsingMedicines.tsx
-  // нашли сам объект лекарства по его id
-  const medicine = takingMedications.find((item) => item.id == idMed);
+  const idMed = useAppSelector((state) => state.chosenMedicine); // изменение состояния (useAppDispatch) в DayUsingrecipes.tsx
+  // получить рецепт по id, на который клинули
+  const [recipe, setRecipe] = useState<IRecipeRepository | Object>({});
+  const getOneRecipe = async (id: string) => {
+    const response = await RecipeService.getOne(id);
+    // console.log(response);
+    setRecipe(response);
+    // toast.success('Рецепт один: загружен');
+  };
 
-  return (
-    <WrapperRecipeWindow>
-      {/* сторая обертка, чтобы позиционировать элментами не выхоодя за белый фон */}
-      <WrapperRecipe>
-        <h2>Схема приема препарата: </h2>
-        {/* при обновлении, лекарство не вырбано, если так то сообщение о клике на ЛС */}
-        {(medicine) ? (
-                  <ul>
-                  <li>
-                    Наименование: <p>"{medicine?.title}"</p>
-                  </li>
-                  <li>
-                    Способ приёма:&nbsp;
-                    <br />
-                    <p>
-                      {!medicine?.independently
-                        ? medicine?.position == 'before'
-                          ? `За ${medicine.interval.hour}${
-                              medicine.interval.minute == 0
-                                ? 'часов'
-                                : `:${medicine.interval.minute}`
-                            } ` +
-                            'до ' +
-                            `${
-                              medicine?.action == 'eating'
-                                ? 'еды'
-                                : medicine?.action == 'first breakfast'
-                                ? 'завтрака'
-                                : 'ужина'
-                            }`
-                          : medicine?.position == 'while'
-                          ? 'Вовремя ' +
-                            `${
-                              medicine?.action == 'eating'
-                                ? 'еды'
-                                : medicine?.action == 'first breakfast'
-                                ? 'завтрака'
-                                : 'ужина'
-                            }`
-                          : `Спустя ${medicine.interval.hour}:${medicine.interval.minute} ` +
-                            'после ' +
-                            `${
-                              medicine?.action == 'eating'
-                                ? 'еды'
-                                : medicine?.action == 'first breakfast'
-                                ? 'завтрака'
-                                : 'ужина'
-                            }`
-                        : 'Независимо'}
-                    </p>
-                  </li>
-                  <li>
-                    Количество приёмов:&nbsp;
-                    <p>
-                      {medicine?.quantity} раза в
-                      {medicine?.unitTime == 'day'
-                        ? ' день'
-                        : medicine?.unitTime == 'week'
-                        ? ' в неделю'
-                        : 'в месяц'}
-                    </p>
-                  </li>
-                  <li>
-                    Курс лечения:{' '}
-                    <p>
-                      {medicine?.duration.index + ' '}
-                      {medicine?.duration.title == 'days'
-                        ? 'дня/дней/день'
-                        : medicine?.duration.title == 'weeks'
-                        ? 'недели/ей'
-                        : medicine?.duration.title == 'months'
-                        ? 'месяца/месяцев'
-                        : 'год'}
-                    </p>
-                  </li>
-                  <li>
-                    Начало приёма: 
-                    <br />
-                    <p>{moment(medicine.start, 'YYYY-MM-DD').format('YYYY-MM-DD')}</p>
-                  </li>
-                  <li>
-                    {/* сколько осталось принимать (diff - это разница) */}
-                    Осталось принимать:{' '}
-                    <br />
-                    <p>{(moment(medicine.start, 'YYYY-MM-DD').add(medicine.duration.index, `${medicine.duration.title}`) > moment()) ? // если старт + курс > текущего дня, то
-                    (moment(medicine.start, 'YYYY-MM-DD').add(medicine.duration.index, `${medicine.duration.title}`).diff(moment(), 'day')) + ' день/дней/дня' : // (стартовый день + длительность курса) - текущее время = сколько осталось принимать
-                    `завершение курса ${(moment(medicine.start, 'YYYY-MM-DD').add(medicine.duration.index, `${medicine.duration.title}`).format('YYYY-MM-DD'))} `} </p>
-                  </li>
-                  <li>
-                    Завершение курса (до):{' '}
-                    <br />
-                    <p>{moment(medicine.start, 'YYYY-MM-DD').add(medicine.duration.index, `${medicine.duration.title}`).format('YYYY-MM-DD')}</p>
-                  </li>
-                </ul>
-        ) : (<p style={{fontSize: '3em'}}>Чтобы узнать подробности <br/> - кликните мышкой по любому лекарству</p>)}
-      </WrapperRecipe>
-      <WrapperMyButton>
-          {(medicine) && (<MyButton>Изменить</MyButton>)}
+  useEffect(() => {
+    getOneRecipe(idMed);
+  }, [idMed]);
+  // const recipe = takingMedications.find((item) => item.id == idMed);
+
+  if (recipe.id) {
+    return (
+      <WrapperRecipeWindow>
+        {/* сторая обертка, чтобы позиционировать элментами не выхоодя за белый фон */}
+        <WrapperRecipe>
+          <h2>Схема приема препарата: </h2>
+          {/* при обновлении, лекарство не вырбано, если так то сообщение о клике на ЛС */}
+          {recipe ? (
+            <ul>
+              <li>
+                Наименование: <p>"{recipe?.title}"</p>
+              </li>
+              <li>
+                Способ приёма:&nbsp;
+                <br />
+                <p>
+                  {!recipe?.independently
+                    ? recipe?.position == 'before'
+                      ? `За ${recipe.interval.hour}${
+                          recipe.interval.minute == 0
+                            ? ' часов'
+                            : `:${recipe.interval.minute}`
+                        } ` +
+                        'до ' +
+                        `${
+                          recipe?.action == 'eating'
+                            ? 'еды'
+                            : recipe?.action == 'first breakfast'
+                            ? 'завтрака'
+                            : 'ужина'
+                        }`
+                      : recipe?.position == 'while'
+                      ? 'Вовремя ' +
+                        `${
+                          recipe?.action == 'eating'
+                            ? 'еды'
+                            : recipe?.action == 'first breakfast'
+                            ? 'завтрака'
+                            : 'ужина'
+                        }`
+                      : `Спустя ${recipe.interval.hour}:${recipe.interval.minute} ` +
+                        'после ' +
+                        `${
+                          recipe?.action == 'eating'
+                            ? 'еды'
+                            : recipe?.action == 'first breakfast'
+                            ? 'завтрака'
+                            : 'ужина'
+                        }`
+                    : 'Независимо'}
+                </p>
+              </li>
+              <li>
+                Количество приёмов:&nbsp;
+                <p>
+                  {recipe?.quantity} раза в
+                  {recipe?.unitTime == 'day'
+                    ? ' день'
+                    : recipe?.unitTime == 'week'
+                    ? ' в неделю'
+                    : 'в месяц'}
+                </p>
+              </li>
+              <li>
+                Курс лечения:{' '}
+                <p>
+                  {recipe?.duration.index + ' '}
+                  {recipe?.duration.title == 'days'
+                    ? 'дня/дней/день'
+                    : recipe?.duration.title == 'weeks'
+                    ? 'недели/ей'
+                    : recipe?.duration.title == 'months'
+                    ? 'месяца/месяцев'
+                    : 'год'}
+                </p>
+              </li>
+              <li>
+                Начало приёма:
+                <br />
+                <p>{moment(recipe.start, 'YYYY-MM-DD').format('YYYY-MM-DD')}</p>
+              </li>
+              <li>
+                {/* сколько осталось принимать (diff - это разница) */}
+                Осталось принимать: <br />
+                <p>
+                  {moment(recipe.start, 'YYYY-MM-DD').add(
+                    recipe.duration.index,
+                    `${recipe.duration.title}`,
+                  ) > moment() // если старт + курс > текущего дня, то
+                    ? moment(recipe.start, 'YYYY-MM-DD')
+                        .add(recipe.duration.index, `${recipe.duration.title}`)
+                        .diff(moment(), 'day') + ' день/дней/дня' // (стартовый день + длительность курса) - текущее время = сколько осталось принимать
+                    : `завершение курса ${moment(recipe.start, 'YYYY-MM-DD')
+                        .add(recipe.duration.index, `${recipe.duration.title}`)
+                        .format('YYYY-MM-DD')} `}{' '}
+                </p>
+              </li>
+              <li>
+                Завершение курса (до): <br />
+                <p>
+                  {moment(recipe.start, 'YYYY-MM-DD')
+                    .add(recipe.duration.index, `${recipe.duration.title}`)
+                    .format('YYYY-MM-DD')}
+                </p>
+              </li>
+            </ul>
+          ) : (
+            <p style={{ fontSize: '3em' }}>
+              Чтобы узнать подробности <br /> - кликните мышкой по любому
+              лекарству
+            </p>
+          )}
+        </WrapperRecipe>
+        <WrapperMyButton>
+          {recipe && <MyButton>Изменить</MyButton>}
         </WrapperMyButton>
-    </WrapperRecipeWindow>
-  );
+      </WrapperRecipeWindow>
+    );
+  } else {
+    return (
+      <WrapperRecipeWindow>
+        <WrapperRecipe>
+        <p style={{ fontSize: '3em' }}>
+          Чтобы узнать подробности <br /> - кликните мышкой по любому лекарству
+        </p>
+        </WrapperRecipe>
+      </WrapperRecipeWindow>
+    );
+  }
 };
 
 export default RecipeWindow;

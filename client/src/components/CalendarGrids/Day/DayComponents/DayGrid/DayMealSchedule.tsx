@@ -3,16 +3,14 @@
 // как в Week
 import { Moment } from 'moment';
 import { FC, memo, useMemo } from 'react';
-import { IRecipesMedication } from '../../../../../data/localDataBase/LocalDB_WaysUsing';
-// local DataBase
 import { MdOutlineFastfood } from 'react-icons/md';
 import { FoodTooltip, StyleIconFood } from '../../stylesDayGrid/sc_DayGrid';
-import { IMealscheduleRepository } from '../../../../../types/types';
+import { IMealscheduleRepository, IRecipe, IRecipeRepository } from '../../../../../types/types';
 
 
 interface IProps {
   halfHourItem: Moment
-  maxmealfood: IRecipesMedication
+  maxmealfood: IRecipeRepository | Object
   currentDate: Moment
   dataMealSchedule: IMealscheduleRepository | Object
 }

@@ -10,10 +10,12 @@ import TimeLine from './TimeLine';
 import DaySpaceBetweenMeals from './DaySpaceBetweenMeals';
 // режим митания. icon food
 import DayMealSchedule from './DayMealSchedule';
-import recipesMedications from '../../../../../data/localDataBase/LocalDB_WaysUsing';
 import DayUsingMedicines from '../dayMedicines/DayUsingMedicines';
 import { useAppSelector } from '../../../../../store/hooks';
-import { IMealscheduleRepository } from '../../../../../types/types';
+import {
+  IMealscheduleRepository,
+  IRecipeRepository,
+} from '../../../../../types/types';
 
 interface IMeal {
   firstMealWeekdays: Moment;
@@ -25,10 +27,19 @@ interface IMeal {
 interface IProps {
   currentDate: Moment;
   meal: Promise<IMeal> | Object;
-  dataMealSchedule: IMealscheduleRepository | Object
+  dataMealSchedule: IMealscheduleRepository | Object;
+  recipes: Array<IRecipeRepository>; // рецепты их базы данных (DayGrid.tsx)
+  maxMealFood: IRecipeRepository | Object
 }
 
-const ListDayHalfHours: FC<IProps> = ({ currentDate, meal, dataMealSchedule }) => {
+const ListDayHalfHours: FC<IProps> = ({
+  currentDate,
+  meal,
+  dataMealSchedule,
+  recipes,
+  maxMealFood,
+}) => {
+
   // 48 Half Hours  (content), exemple: 0:00, 0:30, 1:00
   const ArrayHalfHoursContent = useMemo(
     () =>
@@ -41,22 +52,7 @@ const ListDayHalfHours: FC<IProps> = ({ currentDate, meal, dataMealSchedule }) =
     [currentDate],
   );
 
-  // для icons Food
-  // выбираем самое большое количество приёмов Лекарств (из рецептов), например: 7 раз/день > 6 раз/день = 7: еда
-  const maxMealFood = useMemo(
-    // для дочернего DayMealSchedule.tsx
-    () =>
-      recipesMedications.reduce(function (prev, current) {
-        if (+current.quantity > +prev.quantity) {
-          return current;
-        } else {
-          return prev;
-        }
-      }),
-    [],
-  );
-
-  //! WarnigMarker: маркер ячейки, если текущее время совпадает со временем приёма лекарств:
+  // WarnigMarker: маркер ячейки, если текущее время совпадает со временем приёма лекарств:
   // учавствуют: WeekGrid.tsx, DependingBreakfast, DependingEating etc ... , HelperWarningMarker.tsx
   const warningMarker = useAppSelector((state) => state.markerWarning); // общий индикатор
   // текущий день, для Warning
@@ -92,7 +88,7 @@ const ListDayHalfHours: FC<IProps> = ({ currentDate, meal, dataMealSchedule }) =
         warningMarker // время приёма лекарства
       }
     >
-      {/* // Временная ШКАЛА */}
+      {/* // Временная ШКАЛА - линия */}
       {
         // текущее время - для временной шкалы, как и с $currentHalfHour
         halfHourItem.isSame(moment(), 'hour') && // проверить на текущий час
@@ -103,13 +99,12 @@ const ListDayHalfHours: FC<IProps> = ({ currentDate, meal, dataMealSchedule }) =
       }
 
       {/* //* icons Sun & Moon (space between firs и last eating)*/}
-      {/* data: localDB_MealSchedule.ts */}
       <DaySpaceBetweenMeals
         meal={meal}
         halfHourItem={halfHourItem}
         currentDate={currentDate}
       />
-
+      {/* icon food */}
       {dataMealSchedule.id ? ( // если user создал график питания
         <DayMealSchedule
           halfHourItem={halfHourItem}
@@ -119,27 +114,30 @@ const ListDayHalfHours: FC<IProps> = ({ currentDate, meal, dataMealSchedule }) =
         />
       ) : null}
 
-      {/* //* for Using Medicines (расчет приёма лекарств) */}
-      <WrapperFlexMedicines>
-        {recipesMedications.map(
-          (medItem, index) =>
-            // для расчета интервала курса (дни/месяцы/годы приёма), временной диапазон приёмов ЛС, epm: курс 1 месяц, то есть интервал с 23 марта по 23 апреля
-            moment(medItem.start, 'YYYY-MM-DD') <= currentDate &&
-            // < - чтобы не было так: 5 дней приёма, превратились в 7 (если <= и =>)
-            currentDate <
-              moment(medItem.start, 'YYYY-MM-DD')
-                .clone()
-                .add(medItem.duration.index, medItem.duration.title) && (
-              <DayUsingMedicines
-                key={index}
-                halfHourItem={halfHourItem}
-                med={medItem}
-                currentDate={currentDate}
-                currentDayForWirning={currentDayForWirning}
-              />
-            ),
-        )}
-      </WrapperFlexMedicines>
+      {/* for Using Medicines (расчет приёма лекарств) */}
+      {recipes.length > 0 && dataMealSchedule.id ? (
+        <WrapperFlexMedicines>
+          {recipes.map(
+            (medItem, indx) =>
+              // для расчета интервала курса (дни/месяцы/годы приёма), временной диапазон приёмов ЛС, epm: курс 1 месяц, то есть интервал с 23 марта по 23 апреля
+              moment(medItem.start, 'YYYY-MM-DD') <= currentDate &&
+              // < - чтобы не было так: 5 дней приёма, превратились в 7 (если <= и =>)
+              currentDate <
+                moment(medItem.start, 'YYYY-MM-DD')
+                  .clone()
+                  .add(+medItem.duration.index, medItem.duration.title) && (
+                <DayUsingMedicines
+                  key={indx}
+                  halfHourItem={halfHourItem}
+                  med={medItem}
+                  currentDate={currentDate}
+                  currentDayForWirning={currentDayForWirning}
+                  dataMealSchedule={dataMealSchedule}
+                />
+              ),
+          )}
+        </WrapperFlexMedicines>
+      ) : null}
     </HalfHoursContent>
   ));
 };

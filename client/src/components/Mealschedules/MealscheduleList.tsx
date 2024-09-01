@@ -19,6 +19,7 @@ import { GoSun } from 'react-icons/go';
 import { BsMoon } from 'react-icons/bs';
 import { MdOutlineDinnerDining, MdOutlineFreeBreakfast } from 'react-icons/md';
 import { toast } from 'react-toastify';
+import { IMealscheduleRepository } from '../../types/types';
 
 const MealscheduleList: FC = () => {
   // если нет графика, будет кнопка для перехода на 'Add new'
@@ -34,7 +35,7 @@ const MealscheduleList: FC = () => {
   const id = localStorage.getItem('idMealschedules');
   // console.log(id)
   //! пустые данные
-  const [data, setData] = useState({});
+  const [data, setData] = useState<IMealscheduleRepository | Object>({});
 
   // получить по id 
   const getMealSchedule = async () => {

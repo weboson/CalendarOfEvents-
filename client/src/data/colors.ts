@@ -1,5 +1,6 @@
-//! массив рандомных цветов для цветных лекарств в WeekGrid.tsx, MonthGrid.tsx
-import recipesMedications from "./localDataBase/LocalDB_WaysUsing";
+//! массив рандомных цветов 
+// для цветных лекарств в WeekGrid.tsx, MonthGrid.tsx, DayGrid.tsx
+// используется в DayGrid.tsx, WeekGrid.tsx, MonthGrid.tsx в useEffect
 
  // метод для рандомного цвета
   function getRandomColor() {
@@ -14,6 +15,6 @@ import recipesMedications from "./localDataBase/LocalDB_WaysUsing";
 
   export const arrayColors = ['blue']; // массив по-умолчанию
   
-  recipesMedications.map(() => {
+  [...new Array(100)].map(() => {
     arrayColors.push(getRandomColor())
   })

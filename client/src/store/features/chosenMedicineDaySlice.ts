@@ -1,9 +1,9 @@
 // redux-toolkit - Slice 
-//! отображение данных в Recipte окне по измненяющему id лекарства
+//! отображение данных в Recipte окне по измненяющему id лекарства (RecipeWindow)
 import { createSlice } from '@reduxjs/toolkit'
 import type { RootState } from '../store'
 
-// id лекарства, по которому (в Recipte окне) будет поиск (arr.find((arrItem) => arrItem.id == id)) по массиву лекарств
+// id лекарства, по которому (в RecipeWindow) будет поиск 
 const initialState: number   = 0 // по-умолчанию
 
 export const chosenMedicineDaySlice = createSlice({

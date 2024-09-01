@@ -20,24 +20,11 @@ interface IProps {
   limit: number;
 }
 
-const RecipeList: FC<IProps> = ({ limit = 3 }) => {
-  //* вариант получении всех рецептов из БД (старый вариант - оставил для справки):
-  // пустые данные
-  // const [data, setData] = useState<IRecipeRepository[]>([]); // все рецепты из БД
-  // получить весь список рецептов
-  // const getAllRecipes = async () => {
-  //   const response = await RecipeService.getAll();
-  //   console.log(response);
-  //   // установить полученные данные
-  //   setData(response);
-  //   return recipes;
-  // };
+const RecipeList: FC<IProps> = ({ limit = 10 }) => {
 
-  // useEffect(() => {
-  //   getAllRecipes();
-  // }, []);
 
   //! для пагинации: https://youtu.be/7tTtLfw-acU?list=PLkUJHNMBzmtQj5qvTCqn0uMXFDG4ENiwf&t=4142
+  // получаю порциями (limit), а не все (GetAll в Day и Week)
   const [recipes, setRecipes] = useState<IRecipeRepository[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1); // текущая страница
   const [totalPages, setTotalPages] = useState<number>(0); // общее количество страниц

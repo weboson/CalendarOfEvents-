@@ -17,7 +17,11 @@ import { readingMarkerWarning } from '../../../../../store/features/markerWarnin
 import { arrWarningCleare } from '../../../../../store/features/arrWarningSlice';
 import { MealScheduleService } from '../../../../../services/mealschedule.service';
 import { toast } from 'react-toastify';
-import { IMealscheduleRepository } from '../../../../../types/types';
+import {
+  IMealscheduleRepository,
+  IRecipeRepository,
+} from '../../../../../types/types';
+import { RecipeService } from '../../../../../services/recipe.service';
 
 interface IMeal {
   firstMealWeekdays: Moment;
@@ -31,6 +35,42 @@ interface IProps {
 }
 
 const DayGrid: FC<IProps> = ({ currentDate }) => {
+  // ! GetAll рецепты
+  const [data, setData] = useState<IRecipeRepository[]>([]); // все рецепты из БД
+
+  // для icons Food
+  // выбираем самое большое количество приёмов Лекарств (из рецептов), например: 7 раз/день > 6 раз/день = 7: еда
+  // для дочернего DayMealSchedule.tsx
+  const [maxMealFood, setMaxMealFood] = useState({});
+
+  //* метод определения максимального количества приёма ЛС среди всех рецептов
+  const calcMaxMealFood = (recipes: Array<IRecipeRepository>) => {
+    if (recipes.length > 0) {
+      const result = recipes.reduce(function (prev, current) {
+        if (+current.quantity > +prev.quantity) {
+          return current;
+        } else {
+          return prev;
+        }
+      });
+      setMaxMealFood(result);
+    }
+  };
+
+  //! метод: получить весь список рецептов
+  const getAllRecipes = async () => {
+    const response = await RecipeService.getAll();
+    // console.log(response);
+    // установить полученные данные
+    setData(response);
+    calcMaxMealFood(response)
+    toast.success('Рецепты: загружены');
+  };
+
+  useEffect(() => {
+    getAllRecipes();
+  }, []);
+
   // 24 Hours (side panel) HourSidePanel
   // Days of week (top panel)
   const ArrayHoursSidePanel = useMemo(
@@ -42,8 +82,8 @@ const DayGrid: FC<IProps> = ({ currentDate }) => {
   // вызывается в DependingEating.tsx, DependingBreakfast и т.д, а использую в HelperWarningMarker.tsx;
   const dispatch = useAppDispatch();
   const arrWarning = useAppSelector((state) => state.arrWarning);
-   // перключатель (реагирующий <, today, >) для подгрузки новых данных для DayGrid, Week
-  const toggle = useAppSelector((state) => state.toggle)
+  // перключатель (реагирующий <, today, >) для подгрузки новых данных для DayGrid, Week
+  const toggle = useAppSelector((state) => state.toggle);
   useEffect(() => {
     if (arrWarning.arr.indexOf(true) != -1) {
       // arr.indexOf(item, from) ищет item начиная с индекса from и возвращает номер индекса, на котором был найден искомый элемент, в противном случае -1.
@@ -61,7 +101,7 @@ const DayGrid: FC<IProps> = ({ currentDate }) => {
   // массив цветов (arrayColors) генерируется в Colors.ts - в отдельном файле, т.к. генерируется 1 раз (для решения бага: если ЛС исчезнет, и если он снова появится, то уже без цвета )
   // назначение стилей
   useEffect(() => {
-    recipesMedications.map((itemMed, index) => {
+    data.map((itemMed, index) => {
       // const color = getRandomColor();
       for (const elem of document.querySelectorAll(
         `.medElemUnic${itemMed.id}`, // пример классов: medElemUnic6, medElemUnic7, medElemUnic12 etc - (таким же методом назанченные в InDependently.tsx и тд.)
@@ -78,9 +118,9 @@ const DayGrid: FC<IProps> = ({ currentDate }) => {
   // если пустой массива, то при 1-й загрузке
 
   // состояние данных
-  const [dataMealSchedule, setDataMealSchedule] = useState<IMealscheduleRepository | Object>(
-    {},
-  );
+  const [dataMealSchedule, setDataMealSchedule] = useState<
+    IMealscheduleRepository | Object
+  >({});
   const [spaceBetweenMeals, setSpaceBetweenMeals] = useState<IMeal | Object>(
     {},
   );
@@ -145,7 +185,7 @@ const DayGrid: FC<IProps> = ({ currentDate }) => {
       toast.error('Создайте график питания, либо войдите в систему');
     }
   };
- // toggle- перключатель (реагирующий <, today, >) для подгрузки новых данных для DayGrid, Week
+  // toggle- перключатель (реагирующий <, today, >) для подгрузки новых данных для DayGrid, Week
   useEffect(() => {
     getMealSchedule(idMeal);
   }, [toggle]);
@@ -171,7 +211,13 @@ const DayGrid: FC<IProps> = ({ currentDate }) => {
       {/* Days of Week (Top Panel) */}
       <WrapperList>
         {/* Grid Day with Hours (Content) */}
-        <ListDayHalfHours currentDate={currentDate} meal={spaceBetweenMeals} dataMealSchedule={dataMealSchedule}/>
+        <ListDayHalfHours
+          currentDate={currentDate}
+          meal={spaceBetweenMeals}
+          dataMealSchedule={dataMealSchedule}
+          recipes={data}
+          maxMealFood={maxMealFood}
+        />
       </WrapperList>
     </WrapperGridDay>
   );

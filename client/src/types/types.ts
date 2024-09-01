@@ -61,7 +61,7 @@ export interface IInterval {
 
 export interface IDuration {
     index: number
-    title: string
+    title: 'days' | 'weeks' | 'months' | 'years'
 }
 
 export interface Iuser {

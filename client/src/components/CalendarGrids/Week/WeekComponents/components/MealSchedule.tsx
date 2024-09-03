@@ -9,7 +9,7 @@ import { IMealscheduleRepository, IRecipeRepository } from '../../../../../types
 interface IProps {
   dayItem: Moment;
   halfHourItem: Moment;
-  maxmealfood: IRecipeRepository | Object
+  maxmealfood: number
   currentDate: Moment;
   dataMealSchedule: IMealscheduleRepository | Object
 }
@@ -53,7 +53,7 @@ const MealSchedule: FC<IProps> = memo(({
   // интервал времени / количество приёма Лекарств
   // -1 потому что (в начале завтрак -1)
   const betweenMealsWeekdays = useMemo(
-    () => Math.floor(diffIntervalMealWeekdays / (maxmealfood.quantity - 1)),
+    () => Math.floor(diffIntervalMealWeekdays / +(maxmealfood-1)),
     [diffIntervalMealWeekdays, maxmealfood],
   ); // 50400000(~14 ч) / 3-1раз/день = 3.5 часа -
   //console.log(betweenMealsWeekdays); // 3 (каждые три часа принимать пищу, так как принимать таблетку после еды)
@@ -79,12 +79,10 @@ const MealSchedule: FC<IProps> = memo(({
     [lastMealWeekend, firstMealWeekend],
   );
   const betweenMealsWeekend = useMemo(
-    () => Math.floor(diffIntervalMealWeekend / (maxmealfood.quantity - 1)),
+    () => Math.floor(diffIntervalMealWeekend / +(maxmealfood-1)),
     [diffIntervalMealWeekend, maxmealfood],
   );
 
-  if (!maxmealfood.independently) {
-    // есть ли зависимость от еды?
     return (
       <>
         {
@@ -100,7 +98,7 @@ const MealSchedule: FC<IProps> = memo(({
                     </StyleIconFood>
                   </FoodTooltip>
                 )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
-              [...new Array(maxmealfood.quantity)].map((_, index) =>
+              [...new Array(maxmealfood)].map((_, index) =>
                 //ячейку.сравнить(время первого завтрака + (интервал времени, по секундам), сравнить по 'часам')
                 halfHourItem.isSame(
                   firstMealWeekdays.add(betweenMealsWeekdays, 's'),
@@ -135,7 +133,7 @@ const MealSchedule: FC<IProps> = memo(({
                     </StyleIconFood>
                   </FoodTooltip>
                 )) || // промежуточные приёмы пищи, количество, которых зависят от приёмов лекарств (зависящие от еды)
-              [...new Array(maxmealfood.quantity)].map((_, index) =>
+              [...new Array(maxmealfood)].map((_, index) =>
                 //ячейку.сравнить(время первого завтрака + (интервал времени, по секундам), сравнить по 'часам')
                 halfHourItem.isSame(
                   firstMealWeekend.add(betweenMealsWeekend, 's'),
@@ -163,7 +161,7 @@ const MealSchedule: FC<IProps> = memo(({
         }
       </>
     );
-  }
+
 }
 );
 

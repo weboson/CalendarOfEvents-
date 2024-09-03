@@ -20,7 +20,7 @@ interface IProps {
   dayItem: Moment;
   dataMealSchedule: IMealscheduleRepository | Object;
   recipes: Array<IRecipeRepository>; // рецепты их базы данных (WeekGrid.tsx)
-  maxMealFood: IRecipeRepository | Object;
+  maxMealFood: number
 }
 
 const GridDayWithHours: FC<IProps> = memo(

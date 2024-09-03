@@ -41,8 +41,8 @@ const YearGrid: FC<IProps> = ({ currentDate }) => {
       // нахожу самое длителное время из курса
       const maxCourse = moment.max(recipes.map((item, indx) => (moment().add(item.duration.index, item.duration.title)) ))
       setMaxDuration(maxCourse);
-      console.log(minStart)
-      console.log(maxCourse)
+      // console.log(minStart)
+      // console.log(maxCourse)
     }
   };
 

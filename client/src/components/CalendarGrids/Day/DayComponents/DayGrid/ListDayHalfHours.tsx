@@ -29,7 +29,7 @@ interface IProps {
   meal: Promise<IMeal> | Object;
   dataMealSchedule: IMealscheduleRepository | Object;
   recipes: Array<IRecipeRepository>; // рецепты их базы данных (DayGrid.tsx)
-  maxMealFood: IRecipeRepository | Object
+  maxMealFood: number
 }
 
 const ListDayHalfHours: FC<IProps> = ({

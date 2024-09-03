@@ -35,19 +35,32 @@ const WeekGrid: FC<IProps> = ({ currentDate }) => {
   // для icons Food
   // выбираем самое большое количество приёмов Лекарств (из рецептов), например: 7 раз/день > 6 раз/день = 7: еда
   // для дочернего DayMealSchedule.tsx
-  const [maxMealFood, setMaxMealFood] = useState({});
+  const [maxMealFood, setMaxMealFood] = useState(1);
 
-  //* метод определения максимального количества приёма ЛС среди всех рецептов
+  //* метод определения максимального количества приёма ЛС среди всех рецептов => number
   const calcMaxMealFood = (recipes: Array<IRecipeRepository>) => {
+    // находим все рецепты, которые ЗАВИСИМЫ от еды
     if (recipes.length > 0) {
-      const result = recipes.reduce(function (prev, current) {
-        if (+current.quantity > +prev.quantity) {
-          return current;
-        } else {
-          return prev;
+      const dependent = recipes.map((item, index) => {
+        if (!item.independently) {
+          // если рецепт зависит от еду (ставим icon food)
+          return item;
         }
+        return 0; // иначе будет некоторые индексы undefuned или null - потом перебор бывает ошибка
       });
-      setMaxMealFood(result);
+      // console.log(dependent)
+
+      // находим максимально частый приём лекраства (который зависит от еды)
+      const arr = dependent.map((item, index) => {
+        if (item !== 0) {
+          return +item.quantity;
+        }
+        return 0; // нужен number
+      });
+      const maxQuantity = Math.max(...arr)
+
+      // console.log(maxQuantity); // 3 приёма пищи ЛС, которое зависит от еды (иначе icon food будет у тех, которые не хависят от еды)
+      setMaxMealFood(maxQuantity);
     }
   };
 

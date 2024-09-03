@@ -1,5 +1,5 @@
 import moment, { Moment } from 'moment';
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import {
   CellDay,
   CellWeek,
@@ -10,14 +10,56 @@ import {
   WrapperYear,
   СellMonths,
 } from './stylesYearGrid/sc_YearGrid';
+import { IRecipeRepository } from '../../../types/types';
+import { RecipeService } from '../../../services/recipe.service';
+import { toast } from 'react-toastify';
 //  data
-import recipesMedications from '../../../data/localDataBase/LocalDB_WaysUsing';
+// import recipesMedications from '../../../data/localDataBase/LocalDB_WaysUsing';
 
 interface IProps {
   currentDate: Moment;
 }
 
 const YearGrid: FC<IProps> = ({ currentDate }) => {
+
+  // const max =  moment.max(moment(), moment().add(5, 'years')).format('YYYY-MM-DD')
+  // console.log(max)
+
+  // самое ранее начало курса (приёма лекарств)
+  const [minStart, setMinStart] = useState(moment());
+  //* максимальный большой курс (использую moment.max(moment(...), moment(...)))
+  const [maxDuration, setMaxDuration] = useState(moment());
+
+  const calcMaxDuration = (recipes: Array<IRecipeRepository>) => {
+    if (recipes.length > 0) {
+      // const result = recipes.map((item, index) => {
+
+      // });
+      // нахожу самое ранее начало курса (приёма лекарств) 
+      const minStart = moment.min(recipes.map((item, indx) => moment(item.start)))
+      setMinStart(minStart)
+      // нахожу самое длителное время из курса
+      const maxCourse = moment.max(recipes.map((item, indx) => (moment().add(item.duration.index, item.duration.title)) ))
+      setMaxDuration(maxCourse);
+      console.log(minStart)
+      console.log(maxCourse)
+    }
+  };
+
+  // ! GetAll рецепты
+  const [data, setData] = useState<IRecipeRepository[]>([]); // все рецепты из БД
+  //! метод: получить весь список рецептов
+  const getAllRecipes = async () => {
+    const response = await RecipeService.getAll();
+    setData(response)
+    calcMaxDuration(response);
+    toast.success('Рецепты: загружены');
+  };
+
+  useEffect(() => {
+    getAllRecipes();
+  }, []);
+
   moment.updateLocale('ru', { week: { dow: 1 } }); // неделя начинается с понедельника
 
   // начало первого месяца в году: 1-е январь
@@ -27,10 +69,10 @@ const YearGrid: FC<IProps> = ({ currentDate }) => {
     firstMonth.clone().add(i, 'month'),
   );
 
-  // for marker cell with medicines
-  let marker = false;
-  const helper = (bool: boolean) => {
-    marker = bool; // true/fasle
+  // закрашивает серым цветом самый большой интервал от начала курса (start) до кончания (duration)
+  let indicator = false;
+  const marker = (bool: boolean) => {
+    indicator = bool; // true/fasle
     return null;
   };
 
@@ -63,19 +105,9 @@ const YearGrid: FC<IProps> = ({ currentDate }) => {
                   .startOf('month')
                   .startOf('week')
                   .add(i, 'day'); // переменная каждого дня
-                  
-                  {recipesMedications.map((medItem, index) =>
-                    // расчет интервала (курс приёма лекарств)
-                    moment(medItem.start, 'YYYY-MM-DD') <= iDay &&
-                    iDay <
-                      moment(medItem.start, 'YYYY-MM-DD')
-                        .clone()
-                        .add(medItem.duration.index, medItem.duration.title)
-                      ? // если схоть одно лекарсвто находится в ячейке (в определенный день), то маркеруем true (далее ставим иконку)
-                        helper(true)
-                      : // или fasle
-                        helper(false),
-                  )}
+
+                // расчет интервала (курс приёма лекарств)
+                ((iDay >= minStart) && iDay <= maxDuration) ? marker(true) : marker(false)
 
                 return (
                   <CellDay
@@ -88,7 +120,7 @@ const YearGrid: FC<IProps> = ({ currentDate }) => {
                       iDay.isSame(currentDate, 'month') &&
                       monthItem.isSame(currentDate, 'month')
                     }
-                    $isMedicines={marker}
+                    $isMedicines={indicator}
                   >
                     {iDay.format('D')}
                   </CellDay>
